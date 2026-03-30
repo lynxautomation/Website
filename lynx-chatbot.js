@@ -356,8 +356,8 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
     form.className = 'lynx-lead-form';
     form.innerHTML = `
       <div class="lynx-lead-form-title">📬 Demo anfragen</div>
-      <input id="lf-name" type="text" placeholder="Dein Name" maxlength="80">
-      <input id="lf-email" type="email" placeholder="Deine E-Mail-Adresse" maxlength="120">
+      <input id="lf-name" type="text" placeholder="Dein Name" maxlength="80" style="width:100%">
+      <input id="lf-email" type="email" placeholder="Deine E-Mail-Adresse" maxlength="120" style="width:100%">
       <textarea id="lf-note" placeholder="Dein Unternehmen / Anliegen (optional)"></textarea>
       <div class="lynx-consent-row">
         <input type="checkbox" id="lf-consent">
@@ -367,6 +367,10 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
     `;
     msgArea.appendChild(form);
     msgArea.scrollTop = msgArea.scrollHeight;
+
+    // Hide quick-reply chips when form is visible
+    const chipsEl = document.getElementById('lynx-chips');
+    if (chipsEl) chipsEl.style.display = 'none';
 
     const submitBtn  = document.getElementById('lf-submit');
     const consentBox = document.getElementById('lf-consent');
@@ -393,6 +397,7 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
       await handleLead({ name, email, anliegen: note || '–', consentDate });
 
       form.innerHTML = '<div class="lynx-lead-form-success">✓ Vielen Dank! Wir melden uns bald bei dir.</div>';
+      if (chipsEl) chipsEl.style.display = 'flex';
     });
   }
 
