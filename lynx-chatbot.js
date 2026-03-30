@@ -140,7 +140,7 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
     #lynx-messages::-webkit-scrollbar-track { background: transparent; }
     #lynx-messages::-webkit-scrollbar-thumb { background: rgba(124,92,196,0.3); border-radius: 2px; }
 
-    .lynx-msg { display: flex; flex-direction: column; max-width: 85%; animation: lynx-fade-in 0.2s ease; }
+    .lynx-msg { display: flex; flex-direction: column; max-width: 92%; animation: lynx-fade-in 0.2s ease; }
     @keyframes lynx-fade-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     .lynx-msg.bot { align-self: flex-start; }
     .lynx-msg.user { align-self: flex-end; }
@@ -339,7 +339,7 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
         </div>
 
         <div id="lynx-input-area">
-          <textarea id="lynx-input" rows="1" placeholder="Schreib eine Nachricht …" maxlength="800"></textarea>
+          <textarea id="lynx-input" rows="1" placeholder="Schreib eine Nachricht …" maxlength="800" style="height:38px;max-height:38px;overflow:hidden"></textarea>
           <button id="lynx-send" aria-label="Senden">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
               <path d="M14 8L2 2l3 6-3 6 12-6z" fill="white"/>
