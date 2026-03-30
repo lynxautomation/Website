@@ -5,8 +5,8 @@
  */
 
 (function () {
-  const ANTHROPIC_API = "https://api.anthropic.com/v1/messages";
-  const MODEL = "claude-sonnet-4-20250514";
+  const CHAT_API = "/.netlify/functions/chat";
+
 
   const SYSTEM_PROMPT = `Du bist der KI-Assistent von Lynx Automation Solutions – einem Unternehmen, das intelligente Chatbot-Lösungen für Unternehmenswebsites entwickelt.
 
@@ -336,21 +336,16 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
     if (leadCaptured) return;
     leadCaptured = true;
 
-    // Name in Vor- und Nachname aufteilen (lead.js erwartet vorname + nachname)
-    const nameParts = (lead.name || "").trim().split(/\s+/);
-    const vorname   = nameParts[0] || lead.name || "";
-    const nachname  = nameParts.slice(1).join(" ") || "–";
-
-    // Payload passend zum Schema von /.netlify/functions/lead
+    // Payload passend zum Schema von lead.js
+    const now = new Date().toISOString();
     const payload = {
-      vorname,
-      nachname,
-      email:        lead.email        || "",
-      telefon:      "",                       // Chatbot fragt kein Telefon ab → leer
-      unternehmen:  "",                       // optional, kann später ergänzt werden
-      thema:        "Chatbot – Demo-Anfrage",
-      nachricht:    lead.anliegen     || "",
-      einwilligung: true,                     // Nutzer hat aktiv geschrieben → implizite Einwilligung
+      name:        lead.name         || "",
+      phone:       "",                        // Chatbot fragt kein Telefon ab
+      email:       lead.email        || "",
+      topic:       "Chatbot – Demo-Anfrage",
+      note:        lead.anliegen     || "",
+      date:        now,
+      consentDate: now,
     };
 
     fetch("/.netlify/functions/lead", {
@@ -363,7 +358,7 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
         if (res.success) {
           console.log("[Lynx Lead] ✓ In Google Sheet eingetragen", payload);
         } else {
-          console.warn("[Lynx Lead] API-Fehler:", res.error);
+          console.warn("[Lynx Lead] Fehler:", res.error);
         }
       })
       .catch(err => console.error("[Lynx Lead] Netzwerkfehler:", err));
@@ -423,12 +418,10 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
     msgArea.scrollTop = msgArea.scrollHeight;
 
     try {
-      const res = await fetch(ANTHROPIC_API, {
+      const res = await fetch(CHAT_API, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          model: MODEL,
-          max_tokens: 1000,
           system: SYSTEM_PROMPT,
           messages: messages,
         }),
