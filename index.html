@@ -954,7 +954,576 @@
   });
 </script>
 
-<!-- Lynx Chatbot Widget -->
-<script src="/lynx-chatbot.js"></script>
+
+<!-- ── LYNX CHATBOT ──────────────────────────────────────── -->
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple:       #5b3fa0;
+    --purple-dark:  #42297a;
+    --purple-light: rgba(91,63,160,0.12);
+    --navy:         #0d1b3e;
+    --navy-mid:     #162454;
+    --border:       rgba(179,157,219,0.2);
+    --text:         #f5f3ff;
+    --text-muted:   #a0a0b8;
+    --bot-bg:       rgba(22,36,84,0.75);
+    --user-bg:      linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    --surface:      rgba(13,27,62,0.85);
+    --surface2:     rgba(22,36,84,0.7);
+    --shadow:       0 24px 80px rgba(0,0,0,0.6);
+    --radius:       18px;
+    --font-body:    'DM Sans', sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --accent:       #7c5cc4;
+    --accent-dark:  #5b3fa0;
+  }
+
+  html, body { height: 100%; font-family: var(--font-body); }
+
+  /* ── LAUNCHER ─────────────────────────────────────────── */
+  #launcher {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 0 rgba(124,92,196,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+    z-index: 1000;
+    animation: lynxPulse 3s ease-in-out infinite;
+  }
+  @keyframes lynxPulse {
+    0%,100% { box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 0 rgba(124,92,196,0.4); }
+    50%      { box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 10px rgba(124,92,196,0); }
+  }
+  #launcher:hover { transform: scale(1.08); }
+  #launcher svg { width: 28px; height: 28px; }
+  #launcher .close-icon { display: none; }
+  #launcher.open .chat-icon  { display: none; }
+  #launcher.open .close-icon { display: block; }
+
+  /* ── WIDGET ───────────────────────────────────────────── */
+  #widget {
+    position: fixed; bottom: 100px; right: 28px;
+    width: 380px; max-width: calc(100vw - 40px);
+    max-height: 580px;
+    background: var(--navy);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    opacity: 0; transform: translateY(18px) scale(.97);
+    pointer-events: none;
+    transition: opacity .3s ease, transform .3s cubic-bezier(.34,1.3,.64,1);
+    z-index: 999;
+  }
+  #widget.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+  /* ── HEADER ───────────────────────────────────────────── */
+  .wg-header {
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(91,63,160,0.35), rgba(22,36,84,0.9));
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 11px; flex-shrink: 0;
+  }
+  .wg-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 2px 12px rgba(91,63,160,0.5);
+  }
+  .wg-avatar svg { width: 20px; height: 20px; }
+  .wg-header-text { flex: 1; min-width: 0; }
+  .wg-name { font-size: 13.5px; font-weight: 500; color: #f5f3ff; line-height: 1.2; }
+  .wg-status {
+    font-size: 11px; color: rgba(179,157,219,0.9);
+    display: flex; align-items: center; gap: 5px; margin-top: 2px;
+  }
+  .wg-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4cda64;
+    box-shadow: 0 0 5px #4cda64; flex-shrink: 0;
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 2px rgba(76,218,100,.3); }
+    50%      { box-shadow: 0 0 0 5px rgba(76,218,100,.15); }
+  }
+
+  /* ── MESSAGES ─────────────────────────────────────────── */
+  #messages {
+    flex: 1; overflow-y: auto; padding: 14px 13px;
+    display: flex; flex-direction: column; gap: 8px;
+    scroll-behavior: smooth;
+  }
+  #messages::-webkit-scrollbar { width: 4px; }
+  #messages::-webkit-scrollbar-track { background: transparent; }
+  #messages::-webkit-scrollbar-thumb { background: rgba(124,92,196,0.3); border-radius: 4px; }
+
+  .msg {
+    max-width: 88%; padding: 10px 13px;
+    border-radius: 14px; font-size: 13.5px;
+    line-height: 1.55; word-break: break-word;
+    animation: fadeUp .25s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.bot {
+    background: var(--bot-bg); color: #e8e4ff;
+    border: 1px solid rgba(179,157,219,0.12);
+    border-bottom-left-radius: 4px; align-self: flex-start;
+  }
+  .msg.user {
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4); color: #fff;
+    border-bottom-right-radius: 4px; align-self: flex-end;
+  }
+  .msg.privacy {
+    font-size: 11px; color: #888880;
+    background: transparent; padding: 2px 6px;
+    max-width: 95%; line-height: 1.5; border: none;
+  }
+  .msg.typing {
+    background: var(--bot-bg); border: 1px solid rgba(179,157,219,0.12);
+    align-self: flex-start; border-bottom-left-radius: 4px;
+    display: flex; gap: 5px; align-items: center; padding: 12px 15px;
+  }
+  .msg.typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #7c5cc4; animation: blink 1.2s infinite; display: inline-block;
+  }
+  .msg.typing span:nth-child(2) { animation-delay: .2s; }
+  .msg.typing span:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink {
+    0%,80%,100% { opacity: .25; }
+    40%          { opacity: 1; }
+  }
+
+  /* ── LEAD FORM ────────────────────────────────────────── */
+  .lead-form-wrapper {
+    margin: 4px 0; align-self: flex-start;
+    max-width: 95%; width: 100%;
+    animation: fadeUp .3s ease both;
+  }
+  .lead-form {
+    background: rgba(22,36,84,0.85);
+    border: 1px solid rgba(124,92,196,0.25);
+    border-radius: 14px; padding: 14px;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .lead-form h3 {
+    font-size: 13px; font-weight: 500; color: #b39ddb; margin-bottom: 2px;
+  }
+  .lead-form input, .lead-form textarea {
+    width: 100%; padding: 8px 10px;
+    border: 1px solid rgba(124,92,196,0.22);
+    border-radius: 8px; font-family: var(--font-body);
+    font-size: 12.5px; background: rgba(13,27,62,0.8);
+    color: #f5f3ff; outline: none;
+    transition: border-color .2s; resize: none;
+  }
+  .lead-form input::placeholder, .lead-form textarea::placeholder { color: rgba(160,160,184,0.45); }
+  .lead-form input:focus, .lead-form textarea:focus { border-color: rgba(124,92,196,0.6); }
+  .lead-form textarea { min-height: 62px; line-height: 1.4; }
+  .consent-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    background: rgba(91,63,160,0.15);
+    border-radius: 8px; padding: 9px 10px;
+  }
+  .consent-row input[type="checkbox"] {
+    width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px;
+    accent-color: #7c5cc4; cursor: pointer; padding: 0; border: none;
+  }
+  .consent-row label {
+    font-size: 10.5px; color: #888880; line-height: 1.5; cursor: pointer;
+  }
+  .consent-row a { color: #7c5cc4; text-decoration: underline; }
+  .lead-submit {
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    color: #fff; border: none; border-radius: 9px; padding: 9px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: opacity .2s; width: 100%;
+  }
+  .lead-submit:disabled { opacity: .45; cursor: not-allowed; }
+  .lead-submit:not(:disabled):hover { opacity: .88; }
+
+  /* ── CHIPS ────────────────────────────────────────────── */
+  #chips {
+    padding: 0 13px 10px;
+    display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+  }
+  .chip {
+    background: rgba(91,63,160,0.15);
+    color: #b39ddb;
+    border: 1px solid rgba(124,92,196,0.3);
+    border-radius: 20px; padding: 5px 12px;
+    font-size: 12px; font-weight: 400;
+    cursor: pointer; transition: background .18s, transform .15s;
+    font-family: var(--font-body);
+  }
+  .chip:hover {
+    background: rgba(91,63,160,0.4); color: #f5f3ff;
+    border-color: rgba(124,92,196,0.7); transform: translateY(-1px);
+  }
+
+  /* ── INPUT BAR ────────────────────────────────────────── */
+  .wg-input-bar {
+    padding: 10px 12px 12px; display: flex; gap: 8px;
+    align-items: flex-end; border-top: 1px solid var(--border);
+    background: rgba(13,27,62,0.7); flex-shrink: 0;
+  }
+  #userInput {
+    flex: 1; border: 1px solid rgba(124,92,196,0.25);
+    border-radius: 12px; padding: 9px 12px;
+    font-family: var(--font-body); font-size: 13px;
+    color: #f5f3ff; background: rgba(22,36,84,0.7);
+    resize: none; outline: none;
+    height: 38px; max-height: 100px; overflow-y: auto;
+    line-height: 1.4; transition: border-color .2s;
+  }
+  #userInput:focus { border-color: rgba(124,92,196,0.6); }
+  #userInput::placeholder { color: rgba(160,160,184,0.5); }
+  #sendBtn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: opacity .2s, transform .15s;
+  }
+  #sendBtn:hover { opacity: .88; transform: scale(1.05); }
+  #sendBtn svg { width: 17px; height: 17px; fill: #fff; }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  .wg-footer {
+    text-align: center; padding: 5px 0 8px;
+    font-size: 10px; color: rgba(160,160,184,0.4); flex-shrink: 0;
+  }
+
+  @media (max-width: 440px) {
+    #widget { right: 0; bottom: 0; width: 100vw; max-height: 100dvh; border-radius: 0; }
+    #launcher { bottom: 16px; right: 16px; }
+  }
+
+</style>
+
+<!-- LAUNCHER -->
+<button id="launcher" aria-label="Chat öffnen">
+  <!-- Bot/AI Icon -->
+  <svg class="chat-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="10" r="5" fill="white" opacity="0.9"/>
+    <rect x="9" y="16" width="10" height="7" rx="2" fill="white" opacity="0.9"/>
+    <circle cx="6" cy="19" r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="22" cy="19" r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="11.5" cy="9" r="1" fill="#5b3fa0"/>
+    <circle cx="16.5" cy="9" r="1" fill="#5b3fa0"/>
+    <rect x="12.5" y="11.5" width="3" height="1" rx="0.5" fill="#5b3fa0"/>
+    <line x1="14" y1="5" x2="14" y2="3" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="14" cy="2.5" r="1" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Close Icon -->
+  <svg class="close-icon" viewBox="0 0 24 24" fill="white">
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+  </svg>
+</button>
+
+<!-- WIDGET -->
+<div id="widget" role="dialog" aria-label="Lynx KI-Assistent">
+  <div class="wg-header">
+    <div class="wg-avatar">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="7" r="3.5" fill="white" opacity="0.9"/>
+        <rect x="6.5" y="11" width="7" height="5" rx="1.5" fill="white" opacity="0.9"/>
+        <circle cx="4" cy="13.5" r="1.8" fill="white" opacity="0.7"/>
+        <circle cx="16" cy="13.5" r="1.8" fill="white" opacity="0.7"/>
+        <circle cx="8.5" cy="6.5" r="0.7" fill="#5b3fa0"/>
+        <circle cx="11.5" cy="6.5" r="0.7" fill="#5b3fa0"/>
+      </svg>
+    </div>
+    <div class="wg-header-text">
+      <div class="wg-name">Lynx KI-Assistent</div>
+      <div class="wg-status"><div class="wg-dot"></div>Online &amp; bereit</div>
+    </div>
+  </div>
+
+  <div id="messages" aria-live="polite">
+    <div class="msg bot">Hallo! 👋 Ich bin der KI-Assistent von <strong>Lynx Automation Solutions</strong>. Wie kann ich dir helfen?</div>
+    <div class="msg privacy">Ich bin ein KI-gestützter Chatbot und beantworte Fragen zu diesem Unternehmen. Deine Eingaben können technisch verarbeitet werden. Bitte gib keine sensiblen personenbezogenen Daten ein. Weitere Informationen findest du in der <a href="datenschutz.html" target="_blank" style="color:#7c5cc4">Datenschutzerklärung</a>.</div>
+  </div>
+
+  <div id="chips">
+    <button class="chip">Was ist Modell 1?</button>
+    <button class="chip">Was ist Modell 2?</button>
+    <button class="chip">Wie läuft die Einrichtung ab?</button>
+    <button class="chip">Demo anfragen</button>
+  </div>
+
+  <div class="wg-input-bar">
+    <textarea id="userInput" rows="1" placeholder="Schreib eine Nachricht …" aria-label="Nachricht eingeben"></textarea>
+    <button id="sendBtn" aria-label="Senden">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+
+  <div class="wg-footer">Lynx Automation Solutions · Powered by KI</div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const SYSTEM_PROMPT = `Du bist der KI-Assistent von Lynx Automation Solutions – einem Unternehmen, das intelligente Chatbot-Lösungen für Unternehmenswebsites entwickelt.
+
+Deine Aufgabe: Besucher freundlich und professionell informieren, Vertrauen aufbauen und Demo-Anfragen generieren.
+
+=== LEISTUNGSMODELLE ===
+
+Modell 1 – Intelligenter Webchat:
+- FAQ-Bot mit wöchentlicher Wissensbasis-Aktualisierung
+- DSGVO-konform, Datenhaltung in Deutschland
+- Nahtlose Integration in bestehende Websites
+- Ideal für Unternehmen, die Kundenanfragen automatisieren möchten
+- Preis: Einrichtungspauschale + monatliche Servicegebühr
+
+Modell 2 – Chat + Lead Engine:
+- Alle Funktionen von Modell 1
+- Zusätzlich: Automatische Lead-Erfassung in Echtzeit
+- Leads landen direkt in Google Sheets (Name, E-Mail, Interesse)
+- Keine manuelle Nachbearbeitung, kein Lead geht verloren
+- Ideal für Unternehmen mit aktivem Vertrieb
+
+=== EINRICHTUNGSPROZESS ===
+1. Erstgespräch & Bedarfsanalyse (kostenlos, ~30 Min.)
+2. Individuelle Konfiguration des Chatbots auf Ihre Inhalte
+3. Technische Integration in Ihre Website
+4. Test-Phase & Feinabstimmung
+5. Go-Live + laufender Support
+
+=== KONTAKT ===
+E-Mail: info@lynx-automation.de
+
+=== LEAD-ERFASSUNG ===
+Wenn ein Besucher eine Demo anfragen möchte oder Kontakt aufnehmen will, antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag:
+[SHOW_LEAD_FORM]
+
+Das System zeigt dann automatisch ein Kontaktformular an. Frage NICHT nach Name, E-Mail oder Anliegen – das übernimmt das Formular.
+
+=== TONALITÄT ===
+- Professionell, modern, auf Augenhöhe
+- Klar und prägnant (max. 3-4 Sätze pro Antwort)
+- Deutsch, Du-Form erlaubt wenn der Besucher es vorgibt
+- Begeistere für KI-Automatisierung, ohne zu übertreiben
+- Kein Markdown wie #, ## oder --- in Antworten
+- Fett (**text**) nur sparsam für wichtige Begriffe`;
+
+// ── STATE ───────────────────────────────────────────────────────────────────
+const history  = [];
+let formShown  = false;
+
+// ── DOM REFS ────────────────────────────────────────────────────────────────
+const launcher  = document.getElementById('launcher');
+const widget    = document.getElementById('widget');
+const messages  = document.getElementById('messages');
+const userInput = document.getElementById('userInput');
+const sendBtn   = document.getElementById('sendBtn');
+const chipsEl   = document.getElementById('chips');
+
+// ── OPEN / CLOSE ────────────────────────────────────────────────────────────
+launcher.addEventListener('click', () => {
+  const isOpen = widget.classList.toggle('open');
+  launcher.classList.toggle('open', isOpen);
+  if (isOpen) { userInput.focus(); scrollBottom(); }
+});
+
+// ── AUTO-RESIZE TEXTAREA ────────────────────────────────────────────────────
+userInput.addEventListener('input', () => {
+  userInput.style.height = 'auto';
+  userInput.style.height = Math.min(userInput.scrollHeight, 100) + 'px';
+});
+
+// ── SEND ON ENTER ───────────────────────────────────────────────────────────
+userInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+sendBtn.addEventListener('click', sendMessage);
+
+// ── CHIPS ───────────────────────────────────────────────────────────────────
+chipsEl.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    userInput.value = chip.textContent;
+    sendMessage();
+  });
+});
+
+// ── HELPERS ─────────────────────────────────────────────────────────────────
+function scrollBottom() {
+  setTimeout(() => { messages.scrollTop = messages.scrollHeight; }, 50);
+}
+
+function appendMsg(cls, html) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + cls;
+  div.innerHTML = html;
+  messages.appendChild(div);
+  scrollBottom();
+  return div;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg typing';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  messages.appendChild(div);
+  scrollBottom();
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function formatReply(text) {
+  return escapeHtml(text)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+// ── LEAD FORM ────────────────────────────────────────────────────────────────
+function showLeadForm() {
+  if (formShown) return;
+  formShown = true;
+  chipsEl.style.display = 'none';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'lead-form-wrapper';
+  wrap.innerHTML =
+    '<div class="lead-form">' +
+      '<h3>📬 Demo anfragen</h3>' +
+      '<input type="text"  id="lf-name"  placeholder="Dein Name *" />' +
+      '<input type="email" id="lf-email" placeholder="Deine E-Mail-Adresse *" />' +
+      '<textarea id="lf-note" placeholder="Dein Unternehmen / Anliegen (optional)"></textarea>' +
+      '<div class="consent-row">' +
+        '<input type="checkbox" id="lf-consent" />' +
+        '<label for="lf-consent">Ich stimme zu, dass meine Daten (Name, E-Mail, Anliegen) gespeichert und zur Kontaktaufnahme genutzt werden. Die Einwilligung kann jederzeit widerrufen werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>' +
+      '</div>' +
+      '<button class="lead-submit" id="lf-submit" disabled>Anfrage absenden</button>' +
+    '</div>';
+  messages.appendChild(wrap);
+  scrollBottom();
+
+  const consentBox = wrap.querySelector('#lf-consent');
+  const submitBtn  = wrap.querySelector('#lf-submit');
+
+  consentBox.addEventListener('change', () => {
+    submitBtn.disabled = !consentBox.checked;
+  });
+
+  submitBtn.addEventListener('click', async () => {
+    const name  = document.getElementById('lf-name').value.trim();
+    const email = document.getElementById('lf-email').value.trim();
+    const note  = document.getElementById('lf-note').value.trim();
+
+    if (!name || !email) {
+      if (!name)  document.getElementById('lf-name').style.borderColor  = 'rgba(255,100,100,0.6)';
+      if (!email) document.getElementById('lf-email').style.borderColor = 'rgba(255,100,100,0.6)';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet…';
+
+    const now = new Date().toISOString();
+    const payload = {
+      name,
+      phone:       '',
+      email,
+      topic:       'Chatbot – Demo-Anfrage',
+      note:        note || '',
+      date:        now,
+      consentDate: now
+    };
+
+    try {
+      const res  = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        wrap.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns bald bei dir.</div>';
+        appendMsg('bot', 'Deine Anfrage ist eingegangen – wir melden uns schnellstmöglich! Bei dringenden Fragen erreichst du uns auch direkt unter info@lynx-automation.de');
+        chipsEl.style.display = 'flex';
+      } else {
+        throw new Error(data.error || 'Fehler');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage absenden';
+      appendMsg('bot', 'Beim Senden ist ein Fehler aufgetreten. Bitte schreib uns direkt: info@lynx-automation.de');
+    }
+    scrollBottom();
+  });
+  scrollBottom();
+}
+
+// ── SEND MESSAGE ─────────────────────────────────────────────────────────────
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  chipsEl.style.display = 'none';
+  appendMsg('user', escapeHtml(text));
+  userInput.value = '';
+  userInput.style.height = 'auto';
+
+  history.push({ role: 'user', content: text });
+
+  showTyping();
+  sendBtn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history, system: SYSTEM_PROMPT })
+    });
+    const data = await res.json();
+    removeTyping();
+
+    let reply = '';
+    if (data.content && data.content[0] && data.content[0].text) {
+      reply = data.content[0].text;
+    } else {
+      reply = 'Entschuldigung, es gab einen technischen Fehler. Bitte versuche es erneut.';
+    }
+
+    const showForm = reply.includes('[SHOW_LEAD_FORM]');
+
+    const cleanReply = reply
+      .replace(/\[SHOW_LEAD_FORM\]/g, '')
+      .trim();
+
+    history.push({ role: 'assistant', content: reply });
+
+    if (cleanReply) appendMsg('bot', formatReply(cleanReply));
+    if (showForm)   showLeadForm();
+
+  } catch (err) {
+    removeTyping();
+    appendMsg('bot', 'Verbindungsfehler. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+  }
+
+  sendBtn.disabled = false;
+  scrollBottom();
+}
+</script>
+<!-- ── END LYNX CHATBOT ───────────────────────────────────── -->
 </body>
 </html>
