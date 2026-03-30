@@ -199,7 +199,7 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
       flex: 1; background: rgba(22,36,84,0.7); border: 1px solid rgba(124,92,196,0.25);
       border-radius: 12px; padding: 9px 12px; font-size: 13px; color: #f5f3ff;
       outline: none; resize: none; font-family: 'DM Sans', sans-serif;
-      line-height: 1.4; height: 38px; max-height: 90px; overflow-y: auto;
+      line-height: 1.4; height: 38px; max-height: 38px; overflow-y: hidden;
       transition: border-color 0.15s;
     }
     #lynx-input::placeholder { color: rgba(160,160,184,0.5); }
