@@ -1,110 +1,64 @@
-/**
- * Lynx Automation Solutions – Lead Function
- * Netlify Function: netlify/functions/lead.js
- * Keine externen Dependencies – läuft mit Node.js built-ins + fetch
- */
-
-exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
-  }
+exports.handler = async function(event, context) {
+  const headers = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+  };
+  if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
+  if (event.httpMethod !== 'POST') return { statusCode: 405, headers, body: 'Method not allowed' };
 
   try {
-    const data = JSON.parse(event.body);
-    const { vorname, nachname, email, telefon, unternehmen, thema, nachricht, einwilligung } = data;
+    const { name, phone, email, topic, note, date, consentDate } = JSON.parse(event.body);
 
-    const serviceAccount = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
-    const sheetId        = process.env.GOOGLE_SHEET_ID;
+    const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
+    creds.private_key = creds.private_key.replace(/\\n/g, '\n');
+    const sheetId = process.env.GOOGLE_SHEET_ID;
 
-    // ── JWT Access Token holen ─────────────────────────────────────────────
-    const token = await getAccessToken(serviceAccount);
+    const token = await getGoogleToken(creds);
 
-    // ── Zeile aufbauen ────────────────────────────────────────────────────
-    const datum = new Date().toLocaleString("de-DE", { timeZone: "Europe/Berlin" });
-    const name  = `${vorname || ""} ${nachname || ""}`.trim();
+    const d = new Date(date);
+    const formatted = `${String(d.getDate()).padStart(2,'0')}.${String(d.getMonth()+1).padStart(2,'0')}.${d.getFullYear()} ${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}`;
 
-    // Spalten: A: Datum | B: Name | C: Telefon | D: E-Mail | E: Thema | F: Anliegen | G: Einwilligung
-    const row = [
-      datum,
-      name,
-      telefon      || "–",
-      email        || "–",
-      thema        || "–",
-      nachricht    || "–",
-      einwilligung ? "Ja" : "Nein",
-    ];
+    const c = new Date(consentDate);
+    const consentFormatted = `Ja, ${String(c.getDate()).padStart(2,'0')}.${String(c.getMonth()+1).padStart(2,'0')}.${c.getFullYear()} ${String(c.getHours()).padStart(2,'0')}:${String(c.getMinutes()).padStart(2,'0')}`;
 
-    // ── In Google Sheet schreiben ─────────────────────────────────────────
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Leads!A:G:append?valueInputOption=USER_ENTERED`;
+    const range = encodeURIComponent('Leads!A:G');
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/${range}:append?valueInputOption=USER_ENTERED`;
 
     const res = await fetch(url, {
-      method:  "POST",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type":  "application/json",
-      },
-      body: JSON.stringify({ values: [row] }),
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        values: [[formatted, name || '-', phone || '-', email || '-', topic || '-', note || '-', consentFormatted]]
+      })
     });
 
-    if (!res.ok) {
-      const err = await res.text();
-      throw new Error(`Sheets API: ${res.status} – ${err}`);
-    }
-
-    return {
-      statusCode: 200,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ success: true }),
-    };
+    if (!res.ok) { const err = await res.text(); throw new Error(`Sheets API Fehler: ${err}`); }
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
 
   } catch (err) {
-    console.error("lead.js Fehler:", err);
-    return {
-      statusCode: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ success: false, error: err.message }),
-    };
+    console.error('Lead-Fehler:', err);
+    return { statusCode: 500, headers, body: JSON.stringify({ error: err.message }) };
   }
 };
 
-// ── JWT Helper (ohne googleapis) ──────────────────────────────────────────
-async function getAccessToken(sa) {
-  const now    = Math.floor(Date.now() / 1000);
-  const header = b64url(JSON.stringify({ alg: "RS256", typ: "JWT" }));
-  const claim  = b64url(JSON.stringify({
-    iss:   sa.client_email,
-    scope: "https://www.googleapis.com/auth/spreadsheets",
-    aud:   "https://oauth2.googleapis.com/token",
-    iat:   now,
-    exp:   now + 3600,
-  }));
-
-  const signingInput = `${header}.${claim}`;
-  const signature    = await rsaSign(signingInput, sa.private_key);
-  const jwt          = `${signingInput}.${signature}`;
-
-  const res = await fetch("https://oauth2.googleapis.com/token", {
-    method:  "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body:    `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`,
+async function getGoogleToken(creds) {
+  const now = Math.floor(Date.now() / 1000);
+  const header  = { alg: 'RS256', typ: 'JWT' };
+  const payload = { iss: creds.client_email, scope: 'https://www.googleapis.com/auth/spreadsheets', aud: 'https://oauth2.googleapis.com/token', exp: now + 3600, iat: now };
+  const encode = obj => Buffer.from(JSON.stringify(obj)).toString('base64url');
+  const signingInput = `${encode(header)}.${encode(payload)}`;
+  const crypto = require('crypto');
+  const sign = crypto.createSign('RSA-SHA256');
+  sign.update(signingInput);
+  const signature = sign.sign(creds.private_key, 'base64url');
+  const jwt = `${signingInput}.${signature}`;
+  const tokenRes = await fetch('https://oauth2.googleapis.com/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `grant_type=urn%3Aietf%3Aparams%3Aoauth%3Agrant-type%3Ajwt-bearer&assertion=${jwt}`
   });
-
-  const json = await res.json();
-  if (!json.access_token) throw new Error("Token-Fehler: " + JSON.stringify(json));
-  return json.access_token;
-}
-
-function b64url(str) {
-  return Buffer.from(str).toString("base64")
-    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
-}
-
-async function rsaSign(data, pemKey) {
-  const crypto  = require("crypto");
-  const sign    = crypto.createSign("RSA-SHA256");
-  sign.update(data);
-  sign.end();
-  const sig = sign.sign(pemKey);
-  return sig.toString("base64")
-    .replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+  const tokenData = await tokenRes.json();
+  if (!tokenData.access_token) throw new Error('Kein Access Token: ' + JSON.stringify(tokenData));
+  return tokenData.access_token;
 }
