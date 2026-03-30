@@ -60,6 +60,7 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
   let isOpen = false;
   let isTyping = false;
   let leadCaptured = false;
+  let greeted = false;
 
   // ── STYLES ───────────────────────────────────────────────────────────────
   const css = `
@@ -69,7 +70,7 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
 
     /* BUBBLE */
     #lynx-bubble {
-      position: fixed; bottom: 28px; right: 28px; z-index: 99999;
+      position: fixed; bottom: 28px; right: 90px; z-index: 99999;
       width: 60px; height: 60px; border-radius: 50%;
       background: linear-gradient(135deg, #5b3fa0 0%, #7c5cc4 100%);
       box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 0 rgba(124,92,196,0.4);
@@ -89,7 +90,7 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
 
     /* WINDOW */
     #lynx-window {
-      position: fixed; bottom: 100px; right: 28px; z-index: 99998;
+      position: fixed; bottom: 100px; right: 90px; z-index: 99998;
       width: 380px; max-width: calc(100vw - 40px);
       height: 560px; max-height: calc(100vh - 130px);
       background: #0d1b3e;
@@ -161,6 +162,8 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
       border-bottom-right-radius: 4px;
     }
     .lynx-msg-time { font-size: 10px; color: rgba(160,160,184,0.5); margin-top: 3px; padding: 0 4px; }
+    .lynx-privacy { font-size: 11px; color: #888880; background: rgba(22,36,84,0.4); border: 1px solid rgba(179,157,219,0.08); border-radius: 10px; padding: 8px 12px; align-self: flex-start; line-height: 1.5; max-width: 90%; animation: lynx-fade-in 0.2s ease; }
+    .lynx-privacy a { color: #7c5cc4; text-decoration: underline; }
     .bot .lynx-msg-time { align-self: flex-start; }
     .user .lynx-msg-time { align-self: flex-end; }
 
@@ -370,7 +373,7 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
   function toggle() {
     isOpen = !isOpen;
     win.classList.toggle("open", isOpen);
-    if (isOpen && messages.length === 0) greet();
+    if (isOpen && !greeted) { greeted = true; greet(); }
   }
 
   bubble.addEventListener("click", toggle);
@@ -404,7 +407,13 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
 
   // ── GREETING ──────────────────────────────────────────────────────────────
   function greet() {
-    addMessage("Hallo! 👋 Ich bin der KI-Assistent von **Lynx Automation Solutions**.\n\nWie kann ich dir helfen? Wähle einen Themenpunkt oder stell mir direkt deine Frage.", "bot");
+    addMessage("Hallo! 👋 Ich bin der KI-Assistent von Lynx Automation Solutions.\n\nWie kann ich dir helfen? Wähle einen Themenpunkt oder stell mir direkt deine Frage.", "bot");
+    // Datenschutzhinweis
+    const privacy = document.createElement("div");
+    privacy.className = "lynx-privacy";
+    privacy.innerHTML = 'Ich bin ein KI-gestützter Chatbot und beantworte Fragen zu diesem Unternehmen. Deine Eingaben können technisch verarbeitet werden. Bitte gib keine sensiblen personenbezogenen Daten ein. Weitere Informationen findest du in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.';
+    msgArea.appendChild(privacy);
+    msgArea.scrollTop = msgArea.scrollHeight;
   }
 
   // ── API CALL ──────────────────────────────────────────────────────────────
