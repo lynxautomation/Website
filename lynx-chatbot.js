@@ -213,6 +213,67 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
     #lynx-send:hover { opacity: 0.88; transform: scale(0.97); }
     #lynx-send:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
 
+
+    /* ── LEAD FORM ──────────────────────────────────────────── */
+    #lynx-chat-root .lynx-lead-form {
+      background: rgba(22,36,84,0.9); border: 1px solid rgba(124,92,196,0.25);
+      border-radius: 14px; padding: 14px; margin: 4px 0;
+      display: flex; flex-direction: column; gap: 9px;
+      align-self: flex-start; width: 100%;
+      animation: lynx-fade-in 0.25s ease;
+    }
+    #lynx-chat-root .lynx-lead-form-title {
+      font-size: 13px; font-weight: 500; color: #b39ddb; margin-bottom: 2px;
+    }
+    #lynx-chat-root .lynx-lead-form input,
+    #lynx-chat-root .lynx-lead-form textarea {
+      width: 100% !important; padding: 8px 10px !important;
+      border: 1px solid rgba(124,92,196,0.25) !important; border-radius: 8px !important;
+      font-family: 'DM Sans', sans-serif !important; font-size: 12.5px !important;
+      background: rgba(13,27,62,0.85) !important; color: #f5f3ff !important;
+      outline: none !important; transition: border-color .2s !important;
+      resize: none !important; box-shadow: none !important;
+      line-height: 1.4 !important; height: auto !important;
+    }
+    #lynx-chat-root .lynx-lead-form textarea {
+      min-height: 62px !important; max-height: 62px !important;
+    }
+    #lynx-chat-root .lynx-lead-form input::placeholder,
+    #lynx-chat-root .lynx-lead-form textarea::placeholder { color: rgba(160,160,184,0.45) !important; }
+    #lynx-chat-root .lynx-lead-form input:focus,
+    #lynx-chat-root .lynx-lead-form textarea:focus { border-color: rgba(124,92,196,0.6) !important; }
+    #lynx-chat-root .lynx-consent-row {
+      display: flex !important; align-items: flex-start !important; gap: 8px !important;
+      background: rgba(91,63,160,0.15) !important; border-radius: 8px !important;
+      padding: 9px 10px !important;
+    }
+    #lynx-chat-root .lynx-consent-row input[type="checkbox"] {
+      width: 14px !important; height: 14px !important; flex-shrink: 0 !important;
+      margin-top: 2px !important; accent-color: #7c5cc4 !important;
+      cursor: pointer !important; padding: 0 !important;
+    }
+    #lynx-chat-root .lynx-consent-row label {
+      font-size: 10.5px !important; color: #888880 !important;
+      line-height: 1.5 !important; cursor: pointer !important;
+      text-transform: none !important; font-weight: 400 !important;
+      letter-spacing: 0 !important;
+    }
+    #lynx-chat-root .lynx-consent-row a { color: #7c5cc4 !important; text-decoration: underline !important; }
+    #lynx-chat-root .lynx-lead-form-btn {
+      background: linear-gradient(135deg, #5b3fa0, #7c5cc4) !important;
+      color: #fff !important; border: none !important; border-radius: 9px !important;
+      padding: 9px !important; font-family: 'DM Sans', sans-serif !important;
+      font-size: 13px !important; font-weight: 600 !important;
+      cursor: pointer !important; transition: opacity .2s !important;
+      width: 100% !important; text-transform: none !important; letter-spacing: 0 !important;
+    }
+    #lynx-chat-root .lynx-lead-form-btn:disabled { opacity: .45 !important; cursor: not-allowed !important; }
+    #lynx-chat-root .lynx-lead-form-btn:not(:disabled):hover { opacity: 0.85 !important; }
+    #lynx-chat-root .lynx-lead-form-success {
+      font-size: 12px !important; color: #7defa0 !important;
+      text-align: center !important; padding: 6px 0 !important;
+    }
+
     /* LEAD NOTIFICATION */
     #lynx-lead-toast {
       display: none; margin: 0 14px 8px;
