@@ -39,21 +39,19 @@ Modell 2 – Chat + Lead Engine:
 E-Mail: info@lynx-automation.de
 
 === LEAD-ERFASSUNG ===
-Wenn ein Besucher eine Demo anfragen möchte, frage nach:
-1. Name
-2. E-Mail-Adresse
-3. Kurze Beschreibung ihres Unternehmens oder Anliegens
+Wenn ein Besucher eine Demo anfragen möchte oder Kontakt aufnehmen will, antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag (nichts weglassen, nichts verändern):
+<<<SHOW_LEAD_FORM>>>
 
-Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-Block aus (nichts weglassen, nichts hinzufügen):
-<<<LEAD_JSON>>>
-{"name":"[Name]","email":"[E-Mail]","anliegen":"[Anliegen]"}
-<<<END_LEAD_JSON>>>
+Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Name, E-Mail oder Anliegen fragen – das übernimmt das Formular.
 
 === TONALITÄT ===
 - Professionell, modern, auf Augenhöhe
 - Klar und prägnant (keine langen Monologe)
 - Deutsch, Du-Form erlaubt wenn der Besucher es vorgibt
-- Begeistere für KI-Automatisierung, ohne zu übertreiben`;
+- Begeistere für KI-Automatisierung, ohne zu übertreiben
+- Verwende KEIN Markdown wie #, ##, --- oder ``` in deinen Antworten
+- Für Aufzählungen nutze einfache Zahlen (1. 2. 3.) ohne ** drum herum
+- Fett (**text**) nur sparsam für wirklich wichtige Begriffe`;
 
   // ── STATE ─────────────────────────────────────────────────────────────────
   let messages = [];
@@ -315,9 +313,20 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
     el.className = `lynx-msg ${role}`;
 
     // Strip lead JSON from displayed text
-    const clean = text.replace(/<<<LEAD_JSON>>>[\s\S]*?<<<END_LEAD_JSON>>>/g, "").trim();
+    const clean = text.replace(/<<<LEAD_JSON>>>[\s\S]*?<<<END_LEAD_JSON>>>/g, "").replace(/<<<SHOW_LEAD_FORM>>>/g, "").trim();
 
-    el.innerHTML = `<div class="lynx-bubble-text">${clean.replace(/\n/g, "<br>")}</div>
+    // Simple markdown renderer
+    function renderMarkdown(str) {
+      return str
+        .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")   // **bold**
+        .replace(/\*(.+?)\*/g, "<em>$1</em>")                 // *italic*
+        .replace(/^#{1,3}\s+(.+)$/gm, "<strong>$1</strong>")  // # headings → bold
+        .replace(/^---+$/gm, "<hr style=\'border:none;border-top:1px solid rgba(179,157,219,0.15);margin:6px 0\'>") // ---
+        .replace(/^(\d+\.\s.+)$/gm, "<div style=\'margin:2px 0\'>$1</div>") // numbered lists
+        .replace(/\n/g, "<br>");
+    }
+
+    el.innerHTML = `<div class="lynx-bubble-text">${renderMarkdown(clean)}</div>
                     <span class="lynx-msg-time">${timestamp()}</span>`;
     msgArea.appendChild(el);
     msgArea.scrollTop = msgArea.scrollHeight;
@@ -330,9 +339,61 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
     try { return JSON.parse(match[1].trim()); } catch { return null; }
   }
 
+  function checkFormTrigger(text) {
+    return text.includes('<<<SHOW_LEAD_FORM>>>');
+  }
+
   function showLeadToast() {
     toast.classList.add("show");
     setTimeout(() => toast.classList.remove("show"), 6000);
+  }
+
+  // ── LEAD FORM ─────────────────────────────────────────────────────────────
+  function showLeadForm() {
+    if (document.querySelector('.lynx-lead-form')) return; // only once
+
+    const form = document.createElement('div');
+    form.className = 'lynx-lead-form';
+    form.innerHTML = `
+      <div class="lynx-lead-form-title">📬 Demo anfragen</div>
+      <input id="lf-name" type="text" placeholder="Dein Name" maxlength="80">
+      <input id="lf-email" type="email" placeholder="Deine E-Mail-Adresse" maxlength="120">
+      <textarea id="lf-note" placeholder="Dein Unternehmen / Anliegen (optional)"></textarea>
+      <div class="lynx-consent-row">
+        <input type="checkbox" id="lf-consent">
+        <label for="lf-consent">Ich stimme zu, dass meine Daten (Name, Telefon, E-Mail, Anliegen) gespeichert und zur Kontaktaufnahme genutzt werden. Die Einwilligung kann jederzeit widerrufen werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+      </div>
+      <button class="lynx-lead-form-btn" id="lf-submit" disabled>Anfrage absenden</button>
+    `;
+    msgArea.appendChild(form);
+    msgArea.scrollTop = msgArea.scrollHeight;
+
+    const submitBtn  = document.getElementById('lf-submit');
+    const consentBox = document.getElementById('lf-consent');
+
+    consentBox.addEventListener('change', () => {
+      submitBtn.disabled = !consentBox.checked;
+    });
+
+    submitBtn.addEventListener('click', async () => {
+      const name  = document.getElementById('lf-name').value.trim();
+      const email = document.getElementById('lf-email').value.trim();
+      const note  = document.getElementById('lf-note').value.trim();
+
+      if (!name || !email) {
+        document.getElementById('lf-name').style.borderColor  = name  ? '' : 'rgba(255,100,100,0.6)';
+        document.getElementById('lf-email').style.borderColor = email ? '' : 'rgba(255,100,100,0.6)';
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Wird gesendet …';
+
+      const consentDate = new Date().toISOString();
+      await handleLead({ name, email, anliegen: note || '–', consentDate });
+
+      form.innerHTML = '<div class="lynx-lead-form-success">✓ Vielen Dank! Wir melden uns bald bei dir.</div>';
+    });
   }
 
   function handleLead(lead) {
@@ -343,12 +404,12 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
     const now = new Date().toISOString();
     const payload = {
       name:        lead.name         || "",
-      phone:       "",                        // Chatbot fragt kein Telefon ab
+      phone:       "",
       email:       lead.email        || "",
       topic:       "Chatbot – Demo-Anfrage",
       note:        lead.anliegen     || "",
       date:        now,
-      consentDate: now,
+      consentDate: lead.consentDate  || now,
     };
 
     fetch("/.netlify/functions/lead", {
@@ -446,6 +507,8 @@ Sobald du alle drei Angaben hast, gib am ENDE deiner Antwort EXAKT diesen JSON-B
       if (lead) handleLead(lead);
 
       addMessage(reply, "bot");
+
+      if (checkFormTrigger(reply)) showLeadForm();
     } catch (err) {
       addMessage("Entschuldigung, es gab einen technischen Fehler. Bitte schreib uns direkt an info@lynx-automation.de", "bot");
       console.error("[Lynx Chat]", err);
