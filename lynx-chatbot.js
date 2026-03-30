@@ -49,7 +49,7 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
 - Klar und prägnant (keine langen Monologe)
 - Deutsch, Du-Form erlaubt wenn der Besucher es vorgibt
 - Begeistere für KI-Automatisierung, ohne zu übertreiben
-- Verwende KEIN Markdown wie #, ##, --- oder ``` in deinen Antworten
+- Verwende KEIN Markdown wie #, ##, --- in deinen Antworten
 - Für Aufzählungen nutze einfache Zahlen (1. 2. 3.) ohne ** drum herum
 - Fett (**text**) nur sparsam für wirklich wichtige Begriffe`;
 
@@ -321,8 +321,8 @@ Das System zeigt dann automatisch ein Kontaktformular an. Du musst NICHT nach Na
         .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")   // **bold**
         .replace(/\*(.+?)\*/g, "<em>$1</em>")                 // *italic*
         .replace(/^#{1,3}\s+(.+)$/gm, "<strong>$1</strong>")  // # headings → bold
-        .replace(/^---+$/gm, "<hr style=\'border:none;border-top:1px solid rgba(179,157,219,0.15);margin:6px 0\'>") // ---
-        .replace(/^(\d+\.\s.+)$/gm, "<div style=\'margin:2px 0\'>$1</div>") // numbered lists
+        .replace(/^---+$/gm, '<hr style="border:none;border-top:1px solid rgba(179,157,219,0.15);margin:6px 0">') // ---
+        .replace(/^(\d+\.\s.+)$/gm, '<div style="margin:2px 0">$1</div>') // numbered lists
         .replace(/\n/g, "<br>");
     }
 
