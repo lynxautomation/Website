@@ -1182,7 +1182,7 @@
     font-family: var(--font-body); font-size: 13px;
     color: #f5f3ff; background: rgba(22,36,84,0.7);
     resize: none; outline: none;
-    height: 38px; max-height: 38px; overflow-y: hidden;
+    height: 38px !important; max-height: 38px !important; overflow-y: hidden !important; min-height: unset !important;
     line-height: 1.4; transition: border-color .2s;
   }
   #userInput:focus { border-color: rgba(124,92,196,0.6); }
@@ -1262,7 +1262,7 @@
   </div>
 
   <div class="wg-input-bar">
-    <textarea id="userInput" rows="1" placeholder="Schreib eine Nachricht …" aria-label="Nachricht eingeben"></textarea>
+    <textarea id="userInput" rows="1" placeholder="Schreib eine Nachricht …" aria-label="Nachricht eingeben" style="height:38px!important;max-height:38px!important;min-height:unset!important"></textarea>
     <button id="sendBtn" aria-label="Senden">
       <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
     </button>
