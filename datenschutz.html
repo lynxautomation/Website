@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Datenschutzerklärung – Lynx Automation Solutions</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-mid: #162454;
+    --purple: #5b3fa0;
+    --purple-light: #7c5cc4;
+    --purple-glow: #9d7fe0;
+    --accent: #b39ddb;
+    --white: #f5f3ff;
+    --grey: #a0a0b8;
+    --card-bg: rgba(22, 36, 84, 0.55);
+    --border: rgba(179, 157, 219, 0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+  .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bg-mesh::before {
+    content: ''; position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,63,160,0.25) 0%, transparent 70%);
+    top: -100px; left: -100px;
+  }
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(13,27,62,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--white); text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-back {
+    color: var(--grey); text-decoration: none; font-size: 0.88rem;
+    display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--white); }
+  main {
+    position: relative; z-index: 1;
+    max-width: 780px; margin: 0 auto;
+    padding: 140px 40px 100px;
+  }
+  .page-label {
+    font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--purple-glow); margin-bottom: 14px; display: block;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    font-weight: 300; line-height: 1.1; margin-bottom: 12px;
+  }
+  .last-updated { font-size: 0.8rem; color: var(--grey); margin-bottom: 60px; }
+  .notice {
+    background: rgba(91,63,160,0.15);
+    border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 10px; padding: 20px 24px;
+    font-size: 0.85rem; color: var(--grey); line-height: 1.7; margin-bottom: 56px;
+  }
+  .notice strong { color: var(--accent); }
+  section { margin-bottom: 52px; }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem; font-weight: 400;
+    margin-bottom: 18px; padding-bottom: 12px;
+    border-bottom: 1px solid var(--border); color: var(--white);
+  }
+  h3 {
+    font-size: 1rem; font-weight: 500; color: var(--accent);
+    margin: 24px 0 10px; letter-spacing: 0.02em;
+  }
+  p {
+    color: var(--grey); font-size: 0.92rem;
+    line-height: 1.85; font-weight: 300; margin-bottom: 14px;
+  }
+  ul {
+    color: var(--grey); font-size: 0.92rem;
+    line-height: 1.85; font-weight: 300;
+    padding-left: 20px; margin-bottom: 14px;
+  }
+  ul li { margin-bottom: 6px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .highlight-box {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 24px; margin: 20px 0;
+    backdrop-filter: blur(12px);
+  }
+  .highlight-box p { margin-bottom: 0; }
+  .strong { color: var(--white); font-weight: 500; }
+  footer {
+    border-top: 1px solid var(--border); padding: 36px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: relative; z-index: 1; flex-wrap: wrap; gap: 16px;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--grey); }
+  .footer-links { display: flex; gap: 28px; }
+  .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+  @media (max-width: 700px) {
+    nav { padding: 16px 24px; }
+    main { padding: 120px 24px 80px; }
+    footer { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav>
+  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
+  <a href="index.html" class="nav-back">← Zurück zur Website</a>
+</nav>
+
+<main>
+  <span class="page-label">Rechtliches</span>
+  <h1>Datenschutzerklärung</h1>
+  <p class="last-updated">Stand: Januar 2025 · Lynx Automation Solutions</p>
+
+  <div class="notice">
+    <strong>Hinweis:</strong> Diese Datenschutzerklärung wurde sorgfältig erstellt, ersetzt jedoch keine individuelle Rechtsberatung. Wir empfehlen eine Prüfung durch einen Rechtsanwalt oder einen spezialisierten Datenschutzdienst vor der Veröffentlichung.
+  </div>
+
+  <!-- 1 -->
+  <section>
+    <h2>1. Verantwortlicher</h2>
+    <p>Verantwortlicher im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:</p>
+    <div class="highlight-box">
+      <p>
+        <span class="strong">Lynx Automation Solutions</span><br>
+        [Vorname Nachname]<br>
+        [Straße Hausnummer]<br>
+        [PLZ Ort]<br>
+        Deutschland<br><br>
+        E-Mail: <a href="mailto:info@lynx-automation.de">info@lynx-automation.de</a><br>
+        Website: <a href="#">www.lynx-automation.de</a>
+      </p>
+    </div>
+    <p style="color:rgba(160,160,184,0.6);font-size:0.8rem;">⚠ Bitte trage deine vollständigen Kontaktdaten ein, bevor du die Website veröffentlichst.</p>
+  </section>
+
+  <!-- 2 -->
+  <section>
+    <h2>2. Grundsätze der Datenverarbeitung</h2>
+    <p>Wir verarbeiten personenbezogene Daten unserer Nutzer nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist.</p>
+    <p>Die Verarbeitung erfolgt auf Grundlage der DSGVO, insbesondere:</p>
+    <ul>
+      <li>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</li>
+      <li>Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen)</li>
+      <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)</li>
+    </ul>
+  </section>
+
+  <!-- 3 -->
+  <section>
+    <h2>3. Erhebung und Speicherung personenbezogener Daten</h2>
+
+    <h3>3.1 Beim Besuch der Website</h3>
+    <p>Beim Aufrufen unserer Website werden automatisch Informationen durch Ihren Browser übermittelt und temporär in sogenannten Logfiles gespeichert:</p>
+    <ul>
+      <li>IP-Adresse (ggf. anonymisiert)</li>
+      <li>Datum und Uhrzeit des Zugriffs</li>
+      <li>Name und URL der abgerufenen Datei</li>
+      <li>Referrer-URL</li>
+      <li>verwendeter Browser und Betriebssystem</li>
+    </ul>
+    <p><span class="strong">Zweck der Verarbeitung:</span> Sicherstellung eines reibungslosen Verbindungsaufbaus sowie Systemsicherheit und Stabilität.</p>
+    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO</p>
+
+    <h3>3.2 Kontaktformular und Anfragen</h3>
+    <p>Wenn Sie uns über das Kontaktformular oder per E-Mail kontaktieren, verarbeiten wir folgende Daten:</p>
+    <ul>
+      <li>Vor- und Nachname</li>
+      <li>E-Mail-Adresse</li>
+      <li>Telefonnummer (optional)</li>
+      <li>Unternehmensname</li>
+      <li>Nachricht / Anliegen</li>
+      <li>Datum und Uhrzeit</li>
+    </ul>
+    <p>Die Verarbeitung erfolgt zum Zweck der Bearbeitung Ihrer Anfrage sowie zur Kontaktaufnahme.</p>
+    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) sowie Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen)</p>
+    <p>Die im Formular eingegebenen Daten werden in einer passwortgeschützten Google Sheets-Tabelle gespeichert, die durch den Verantwortlichen betrieben wird. Im Rahmen der technischen Infrastruktur können administrative Zugriffsmöglichkeiten bestehen, die jedoch ausschließlich zur Wartung, Fehlerbehebung und Sicherstellung des Systembetriebs genutzt werden.</p>
+    <p>Eine Weitergabe der Daten erfolgt nicht, es sei denn, dies ist zur Erfüllung des Zwecks erforderlich oder gesetzlich vorgeschrieben.</p>
+  </section>
+
+  <!-- 4 -->
+  <section>
+    <h2>4. Einsatz eines KI-Chatbots auf dieser Website</h2>
+    <p>Auf unserer Website setzen wir einen KI-gestützten Chatbot ein, um Nutzeranfragen automatisiert zu beantworten und die Kommunikation zu erleichtern.</p>
+
+    <h3>4.1 Verarbeitung im Chat</h3>
+    <p>Bei Nutzung des Chatbots können folgende Daten verarbeitet werden:</p>
+    <ul>
+      <li>eingegebene Nachrichten (Chat-Inhalte)</li>
+      <li>technische Verbindungsdaten (z. B. IP-Adresse, Zeitstempel)</li>
+    </ul>
+    <p>Die Verarbeitung erfolgt zur Bereitstellung des Chat-Dienstes.</p>
+    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kundenkommunikation)</p>
+
+    <h3>4.2 Erhebung von Kontaktdaten über den Chatbot</h3>
+    <p>Sofern Sie über den Chatbot freiwillig personenbezogene Daten (z. B. Name, E-Mail-Adresse, Telefonnummer) angeben, erfolgt dies ausschließlich auf Grundlage Ihrer ausdrücklichen Einwilligung.</p>
+    <p>Diese Daten werden verwendet, um:</p>
+    <ul>
+      <li>Ihre Anfrage zu bearbeiten</li>
+      <li>eine Demo oder Beratung bereitzustellen</li>
+      <li>Sie zu kontaktieren</li>
+    </ul>
+    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</p>
+    <p>Die Speicherung erfolgt in einer geschützten Google Sheets-Tabelle. Zugriff hat ausschließlich der Verantwortliche. Im Rahmen des technischen Betriebs können administrative Zugriffsmöglichkeiten des technischen Dienstleisters bestehen, die jedoch ausschließlich zur Wartung, Fehlerbehebung und Sicherstellung des Systembetriebs sowie auf dokumentierte Weisung des Verantwortlichen genutzt werden.</p>
+
+    <h3>4.3 Kein Profiling</h3>
+    <p>Es findet keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO statt.</p>
+  </section>
+
+  <!-- 5 -->
+  <section>
+    <h2>5. Weitergabe von Daten und eingesetzte Dienstleister</h2>
+    <p>Eine Weitergabe personenbezogener Daten erfolgt nur, wenn dies erforderlich ist oder eine gesetzliche Grundlage besteht.</p>
+    <p><span class="strong">Eingesetzte Dienstleister:</span></p>
+    <ul>
+      <li>
+        <span class="strong">Netlify, Inc.</span>, 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA – Hosting und Server-Infrastruktur<br>
+        <a href="https://www.netlify.com/privacy/" target="_blank">www.netlify.com/privacy</a>
+      </li>
+      <li>
+        <span class="strong">Google LLC</span>, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA – Speicherung von Kontaktanfragen (Google Sheets)<br>
+        <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>
+      </li>
+      <li>
+        <span class="strong">Anthropic, PBC</span>, 548 Market St, San Francisco, CA 94104, USA – KI-Technologie für Chatbot-Funktionen<br>
+        <a href="https://www.anthropic.com/privacy" target="_blank">www.anthropic.com/privacy</a>
+      </li>
+    </ul>
+    <p>Bei der Auswahl unserer Dienstleister achten wir auf datenschutzkonforme Verarbeitung. Wir behalten uns vor, eingesetzte Dienstleister zu ändern oder durch andere Anbieter zu ersetzen, sofern dies zur Erbringung unserer Leistungen erforderlich ist. In diesem Fall stellen wir sicher, dass auch neue Dienstleister den Anforderungen der DSGVO entsprechen. Über wesentliche Änderungen werden betroffene Parteien informiert.</p>
+    <p>Bei der Nutzung des Chatbots werden Inhalte zur Verarbeitung an Anthropic übermittelt. Bei Datenübermittlungen in die USA stützen wir uns auf Standardvertragsklauseln der EU-Kommission gemäß Art. 46 Abs. 2 lit. c DSGVO sowie ggf. ergänzende Schutzmaßnahmen.</p>
+  </section>
+
+  <!-- 6 -->
+  <section>
+    <h2>6. Speicherdauer</h2>
+    <p>Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist.</p>
+    <p>Kontaktanfragen sowie über den Chatbot übermittelte Kontaktdaten werden gelöscht, sobald die Bearbeitung abgeschlossen ist und keine weitere Kommunikation erfolgt, <span class="strong">spätestens jedoch nach 3 Monaten</span>, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+  </section>
+
+  <!-- 7 -->
+  <section>
+    <h2>7. Ihre Rechte</h2>
+    <p>Sie haben folgende Rechte hinsichtlich Ihrer personenbezogenen Daten:</p>
+    <ul>
+      <li>Auskunft (Art. 15 DSGVO)</li>
+      <li>Berichtigung (Art. 16 DSGVO)</li>
+      <li>Löschung (Art. 17 DSGVO)</li>
+      <li>Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+      <li>Datenübertragbarkeit (Art. 20 DSGVO)</li>
+      <li>Widerspruch (Art. 21 DSGVO)</li>
+      <li>Widerruf Ihrer Einwilligung jederzeit mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
+    </ul>
+    <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:info@lynx-automation.de">info@lynx-automation.de</a></p>
+    <p>Sie haben außerdem das Recht, sich bei einer zuständigen Datenschutz-Aufsichtsbehörde zu beschweren.</p>
+  </section>
+
+  <!-- 8 -->
+  <section>
+    <h2>8. Datensicherheit</h2>
+    <p>Wir verwenden SSL-/TLS-Verschlüsselung, um Ihre Daten bei der Übertragung zu schützen. Zusätzlich setzen wir technische und organisatorische Maßnahmen (TOMs) ein, um Daten vor Verlust, Manipulation oder unbefugtem Zugriff zu schützen. Dazu gehören insbesondere:</p>
+    <ul>
+      <li>Verschlüsselte Datenübertragung (HTTPS)</li>
+      <li>Zugriffsbeschränkung auf Systeme und API-Schlüssel durch Environment-Variablen</li>
+      <li>Keine dauerhafte Speicherung von Chat-Inhalten außer bei ausdrücklicher Einwilligung</li>
+      <li>Zugriff auf Google Sheets ausschließlich über einen dedizierten Service Account</li>
+      <li>Dokumentation der Nutzereinwilligung innerhalb des Systems</li>
+      <li>Verzicht auf Tracking- oder Analyse-Tools</li>
+    </ul>
+  </section>
+
+  <!-- 9 -->
+  <section>
+    <h2>9. Cookies</h2>
+    <p>Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Website erforderlich sind und keiner gesonderten Einwilligung bedürfen.</p>
+    <p>Es werden keine Tracking- oder Analyse-Tools eingesetzt.</p>
+  </section>
+
+  <!-- 10 -->
+  <section>
+    <h2>10. Aktualität und Änderungen</h2>
+    <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Januar 2025. Sie wird bei Bedarf angepasst, insbesondere wenn sich rechtliche Vorgaben ändern oder neue Dienstleister eingesetzt werden. Die jeweils aktuelle Version ist jederzeit auf dieser Seite abrufbar.</p>
+  </section>
+
+</main>
+
+<footer>
+  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
+  <div class="footer-copy">© 2025 Lynx Automation Solutions</div>
+  <div class="footer-links">
+    <a href="impressum.html">Impressum</a>
+    <a href="agb.html">AGB</a>
+    <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
+</body>
+</html>
