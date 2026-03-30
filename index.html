@@ -912,18 +912,18 @@
     btn.disabled = true;
 
     try {
+      const now = new Date().toISOString();
       const res = await fetch('/.netlify/functions/lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          vorname,
-          nachname,
+          name:        `${vorname} ${nachname}`.trim(),
+          phone:       document.getElementById('f-telefon').value.trim() || '',
           email,
-          telefon: document.getElementById('f-telefon').value.trim(),
-          unternehmen,
-          thema: document.getElementById('f-thema').value,
-          nachricht: document.getElementById('f-nachricht').value.trim(),
-          einwilligung
+          topic:       document.getElementById('f-thema').value || 'Website-Formular',
+          note:        `Unternehmen: ${unternehmen}. ${document.getElementById('f-nachricht').value.trim()}`.trim(),
+          date:        now,
+          consentDate: now
         })
       });
 
