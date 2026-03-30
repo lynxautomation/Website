@@ -1008,8 +1008,8 @@
   /* ── WIDGET ───────────────────────────────────────────── */
   #widget {
     position: fixed; bottom: 100px; right: 28px;
-    width: 380px; max-width: calc(100vw - 40px);
-    max-height: 580px;
+    width: 420px; max-width: calc(100vw - 40px);
+    max-height: 660px;
     background: var(--navy);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
@@ -1182,7 +1182,7 @@
     font-family: var(--font-body); font-size: 13px;
     color: #f5f3ff; background: rgba(22,36,84,0.7);
     resize: none; outline: none;
-    height: 38px; max-height: 100px; overflow-y: auto;
+    height: 38px; max-height: 38px; overflow-y: hidden;
     line-height: 1.4; transition: border-color .2s;
   }
   #userInput:focus { border-color: rgba(124,92,196,0.6); }
@@ -1311,11 +1311,12 @@ Das System zeigt dann automatisch ein Kontaktformular an. Frage NICHT nach Name,
 
 === TONALITÄT ===
 - Professionell, modern, auf Augenhöhe
-- Klar und prägnant (max. 3-4 Sätze pro Antwort)
+- Maximal 3 Sätze ODER eine kurze Stichpunktliste – nie beides kombiniert
+- Bei Erklärungen: lieber 3-4 knappe Stichpunkte als Fließtext
 - Deutsch, Du-Form erlaubt wenn der Besucher es vorgibt
 - Begeistere für KI-Automatisierung, ohne zu übertreiben
 - Kein Markdown wie #, ## oder --- in Antworten
-- Fett (**text**) nur sparsam für wichtige Begriffe`;
+- Fett (**text**) nur für wirklich wichtige Begriffe, sparsam einsetzen`;
 
 // ── STATE ───────────────────────────────────────────────────────────────────
 const history  = [];
@@ -1338,8 +1339,7 @@ launcher.addEventListener('click', () => {
 
 // ── AUTO-RESIZE TEXTAREA ────────────────────────────────────────────────────
 userInput.addEventListener('input', () => {
-  userInput.style.height = 'auto';
-  userInput.style.height = Math.min(userInput.scrollHeight, 100) + 'px';
+  // input stays fixed height
 });
 
 // ── SEND ON ENTER ───────────────────────────────────────────────────────────
@@ -1405,8 +1405,9 @@ function showLeadForm() {
   wrap.innerHTML =
     '<div class="lead-form">' +
       '<h3>📬 Demo anfragen</h3>' +
-      '<input type="text"  id="lf-name"  placeholder="Dein Name *" />' +
-      '<input type="email" id="lf-email" placeholder="Deine E-Mail-Adresse *" />' +
+      '<input type="text" id="lf-name"  placeholder="Dein Name *" />' +
+      '<input type="tel"  id="lf-phone" placeholder="Telefonnummer *" />' +
+      '<input type="email" id="lf-email" placeholder="E-Mail-Adresse (optional)" />' +
       '<textarea id="lf-note" placeholder="Dein Unternehmen / Anliegen (optional)"></textarea>' +
       '<div class="consent-row">' +
         '<input type="checkbox" id="lf-consent" />' +
@@ -1426,12 +1427,13 @@ function showLeadForm() {
 
   submitBtn.addEventListener('click', async () => {
     const name  = document.getElementById('lf-name').value.trim();
+    const phone = document.getElementById('lf-phone').value.trim();
     const email = document.getElementById('lf-email').value.trim();
     const note  = document.getElementById('lf-note').value.trim();
 
-    if (!name || !email) {
+    if (!name || !phone) {
       if (!name)  document.getElementById('lf-name').style.borderColor  = 'rgba(255,100,100,0.6)';
-      if (!email) document.getElementById('lf-email').style.borderColor = 'rgba(255,100,100,0.6)';
+      if (!phone) document.getElementById('lf-phone').style.borderColor = 'rgba(255,100,100,0.6)';
       return;
     }
 
@@ -1441,7 +1443,7 @@ function showLeadForm() {
     const now = new Date().toISOString();
     const payload = {
       name,
-      phone:       '',
+      phone,
       email,
       topic:       'Chatbot – Demo-Anfrage',
       note:        note || '',
