@@ -318,6 +318,99 @@
     user-select: none;
   }
 
+  .product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 4px 0 28px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .product-price .amount { font-size: 1.7rem; font-weight: 600; color: var(--white); }
+  .product-price .period { font-size: 0.8rem; color: var(--grey); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+
+  /* PILLAR SUBSECTIONS */
+  .pillar {
+    padding-top: 90px;
+    margin-top: 90px;
+    border-top: 1px solid var(--border);
+  }
+  .pillar:first-of-type { padding-top: 0; margin-top: 70px; border-top: none; }
+  .pillar-header { text-align: center; margin-bottom: 56px; }
+  .pillar-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+  .pillar-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 40px 0 0;
+  }
+  .pillar-nav a {
+    font-size: 0.8rem;
+    color: var(--grey);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pillar-nav a:hover { color: var(--white); border-color: rgba(179,157,219,0.4); }
+
+  /* BUNDLE */
+  .bundle { padding: 100px 60px; max-width: 1000px; margin: 0 auto; }
+  .bundle-card {
+    background: linear-gradient(145deg, rgba(91,63,160,0.35), rgba(22,36,84,0.7));
+    border: 1px solid rgba(179,157,219,0.35);
+    border-radius: 20px;
+    padding: 56px;
+    backdrop-filter: blur(16px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .bundle-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(179,157,219,0.12);
+    border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-bottom: 20px;
+  }
+  .bundle-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .bundle-card p { color: var(--grey); font-size: 0.92rem; line-height: 1.75; font-weight: 300; margin-bottom: 8px; }
+  .bundle-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .bundle-includes li { font-size: 0.88rem; color: var(--grey); display: flex; align-items: center; gap: 10px; }
+  .bundle-includes li::before { content: '+'; color: var(--purple-glow); font-weight: 600; }
+  .bundle-price-box { text-align: center; border-left: 1px solid var(--border); padding-left: 48px; }
+  .bundle-price-box .save {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--purple-glow); margin-bottom: 12px;
+  }
+  .bundle-price-box .amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 600; color: var(--white); line-height: 1;
+  }
+  .bundle-price-box .period { font-size: 0.82rem; color: var(--grey); margin: 8px 0 4px; }
+  .bundle-price-box .setup { font-size: 0.8rem; color: var(--grey); margin-bottom: 24px; }
+  @media (max-width: 900px) {
+    .bundle-card { grid-template-columns: 1fr; }
+    .bundle-price-box { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 32px; }
+  }
+
   /* COMPARISON TABLE */
   .comparison { padding: 80px 60px; max-width: 1000px; margin: 0 auto; }
   .comparison-header { text-align: center; margin-bottom: 50px; }
@@ -542,7 +635,9 @@
     .problem, .products-grid, .benefits-grid, .steps { grid-template-columns: 1fr; }
     .steps::before { display: none; }
     .problem { padding: 80px 24px; gap: 40px; }
-    .products, .how, .benefits, .comparison, .faq, .contact { padding: 80px 24px; }
+    .products, .how, .benefits, .comparison, .faq, .contact, .bundle { padding: 80px 24px; }
+    .bundle-card { padding: 36px 28px; }
+    .pillar { padding-top: 60px; margin-top: 60px; }
     .contact-form { padding: 36px 28px; }
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 36px 24px; }
@@ -557,9 +652,9 @@
 <nav>
   <a href="#" class="logo">Lynx <span>Automation</span></a>
   <ul class="nav-links">
-    <li><a href="#products">Produkte</a></li>
+    <li><a href="#products">Leistungen</a></li>
+    <li><a href="#bundle">Bundle</a></li>
     <li><a href="#how">Ablauf</a></li>
-    <li><a href="#benefits">Vorteile</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#contact" class="nav-cta">Demo buchen</a></li>
   </ul>
@@ -568,12 +663,12 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">KI-Automatisierung für Ihr Unternehmen</div>
-    <h1>Ihr Unternehmen.<br><em>Immer verfügbar.</em><br>Immer informiert.</h1>
-    <p class="hero-sub">Intelligente Chatbot-Lösungen, die rund um die Uhr Kundenfragen beantworten, Leads qualifizieren und Ihr Team entlasten – DSGVO-konform und wöchentlich aktualisiert.</p>
+    <div class="hero-badge">KI-Automatisierung, Websites & Content für Ihr Unternehmen</div>
+    <h1>Ihr Unternehmen.<br><em>Immer verfügbar.</em><br>Immer sichtbar.</h1>
+    <p class="hero-sub">Intelligente Chatbot-Lösungen, professionelle Websites und fertiges Content-Material für Ihre digitale Präsenz – aus einer Hand, DSGVO-konform und ohne Agentur-Overhead.</p>
     <div class="hero-ctas">
       <a href="#contact" class="btn-primary">Kostenlose Demo anfragen</a>
-      <a href="#products" class="btn-secondary">Unsere Lösungen</a>
+      <a href="#products" class="btn-secondary">Unsere Leistungen</a>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
@@ -612,79 +707,204 @@
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- PRODUCTS / LEISTUNGEN -->
 <section id="products">
   <div class="products fade-up">
     <div class="products-header">
-      <span class="section-label">Unsere Lösungen</span>
-      <h2>Zwei Modelle. Ein Ziel.</h2>
-      <p class="section-desc">Wählen Sie die Lösung, die zu Ihrem Unternehmen passt – oder starten Sie mit Modell 1 und erweitern Sie später.</p>
-    </div>
-    <div class="products-grid">
-      <div class="product-card">
-        <div class="product-tag">Modell 1 — Starter</div>
-        <h3>Intelligenter Webchat</h3>
-        <p>Ihr KI-Assistent beantwortet rund um die Uhr alle Fragen zu Ihrem Unternehmen – präzise, professionell und immer aktuell.</p>
-        <ul class="product-features">
-          <li>Öffnungszeiten & Standort</li>
-          <li>Projekte & Leistungen</li>
-          <li>Bewertungen & Referenzen</li>
-          <li>Individuelle Unternehmensinformationen</li>
-          <li>Wöchentliche Aktualisierung</li>
-          <li>DSGVO-konform</li>
-        </ul>
-        <div class="product-num">01</div>
+      <span class="section-label">Unsere Leistungen</span>
+      <h2>Drei Bausteine.<br>Eine digitale Präsenz.</h2>
+      <p class="section-desc" style="margin:0 auto">Chatbot, Website und fertiges Content-Material – einzeln buchbar oder als Bundle kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
+      <div class="pillar-nav">
+        <a href="#chatbot">01 · KI-Assistent</a>
+        <a href="#website">02 · Web-Präsenz</a>
+        <a href="#content">03 · Content-Produktion</a>
+        <a href="#bundle">Bundle</a>
       </div>
-      <div class="product-card featured">
-        <div class="product-tag">Modell 2 — Pro</div>
-        <h3>Chat + Lead Engine</h3>
-        <p>Alles aus Modell 1, plus automatische Lead-Erfassung in Echtzeit: Interessenten hinterlassen ihre Daten direkt im Chat – Sie sehen neue Leads sofort in Ihrer Tabelle.</p>
-        <ul class="product-features">
-          <li>Öffnungszeiten & Standort</li>
-          <li>Projekte & Leistungen</li>
-          <li>Bewertungen & Referenzen</li>
-          <li>Individuelle Unternehmensinformationen</li>
-          <li>Wöchentliche Aktualisierung der Bot-Wissensbasis</li>
-          <li>DSGVO-konform</li>
-        </ul>
-        <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
-          <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Modell 2</span>
+    </div>
+
+    <!-- PILLAR 1: CHATBOT -->
+    <div class="pillar" id="chatbot">
+      <div class="pillar-header">
+        <span class="section-label">Säule 01</span>
+        <h3>KI-Assistent</h3>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Modell 1 — Starter</div>
+          <h3>Intelligenter Webchat</h3>
+          <div class="product-price"><span class="amount">ab 99 €</span><span class="period">/ Monat</span></div>
+          <p>Ihr KI-Assistent beantwortet rund um die Uhr alle Fragen zu Ihrem Unternehmen – präzise, professionell und immer aktuell.</p>
+          <ul class="product-features">
+            <li>Öffnungszeiten & Standort</li>
+            <li>Projekte & Leistungen</li>
+            <li>Bewertungen & Referenzen</li>
+            <li>Individuelle Unternehmensinformationen</li>
+            <li>Wöchentliche Aktualisierung</li>
+            <li>DSGVO-konform</li>
+          </ul>
+          <div class="product-num">01</div>
         </div>
-        <ul class="product-features">
-          <li>Kontaktdaten-Erfassung direkt im Chat</li>
-          <li>Lead-Qualifizierung durch gezielte Fragen</li>
-          <li>Sofortiger Echtzeit-Export in Ihre Tabelle</li>
-          <li>E-Mail-Benachrichtigung bei neuem Lead</li>
-          <li>DSGVO-konforme Einwilligungserklärung im Chat</li>
-        </ul>
-        <div class="product-num">02</div>
+        <div class="product-card featured">
+          <div class="product-tag">Modell 2 — Pro</div>
+          <h3>Chat + Lead Engine</h3>
+          <div class="product-price"><span class="amount">ab 179 €</span><span class="period">/ Monat</span></div>
+          <p>Alles aus Modell 1, plus automatische Lead-Erfassung in Echtzeit: Interessenten hinterlassen ihre Daten direkt im Chat – Sie sehen neue Leads sofort in Ihrer Tabelle.</p>
+          <ul class="product-features">
+            <li>Öffnungszeiten & Standort</li>
+            <li>Projekte & Leistungen</li>
+            <li>Bewertungen & Referenzen</li>
+            <li>Individuelle Unternehmensinformationen</li>
+            <li>Wöchentliche Aktualisierung der Bot-Wissensbasis</li>
+            <li>DSGVO-konform</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Modell 2</span>
+          </div>
+          <ul class="product-features">
+            <li>Kontaktdaten-Erfassung direkt im Chat</li>
+            <li>Lead-Qualifizierung durch gezielte Fragen</li>
+            <li>Sofortiger Echtzeit-Export in Ihre Tabelle</li>
+            <li>E-Mail-Benachrichtigung bei neuem Lead</li>
+            <li>DSGVO-konforme Einwilligungserklärung im Chat</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
+      </div>
+      <table style="margin-top:48px">
+        <tr>
+          <th>Funktion</th>
+          <th>Modell 1</th>
+          <th>Modell 2</th>
+        </tr>
+        <tr><td>Automatische FAQ-Beantwortung</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>24/7 Verfügbarkeit</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Wöchentliche Aktualisierung</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>DSGVO-Konformität</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Anpassbar an Ihre CI</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Lead-Erfassung im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Lead-Qualifizierung</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Echtzeit-Export in Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>E-Mail-Benachrichtigung bei neuem Lead</td><td class="dash">–</td><td class="check">✓</td></tr>
+      </table>
+    </div>
+
+    <!-- PILLAR 2: WEBSITE -->
+    <div class="pillar" id="website">
+      <div class="pillar-header">
+        <span class="section-label">Säule 02</span>
+        <h3>Web-Präsenz</h3>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Web Start</div>
+          <h3>Landingpage</h3>
+          <div class="product-price"><span class="amount">ab 890 €</span><span class="period">einmalig</span></div>
+          <p>Eine schlanke, professionelle Seite für Unternehmen mit überschaubarem Umfang – ideal als schnelle digitale Visitenkarte oder Kampagnenseite.</p>
+          <ul class="product-features">
+            <li>1–3 Unterseiten</li>
+            <li>Individuelles Design nach Ihrer CI</li>
+            <li>Responsive für Mobile & Desktop</li>
+            <li>Kontaktformular & Google Maps</li>
+            <li>Grundlegende SEO-Einrichtung</li>
+            <li>DSGVO-konforme Rechtstexte</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+        <div class="product-card featured">
+          <div class="product-tag">Web Business</div>
+          <h3>Unternehmenswebsite</h3>
+          <div class="product-price"><span class="amount">ab 2.400 €</span><span class="period">einmalig</span></div>
+          <p>Eine vollwertige Unternehmenswebsite mit mehreren Seiten, individuellem Design und Raum für Leistungen, Referenzen und Team.</p>
+          <ul class="product-features">
+            <li>5–8 Unterseiten</li>
+            <li>Individuelles Design nach Ihrer CI</li>
+            <li>Referenzen-/Portfoliobereich</li>
+            <li>Responsive für Mobile & Desktop</li>
+            <li>SEO-Grundoptimierung</li>
+            <li>Integration Ihres Chatbots möglich</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Optional dazu buchbar</span>
+          </div>
+          <ul class="product-features">
+            <li>Laufende Wartung ab 39 €/Monat</li>
+            <li>Hosting & Domain-Verwaltung</li>
+            <li>Inhaltliche Änderungen auf Anfrage</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILLAR 3: CONTENT -->
+    <div class="pillar" id="content">
+      <div class="pillar-header">
+        <span class="section-label">Säule 03</span>
+        <h3>Content-Produktion</h3>
+        <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle – ohne Strategie-Konzept. Sie entscheiden, wo und wie gepostet wird, wir liefern das Material.</p>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Content Basis</div>
+          <h3>8 Beiträge / Monat</h3>
+          <div class="product-price"><span class="amount">ab 249 €</span><span class="period">/ Monat</span></div>
+          <p>Fertig gestaltete Social-Media-Grafiken und Texte zum direkten Posten – zugeschnitten auf Ihre Marke.</p>
+          <ul class="product-features">
+            <li>8 fertige Beiträge inkl. Text</li>
+            <li>Einheitliches Design nach Ihrer CI</li>
+            <li>Lieferung als fertige Dateien</li>
+            <li>Kein Community-Management</li>
+            <li>Keine Strategie- oder Konzeptarbeit</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+        <div class="product-card featured">
+          <div class="product-tag">Content Plus</div>
+          <h3>16 Beiträge / Monat</h3>
+          <div class="product-price"><span class="amount">ab 490 €</span><span class="period">/ Monat</span></div>
+          <p>Alles aus Content Basis, plus mehr Umfang und zusätzliche Formate für Story und Anzeigen.</p>
+          <ul class="product-features">
+            <li>16 fertige Beiträge inkl. Text</li>
+            <li>Einheitliches Design nach Ihrer CI</li>
+            <li>Lieferung als fertige Dateien</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Content Plus</span>
+          </div>
+          <ul class="product-features">
+            <li>Story-Grafiken für Instagram/Facebook</li>
+            <li>Anzeigenformate für Paid Ads</li>
+            <li>Priorisierte Bearbeitung</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMPARISON -->
-<section id="comparison">
-  <div class="comparison fade-up">
-    <div class="comparison-header">
-      <h2>Modell-Vergleich</h2>
+<!-- BUNDLE -->
+<section id="bundle">
+  <div class="bundle fade-up">
+    <div class="bundle-card">
+      <div>
+        <div class="bundle-tag">Meistgewählt</div>
+        <h3>Digitale Rundum-Lösung</h3>
+        <p>Chatbot, Website und laufender Content in einem Paket – abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
+        <ul class="bundle-includes">
+          <li>KI-Assistent Modell 2 — Chat + Lead Engine</li>
+          <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
+          <li>Content Basis — 8 fertige Beiträge / Monat</li>
+        </ul>
+      </div>
+      <div class="bundle-price-box">
+        <div class="save">Rabatt ggü. Einzelbuchung</div>
+        <div class="amount">349 €</div>
+        <div class="period">pro Monat</div>
+        <div class="setup">+ 2.400 € einmalig (Website)</div>
+        <a href="#contact" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">Bundle anfragen</a>
+      </div>
     </div>
-    <table>
-      <tr>
-        <th>Funktion</th>
-        <th>Modell 1</th>
-        <th>Modell 2</th>
-      </tr>
-      <tr><td>Automatische FAQ-Beantwortung</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>24/7 Verfügbarkeit</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>Wöchentliche Aktualisierung</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>DSGVO-Konformität</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>Anpassbar an Ihre CI</td><td class="check">✓</td><td class="check">✓</td></tr>
-      <tr><td>Lead-Erfassung im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
-      <tr><td>Lead-Qualifizierung</td><td class="dash">–</td><td class="check">✓</td></tr>
-      <tr><td>Echtzeit-Export in Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
-      <tr><td>E-Mail-Benachrichtigung bei neuem Lead</td><td class="dash">–</td><td class="check">✓</td></tr>
-    </table>
   </div>
 </section>
 
@@ -805,6 +1025,18 @@
       <div class="faq-q">Was passiert, wenn mein Unternehmen neue Leistungen anbietet?</div>
       <div class="faq-a">Kein Problem. Durch die wöchentliche Aktualisierung halten wir Ihren Chatbot stets auf dem neuesten Stand. Sie teilen uns Änderungen einfach mit – wir kümmern uns um den Rest.</div>
     </div>
+    <div class="faq-item">
+      <div class="faq-q">Ist bei der Content-Produktion eine Marketingstrategie enthalten?</div>
+      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material – Grafiken und Texte, einsatzbereit für Ihre Kanäle. Themenplanung, Positionierung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung. Das hält den Preis niedrig und vermeidet doppelte Leistungen, falls Sie bereits einen Ansprechpartner für Strategie haben.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie lange dauert die Erstellung einer Website?</div>
+      <div class="faq-a">Eine Landingpage ist in der Regel nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–6 Wochen – abhängig davon, wie schnell uns Inhalte (Texte, Bilder, Logo) vorliegen. Sie erhalten den Quellcode bzw. Zugang zum System; eine Abhängigkeit von uns entsteht nicht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kann ich Leistungen später kombinieren oder wechseln?</div>
+      <div class="faq-a">Ja. Sie können jederzeit mit einem einzelnen Baustein starten – z. B. nur dem Chatbot – und später Website oder Content-Produktion dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+    </div>
   </div>
 </section>
 
@@ -812,8 +1044,8 @@
 <section id="contact">
   <div class="contact fade-up">
     <span class="section-label">Kontakt</span>
-    <h2>Bereit für Ihren<br>KI-Assistenten?</h2>
-    <p class="section-desc" style="margin:0 auto">Fordern Sie jetzt eine kostenlose Demo an. Wir zeigen Ihnen, wie Ihr persönlicher Chatbot aussehen und funktionieren würde.</p>
+    <h2>Bereit für Ihre<br>digitale Präsenz?</h2>
+    <p class="section-desc" style="margin:0 auto">Fordern Sie jetzt eine kostenlose Beratung an – ob Chatbot, Website, Content oder alles zusammen. Wir zeigen Ihnen unverbindlich, wie Ihre Lösung aussehen würde.</p>
     <div class="contact-form">
       <div class="form-row">
         <div class="form-group">
@@ -844,6 +1076,10 @@
         <select id="f-thema">
           <option>Modell 1 – Intelligenter Webchat</option>
           <option>Modell 2 – Chat + Lead Engine</option>
+          <option>Website – Landingpage</option>
+          <option>Website – Unternehmenswebsite</option>
+          <option>Content-Produktion</option>
+          <option>Bundle – Digitale Rundum-Lösung</option>
           <option>Ich bin noch unentschieden</option>
         </select>
       </div>
