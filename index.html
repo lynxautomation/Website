@@ -349,6 +349,29 @@
     background: var(--border);
   }
 
+  /* WARUM LYNX */
+  .why { padding: 100px 60px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .why-header { margin-bottom: 50px; }
+  .why-header .section-desc { margin: 0 auto; }
+  .why-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 56px;
+    backdrop-filter: blur(16px);
+    text-align: left;
+  }
+  ul.product-features.why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 36px;
+  }
+  ul.product-features.why-grid li { font-size: 0.92rem; }
+  @media (max-width: 900px) {
+    ul.product-features.why-grid { grid-template-columns: 1fr; }
+    .why-card { padding: 36px 28px; }
+  }
+
   /* PILLAR SUBSECTIONS */
   .pillar {
     padding-top: 90px;
@@ -684,11 +707,11 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">KI-Automatisierung, Websites & Content für Ihr Unternehmen</div>
+    <div class="hero-badge">Websites, digitale Assistenten & Content für Ihr Unternehmen</div>
     <h1>Ihr Unternehmen.<br><em>Immer verfügbar.</em><br>Immer sichtbar.</h1>
-    <p class="hero-sub">Intelligente Chatbot-Lösungen, professionelle Websites und fertiges Content-Material für Ihre digitale Präsenz – aus einer Hand, DSGVO-konform und ohne Agentur-Overhead.</p>
+    <p class="hero-sub">Wir bauen Websites und digitale Assistenten, die Kunden rund um die Uhr informieren und neue Anfragen automatisch aufnehmen – dazu fertige Beiträge für Ihre Social-Media-Kanäle. Alles aus einer Hand, DSGVO-konform.</p>
     <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">Kostenlose Demo anfragen</a>
+      <a href="#contact" class="btn-primary">Kostenlos beraten lassen</a>
       <a href="#products" class="btn-secondary">Unsere Leistungen</a>
     </div>
     <div class="hero-scroll">
@@ -736,9 +759,9 @@
       <h2>Von unsichtbar<br>zu unverkennbar.</h2>
       <p class="section-desc" style="margin:0 auto">Drei Bausteine für Ihre digitale Präsenz – einzeln buchbar oder kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
       <div class="pillar-nav">
-        <a href="#chatbot">01 · KI-Assistent</a>
-        <a href="#website">02 · Web-Präsenz</a>
-        <a href="#content">03 · Content-Produktion</a>
+        <a href="#chatbot">01 · Digitaler Assistent</a>
+        <a href="#website">02 · Website</a>
+        <a href="#content">03 · Beiträge & Fotos</a>
         <a href="#bundle">Bundle</a>
       </div>
     </div>
@@ -747,45 +770,45 @@
     <div class="pillar" id="chatbot">
       <div class="pillar-header">
         <span class="section-label">Baustein 01</span>
-        <h3>KI-Assistent</h3>
+        <h3>Digitaler Assistent</h3>
       </div>
       <div class="products-grid">
         <div class="product-card">
           <div class="product-tag">Modell 1 — Starter</div>
-          <h3>Intelligenter Webchat</h3>
+          <h3>Digitaler Assistent für Ihre Website</h3>
           <div class="product-price"><span class="amount">ab 99 €</span><span class="period">/ Monat</span></div>
-          <p>Ihr KI-Assistent beantwortet rund um die Uhr alle Fragen zu Ihrem Unternehmen – präzise, professionell und immer aktuell.</p>
+          <p>Ihr digitaler Assistent beantwortet Fragen rund um die Uhr. Besucher erhalten sofort Antworten – auch außerhalb Ihrer Öffnungszeiten. So verlieren Sie keine Interessenten mehr.</p>
           <ul class="product-features">
             <li>Öffnungszeiten & Standort</li>
             <li>Projekte & Leistungen</li>
             <li>Bewertungen & Referenzen</li>
             <li>Individuelle Unternehmensinformationen</li>
-            <li>Wöchentliche Aktualisierung</li>
+            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
             <li>DSGVO-konform</li>
           </ul>
           <div class="product-num">01</div>
         </div>
         <div class="product-card featured">
           <div class="product-tag">Modell 2 — Pro</div>
-          <h3>Chat + Lead Engine</h3>
+          <h3>Assistent mit automatischer Kundengewinnung</h3>
           <div class="product-price"><span class="amount">ab 179 €</span><span class="period">/ Monat</span></div>
-          <p>Alles aus Modell 1, plus automatische Lead-Erfassung in Echtzeit: Interessenten hinterlassen ihre Daten direkt im Chat – Sie sehen neue Leads sofort in Ihrer Tabelle.</p>
+          <p>Alles aus Modell 1 – und der Chat sammelt zusätzlich Kontaktdaten von Interessenten. Sie bekommen neue Anfragen, selbst wenn Sie gerade arbeiten.</p>
           <ul class="product-features">
             <li>Öffnungszeiten & Standort</li>
             <li>Projekte & Leistungen</li>
             <li>Bewertungen & Referenzen</li>
             <li>Individuelle Unternehmensinformationen</li>
-            <li>Wöchentliche Aktualisierung der Bot-Wissensbasis</li>
+            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
             <li>DSGVO-konform</li>
           </ul>
           <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
             <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Modell 2</span>
           </div>
           <ul class="product-features">
-            <li>Kontaktdaten-Erfassung direkt im Chat</li>
-            <li>Lead-Qualifizierung durch gezielte Fragen</li>
-            <li>Sofortiger Echtzeit-Export in Ihre Tabelle</li>
-            <li>E-Mail-Benachrichtigung bei neuem Lead</li>
+            <li>Der Chat fragt gezielt nach Kontaktdaten</li>
+            <li>Der Chat stellt die richtigen Fragen, bevor er Kontakte weitergibt</li>
+            <li>Neue Anfragen landen automatisch in Ihrer Tabelle</li>
+            <li>E-Mail-Benachrichtigung bei neuer Anfrage</li>
             <li>DSGVO-konforme Einwilligungserklärung im Chat</li>
           </ul>
           <div class="product-num">02</div>
@@ -797,15 +820,15 @@
           <th>Modell 1</th>
           <th>Modell 2</th>
         </tr>
-        <tr><td>Automatische FAQ-Beantwortung</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Automatische Beantwortung häufiger Fragen</td><td class="check">✓</td><td class="check">✓</td></tr>
         <tr><td>24/7 Verfügbarkeit</td><td class="check">✓</td><td class="check">✓</td></tr>
-        <tr><td>Wöchentliche Aktualisierung</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Immer aktuelle Öffnungszeiten & Leistungen</td><td class="check">✓</td><td class="check">✓</td></tr>
         <tr><td>DSGVO-Konformität</td><td class="check">✓</td><td class="check">✓</td></tr>
-        <tr><td>Anpassbar an Ihre CI</td><td class="check">✓</td><td class="check">✓</td></tr>
-        <tr><td>Lead-Erfassung im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
-        <tr><td>Lead-Qualifizierung</td><td class="dash">–</td><td class="check">✓</td></tr>
-        <tr><td>Echtzeit-Export in Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
-        <tr><td>E-Mail-Benachrichtigung bei neuem Lead</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>In Ihren Farben & Ihrem Design</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Sammelt Kontaktdaten im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Stellt gezielte Rückfragen</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Neue Anfragen automatisch in Ihrer Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>E-Mail-Benachrichtigung bei neuer Anfrage</td><td class="dash">–</td><td class="check">✓</td></tr>
       </table>
     </div>
 
@@ -813,7 +836,7 @@
     <div class="pillar" id="website">
       <div class="pillar-header">
         <span class="section-label">Baustein 02</span>
-        <h3>Web-Präsenz</h3>
+        <h3>Website</h3>
       </div>
       <div class="products-grid">
         <div class="product-card">
@@ -823,8 +846,8 @@
           <p>Eine schlanke, professionelle Seite für Unternehmen mit überschaubarem Umfang – ideal als schnelle digitale Visitenkarte oder Kampagnenseite.</p>
           <ul class="product-features">
             <li>1–3 Unterseiten</li>
-            <li>Individuelles Design nach Ihrer CI</li>
-            <li>Responsive für Mobile & Desktop</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
+            <li>Funktioniert auf Handy und Computer</li>
             <li>Kontaktformular & Google Maps</li>
             <li>Grundlegende SEO-Einrichtung</li>
             <li>DSGVO-konforme Rechtstexte</li>
@@ -838,11 +861,11 @@
           <p>Eine vollwertige Unternehmenswebsite mit mehreren Seiten, individuellem Design und Raum für Leistungen, Referenzen und Team.</p>
           <ul class="product-features">
             <li>5–8 Unterseiten</li>
-            <li>Individuelles Design nach Ihrer CI</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
             <li>Referenzen-/Portfoliobereich</li>
-            <li>Responsive für Mobile & Desktop</li>
+            <li>Funktioniert auf Handy und Computer</li>
             <li>SEO-Grundoptimierung</li>
-            <li>Integration Ihres Chatbots möglich</li>
+            <li>Ihr digitaler Assistent kann direkt eingebunden werden</li>
           </ul>
           <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
             <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Optional dazu buchbar</span>
@@ -861,7 +884,7 @@
     <div class="pillar" id="content">
       <div class="pillar-header">
         <span class="section-label">Baustein 03</span>
-        <h3>Content-Produktion</h3>
+        <h3>Beiträge & Fotos für Facebook & Instagram</h3>
         <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle – ohne Strategie-Konzept. Sie entscheiden, wo und wie gepostet wird, wir liefern das Material.</p>
       </div>
 
@@ -888,10 +911,10 @@
           <div class="product-tag">Content Basis</div>
           <h3>8 Beiträge / Monat</h3>
           <div class="product-price"><span class="amount">ab 249 €</span><span class="period">/ Monat</span></div>
-          <p>Fertig gestaltete Social-Media-Grafiken und Texte zum direkten Posten – zugeschnitten auf Ihre Marke.</p>
+          <p>Fertig gestaltete Grafiken und Texte für Facebook & Instagram zum direkten Posten – zugeschnitten auf Ihre Marke.</p>
           <ul class="product-features">
             <li>8 fertige Beiträge inkl. Text</li>
-            <li>Einheitliches Design nach Ihrer CI</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
             <li>Lieferung als fertige Dateien</li>
             <li>Kein Community-Management</li>
             <li>Keine Strategie- oder Konzeptarbeit</li>
@@ -905,7 +928,7 @@
           <p>Alles aus Content Basis, plus mehr Umfang und zusätzliche Formate für Story und Anzeigen.</p>
           <ul class="product-features">
             <li>16 fertige Beiträge inkl. Text</li>
-            <li>Einheitliches Design nach Ihrer CI</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
             <li>Lieferung als fertige Dateien</li>
           </ul>
           <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
@@ -932,7 +955,7 @@
         <h3>Digitale Rundum-Lösung</h3>
         <p>Chatbot, Website und laufender Content in einem Paket – abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
         <ul class="bundle-includes">
-          <li>KI-Assistent Modell 2 — Chat + Lead Engine</li>
+          <li>Digitaler Assistent mit automatischer Kundengewinnung</li>
           <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
           <li>Foto & Grundausstattung — einmalig</li>
           <li>Content Basis — 8 fertige Beiträge / Monat</li>
@@ -971,7 +994,7 @@
       <div class="step">
         <div class="step-num">03</div>
         <h4>Live & laufend betreut</h4>
-        <p>Ihre Lösung geht live. Chatbot-Wissensbasis und Content werden laufend aktualisiert, Leads erscheinen in Echtzeit in Ihrer Tabelle.</p>
+        <p>Ihre Lösung geht live. Ihr Chatbot und Ihre Beiträge werden laufend aktualisiert, neue Anfragen erscheinen in Echtzeit in Ihrer Tabelle.</p>
       </div>
     </div>
   </div>
@@ -1044,7 +1067,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie lange dauert die Einrichtung?</div>
-      <div class="faq-a">In der Regel ist Ihr Chatbot innerhalb von 3–5 Werktagen nach Onboarding fertig konfiguriert. Parallel dazu müssen Sie Ihre Datenschutzerklärung um einen Datenschutzbaustein für den Chatbot ergänzen – dafür erhalten Sie von uns eine Vorlage. Anschließend binden Sie das Widget selbst auf Ihrer Website ein: Wir haben keinen direkten Zugriff auf Ihre Website, stellen Ihnen aber den fertigen Code-Snippet sowie eine einfache Schritt-für-Schritt-Anleitung bereit.</div>
+      <div class="faq-a">In der Regel ist Ihr Chatbot innerhalb von 3–5 Werktagen nach Onboarding fertig konfiguriert. Parallel dazu müssen Sie Ihre Datenschutzerklärung um einen Datenschutzbaustein für den Chatbot ergänzen – dafür erhalten Sie von uns eine Vorlage. Anschließend binden Sie das Chatfenster selbst auf Ihrer Website ein: Wir haben keinen direkten Zugriff auf Ihre Website, stellen Ihnen aber den fertigen Code-Snippet sowie eine einfache Schritt-für-Schritt-Anleitung bereit.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Was passiert mit den Daten meiner Kunden?</div>
@@ -1052,11 +1075,11 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">Muss ich selbst technisches Wissen mitbringen?</div>
-      <div class="faq-a">Nur minimal. Das Einbinden des Widgets erfolgt über einen einfachen Code-Snippet, den wir Ihnen bereitstellen. Wenn Sie Ihre Website selbst hosten (z. B. über WordPress oder ein ähnliches System), können Sie das problemlos selbst erledigen. Andernfalls übernimmt das in wenigen Minuten der Anbieter Ihrer Website – sprechen Sie einfach Ihren Webmaster oder Hosting-Anbieter an.</div>
+      <div class="faq-a">Nur minimal. Das Einbinden des Chatfensters erfolgt über einen einfachen Code-Snippet, den wir Ihnen bereitstellen. Wenn Sie Ihre Website selbst hosten (z. B. über WordPress oder ein ähnliches System), können Sie das problemlos selbst erledigen. Andernfalls übernimmt das in wenigen Minuten der Anbieter Ihrer Website – sprechen Sie einfach Ihren Webmaster oder Hosting-Anbieter an.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Wie erhalte ich meine Leads?</div>
-      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint der Lead in Echtzeit in Ihrer Tabelle (Google Sheets oder Excel). Es gibt keine Verzögerung – Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
+      <div class="faq-q">Wie erhalte ich neue Kundenanfragen?</div>
+      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Es gibt keine Verzögerung – Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich jederzeit von Modell 1 auf Modell 2 wechseln?</div>
@@ -1067,7 +1090,7 @@
       <div class="faq-a">Kein Problem. Durch die wöchentliche Aktualisierung halten wir Ihren Chatbot stets auf dem neuesten Stand. Sie teilen uns Änderungen einfach mit – wir kümmern uns um den Rest.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Ist bei der Content-Produktion eine Marketingstrategie enthalten?</div>
+      <div class="faq-q">Ist bei den Beiträgen eine Marketingstrategie enthalten?</div>
       <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material – Grafiken und Texte, einsatzbereit für Ihre Kanäle. Themenplanung, Positionierung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung. Das hält den Preis niedrig und vermeidet doppelte Leistungen, falls Sie bereits einen Ansprechpartner für Strategie haben.</div>
     </div>
     <div class="faq-item">
@@ -1076,7 +1099,28 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich Leistungen später kombinieren oder wechseln?</div>
-      <div class="faq-a">Ja. Sie können jederzeit mit einem einzelnen Baustein starten – z. B. nur dem Chatbot – und später Website oder Content-Produktion dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+      <div class="faq-a">Ja. Sie können jederzeit mit einem einzelnen Baustein starten – z. B. nur dem digitalen Assistenten – und später Website oder Beiträge dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM LYNX -->
+<section id="why">
+  <div class="why fade-up">
+    <div class="why-header">
+      <span class="section-label">Warum Lynx</span>
+      <h2>Wir kümmern uns<br>um die Technik.</h2>
+      <p class="section-desc">Sie müssen nichts programmieren und kein Fachchinesisch verstehen. Sie bekommen eine fertige Lösung – in wenigen Tagen einsatzbereit.</p>
+    </div>
+    <div class="why-card">
+      <ul class="product-features why-grid">
+        <li>Persönlicher Ansprechpartner</li>
+        <li>Keine Agentur mit wechselnden Mitarbeitern</li>
+        <li>Schnelle Einrichtung</li>
+        <li>Transparente Preise</li>
+        <li>Monatlich kündbar</li>
+        <li>Chatbot, Website & Content aus einer Hand</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1115,8 +1159,8 @@
       <div class="form-group">
         <label>Ich interessiere mich für *</label>
         <select id="f-thema">
-          <option>Modell 1 – Intelligenter Webchat</option>
-          <option>Modell 2 – Chat + Lead Engine</option>
+          <option>Modell 1 – Digitaler Assistent für Ihre Website</option>
+          <option>Modell 2 – Assistent mit automatischer Kundengewinnung</option>
           <option>Website – Landingpage</option>
           <option>Website – Unternehmenswebsite</option>
           <option>Content – Foto & Grundausstattung (einmalig)</option>
@@ -1138,7 +1182,7 @@
       </div>
       <div id="f-error" style="display:none;color:#f08080;font-size:0.83rem;margin-bottom:16px;padding:10px 14px;background:rgba(240,128,128,0.08);border:1px solid rgba(240,128,128,0.2);border-radius:6px;"></div>
       <button id="f-submit" class="form-submit" onclick="submitLead()">
-        Kostenlose Demo anfragen →
+        Kostenlos beraten lassen →
       </button>
     </div>
   </div>
@@ -1214,7 +1258,7 @@
         throw new Error(data.error || 'Unbekannter Fehler');
       }
     } catch (err) {
-      btn.textContent = 'Kostenlose Demo anfragen →';
+      btn.textContent = 'Kostenlos beraten lassen →';
       btn.disabled = false;
       errBox.textContent = 'Fehler beim Senden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.';
       errBox.style.display = 'block';
