@@ -328,6 +328,27 @@
   .product-price .amount { font-size: 1.7rem; font-weight: 600; color: var(--white); }
   .product-price .period { font-size: 0.8rem; color: var(--grey); font-family: 'DM Sans', sans-serif; font-weight: 300; }
 
+  .sub-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 36px;
+  }
+  .sub-divider span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--purple-glow);
+    white-space: nowrap;
+  }
+  .sub-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
   /* PILLAR SUBSECTIONS */
   .pillar {
     padding-top: 90px;
@@ -682,26 +703,26 @@
   <div class="problem fade-up">
     <div>
       <span class="section-label">Das Problem</span>
-      <h2>Kunden fragen. Niemand antwortet.</h2>
-      <p class="section-desc" style="margin-bottom:24px">Potenzielle Kunden besuchen Ihre Website – außerhalb der Geschäftszeiten, am Wochenende, nachts. Ohne sofortige Antwort verlieren Sie sie für immer.</p>
-      <p class="section-desc">Lynx Automation gibt Ihren Kunden in Echtzeit die Informationen, die sie brauchen – und sammelt dabei automatisch qualifizierte Leads für Sie.</p>
+      <h2>Digital unsichtbar.<br>Kunden gehen weiter.</h2>
+      <p class="section-desc" style="margin-bottom:24px">Ohne aktuelle Website, sichtbaren Content und sofortige Antworten verlieren Sie Interessenten, bevor Sie überhaupt mit ihnen gesprochen haben. Digitalisierung ist längst keine Kür mehr, sondern die Grundvoraussetzung, um online gefunden und ernst genommen zu werden.</p>
+      <p class="section-desc">Lynx Automation schließt genau diese Lücke: mit einer modernen Website, einem Chatbot, der rund um die Uhr antwortet, und Content, der Ihre Präsenz laufend aktuell hält.</p>
     </div>
     <div class="problem-stats">
       <div class="stat-card">
-        <div class="stat-num">67%</div>
-        <div class="stat-label">der Kunden erwarten eine sofortige Antwort auf Anfragen</div>
+        <div class="stat-num">72%</div>
+        <div class="stat-label">recherchieren online, bevor sie Kontakt aufnehmen</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">3×</div>
-        <div class="stat-label">mehr Leads durch automatisierte Lead-Erfassung</div>
+        <div class="stat-num">67%</div>
+        <div class="stat-label">der Kunden erwarten eine sofortige Antwort auf Anfragen</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">24/7</div>
         <div class="stat-label">Erreichbarkeit ohne zusätzlichen Personalaufwand</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">80%</div>
-        <div class="stat-label">der Anfragen werden automatisch beantwortet</div>
+        <div class="stat-num">3×</div>
+        <div class="stat-label">mehr Leads durch konsistente digitale Präsenz</div>
       </div>
     </div>
   </div>
@@ -712,8 +733,8 @@
   <div class="products fade-up">
     <div class="products-header">
       <span class="section-label">Unsere Leistungen</span>
-      <h2>Drei Bausteine.<br>Eine digitale Präsenz.</h2>
-      <p class="section-desc" style="margin:0 auto">Chatbot, Website und fertiges Content-Material – einzeln buchbar oder als Bundle kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
+      <h2>Von unsichtbar<br>zu unverkennbar.</h2>
+      <p class="section-desc" style="margin:0 auto">Drei Bausteine für Ihre digitale Präsenz – einzeln buchbar oder kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
       <div class="pillar-nav">
         <a href="#chatbot">01 · KI-Assistent</a>
         <a href="#website">02 · Web-Präsenz</a>
@@ -722,10 +743,10 @@
       </div>
     </div>
 
-    <!-- PILLAR 1: CHATBOT -->
+    <!-- BAUSTEIN 1: CHATBOT -->
     <div class="pillar" id="chatbot">
       <div class="pillar-header">
-        <span class="section-label">Säule 01</span>
+        <span class="section-label">Baustein 01</span>
         <h3>KI-Assistent</h3>
       </div>
       <div class="products-grid">
@@ -788,10 +809,10 @@
       </table>
     </div>
 
-    <!-- PILLAR 2: WEBSITE -->
+    <!-- BAUSTEIN 2: WEBSITE -->
     <div class="pillar" id="website">
       <div class="pillar-header">
-        <span class="section-label">Säule 02</span>
+        <span class="section-label">Baustein 02</span>
         <h3>Web-Präsenz</h3>
       </div>
       <div class="products-grid">
@@ -839,10 +860,29 @@
     <!-- PILLAR 3: CONTENT -->
     <div class="pillar" id="content">
       <div class="pillar-header">
-        <span class="section-label">Säule 03</span>
+        <span class="section-label">Baustein 03</span>
         <h3>Content-Produktion</h3>
         <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle – ohne Strategie-Konzept. Sie entscheiden, wo und wie gepostet wird, wir liefern das Material.</p>
       </div>
+
+      <div class="sub-divider"><span>Einmalig — Grundausstattung</span></div>
+      <div class="products-grid" style="max-width:560px;margin:0 auto 64px;">
+        <div class="product-card">
+          <div class="product-tag">Foto & Grundausstattung</div>
+          <h3>Digitale Präsenz aufbauen</h3>
+          <div class="product-price"><span class="amount">ab 390 €</span><span class="period">einmalig</span></div>
+          <p>Professionelle Fotos von Ihrem Unternehmen, Team und Räumlichkeiten – die Grundlage für Website, Social Media und Google-Unternehmensprofil.</p>
+          <ul class="product-features">
+            <li>Vor-Ort-Fototermin</li>
+            <li>Bildbearbeitung & Zuschnitt für Web und Social Media</li>
+            <li>Bereitstellung in allen gängigen Formaten</li>
+            <li>Einmalige Investition, keine laufenden Kosten</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+      </div>
+
+      <div class="sub-divider"><span>Laufend — regelmäßige Beiträge</span></div>
       <div class="products-grid">
         <div class="product-card">
           <div class="product-tag">Content Basis</div>
@@ -856,7 +896,7 @@
             <li>Kein Community-Management</li>
             <li>Keine Strategie- oder Konzeptarbeit</li>
           </ul>
-          <div class="product-num">01</div>
+          <div class="product-num">02</div>
         </div>
         <div class="product-card featured">
           <div class="product-tag">Content Plus</div>
@@ -876,7 +916,7 @@
             <li>Anzeigenformate für Paid Ads</li>
             <li>Priorisierte Bearbeitung</li>
           </ul>
-          <div class="product-num">02</div>
+          <div class="product-num">03</div>
         </div>
       </div>
     </div>
@@ -894,6 +934,7 @@
         <ul class="bundle-includes">
           <li>KI-Assistent Modell 2 — Chat + Lead Engine</li>
           <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
+          <li>Foto & Grundausstattung — einmalig</li>
           <li>Content Basis — 8 fertige Beiträge / Monat</li>
         </ul>
       </div>
@@ -901,7 +942,7 @@
         <div class="save">Rabatt ggü. Einzelbuchung</div>
         <div class="amount">349 €</div>
         <div class="period">pro Monat</div>
-        <div class="setup">+ 2.400 € einmalig (Website)</div>
+        <div class="setup">+ 2.790 € einmalig (Website & Fotos)</div>
         <a href="#contact" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">Bundle anfragen</a>
       </div>
     </div>
@@ -913,24 +954,24 @@
   <div class="how fade-up">
     <div class="how-header">
       <span class="section-label">Der Ablauf</span>
-      <h2>In 3 Schritten live.</h2>
-      <p class="section-desc" style="margin:0 auto">Von der Anfrage bis zum laufenden Chatbot – schnell, unkompliziert, ohne technisches Know-how Ihrerseits.</p>
+      <h2>In 3 Schritten<br>digital aufgestellt.</h2>
+      <p class="section-desc" style="margin:0 auto">Egal ob Chatbot, Website oder Content – der Ablauf bleibt einfach und ohne technisches Know-how Ihrerseits.</p>
     </div>
     <div class="steps">
       <div class="step">
         <div class="step-num">01</div>
-        <h4>Onboarding & Setup</h4>
-        <p>Sie teilen uns Ihre Unternehmensinformationen mit. Wir konfigurieren Ihren persönlichen KI-Assistenten und passen ihn an Ihren Auftritt an.</p>
+        <h4>Bedarf klären</h4>
+        <p>Sie teilen uns mit, was Sie brauchen – Chatbot, Website, Content oder das Bundle. Wir stimmen den Umfang gemeinsam ab.</p>
       </div>
       <div class="step">
         <div class="step-num">02</div>
-        <h4>Training & Integration</h4>
-        <p>Der Chatbot wird mit Ihren Daten trainiert und direkt in Ihre Website eingebunden – ein einfacher Code-Snippet, fertig.</p>
+        <h4>Umsetzung</h4>
+        <p>Wir konfigurieren Ihren Chatbot, bauen Ihre Website oder produzieren Ihr Content-Material – abgestimmt auf Ihre Unternehmensidentität.</p>
       </div>
       <div class="step">
         <div class="step-num">03</div>
-        <h4>Live & Laufend</h4>
-        <p>Ihr Assistent ist rund um die Uhr aktiv. Neue Leads erscheinen sofort in Ihrer Tabelle – in Echtzeit. Die Wissensbasis des Bots über Ihr Unternehmen wird wöchentlich aktualisiert.</p>
+        <h4>Live & laufend betreut</h4>
+        <p>Ihre Lösung geht live. Chatbot-Wissensbasis und Content werden laufend aktualisiert, Leads erscheinen in Echtzeit in Ihrer Tabelle.</p>
       </div>
     </div>
   </div>
@@ -941,13 +982,13 @@
   <div class="benefits fade-up">
     <div class="benefits-header">
       <span class="section-label">Ihre Vorteile</span>
-      <h2>Mehr Zeit. Mehr Leads.<br>Mehr Vertrauen.</h2>
+      <h2>Mehr Zeit. Mehr Sichtbarkeit.<br>Mehr Vertrauen.</h2>
     </div>
     <div class="benefits-grid">
       <div class="benefit-card">
         <div class="benefit-icon">⏱</div>
         <h4>Zeitersparnis täglich</h4>
-        <p>Wiederkehrende Fragen werden automatisch beantwortet. Ihr Team kann sich auf das Wesentliche konzentrieren.</p>
+        <p>Wiederkehrende Fragen beantwortet der Chatbot automatisch, Content-Material liefern wir fertig – Ihr Team kann sich auf das Kerngeschäft konzentrieren.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">🎯</div>
@@ -962,17 +1003,17 @@
       <div class="benefit-card">
         <div class="benefit-icon">🔄</div>
         <h4>Immer aktuell</h4>
-        <p>Wöchentliche Updates stellen sicher, dass Ihr Assistent stets die neuesten Informationen über Ihr Unternehmen kennt.</p>
+        <p>Wöchentliche Chatbot-Updates und laufender Content sorgen dafür, dass Ihre digitale Präsenz nie veraltet wirkt.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">🤝</div>
-        <h4>Vertrauen aufbauen</h4>
-        <p>Kunden, die sofort Antworten erhalten, vertrauen Ihrem Unternehmen mehr – noch bevor der erste persönliche Kontakt stattfindet.</p>
+        <h4>Professioneller Auftritt</h4>
+        <p>Website, Bildmaterial und Content greifen ineinander – Kunden erleben ein stimmiges Bild Ihres Unternehmens, statt loser Einzelteile.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">📊</div>
-        <h4>Messbare Ergebnisse</h4>
-        <p>Leads klar strukturiert in Ihrer Tabelle. Keine Daten gehen verloren, kein Interessent wird vergessen.</p>
+        <h4>Alles aus einer Hand</h4>
+        <p>Ein Ansprechpartner für Chatbot, Website und Content – statt drei Anbieter zu koordinieren, deren Ergebnisse nicht zusammenpassen.</p>
       </div>
     </div>
   </div>
@@ -1078,7 +1119,8 @@
           <option>Modell 2 – Chat + Lead Engine</option>
           <option>Website – Landingpage</option>
           <option>Website – Unternehmenswebsite</option>
-          <option>Content-Produktion</option>
+          <option>Content – Foto & Grundausstattung (einmalig)</option>
+          <option>Content – laufende Beiträge</option>
           <option>Bundle – Digitale Rundum-Lösung</option>
           <option>Ich bin noch unentschieden</option>
         </select>
