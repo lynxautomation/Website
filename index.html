@@ -440,9 +440,13 @@
   .bundle-includes li { font-size: 0.88rem; color: var(--grey); display: flex; align-items: center; gap: 10px; }
   .bundle-includes li::before { content: '+'; color: var(--purple-glow); font-weight: 600; }
   .bundle-price-box { text-align: center; border-left: 1px solid var(--border); padding-left: 48px; }
+  .bundle-price-box .was {
+    font-size: 0.85rem; color: var(--grey); text-decoration: line-through;
+    margin-bottom: 6px;
+  }
   .bundle-price-box .save {
     font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--purple-glow); margin-bottom: 12px;
+    color: var(--purple-glow); margin: 10px 0 4px;
   }
   .bundle-price-box .amount {
     font-family: 'Cormorant Garamond', serif;
@@ -573,6 +577,20 @@
   /* FAQ */
   .faq { padding: 120px 60px; max-width: 800px; margin: 0 auto; }
   .faq-header { text-align: center; margin-bottom: 60px; }
+  .faq-category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--purple-glow);
+    margin: 48px 0 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-category:first-of-type { margin-top: 0; }
+  .faq-category .icon { font-size: 1.05rem; }
   .faq-item {
     border-bottom: 1px solid var(--border);
     padding: 24px 0;
@@ -759,10 +777,36 @@
       <h2>Von unsichtbar<br>zu unverkennbar.</h2>
       <p class="section-desc" style="margin:0 auto">Drei Bausteine für Ihre digitale Präsenz – einzeln buchbar oder kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
       <div class="pillar-nav">
+        <a href="#bundle">Bundle — alles inklusive</a>
         <a href="#chatbot">01 · Digitaler Assistent</a>
         <a href="#website">02 · Website</a>
         <a href="#content">03 · Beiträge & Fotos</a>
-        <a href="#bundle">Bundle</a>
+      </div>
+    </div>
+
+    <!-- BUNDLE (featured, shown first) -->
+    <div class="bundle" id="bundle" style="padding:0 0 90px;">
+      <div class="bundle-card">
+        <div>
+          <div class="bundle-tag">Meistgewählt</div>
+          <h3>Digitale Rundum-Lösung</h3>
+          <p>Für 369 €/Monat kümmern wir uns komplett um Ihren digitalen Auftritt – Website, digitaler Assistent und laufende Beiträge, abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
+          <ul class="bundle-includes">
+            <li>Digitaler Assistent mit automatischer Kundengewinnung</li>
+            <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
+            <li>Website-Service inklusive (Hosting, Sicherheitsupdates, kleine Änderungen)</li>
+            <li>Foto & Grundausstattung — einmalig</li>
+            <li>Content Basis — 8 fertige Beiträge / Monat</li>
+          </ul>
+        </div>
+        <div class="bundle-price-box">
+          <div class="was">statt 443 €/Monat einzeln</div>
+          <div class="amount">369 €</div>
+          <div class="period">pro Monat</div>
+          <div class="save">Sie sparen 74 €/Monat</div>
+          <div class="setup">+ 2.790 € einmalig (Website & Fotos)</div>
+          <a href="#contact" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">Bundle anfragen</a>
+        </div>
       </div>
     </div>
 
@@ -850,6 +894,7 @@
             <li>Funktioniert auf Handy und Computer</li>
             <li>Kontaktformular & Google Maps</li>
             <li>Grundlegende SEO-Einrichtung</li>
+            <li>Hosting durch uns – optionaler Website-Service ab 15 €/Monat</li>
             <li>DSGVO-konforme Rechtstexte</li>
           </ul>
           <div class="product-num">01</div>
@@ -865,15 +910,16 @@
             <li>Referenzen-/Portfoliobereich</li>
             <li>Funktioniert auf Handy und Computer</li>
             <li>SEO-Grundoptimierung</li>
+            <li>Hosting durch uns – optionaler Website-Service ab 15 €/Monat</li>
             <li>Ihr digitaler Assistent kann direkt eingebunden werden</li>
           </ul>
           <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
-            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Optional dazu buchbar</span>
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Website-Service (15 €/Monat) beinhaltet</span>
           </div>
           <ul class="product-features">
-            <li>Laufende Wartung ab 39 €/Monat</li>
             <li>Hosting & Domain-Verwaltung</li>
-            <li>Inhaltliche Änderungen auf Anfrage</li>
+            <li>Sicherheitsupdates</li>
+            <li>Kleine inhaltliche Änderungen</li>
           </ul>
           <div class="product-num">02</div>
         </div>
@@ -884,20 +930,20 @@
     <div class="pillar" id="content">
       <div class="pillar-header">
         <span class="section-label">Baustein 03</span>
-        <h3>Beiträge & Fotos für Facebook & Instagram</h3>
-        <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle – ohne Strategie-Konzept. Sie entscheiden, wo und wie gepostet wird, wir liefern das Material.</p>
+        <h3>Beiträge & Fotos für Website, Google & Social Media</h3>
+        <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle – ohne Strategie-Konzept. Sie entscheiden, wo und wie es eingesetzt wird, wir liefern das Material.</p>
       </div>
 
       <div class="sub-divider"><span>Einmalig — Grundausstattung</span></div>
-      <div class="products-grid" style="max-width:560px;margin:0 auto 64px;">
-        <div class="product-card">
+      <div class="products-grid" style="grid-template-columns:1fr;max-width:800px;margin:0 auto 64px;">
+        <div class="product-card featured">
           <div class="product-tag">Foto & Grundausstattung</div>
           <h3>Digitale Präsenz aufbauen</h3>
           <div class="product-price"><span class="amount">ab 390 €</span><span class="period">einmalig</span></div>
-          <p>Professionelle Fotos von Ihrem Unternehmen, Team und Räumlichkeiten – die Grundlage für Website, Social Media und Google-Unternehmensprofil.</p>
+          <p>Professionelle Fotos von Ihrem Unternehmen, Team und Räumlichkeiten – nutzbar für Ihre Website, Ihr Google-Unternehmensprofil und alle Social-Media-Kanäle. Nicht nur für Instagram & Facebook gedacht, sondern die Bildgrundlage für Ihren gesamten Online-Auftritt.</p>
           <ul class="product-features">
             <li>Vor-Ort-Fototermin</li>
-            <li>Bildbearbeitung & Zuschnitt für Web und Social Media</li>
+            <li>Bildbearbeitung & Zuschnitt für Website, Google-Profil und Social Media</li>
             <li>Bereitstellung in allen gängigen Formaten</li>
             <li>Einmalige Investition, keine laufenden Kosten</li>
           </ul>
@@ -941,32 +987,6 @@
           </ul>
           <div class="product-num">03</div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- BUNDLE -->
-<section id="bundle">
-  <div class="bundle fade-up">
-    <div class="bundle-card">
-      <div>
-        <div class="bundle-tag">Meistgewählt</div>
-        <h3>Digitale Rundum-Lösung</h3>
-        <p>Chatbot, Website und laufender Content in einem Paket – abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
-        <ul class="bundle-includes">
-          <li>Digitaler Assistent mit automatischer Kundengewinnung</li>
-          <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
-          <li>Foto & Grundausstattung — einmalig</li>
-          <li>Content Basis — 8 fertige Beiträge / Monat</li>
-        </ul>
-      </div>
-      <div class="bundle-price-box">
-        <div class="save">Rabatt ggü. Einzelbuchung</div>
-        <div class="amount">349 €</div>
-        <div class="period">pro Monat</div>
-        <div class="setup">+ 2.790 € einmalig (Website & Fotos)</div>
-        <a href="#contact" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">Bundle anfragen</a>
       </div>
     </div>
   </div>
@@ -1065,41 +1085,95 @@
       <span class="section-label">Häufige Fragen</span>
       <h2>Alles, was Sie<br>wissen möchten.</h2>
     </div>
+
+    <div class="faq-category"><span class="icon">📋</span> Allgemeines</div>
     <div class="faq-item">
-      <div class="faq-q">Wie lange dauert die Einrichtung?</div>
-      <div class="faq-a">In der Regel ist Ihr Chatbot innerhalb von 3–5 Werktagen nach Onboarding fertig konfiguriert. Parallel dazu müssen Sie Ihre Datenschutzerklärung um einen Datenschutzbaustein für den Chatbot ergänzen – dafür erhalten Sie von uns eine Vorlage. Anschließend binden Sie das Chatfenster selbst auf Ihrer Website ein: Wir haben keinen direkten Zugriff auf Ihre Website, stellen Ihnen aber den fertigen Code-Snippet sowie eine einfache Schritt-für-Schritt-Anleitung bereit.</div>
+      <div class="faq-q">Wie läuft die Zusammenarbeit ab?</div>
+      <div class="faq-a">Wir klären zunächst kurz, was Sie brauchen – digitaler Assistent, Website, Content oder das Bundle. Danach übernehmen wir die Umsetzung und begleiten Sie bei jedem Schritt, bis alles läuft.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie lange dauert die Umsetzung?</div>
+      <div class="faq-a">Der digitale Assistent ist meist nach 3–5 Werktagen einsatzbereit, eine Landingpage nach 1–2 Wochen, eine Unternehmenswebsite nach 3–6 Wochen. Das Bundle läuft parallel, sodass am Ende alles zusammen live geht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Muss ich technisches Wissen mitbringen?</div>
+      <div class="faq-a">Nein. Wir begleiten Sie bei der Einrichtung und erklären Ihnen jeden Schritt in Klartext. Falls doch mal etwas Technisches nötig ist, übernehmen wir das gemeinsam mit Ihrem Webdienstleister.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kann ich später weitere Leistungen hinzufügen?</div>
+      <div class="faq-a">Ja, jederzeit. Sie können mit einem einzelnen Baustein starten und später Website, Assistent oder Content dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Gibt es Mindestlaufzeiten oder Kündigungsfristen?</div>
+      <div class="faq-a">Nein. Alle laufenden Leistungen (Assistent, Website-Service, Content) sind monatlich kündbar. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie nur einmal.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🌐</span> Website</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie lange dauert die Erstellung?</div>
+      <div class="faq-a">Eine Landingpage ist in der Regel nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–6 Wochen – abhängig davon, wie schnell uns Inhalte wie Texte, Bilder oder Logo vorliegen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ist die Website für Smartphones optimiert?</div>
+      <div class="faq-a">Ja, jede Website funktioniert automatisch auf Handy, Tablet und Computer – ohne Aufpreis.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Übernehmt ihr Hosting und Wartung?</div>
+      <div class="faq-a">Ja, optional. Für 15 €/Monat kümmern wir uns um Hosting, Domain, Sicherheitsupdates und kleine inhaltliche Änderungen. Sie müssen sich um nichts kümmern.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Gehört die Website nach Fertigstellung mir?</div>
+      <div class="faq-a">Ja. Die Website gehört Ihnen, Sie sind an keine Agentur gebunden. Wenn Sie den Website-Service später nicht mehr nutzen möchten, übergeben wir Ihnen alle Zugänge, damit Sie problemlos wechseln können.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🤖</span> Digitaler Assistent</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie funktioniert der digitale Assistent?</div>
+      <div class="faq-a">Ihr Assistent ist ein Chatfenster auf Ihrer Website, das Fragen zu Ihrem Unternehmen rund um die Uhr beantwortet – ohne dass jemand aus Ihrem Team dafür online sein muss.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Woher kennt der Chat meine Leistungen?</div>
+      <div class="faq-a">Sie teilen uns Ihre Unternehmensinformationen mit – Öffnungszeiten, Leistungen, Referenzen. Ändert sich etwas, sagen Sie uns kurz Bescheid, wir aktualisieren den Assistenten für Sie.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Was passiert mit den Daten meiner Kunden?</div>
-      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet. Kunden erteilen im Chat ausdrücklich ihre Einwilligung zur Kontaktaufnahme. Wir schließen mit Ihnen einen Auftragsverarbeitungsvertrag (AVV) ab. Daten werden nur so lange gespeichert, wie gesetzlich notwendig.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">Muss ich selbst technisches Wissen mitbringen?</div>
-      <div class="faq-a">Nur minimal. Das Einbinden des Chatfensters erfolgt über einen einfachen Code-Snippet, den wir Ihnen bereitstellen. Wenn Sie Ihre Website selbst hosten (z. B. über WordPress oder ein ähnliches System), können Sie das problemlos selbst erledigen. Andernfalls übernimmt das in wenigen Minuten der Anbieter Ihrer Website – sprechen Sie einfach Ihren Webmaster oder Hosting-Anbieter an.</div>
+      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet. Details dazu finden Sie weiter unten im Abschnitt Datenschutz.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie erhalte ich neue Kundenanfragen?</div>
-      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Es gibt keine Verzögerung – Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
+      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich jederzeit von Modell 1 auf Modell 2 wechseln?</div>
       <div class="faq-a">Ja, ein Upgrade ist jederzeit möglich und unkompliziert. Die bestehende Konfiguration bleibt dabei vollständig erhalten.</div>
     </div>
+
+    <div class="faq-category"><span class="icon">📸</span> Content & Fotos</div>
     <div class="faq-item">
-      <div class="faq-q">Was passiert, wenn mein Unternehmen neue Leistungen anbietet?</div>
-      <div class="faq-a">Kein Problem. Durch die wöchentliche Aktualisierung halten wir Ihren Chatbot stets auf dem neuesten Stand. Sie teilen uns Änderungen einfach mit – wir kümmern uns um den Rest.</div>
+      <div class="faq-q">Was ist in einem Beitrag enthalten?</div>
+      <div class="faq-a">Eine fertig gestaltete Grafik inklusive passendem Text, abgestimmt auf Ihre Farben und Ihr Design – zum direkten Posten auf Facebook & Instagram.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Ist bei den Beiträgen eine Marketingstrategie enthalten?</div>
-      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material – Grafiken und Texte, einsatzbereit für Ihre Kanäle. Themenplanung, Positionierung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung. Das hält den Preis niedrig und vermeidet doppelte Leistungen, falls Sie bereits einen Ansprechpartner für Strategie haben.</div>
+      <div class="faq-q">Muss ich die Beiträge selbst posten?</div>
+      <div class="faq-a">Ja, das Posten übernehmen Sie selbst – wir liefern Ihnen die fertigen Dateien. Wenn Sie das lieber abgeben möchten, sprechen Sie uns gerne an.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Wie lange dauert die Erstellung einer Website?</div>
-      <div class="faq-a">Eine Landingpage ist in der Regel nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–6 Wochen – abhängig davon, wie schnell uns Inhalte (Texte, Bilder, Logo) vorliegen. Sie erhalten den Quellcode bzw. Zugang zum System; eine Abhängigkeit von uns entsteht nicht.</div>
+      <div class="faq-q">Macht ihr auch Fotos vor Ort?</div>
+      <div class="faq-a">Ja. Im Paket "Foto & Grundausstattung" kommen wir zu Ihnen, fotografieren Unternehmen, Team und Räumlichkeiten und liefern die Bilder fertig bearbeitet für Website, Google-Profil und Social Media.</div>
     </div>
     <div class="faq-item">
-      <div class="faq-q">Kann ich Leistungen später kombinieren oder wechseln?</div>
-      <div class="faq-a">Ja. Sie können jederzeit mit einem einzelnen Baustein starten – z. B. nur dem digitalen Assistenten – und später Website oder Beiträge dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+      <div class="faq-q">Ist eine Marketingstrategie enthalten?</div>
+      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material. Themenplanung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung – das hält den Preis niedrig.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🔒</span> Datenschutz</div>
+    <div class="faq-item">
+      <div class="faq-q">Ist alles DSGVO-konform, und wo werden die Daten gespeichert?</div>
+      <div class="faq-a">Ja. Kunden erteilen im Chat ausdrücklich ihre Einwilligung zur Kontaktaufnahme, alle Daten werden auf Servern innerhalb der EU verarbeitet.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Benötige ich einen AV-Vertrag, und wie werden Daten gelöscht?</div>
+      <div class="faq-a">Ja, wir schließen mit Ihnen einen Auftragsverarbeitungsvertrag (AVV) ab. Daten werden automatisch nur so lange gespeichert, wie gesetzlich notwendig, und anschließend gelöscht.</div>
     </div>
   </div>
 </section>
