@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,25 +201,73 @@
 <main>
   <span class="page-label">Aus dem Alltag</span>
   <h1>So läuft die Zusammenarbeit mit Lynx Automation ab</h1>
-  <p class="meta">Lynx Automation Solutions · 3 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
   <p class="lead">Viele zögern bei digitalen Themen, weil sie Aufwand oder technische Komplexität befürchten. Der tatsächliche Ablauf ist deutlich einfacher.</p>
 
     <section>
-    <h2>Schritt 1: Kurzes, unverbindliches Gespräch</h2>
-    <p>Am Anfang steht ein kurzes Gespräch, in dem Sie erzählen, was Sie brauchen und wo aktuell die größten Lücken liegen, sei es beim digitalen Assistenten, der Website oder laufendem Content. Aus diesem Gespräch ergibt sich eine erste, unverbindliche Einschätzung.</p>
+    <h2>Fünf Schritte im Überblick</h2>
+    <p>Der Ablauf lässt sich in fünf klar abgegrenzte Schritte unterteilen, von der ersten Kontaktaufnahme bis zur laufenden Betreuung danach.</p>
   </section>
+
+  <div class="diagram">
+    <svg viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg">
+      <line x1="60" y1="40" x2="60" y2="360" stroke="#5b3fa0" stroke-width="2" stroke-opacity="0.4"/>
+
+      <circle cx="60" cy="40" r="14" fill="#5b3fa0"/>
+      <text x="60" y="45" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">1</text>
+      <text x="95" y="46" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="14.5" font-weight="600">Kontakt &amp; kurzes Gespräch</text>
+
+      <circle cx="60" cy="120" r="14" fill="#5b3fa0"/>
+      <text x="60" y="125" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">2</text>
+      <text x="95" y="126" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="14.5" font-weight="600">Kostenlose Kurzanalyse</text>
+
+      <circle cx="60" cy="200" r="14" fill="#5b3fa0"/>
+      <text x="60" y="205" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">3</text>
+      <text x="95" y="206" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="14.5" font-weight="600">Beratung &amp; Abstimmung</text>
+
+      <circle cx="60" cy="280" r="14" fill="#5b3fa0"/>
+      <text x="60" y="285" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">4</text>
+      <text x="95" y="286" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="14.5" font-weight="600">Umsetzung</text>
+
+      <circle cx="60" cy="360" r="14" fill="#7c5cc4"/>
+      <text x="60" y="365" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="12" font-weight="600">5</text>
+      <text x="95" y="366" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="14.5" font-weight="600">Go-Live &amp; laufende Betreuung</text>
+    </svg>
+  </div>
+
   <section>
-    <h2>Schritt 2: Umsetzung</h2>
+    <h2>Schritt 1: Kontakt und kurzes Gespräch</h2>
+    <p>Am Anfang steht ein kurzes Gespräch, in dem Sie erzählen, was Sie brauchen und wo aktuell die größten Lücken liegen, sei es beim digitalen Assistenten, der Website oder laufendem Content.</p>
+  </section>
+
+  <section>
+    <h2>Schritt 2: Kostenlose Kurzanalyse</h2>
+    <p>Bevor überhaupt über konkrete Umsetzung gesprochen wird, schauen wir uns Ihre aktuelle Website und Ihren Online-Auftritt an und zeigen ehrlich, wo Potenzial liegt. Das kostet nichts und verpflichtet zu nichts.</p>
+  </section>
+
+  <section>
+    <h2>Schritt 3: Beratung und Abstimmung</h2>
+    <p>Auf Basis der Kurzanalyse besprechen wir gemeinsam, welcher Baustein am meisten bringt, ob digitaler Assistent, Website oder beides. Sie entscheiden, was tatsächlich umgesetzt wird.</p>
+  </section>
+
+  <section>
+    <h2>Schritt 4: Umsetzung</h2>
     <p>Je nach gewähltem Baustein wird entweder eine individuelle Chatbot-Demo erstellt oder ein Website-Entwurf gebaut. Sie müssen dabei nichts technisch beisteuern außer den Informationen über Ihr Unternehmen, die ohnehin schon vorhanden sind.</p>
   </section>
+
+  <div class="highlight-box">
+    <p><strong>Wichtig:</strong> Bevor irgendetwas live geht, wird das Ergebnis gemeinsam durchgesprochen und angepasst. Erst wenn alles passt, entscheiden Sie sich für die Übernahme.</p>
+  </div>
+
   <section>
-    <h2>Schritt 3: Gemeinsame Abstimmung</h2>
-    <p>Bevor irgendetwas live geht, wird das Ergebnis gemeinsam durchgesprochen und angepasst. Erst wenn alles passt, entscheiden Sie sich für die Übernahme.</p>
-  </section>
-  <section>
-    <h2>Schritt 4: Go-Live und laufende Betreuung</h2>
+    <h2>Schritt 5: Go-Live und laufende Betreuung</h2>
     <p>Nach dem Go-Live übernimmt Lynx Automation die laufende Pflege, etwa die wöchentliche Aktualisierung des digitalen Assistenten. Ändert sich etwas in Ihrem Unternehmen, zum Beispiel neue Öffnungszeiten oder ein neues Angebot, reicht eine kurze Nachricht.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Die Kurzanalyse in Schritt 2 ist derselbe kostenlose Check, den Sie über das Formular unten anfordern können, unabhängig davon, ob Sie schon ein konkretes Anliegen haben oder erst einmal wissen wollen, wo Sie stehen.</p>
+  </div>
 
 
   <div class="cta-strip">

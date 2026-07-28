@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,24 +201,81 @@
 <main>
   <span class="page-label">Digitaler Assistent</span>
   <h1>Chatbot vs. Kontaktformular: Was bringt wirklich mehr Anfragen?</h1>
-  <p class="meta">Lynx Automation Solutions · 3 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
   <p class="lead">Beide haben denselben Zweck, aber sehr unterschiedliche Erfolgsquoten. Ein ehrlicher Vergleich.</p>
 
     <section>
     <h2>Das klassische Kontaktformular</h2>
     <p>Ein Kontaktformular verlangt vom Besucher, selbst zu formulieren, was er möchte, meist ohne vorherige Information darüber, was der Betrieb überhaupt anbietet oder was es kostet. Viele Interessenten brechen genau an dieser Stelle ab, weil ihnen unklar ist, was sie eigentlich schreiben sollen.</p>
   </section>
+
   <section>
     <h2>Der digitale Assistent</h2>
-    <p>Ein Chatbot nimmt dem Besucher diese Unsicherheit ab. Er beantwortet zunächst die naheliegenden Fragen (Was bieten Sie an? Was kostet das ungefähr? Sind Sie in meiner Region tätig?) und fragt erst danach gezielt nach Kontaktdaten, wenn echtes Interesse erkennbar ist.</p>
+    <p>Ein Chatbot nimmt dem Besucher diese Unsicherheit ab. Er beantwortet zunächst die naheliegenden Fragen, etwa was der Betrieb anbietet, was es ungefähr kostet und ob er in der eigenen Region tätig ist. Erst danach fragt er gezielt nach Kontaktdaten, wenn echtes Interesse erkennbar ist.</p>
   </section>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <text x="15" y="12" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="0.05em">KONTAKTFORMULAR</text>
+      <rect x="15" y="20" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="90" y="55" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Besucher kommt</text>
+      <line x1="165" y1="50" x2="183" y2="50" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="191,50 179,44 179,56" fill="#7c5cc4"/>
+      <rect x="191" y="20" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="266" y="46" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Muss selbst</text>
+      <text x="266" y="62" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">formulieren</text>
+      <line x1="341" y1="50" x2="359" y2="50" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="367,50 355,44 355,56" fill="#7c5cc4"/>
+      <rect x="367" y="20" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="442" y="55" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Unsicherheit</text>
+      <line x1="517" y1="50" x2="535" y2="50" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="543,50 531,44 531,56" fill="#7c5cc4"/>
+      <rect x="543" y="20" width="140" height="60" rx="10" fill="#3a1e1e" stroke="#c0392b" stroke-width="1.5"/>
+      <text x="613" y="55" text-anchor="middle" fill="#f5a3a3" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Abbruch</text>
+
+      <text x="15" y="132" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11" letter-spacing="0.05em">DIGITALER ASSISTENT</text>
+      <rect x="15" y="140" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="90" y="175" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Besucher kommt</text>
+      <line x1="165" y1="170" x2="183" y2="170" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="191,170 179,164 179,176" fill="#7c5cc4"/>
+      <rect x="191" y="140" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="266" y="166" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Fragen werden</text>
+      <text x="266" y="182" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">beantwortet</text>
+      <line x1="341" y1="170" x2="359" y2="170" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="367,170 355,164 355,176" fill="#7c5cc4"/>
+      <rect x="367" y="140" width="150" height="60" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="442" y="166" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Interesse</text>
+      <text x="442" y="182" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">bestätigt</text>
+      <line x1="517" y1="170" x2="535" y2="170" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="543,170 531,164 531,176" fill="#7c5cc4"/>
+      <rect x="543" y="140" width="140" height="60" rx="10" fill="#1b3a2a" stroke="#43a06b" stroke-width="1.5"/>
+      <text x="613" y="175" text-anchor="middle" fill="#8fdb9f" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Kontakt</text>
+    </svg>
+  </div>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Beide Wege wollen dasselbe Ziel erreichen, eine Kontaktaufnahme. Der Unterschied liegt darin, wie viel der Besucher selbst leisten muss, bevor das passiert.</p>
+  </div>
+
   <div class="highlight-box">
     <p>Der entscheidende Unterschied liegt nicht in der Technik, sondern in der Reihenfolge: Erst informieren, dann nach Kontakt fragen, statt umgekehrt.</p>
   </div>
+
+  <section>
+    <h2>Warum diese Reihenfolge einen Unterschied macht</h2>
+    <p>Ein Besucher, der noch unsicher ist, ob ein Betrieb überhaupt zu seinem Anliegen passt, füllt selten freiwillig ein Formular aus. Werden die naheliegenden Fragen vorher schon beantwortet, sinkt diese Unsicherheit, und die Bereitschaft, danach Kontaktdaten zu hinterlassen, steigt spürbar.</p>
+  </section>
+
   <section>
     <h2>Wann ein reines Kontaktformular trotzdem ausreicht</h2>
     <p>Bei sehr wenigen Website-Besuchern pro Monat oder bei Betrieben, die ohnehin fast ausschließlich über Empfehlungen neue Kunden gewinnen, lohnt sich der zusätzliche Aufwand für einen Assistenten oft noch nicht. Ab einer gewissen Besucherzahl kehrt sich dieses Verhältnis aber meist um.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>Praxis-Tipp:</strong> Schauen Sie sich Ihre Statistik der letzten Monate an, sofern vorhanden. Viele Website-Besuche bei wenigen ausgefüllten Formularen sind meist ein Zeichen, dass genau diese Unsicherheit vorher nicht aufgelöst wurde.</p>
+  </div>
 
 
   <div class="cta-strip">

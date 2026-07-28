@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,13 +201,47 @@
 <main>
   <span class="page-label">Digitaler Assistent</span>
   <h1>Digitaler Assistent für Dachdeckerbetriebe: Worauf es ankommt</h1>
-  <p class="meta">Lynx Automation Solutions · 3 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
   <p class="lead">Dachdeckerbetriebe bekommen besonders häufig Anfragen außerhalb der Geschäftszeiten, etwa nach einem Sturm. Genau hier zeigt sich der Nutzen eines digitalen Assistenten am deutlichsten.</p>
 
     <section>
     <h2>Typische Situation</h2>
     <p>Nach einem Unwetter suchen viele Betroffene sofort online nach einem Dachdecker in der Nähe, oft abends oder am Wochenende. Wer in diesem Moment nicht erreichbar ist, verliert die Anfrage meist endgültig an einen Mitbewerber, der schneller reagiert.</p>
   </section>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="35" width="100" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="65" y="72" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Interessent</text>
+
+      <line x1="115" y1="67" x2="140" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="148,67 136,60 136,74" fill="#7c5cc4"/>
+
+      <rect x="148" y="35" width="90" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="193" y="72" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Frage</text>
+
+      <line x1="238" y1="67" x2="263" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="271,67 259,60 259,74" fill="#7c5cc4"/>
+
+      <rect x="271" y="35" width="130" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="336" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">KI antwortet</text>
+      <text x="336" y="78" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">sofort</text>
+
+      <line x1="401" y1="67" x2="426" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="434,67 422,60 422,74" fill="#7c5cc4"/>
+
+      <rect x="434" y="35" width="110" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="489" y="72" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Kontaktdaten</text>
+
+      <line x1="544" y1="67" x2="569" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="577,67 565,60 565,74" fill="#7c5cc4"/>
+
+      <rect x="577" y="35" width="108" height="64" rx="10" fill="#1b2f66" stroke="#7c5cc4" stroke-width="1.5"/>
+      <text x="631" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="10.5" font-weight="600">Mitarbeiter</text>
+      <text x="631" y="78" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="10.5" font-weight="600">meldet sich</text>
+    </svg>
+  </div>
+
   <section>
     <h2>Was ein Assistent hier konkret übernimmt</h2>
   </section>
@@ -204,10 +250,26 @@
     <li>Nimmt Kontaktdaten auf, wenn der Interessent das möchte, auch nachts oder am Wochenende</li>
     <li>Vermittelt Seriosität durch schnelle, klare Antworten statt eines unbeantworteten Kontaktformulars</li>
   </ul>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Der Assistent ersetzt keinen Mitarbeiter. Er beantwortet die ersten Fragen und sammelt Anfragen, die Rückmeldung zum eigentlichen Auftrag bleibt weiterhin bei Ihnen.</p>
+  </div>
+
+  <section>
+    <h2>Notfall und normale Anfrage unterscheiden</h2>
+    <p>Wichtig ist eine klare Aufteilung zwischen dringenden Notfällen, etwa einem Sturmschaden oder einer akuten Undichtigkeit, und normalen Anfragen wie einer geplanten Dacherneuerung oder einem Angebot. Der Assistent sollte beides unterscheiden können, damit dringende Fälle nicht in derselben Warteschlange landen wie eine allgemeine Preisanfrage.</p>
+  </section>
+
   <section>
     <h2>Worauf es bei der Einrichtung ankommt</h2>
-    <p>Wichtig ist eine klare Aufteilung zwischen dringenden Notfällen (Sturmschaden, akute Undichtigkeit) und normalen Anfragen (geplante Dacherneuerung, Anfrage für ein Angebot). Der Assistent sollte beides unterscheiden können, damit dringende Fälle nicht in derselben Warteschlange landen wie eine allgemeine Preisanfrage.</p>
+    <p>Der Assistent wird mit den typischen Fragen Ihrer Kunden gefüttert, also Einsatzgebiet, Leistungen und Ablauf im Notfall. Diese Inhalte stellen Sie einmalig bereit, danach läuft der Assistent eigenständig und wird laufend aktualisiert.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>Praxis-Tipp:</strong> Notieren Sie eine Woche lang, zu welchen Uhrzeiten die meisten Anfragen eingehen. Damit lässt sich gut abschätzen, wie viele davon aktuell außerhalb der Geschäftszeiten unbeantwortet bleiben.</p>
+  </div>
 
 
   <div class="cta-strip">

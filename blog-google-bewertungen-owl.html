@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,7 +201,7 @@
 <main>
   <span class="page-label">Sichtbarkeit & Google</span>
   <h1>Google-Bewertungen: Der unterschätzte Umsatzhebel für Handwerksbetriebe in OWL</h1>
-  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 5 Min. Lesezeit</p>
   <p class="lead">Bevor jemand Ihre Website überhaupt öffnet, hat er meist schon Ihre Sternebewertung gesehen. Genau da entscheidet sich oft, ob er weiterklickt.</p>
 
     <section>
@@ -197,6 +209,42 @@
     <p>Bei einer Google-Suche nach einem Handwerksbetrieb in der Region, etwa in Paderborn, Höxter oder Delbrück, erscheint direkt neben dem Suchergebnis die Sternebewertung mit Anzahl der Rezensionen. Das ist oft das Erste, was ein Interessent überhaupt sieht, noch vor jeder Website.</p>
     <p>Ein Betrieb mit 40 Bewertungen und 4,8 Sternen wirkt automatisch vertrauenswürdiger als einer ohne jede Bewertung, unabhängig davon, wie gut die jeweilige Website gestaltet ist.</p>
   </section>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 140" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="35" width="110" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="70" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Gute</text>
+      <text x="70" y="76" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Arbeit</text>
+
+      <line x1="125" y1="67" x2="150" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="158,67 146,60 146,74" fill="#7c5cc4"/>
+
+      <rect x="158" y="35" width="110" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="213" y="67" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Bewertung</text>
+
+      <line x1="268" y1="67" x2="293" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="301,67 289,60 289,74" fill="#7c5cc4"/>
+
+      <rect x="301" y="35" width="120" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="361" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Mehr</text>
+      <text x="361" y="76" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Vertrauen</text>
+
+      <line x1="421" y1="67" x2="446" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="454,67 442,60 442,74" fill="#7c5cc4"/>
+
+      <rect x="454" y="35" width="110" height="64" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <text x="509" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Mehr</text>
+      <text x="509" y="76" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11.5" font-weight="600">Klicks</text>
+
+      <line x1="564" y1="67" x2="589" y2="67" stroke="#7c5cc4" stroke-width="2"/>
+      <polygon points="597,67 585,60 585,74" fill="#7c5cc4"/>
+
+      <rect x="597" y="35" width="90" height="64" rx="10" fill="#1b2f66" stroke="#7c5cc4" stroke-width="1.5"/>
+      <text x="642" y="60" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Mehr</text>
+      <text x="642" y="76" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Anfragen</text>
+    </svg>
+  </div>
+
   <section>
     <h2>Woran es in der Praxis oft scheitert</h2>
     <p>Die meisten Handwerksbetriebe leisten gute Arbeit, aber fragen selten aktiv nach einer Bewertung. Zufriedene Kunden denken einfach nicht von selbst daran, eine Rezension zu hinterlassen, auch wenn sie es gerne täten, wenn man sie kurz darum bittet.</p>
@@ -204,10 +252,21 @@
   <div class="highlight-box">
     <p><strong>Praktischer Ansatz:</strong> Ein kurzer Hinweis direkt nach Auftragsabschluss, idealerweise mit einem direkten Link oder QR-Code zur Bewertungsseite, erhöht die Rücklaufquote spürbar. Der beste Zeitpunkt ist unmittelbar nach erfolgreich abgeschlossener Arbeit, solange die Zufriedenheit noch frisch ist.</p>
   </div>
+
+  <section>
+    <h2>Wie viele Bewertungen reichen aus?</h2>
+    <p>Es braucht keine hundert Bewertungen, um einen Unterschied zu machen. Schon der Sprung von null oder wenigen Bewertungen auf 15 bis 20 verändert den ersten Eindruck spürbar. Wichtiger als die reine Anzahl ist außerdem, dass regelmäßig neue Bewertungen dazukommen, statt dass die letzte Rezension Jahre zurückliegt.</p>
+  </section>
+
   <section>
     <h2>Was bei negativen Bewertungen zählt</h2>
     <p>Eine einzelne schlechte Bewertung wirkt weniger schlimm, als man denkt, solange darauf sachlich und ruhig geantwortet wird. Interessenten lesen oft genau diese Antwort und bewerten daran, wie professionell ein Betrieb mit Kritik umgeht.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Die Sternebewertung erscheint bereits in der Google-Suche, noch bevor jemand auf die Website oder das Unternehmensprofil klickt. Sie wirkt damit früher als jeder andere Baustein Ihres Auftritts.</p>
+  </div>
 
 
   <div class="cta-strip">

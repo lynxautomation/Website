@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,7 +201,7 @@
 <main>
   <span class="page-label">Website</span>
   <h1>Warum Ihre Website heute mehr sein muss als eine Visitenkarte</h1>
-  <p class="meta">Lynx Automation Solutions · 3 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
   <p class="lead">Adresse, Telefonnummer, ein Foto vom letzten Auftrag. Vor zehn Jahren hat das gereicht. Heute reicht es nicht mehr.</p>
 
     <section>
@@ -197,6 +209,37 @@
     <p>Kunden googeln heute einen Handwerksbetrieb, bevor sie anrufen. Sie vergleichen dabei mehrere Anbieter gleichzeitig, meist auf dem Smartphone, meist innerhalb weniger Minuten. In dieser kurzen Zeit entscheidet sich, wer überhaupt einen Anruf bekommt.</p>
     <p>Eine Website, die nur Kontaktdaten zeigt, beantwortet dabei keine der Fragen, die in diesem Moment tatsächlich zählen: Macht dieser Betrieb, was ich brauche? Wirkt er vertrauenswürdig? Antwortet er schnell?</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Es geht nicht darum, mehr Inhalte auf die Website zu packen, sondern die richtigen Fragen im richtigen Moment zu beantworten.</p>
+  </div>
+
+  <section>
+    <h2>Alt und neu im direkten Vergleich</h2>
+    <p>Am einfachsten zeigt sich der Unterschied, wenn man beide Varianten nebeneinander legt.</p>
+  </section>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="20" width="290" height="240" rx="12" fill="#162454" stroke="#c0392b" stroke-width="1.5" stroke-opacity="0.5"/>
+      <text x="175" y="52" text-anchor="middle" fill="#f5a3a3" font-family="DM Sans, sans-serif" font-size="14" font-weight="600">✕ Alte Website</text>
+      <text x="60" y="90" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Telefonnummer</text>
+      <text x="60" y="120" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Ein Foto</text>
+      <text x="60" y="150" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Kontaktformular</text>
+      <text x="60" y="180" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Keine Bewertungen sichtbar</text>
+      <text x="60" y="210" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Kaum lesbar am Handy</text>
+
+      <rect x="380" y="20" width="290" height="240" rx="12" fill="#162454" stroke="#43a06b" stroke-width="1.5" stroke-opacity="0.5"/>
+      <text x="525" y="52" text-anchor="middle" fill="#8fdb9f" font-family="DM Sans, sans-serif" font-size="14" font-weight="600">✓ Moderne Website</text>
+      <text x="410" y="90" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Klare Leistungen</text>
+      <text x="410" y="120" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Referenzen &amp; Projektfotos</text>
+      <text x="410" y="150" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Google-Bewertungen sichtbar</text>
+      <text x="410" y="180" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Direkter Kontaktweg</text>
+      <text x="410" y="210" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="12.5">Gut lesbar am Handy</text>
+    </svg>
+  </div>
+
   <section>
     <h2>Was eine Website heute leisten sollte</h2>
   </section>
@@ -207,10 +250,21 @@
     <li>Eine einfache Möglichkeit, direkt Kontakt aufzunehmen, ohne erst eine Telefonnummer abtippen zu müssen</li>
     <li>Eine vernünftige Darstellung auf dem Smartphone, da die meisten Besucher von dort kommen</li>
   </ul>
+
+  <section>
+    <h2>Warum die Reihenfolge wichtiger ist als die Menge</h2>
+    <p>Es reicht nicht, all diese Punkte irgendwo auf der Seite unterzubringen. Entscheidend ist, was ein Besucher als Erstes sieht. Leistungen und Vertrauen gehören nach oben, Kontaktmöglichkeiten müssen jederzeit sichtbar bleiben, nicht erst nach langem Scrollen.</p>
+  </section>
+
   <section>
     <h2>Der Unterschied in der Praxis</h2>
     <p>Zwei Websites mit denselben Informationen, aber unterschiedlicher Aufbereitung, erzeugen bei Besuchern ein völlig unterschiedliches Vertrauen. Es geht selten um mehr Text, sondern um die richtige Reihenfolge und Klarheit: Was macht dieser Betrieb, für wen, und wie nimmt man Kontakt auf.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>Praxis-Tipp:</strong> Öffnen Sie Ihre eigene Website einmal auf dem Handy und stoppen Sie die Zeit, bis Sie eine Telefonnummer oder ein Kontaktformular finden. Wenn es länger als 10 Sekunden dauert, geht es den meisten Besuchern genauso.</p>
+  </div>
 
 
   <div class="cta-strip">
