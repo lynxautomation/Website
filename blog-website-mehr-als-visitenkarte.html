@@ -130,6 +130,38 @@
     display: inline-block; margin-top: 48px;
     color: var(--accent); text-decoration: none; font-size: 0.88rem;
   }
+
+  .analyse-form { text-align: left; max-width: 420px; margin: 0 auto; }
+  .analyse-form input, .analyse-form textarea {
+    width: 100%; margin-bottom: 10px;
+    background: rgba(13,27,62,0.7);
+    border: 1px solid rgba(124,92,196,0.3);
+    border-radius: 8px; padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    color: var(--white); outline: none;
+  }
+  .analyse-form input::placeholder, .analyse-form textarea::placeholder { color: rgba(160,160,184,0.6); }
+  .analyse-form textarea { resize: vertical; min-height: 60px; }
+  .analyse-form .consent-row {
+    display: flex; gap: 8px; align-items: flex-start;
+    margin: 10px 0 16px; text-align: left;
+  }
+  .analyse-form .consent-row input { width: auto; margin-top: 3px; }
+  .analyse-form .consent-row label { font-size: 0.72rem; color: var(--grey); line-height: 1.5; }
+  .analyse-form .consent-row a { color: var(--accent); }
+  .analyse-form button {
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    color: var(--white); border: none; cursor: pointer;
+    padding: 12px 26px; border-radius: 10px;
+    font-size: 0.88rem; font-weight: 500; width: 100%;
+    transition: opacity 0.2s;
+  }
+  .analyse-form button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .analyse-form button:not(:disabled):hover { opacity: 0.88; }
+  .af-msg { font-size: 0.8rem; margin-top: 10px; text-align: center; }
+  .af-msg.success { color: #7defa0; }
+  .af-msg.error { color: #ff9d9d; }
+
   footer {
     border-top: 1px solid var(--border); padding: 36px 60px;
     display: flex; align-items: center; justify-content: space-between;
@@ -183,8 +215,19 @@
 
   <div class="cta-strip">
     <h3>Wie sieht das bei Ihnen konkret aus?</h3>
-    <p>Ich schaue mir Ihre Website und Ihren Online-Auftritt gerne kurz und unverbindlich persönlich an und sage Ihnen ehrlich, wo Potenzial liegt.</p>
-    <a href="mailto:jonah.kipshagen@lynx-automation.de?subject=Kostenlose%20Kurzanalyse" class="cta-btn">Kostenlose Kurzanalyse anfragen →</a>
+    <p>Schicken Sie mir kurz Ihre Website und ein paar Infos zu Ihrem Betrieb. Wir schauen sie uns persönlich an und schicken Ihnen eine ehrliche Kurzanalyse zurück, kostenlos und unverbindlich.</p>
+    <form class="analyse-form" id="analyse-form">
+      <input type="text" id="af-firma" placeholder="Firma / Betrieb *" required>
+      <input type="url" id="af-website" placeholder="Website-URL *" required>
+      <input type="email" id="af-email" placeholder="E-Mail-Adresse *" required>
+      <textarea id="af-note" placeholder="Kurze Info zu Ihrem Betrieb (optional)"></textarea>
+      <div class="consent-row">
+        <input type="checkbox" id="af-consent">
+        <label for="af-consent">Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung der Kurzanalyse gespeichert und genutzt werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+      </div>
+      <button type="submit" id="af-submit" disabled>Kostenlose Kurzanalyse anfragen →</button>
+      <div class="af-msg" id="af-msg"></div>
+    </form>
   </div>
 
   <a href="blog.html" class="back-to-blog">← Zurück zur Blog-Übersicht</a>
@@ -200,5 +243,62 @@
   </div>
 </footer>
 
+
+<script>
+  (function() {
+    const form = document.getElementById('analyse-form');
+    if (!form) return;
+    const consent = document.getElementById('af-consent');
+    const submit  = document.getElementById('af-submit');
+    const msg     = document.getElementById('af-msg');
+
+    consent.addEventListener('change', () => { submit.disabled = !consent.checked; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firma   = document.getElementById('af-firma').value.trim();
+      const website = document.getElementById('af-website').value.trim();
+      const email   = document.getElementById('af-email').value.trim();
+      const note    = document.getElementById('af-note').value.trim();
+
+      if (!firma || !website || !email) return;
+
+      submit.disabled = true;
+      submit.textContent = 'Wird gesendet…';
+      msg.textContent = '';
+      msg.className = 'af-msg';
+
+      const now = new Date().toISOString();
+      const payload = {
+        name:  firma,
+        phone: '-',
+        email: email,
+        topic: 'Digital-Check-Anfrage',
+        note:  'Website: ' + website + (note ? ' | Info: ' + note : ''),
+        date: now,
+        consentDate: now
+      };
+
+      try {
+        const res = await fetch('/.netlify/functions/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          form.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns mit der Kurzanalyse bei Ihnen.</div>';
+        } else {
+          throw new Error(data.error || 'Fehler');
+        }
+      } catch (err) {
+        submit.disabled = false;
+        submit.textContent = 'Kostenlose Kurzanalyse anfragen →';
+        msg.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte schreiben Sie uns direkt: jonah.kipshagen@lynx-automation.de';
+        msg.className = 'af-msg error';
+      }
+    });
+  })();
+</script>
 </body>
 </html>

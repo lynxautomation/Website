@@ -96,11 +96,15 @@
     border: 1px solid rgba(124,92,196,0.3);
     border-radius: 20px; padding: 7px 16px;
     font-size: 0.8rem; font-weight: 400;
+    cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, color 0.2s;
   }
+  .filter-chip:hover { background: rgba(91,63,160,0.28); }
   .filter-chip.active {
     background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
     color: var(--white); border-color: transparent;
   }
+  .post-card.hidden { display: none; }
 
   /* BLOG GRID */
   .blog-grid {
@@ -109,6 +113,7 @@
     gap: 28px;
   }
   .post-card {
+    position: relative;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -118,6 +123,23 @@
     transition: transform 0.25s ease, border-color 0.25s ease;
     text-decoration: none;
     color: inherit;
+  }
+  .card-badge {
+    position: absolute; top: -14px; left: 24px;
+    background: linear-gradient(135deg, #2e7d52, #43a06b);
+    color: #f5f3ff; font-size: 0.68rem; font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 5px 14px; border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(46,125,82,0.4);
+    z-index: 2;
+  }
+  .card-badge::after {
+    content: '';
+    position: absolute; bottom: -4px; left: 16px;
+    width: 9px; height: 9px;
+    background: #237a48;
+    transform: rotate(45deg);
+    z-index: -1;
   }
   .post-card:hover {
     transform: translateY(-4px);
@@ -157,26 +179,62 @@
     border: 1px solid rgba(179,157,219,0.25);
     border-radius: 16px;
     padding: 40px;
-    text-align: center;
   }
+  .lead-strip-inner {
+    display: flex; gap: 40px; align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .lead-text { flex: 1; min-width: 260px; }
   .lead-strip h2 {
     font-family: 'Cormorant Garamond', serif;
     font-weight: 400; font-size: 1.7rem; margin-bottom: 12px;
     border: none; padding: 0;
   }
-  .lead-strip p {
-    color: var(--grey); font-size: 0.92rem; margin-bottom: 24px;
-    max-width: 480px; margin-left: auto; margin-right: auto;
+  .lead-strip .lead-text > p {
+    color: var(--grey); font-size: 0.92rem; margin-bottom: 20px;
   }
-  .lead-btn {
-    display: inline-block;
+  .analyse-preview {
+    flex: 1; min-width: 240px;
+    border: 1px dashed rgba(179,157,219,0.4);
+    border-radius: 12px;
+    min-height: 200px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 20px;
+    color: rgba(160,160,184,0.7);
+    font-size: 0.8rem;
+  }
+  .analyse-preview img { max-width: 100%; border-radius: 8px; }
+  .analyse-preview .icon { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.6; }
+
+  .analyse-form { text-align: left; max-width: 420px; }
+  .analyse-form input, .analyse-form textarea {
+    width: 100%; margin-bottom: 10px;
+    background: rgba(13,27,62,0.7);
+    border: 1px solid rgba(124,92,196,0.3);
+    border-radius: 8px; padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+    color: var(--white); outline: none;
+  }
+  .analyse-form input::placeholder, .analyse-form textarea::placeholder { color: rgba(160,160,184,0.6); }
+  .analyse-form textarea { resize: vertical; min-height: 60px; }
+  .analyse-form .consent-row {
+    display: flex; gap: 8px; align-items: flex-start;
+    margin: 10px 0 16px;
+  }
+  .analyse-form .consent-row input { width: auto; margin-top: 3px; }
+  .analyse-form .consent-row label { font-size: 0.72rem; color: var(--grey); line-height: 1.5; }
+  .analyse-form .consent-row a { color: var(--accent); }
+  .analyse-form button {
     background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
-    color: var(--white); text-decoration: none;
-    padding: 13px 28px; border-radius: 10px;
-    font-size: 0.9rem; font-weight: 500;
+    color: var(--white); border: none; cursor: pointer;
+    padding: 12px 26px; border-radius: 10px;
+    font-size: 0.88rem; font-weight: 500; width: 100%;
     transition: opacity 0.2s;
   }
-  .lead-btn:hover { opacity: 0.88; }
+  .analyse-form button:disabled { opacity: 0.45; cursor: not-allowed; }
+  .analyse-form button:not(:disabled):hover { opacity: 0.88; }
+  .af-msg { font-size: 0.8rem; margin-top: 10px; }
+  .af-msg.error { color: #ff9d9d; }
 
   footer {
     border-top: 1px solid var(--border); padding: 36px 60px;
@@ -209,17 +267,18 @@
   <h1>Blog</h1>
   <p class="intro">Kurze, praxisnahe Artikel rund um Website, digitalen Assistenten und Sichtbarkeit im Netz, geschrieben für Handwerksbetriebe in Paderborn, Höxter, Delbrück und der Region OWL. Kein Fachchinesisch, sondern konkrete Antworten auf Fragen, die uns im Alltag begegnen.</p>
 
-  <div class="filters">
-    <span class="filter-chip active">Alle Themen</span>
-    <span class="filter-chip">Digitaler Assistent</span>
-    <span class="filter-chip">Website</span>
-    <span class="filter-chip">Sichtbarkeit &amp; Google</span>
-    <span class="filter-chip">Aus dem Alltag</span>
+  <div class="filters" id="filters">
+    <button class="filter-chip active" data-filter="alle">Alle Themen</button>
+    <button class="filter-chip" data-filter="Digitaler Assistent">Digitaler Assistent</button>
+    <button class="filter-chip" data-filter="Website">Website</button>
+    <button class="filter-chip" data-filter="Sichtbarkeit &amp; Google">Sichtbarkeit &amp; Google</button>
+    <button class="filter-chip" data-filter="Aus dem Alltag">Aus dem Alltag</button>
   </div>
 
   <div class="blog-grid">
 
-    <a href="blog-digitaler-assistent-kosten.html" class="post-card">
+    <a href="blog-digitaler-assistent-kosten.html" class="post-card" data-category="Digitaler Assistent">
+      <span class="card-badge" style="background:linear-gradient(135deg,#5b3fa0,#7c5cc4); box-shadow:0 4px 14px rgba(91,63,160,0.4);">Besonders relevant</span>
       <span class="post-tag">Digitaler Assistent</span>
       <h3>Was kostet ein digitaler Assistent für Handwerksbetriebe wirklich?</h3>
       <p class="post-excerpt">Ein ehrlicher Blick auf Einrichtungskosten, monatliche Gebühren und was am Ende tatsächlich den Unterschied macht.</p>
@@ -229,7 +288,7 @@
       </div>
     </a>
 
-    <a href="blog-website-mehr-als-visitenkarte.html" class="post-card">
+    <a href="blog-website-mehr-als-visitenkarte.html" class="post-card" data-category="Website">
       <span class="post-tag">Website</span>
       <h3>Warum Ihre Website heute mehr sein muss als eine Visitenkarte</h3>
       <p class="post-excerpt">Wie aus einer reinen Kontaktseite ein Werkzeug wird, das tatsächlich neue Anfragen bringt.</p>
@@ -239,7 +298,7 @@
       </div>
     </a>
 
-    <a href="blog-google-bewertungen-owl.html" class="post-card">
+    <a href="blog-google-bewertungen-owl.html" class="post-card" data-category="Sichtbarkeit &amp; Google">
       <span class="post-tag">Sichtbarkeit &amp; Google</span>
       <h3>Google-Bewertungen: Der unterschätzte Umsatzhebel für Handwerksbetriebe in OWL</h3>
       <p class="post-excerpt">Warum Bewertungen oft mehr Anfragen bringen als die eigene Website, und wie man sie gezielt sammelt.</p>
@@ -249,7 +308,7 @@
       </div>
     </a>
 
-    <a href="blog-ablauf-zusammenarbeit.html" class="post-card">
+    <a href="blog-ablauf-zusammenarbeit.html" class="post-card" data-category="Aus dem Alltag">
       <span class="post-tag">Aus dem Alltag</span>
       <h3>So läuft die Zusammenarbeit mit Lynx Automation ab</h3>
       <p class="post-excerpt">Vom ersten Gespräch bis zum Go-Live, Schritt für Schritt erklärt, ohne technisches Vorwissen nötig.</p>
@@ -259,7 +318,7 @@
       </div>
     </a>
 
-    <a href="blog-warum-antworten-nicht.html" class="post-card">
+    <a href="blog-warum-antworten-nicht.html" class="post-card" data-category="Digitaler Assistent">
       <span class="post-tag">Digitaler Assistent</span>
       <h3>Warum antworten viele Handwerksbetriebe nicht auf Anfragen?</h3>
       <p class="post-excerpt">Die häufigsten Gründe für verpasste Anfragen und wie ein Assistent genau diese Lücke schließt.</p>
@@ -269,7 +328,8 @@
       </div>
     </a>
 
-    <a href="blog-7-fehler-handwerker-websites.html" class="post-card">
+    <a href="blog-7-fehler-handwerker-websites.html" class="post-card" data-category="Website">
+      <span class="card-badge">Beliebt</span>
       <span class="post-tag">Website</span>
       <h3>7 Fehler auf Handwerker-Websites</h3>
       <p class="post-excerpt">Die häufigsten Stolperfallen, die Besucher kosten, und wie man sie mit wenig Aufwand behebt.</p>
@@ -279,7 +339,7 @@
       </div>
     </a>
 
-    <a href="blog-so-finden-kunden-handwerksbetrieb.html" class="post-card">
+    <a href="blog-so-finden-kunden-handwerksbetrieb.html" class="post-card" data-category="Sichtbarkeit &amp; Google">
       <span class="post-tag">Sichtbarkeit &amp; Google</span>
       <h3>So finden Kunden heute einen Handwerksbetrieb</h3>
       <p class="post-excerpt">Google, Bewertungen, Website, Empfehlungen und Chatbot im Zusammenspiel, statt isolierter Einzelteile.</p>
@@ -289,7 +349,7 @@
       </div>
     </a>
 
-    <a href="blog-chatbot-vs-kontaktformular.html" class="post-card">
+    <a href="blog-chatbot-vs-kontaktformular.html" class="post-card" data-category="Digitaler Assistent">
       <span class="post-tag">Digitaler Assistent</span>
       <h3>Chatbot vs. Kontaktformular: Was bringt wirklich mehr Anfragen?</h3>
       <p class="post-excerpt">Ein nüchterner Vergleich zwischen klassischem Kontaktformular und digitalem Assistenten.</p>
@@ -299,7 +359,7 @@
       </div>
     </a>
 
-    <a href="blog-digitaler-assistent-dachdecker.html" class="post-card">
+    <a href="blog-digitaler-assistent-dachdecker.html" class="post-card" data-category="Digitaler Assistent">
       <span class="post-tag">Digitaler Assistent</span>
       <h3>Digitaler Assistent für Dachdeckerbetriebe: Worauf es ankommt</h3>
       <p class="post-excerpt">Wie ein digitaler Assistent speziell für Dachdeckerbetriebe eingesetzt werden kann.</p>
@@ -312,9 +372,29 @@
   </div>
 
   <div class="lead-strip">
-    <h2>Wie sieht das bei Ihrem Betrieb aus?</h2>
-    <p>Ich schaue mir Ihre Website und Ihren Online-Auftritt gerne kurz und unverbindlich persönlich an und sage Ihnen ehrlich, wo Potenzial liegt, statt Ihnen nur eine allgemeine Checkliste zu schicken.</p>
-    <a href="mailto:jonah.kipshagen@lynx-automation.de?subject=Kostenlose%20Kurzanalyse" class="lead-btn">Kostenlose Kurzanalyse anfragen →</a>
+    <div class="lead-strip-inner">
+      <div class="lead-text">
+        <h2>Wie sieht das bei Ihrem Betrieb aus?</h2>
+        <p>Schicken Sie mir kurz Ihre Website und ein paar Infos zu Ihrem Betrieb. Wir schauen sie uns persönlich an und schicken Ihnen eine ehrliche Kurzanalyse zurück, kostenlos und unverbindlich, statt einer allgemeinen Checkliste.</p>
+        <div class="analyse-preview">
+          <!-- Beispielbild folgt: hier später <img src="analyse-beispiel.jpg" alt="Beispiel einer Kurzanalyse"> einfügen -->
+          <div class="icon">📄</div>
+          Beispiel einer Kurzanalyse folgt in Kürze
+        </div>
+      </div>
+      <form class="analyse-form" id="analyse-form">
+        <input type="text" id="af-firma" placeholder="Firma / Betrieb *" required>
+        <input type="url" id="af-website" placeholder="Website-URL *" required>
+        <input type="email" id="af-email" placeholder="E-Mail-Adresse *" required>
+        <textarea id="af-note" placeholder="Kurze Info zu Ihrem Betrieb (optional)"></textarea>
+        <div class="consent-row">
+          <input type="checkbox" id="af-consent">
+          <label for="af-consent">Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung der Kurzanalyse gespeichert und genutzt werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>
+        </div>
+        <button type="submit" id="af-submit" disabled>Kostenlose Kurzanalyse anfragen →</button>
+        <div class="af-msg" id="af-msg"></div>
+      </form>
+    </div>
   </div>
 </main>
 
@@ -328,5 +408,83 @@
   </div>
 </footer>
 
+<script>
+  // ── CATEGORY FILTER ──────────────────────────────────────
+  (function() {
+    const chips = document.querySelectorAll('#filters .filter-chip');
+    const cards = document.querySelectorAll('.post-card');
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        const filter = chip.getAttribute('data-filter');
+        cards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'alle' || cat === filter) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  })();
+
+  // ── DIGITAL-CHECK FORMULAR ────────────────────────────────
+  (function() {
+    const form = document.getElementById('analyse-form');
+    if (!form) return;
+    const consent = document.getElementById('af-consent');
+    const submit  = document.getElementById('af-submit');
+    const msg     = document.getElementById('af-msg');
+
+    consent.addEventListener('change', () => { submit.disabled = !consent.checked; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firma   = document.getElementById('af-firma').value.trim();
+      const website = document.getElementById('af-website').value.trim();
+      const email   = document.getElementById('af-email').value.trim();
+      const note    = document.getElementById('af-note').value.trim();
+
+      if (!firma || !website || !email) return;
+
+      submit.disabled = true;
+      submit.textContent = 'Wird gesendet…';
+      msg.textContent = '';
+      msg.className = 'af-msg';
+
+      const now = new Date().toISOString();
+      const payload = {
+        name:  firma,
+        phone: '-',
+        email: email,
+        topic: 'Digital-Check-Anfrage',
+        note:  'Website: ' + website + (note ? ' | Info: ' + note : ''),
+        date: now,
+        consentDate: now
+      };
+
+      try {
+        const res = await fetch('/.netlify/functions/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          form.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns mit der Kurzanalyse bei Ihnen.</div>';
+        } else {
+          throw new Error(data.error || 'Fehler');
+        }
+      } catch (err) {
+        submit.disabled = false;
+        submit.textContent = 'Kostenlose Kurzanalyse anfragen →';
+        msg.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte schreiben Sie uns direkt: jonah.kipshagen@lynx-automation.de';
+        msg.className = 'af-msg error';
+      }
+    });
+  })();
+</script>
 </body>
 </html>
