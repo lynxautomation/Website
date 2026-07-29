@@ -1,0 +1,2021 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitale Lösungen für Handwerksbetriebe | Chatbot, Website & Content – Lynx Automation</title>
+<meta name="description" content="Chatbot, Website und Content für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL. Aus einer Hand und DSGVO-konform. Jetzt kostenlos beraten lassen.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.lynx-automation.de/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Digitale Lösungen für Handwerksbetriebe | Lynx Automation Solutions">
+<meta property="og:description" content="Chatbot, Website und Content für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL. Aus einer Hand und DSGVO-konform.">
+<meta property="og:url" content="https://www.lynx-automation.de/">
+<meta property="og:locale" content="de_DE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Digitale Lösungen für Handwerksbetriebe | Lynx Automation Solutions">
+<meta name="twitter:description" content="Chatbot, Website und Content für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL. Aus einer Hand und DSGVO-konform.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Lynx Automation Solutions",
+  "description": "Digitale Assistenten (Chatbots), Websites und Content-Produktion für Handwerksbetriebe im Mittelstand.",
+  "url": "https://www.lynx-automation.de/",
+  "areaServed": ["Paderborn", "Höxter", "Delbrück", "Willebadessen", "Ostwestfalen-Lippe"],
+  "priceRange": "€€",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Bogenstraße 14",
+    "postalCode": "34439",
+    "addressLocality": "Willebadessen",
+    "addressCountry": "DE"
+  }
+}
+</script>
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --navy-mid: #162454;
+    --purple: #5b3fa0;
+    --purple-light: #7c5cc4;
+    --purple-glow: #9d7fe0;
+    --accent: #b39ddb;
+    --white: #f5f3ff;
+    --grey: #a0a0b8;
+    --card-bg: rgba(22, 36, 84, 0.55);
+    --border: rgba(179, 157, 219, 0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* BACKGROUND MESH */
+  .bg-mesh {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .bg-mesh::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,63,160,0.35) 0%, transparent 70%);
+    top: -100px; left: -100px;
+    animation: drift1 18s ease-in-out infinite alternate;
+  }
+  .bg-mesh::after {
+    content: '';
+    position: absolute;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(124,92,196,0.25) 0%, transparent 70%);
+    bottom: 0; right: -50px;
+    animation: drift2 22s ease-in-out infinite alternate;
+  }
+  @keyframes drift1 { to { transform: translate(80px, 60px); } }
+  @keyframes drift2 { to { transform: translate(-60px, -80px); } }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    background: rgba(13,27,62,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--grey);
+    text-decoration: none;
+    font-size: 0.88rem;
+    letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: var(--white) !important;
+    padding: 10px 24px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .nav-cta:hover { opacity: 0.9; }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+  }
+  .hero-inner { max-width: 780px; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(91,63,160,0.2);
+    border: 1px solid rgba(179,157,219,0.3);
+    border-radius: 100px;
+    padding: 6px 16px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin-bottom: 28px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-sub {
+    font-size: 1.08rem;
+    color: var(--grey);
+    line-height: 1.7;
+    max-width: 560px;
+    margin: 0 auto 48px;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    color: var(--white);
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 32px rgba(91,63,160,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,63,160,0.65); }
+  .btn-secondary {
+    border: 1px solid var(--border);
+    color: var(--grey);
+    padding: 16px 36px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-secondary:hover { border-color: var(--accent); color: var(--white); }
+
+  .hero-scroll {
+    margin-top: 80px;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: var(--grey); font-size: 0.75rem; letter-spacing: 0.1em;
+    text-transform: uppercase; opacity: 0.7;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollAnim 2s ease-in-out infinite;
+  }
+  @keyframes scrollAnim { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+
+  /* SECTION TITLES */
+  .section-label {
+    font-size: 0.73rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--purple-glow);
+    margin-bottom: 14px;
+    display: block;
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4.5vw, 3.4rem);
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+  .section-desc {
+    color: var(--grey);
+    font-size: 1rem;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 580px;
+  }
+
+  /* PROBLEM SECTION */
+  .problem {
+    padding: 120px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .problem-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .stat-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px 24px;
+    backdrop-filter: blur(12px);
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label { font-size: 0.83rem; color: var(--grey); line-height: 1.5; }
+
+  /* PRODUCTS */
+  .products { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .products-header { text-align: center; margin-bottom: 70px; }
+  .products-header .section-desc { margin: 0 auto; }
+  .products-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .product-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 40px;
+    backdrop-filter: blur(16px);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .product-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--purple), var(--purple-light), var(--accent));
+  }
+  .product-card:hover { transform: translateY(-6px); border-color: rgba(179,157,219,0.35); }
+  .product-card.featured {
+    background: linear-gradient(145deg, rgba(91,63,160,0.3), rgba(22,36,84,0.6));
+    border-color: rgba(179,157,219,0.3);
+  }
+  .product-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(179,157,219,0.1);
+    border: 1px solid rgba(179,157,219,0.2);
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-bottom: 24px;
+  }
+  .product-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .product-card p {
+    color: var(--grey);
+    font-size: 0.92rem;
+    line-height: 1.75;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  .product-features { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .product-features li {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 0.88rem; color: var(--grey);
+  }
+  .product-features li::before {
+    content: '';
+    width: 18px; height: 18px; flex-shrink: 0;
+    background: rgba(179,157,219,0.1);
+    border: 1px solid rgba(179,157,219,0.3);
+    border-radius: 50%;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='%23b39ddb' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .product-num {
+    position: absolute; bottom: 32px; right: 36px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 600;
+    color: rgba(179,157,219,0.05);
+    line-height: 1;
+    user-select: none;
+  }
+
+  .product-price {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    margin: 4px 0 28px;
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .product-price .amount { font-size: 1.7rem; font-weight: 600; color: var(--white); }
+  .product-price .period { font-size: 0.8rem; color: var(--grey); font-family: 'DM Sans', sans-serif; font-weight: 300; }
+
+  .sub-divider {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto 36px;
+  }
+  .sub-divider span {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--purple-glow);
+    white-space: nowrap;
+  }
+  .sub-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* WARUM LYNX */
+  .why { padding: 100px 60px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .why-header { margin-bottom: 50px; }
+  .why-header .section-desc { margin: 0 auto; }
+  .why-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px 56px;
+    backdrop-filter: blur(16px);
+    text-align: left;
+  }
+  ul.product-features.why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 36px;
+  }
+  ul.product-features.why-grid li { font-size: 0.92rem; }
+  @media (max-width: 900px) {
+    ul.product-features.why-grid { grid-template-columns: 1fr; }
+    .why-card { padding: 36px 28px; }
+  }
+
+  /* PILLAR SUBSECTIONS */
+  .pillar {
+    padding-top: 90px;
+    margin-top: 90px;
+    border-top: 1px solid var(--border);
+  }
+  .pillar:first-of-type { padding-top: 0; margin-top: 70px; border-top: none; }
+  .pillar-header { text-align: center; margin-bottom: 56px; }
+  .pillar-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.7rem, 3vw, 2.3rem);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+  .pillar-nav {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 40px 0 0;
+  }
+  .pillar-nav a {
+    font-size: 0.8rem;
+    color: var(--grey);
+    text-decoration: none;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .pillar-nav a:hover { color: var(--white); border-color: rgba(179,157,219,0.4); }
+
+  /* BUNDLE */
+  .bundle { padding: 100px 60px; max-width: 1000px; margin: 0 auto; }
+  .bundle-card {
+    background: linear-gradient(145deg, rgba(91,63,160,0.35), rgba(22,36,84,0.7));
+    border: 1px solid rgba(179,157,219,0.35);
+    border-radius: 20px;
+    padding: 56px;
+    backdrop-filter: blur(16px);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .bundle-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    background: rgba(179,157,219,0.12);
+    border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 100px;
+    padding: 4px 12px;
+    margin-bottom: 20px;
+  }
+  .bundle-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+  .bundle-card p { color: var(--grey); font-size: 0.92rem; line-height: 1.75; font-weight: 300; margin-bottom: 8px; }
+  .bundle-includes { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+  .bundle-includes li { font-size: 0.88rem; color: var(--grey); display: flex; align-items: center; gap: 10px; }
+  .bundle-includes li::before { content: '+'; color: var(--purple-glow); font-weight: 600; }
+  .bundle-price-box { text-align: center; border-left: 1px solid var(--border); padding-left: 48px; }
+  .bundle-price-box .was {
+    font-size: 0.85rem; color: var(--grey); text-decoration: line-through;
+    margin-bottom: 6px;
+  }
+  .bundle-price-box .save {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--purple-glow); margin: 10px 0 4px;
+  }
+  .bundle-price-box .amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 600; color: var(--white); line-height: 1;
+  }
+  .bundle-price-box .period { font-size: 0.82rem; color: var(--grey); margin: 8px 0 4px; }
+  .bundle-price-box .setup { font-size: 0.8rem; color: var(--grey); margin-bottom: 24px; }
+  @media (max-width: 900px) {
+    .bundle-card { grid-template-columns: 1fr; }
+    .bundle-price-box { border-left: none; border-top: 1px solid var(--border); padding-left: 0; padding-top: 32px; }
+  }
+
+  /* COMPARISON TABLE */
+  .comparison { padding: 80px 60px; max-width: 1000px; margin: 0 auto; }
+  .comparison-header { text-align: center; margin-bottom: 50px; }
+  table { width: 100%; border-collapse: collapse; }
+  th {
+    padding: 18px 28px;
+    text-align: left;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+    border-bottom: 1px solid var(--border);
+  }
+  th:first-child { width: 50%; }
+  th:not(:first-child) {
+    text-align: center;
+    color: var(--accent);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+  }
+  td {
+    padding: 16px 28px;
+    font-size: 0.88rem;
+    color: var(--grey);
+    border-bottom: 1px solid rgba(179,157,219,0.06);
+  }
+  td:not(:first-child) { text-align: center; }
+  tr:hover td { background: rgba(91,63,160,0.07); }
+  .check { color: var(--purple-glow); font-size: 1.1rem; }
+  .dash { opacity: 0.3; }
+
+  /* HOW IT WORKS */
+  .how { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .how-header { text-align: center; margin-bottom: 80px; }
+  .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; position: relative; }
+  .steps::before {
+    content: '';
+    position: absolute;
+    top: 36px; left: calc(16.6% + 20px); right: calc(16.6% + 20px);
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--purple), var(--purple-light), var(--purple), transparent);
+  }
+  .step { padding: 0 40px; text-align: center; }
+  .step-num {
+    width: 72px; height: 72px;
+    border-radius: 50%;
+    border: 1px solid rgba(179,157,219,0.3);
+    background: var(--card-bg);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 28px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+    backdrop-filter: blur(12px);
+  }
+  .step h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 12px;
+  }
+  .step p { color: var(--grey); font-size: 0.88rem; line-height: 1.7; font-weight: 300; }
+
+  /* VORTEILE */
+  .benefits { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
+  .benefits-header { margin-bottom: 70px; }
+  .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .benefit-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px 32px;
+    backdrop-filter: blur(12px);
+    transition: border-color 0.3s;
+  }
+  .benefit-card:hover { border-color: rgba(179,157,219,0.3); }
+  .benefit-icon {
+    width: 44px; height: 44px;
+    background: rgba(91,63,160,0.2);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+  }
+  .benefit-card h4 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .benefit-card p { font-size: 0.85rem; color: var(--grey); line-height: 1.7; font-weight: 300; }
+
+  /* DATENSCHUTZ */
+  .privacy {
+    padding: 100px 60px;
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .privacy-badges { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 48px; }
+  .privacy-badge {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 24px;
+    font-size: 0.85rem;
+    color: var(--grey);
+    backdrop-filter: blur(12px);
+  }
+  .privacy-badge .icon { font-size: 1.2rem; }
+
+  /* FAQ */
+  .faq { padding: 120px 60px; max-width: 800px; margin: 0 auto; }
+  .faq-header { text-align: center; margin-bottom: 60px; }
+  .faq-category {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--purple-glow);
+    margin: 48px 0 4px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .faq-category:first-of-type { margin-top: 0; }
+  .faq-category .icon { font-size: 1.05rem; }
+  .faq-item {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 0;
+  }
+  .faq-q {
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer;
+    font-size: 0.97rem;
+    color: var(--white);
+    font-weight: 400;
+    user-select: none;
+    gap: 16px;
+  }
+  .faq-q::after { content: '+'; color: var(--accent); font-size: 1.4rem; flex-shrink: 0; transition: transform 0.3s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a {
+    display: none;
+    color: var(--grey);
+    font-size: 0.88rem;
+    line-height: 1.8;
+    padding-top: 16px;
+    font-weight: 300;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* CONTACT */
+  .contact {
+    padding: 120px 60px;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .contact-form {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 56px 52px;
+    backdrop-filter: blur(16px);
+    margin-top: 52px;
+    text-align: left;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey); }
+  input, select, textarea {
+    background: rgba(13,27,62,0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+    font-weight: 300;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--purple-light); }
+  select option { background: var(--navy-mid); }
+  textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: var(--white);
+    border: none;
+    padding: 18px;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    margin-top: 8px;
+    box-shadow: 0 8px 32px rgba(91,63,160,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(91,63,160,0.65); }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 48px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative; z-index: 1;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .footer-copy { font-size: 0.8rem; color: var(--grey); }
+  .footer-links { display: flex; gap: 32px; }
+  .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--white); }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-links { display: none; }
+    .problem, .products-grid, .benefits-grid, .steps { grid-template-columns: 1fr; }
+    .steps::before { display: none; }
+    .problem { padding: 80px 24px; gap: 40px; }
+    .products, .how, .benefits, .comparison, .faq, .contact, .bundle { padding: 80px 24px; }
+    .bundle-card { padding: 36px 28px; }
+    .pillar { padding-top: 60px; margin-top: 60px; }
+    .contact-form { padding: 36px 28px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-mesh"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Lynx <span>Automation</span></a>
+  <ul class="nav-links">
+    <li><a href="#products">Leistungen</a></li>
+    <li><a href="#bundle">Bundle</a></li>
+    <li><a href="#how">Ablauf</a></li>
+    <li><a href="blog.html">Blog</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Demo buchen</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Digitale Lösungen für Handwerksbetriebe in Paderborn, Höxter & OWL</div>
+    <h1>Ihr Betrieb.<br><em>Immer verfügbar.</em><br>Immer sichtbar.</h1>
+    <p class="hero-sub">Wir bauen Websites und digitale Assistenten für Handwerksbetriebe im Mittelstand. Kunden werden rund um die Uhr informiert, neue Anfragen automatisch aufgenommen. Dazu fertige Beiträge für Ihre Social-Media-Kanäle. Alles aus einer Hand, DSGVO-konform.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-primary">Kostenlos beraten lassen</a>
+      <a href="#products" class="btn-secondary">Unsere Leistungen</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      Mehr erfahren
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section>
+  <div class="problem fade-up">
+    <div>
+      <span class="section-label">Das Problem</span>
+      <h2>Digital unsichtbar.<br>Kunden gehen weiter.</h2>
+      <p class="section-desc" style="margin-bottom:24px">Ohne aktuelle Website, sichtbaren Content und sofortige Antworten verlieren Handwerksbetriebe Interessenten, bevor überhaupt ein Kontakt zustande kommt. Ob Dachdecker, Elektriker, SHK-Betrieb, Maler, Tischlerei oder Garten- und Landschaftsbau: Digitalisierung ist längst keine Kür mehr, sondern die Grundvoraussetzung, um online gefunden und ernst genommen zu werden.</p>
+      <p class="section-desc">Lynx Automation schließt genau diese Lücke für Handwerksbetriebe in Paderborn, Höxter, Delbrück und der gesamten Region OWL: mit einer modernen Website, einem Chatbot, der rund um die Uhr antwortet, und Content, der Ihre Präsenz laufend aktuell hält.</p>
+    </div>
+    <div class="problem-stats">
+      <div class="stat-card">
+        <div class="stat-num">72%</div>
+        <div class="stat-label">recherchieren online, bevor sie Kontakt aufnehmen</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">67%</div>
+        <div class="stat-label">der Kunden erwarten eine sofortige Antwort auf Anfragen</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">24/7</div>
+        <div class="stat-label">Erreichbarkeit ohne zusätzlichen Personalaufwand</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3×</div>
+        <div class="stat-label">mehr Leads durch konsistente digitale Präsenz</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS / LEISTUNGEN -->
+<section id="products">
+  <div class="products fade-up">
+    <div class="products-header">
+      <span class="section-label">Unsere Leistungen</span>
+      <h2>Von unsichtbar<br>zu unverkennbar.</h2>
+      <p class="section-desc" style="margin:0 auto">Drei Bausteine für die digitale Präsenz Ihres Handwerksbetriebs, einzeln buchbar oder kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
+      <div class="pillar-nav">
+        <a href="#bundle">Bundle — alles inklusive</a>
+        <a href="#chatbot">01 · Digitaler Assistent</a>
+        <a href="#website">02 · Website</a>
+        <a href="#content">03 · Beiträge & Fotos</a>
+      </div>
+    </div>
+
+    <!-- BUNDLE (featured, shown first) -->
+    <div class="bundle" id="bundle" style="padding:0 0 90px;">
+      <div class="bundle-card">
+        <div>
+          <div class="bundle-tag">Meistgewählt</div>
+          <h3>Digitale Rundum-Lösung</h3>
+          <p>Für 359 €/Monat kümmern wir uns komplett um Ihren digitalen Auftritt: Website, digitaler Assistent und laufende Beiträge, abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
+          <ul class="bundle-includes">
+            <li>Digitaler Assistent mit automatischer Kundengewinnung</li>
+            <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
+            <li>Website-Service inklusive (Hosting, Sicherheitsupdates, kleine Änderungen)</li>
+            <li>Foto & Grundausstattung — einmalig</li>
+            <li>Content Basis — 8 fertige Beiträge / Monat</li>
+          </ul>
+        </div>
+        <div class="bundle-price-box">
+          <div class="was">statt 423 €/Monat einzeln</div>
+          <div class="amount">359 €</div>
+          <div class="period">pro Monat</div>
+          <div class="save">Sie sparen 64 €/Monat</div>
+          <div class="setup">+ 2.790 € einmalig (Website & Fotos)</div>
+          <a href="#contact" class="btn-primary" style="display:inline-block;width:100%;text-align:center;">Bundle anfragen</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- BAUSTEIN 1: CHATBOT -->
+    <div class="pillar" id="chatbot">
+      <div class="pillar-header">
+        <span class="section-label">Baustein 01</span>
+        <h3>Digitaler Assistent</h3>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Modell 1 — Starter</div>
+          <h3>Digitaler Assistent für Ihre Website</h3>
+          <div class="product-price"><span class="amount">79 €</span><span class="period">/ Monat</span></div>
+          <p>Ihr digitaler Assistent beantwortet Fragen rund um die Uhr. Besucher erhalten sofort Antworten, auch außerhalb Ihrer Öffnungszeiten. So verlieren Sie keine Interessenten mehr.</p>
+          <ul class="product-features">
+            <li>Öffnungszeiten & Standort</li>
+            <li>Projekte & Leistungen</li>
+            <li>Bewertungen & Referenzen</li>
+            <li>Individuelle Unternehmensinformationen</li>
+            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
+            <li>DSGVO-konform</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+        <div class="product-card featured">
+          <div class="product-tag">Modell 2 — Pro</div>
+          <h3>Assistent mit automatischer Kundengewinnung</h3>
+          <div class="product-price"><span class="amount">149 €</span><span class="period">/ Monat</span></div>
+          <p>Alles aus Modell 1, und der Chat sammelt zusätzlich Kontaktdaten von Interessenten. Sie bekommen neue Anfragen, selbst wenn Sie gerade arbeiten.</p>
+          <ul class="product-features">
+            <li>Öffnungszeiten & Standort</li>
+            <li>Projekte & Leistungen</li>
+            <li>Bewertungen & Referenzen</li>
+            <li>Individuelle Unternehmensinformationen</li>
+            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
+            <li>DSGVO-konform</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Modell 2</span>
+          </div>
+          <ul class="product-features">
+            <li>Der Chat fragt gezielt nach Kontaktdaten</li>
+            <li>Der Chat stellt die richtigen Fragen, bevor er Kontakte weitergibt</li>
+            <li>Neue Anfragen landen automatisch in Ihrer Tabelle</li>
+            <li>E-Mail-Benachrichtigung bei neuer Anfrage</li>
+            <li>DSGVO-konforme Einwilligungserklärung im Chat</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
+      </div>
+      <table style="margin-top:48px">
+        <tr>
+          <th>Funktion</th>
+          <th>Modell 1</th>
+          <th>Modell 2</th>
+        </tr>
+        <tr><td>Automatische Beantwortung häufiger Fragen</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>24/7 Verfügbarkeit</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Immer aktuelle Öffnungszeiten & Leistungen</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>DSGVO-Konformität</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>In Ihren Farben & Ihrem Design</td><td class="check">✓</td><td class="check">✓</td></tr>
+        <tr><td>Sammelt Kontaktdaten im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Stellt gezielte Rückfragen</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>Neue Anfragen automatisch in Ihrer Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
+        <tr><td>E-Mail-Benachrichtigung bei neuer Anfrage</td><td class="dash">–</td><td class="check">✓</td></tr>
+      </table>
+    </div>
+
+    <!-- BAUSTEIN 2: WEBSITE -->
+    <div class="pillar" id="website">
+      <div class="pillar-header">
+        <span class="section-label">Baustein 02</span>
+        <h3>Website</h3>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Web Start</div>
+          <h3>Landingpage</h3>
+          <div class="product-price"><span class="amount">890 €</span><span class="period">einmalig</span></div>
+          <p>Eine schlanke, professionelle Seite für Unternehmen mit überschaubarem Umfang. Ideal als schnelle digitale Visitenkarte oder Kampagnenseite.</p>
+          <ul class="product-features">
+            <li>1–3 Unterseiten</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
+            <li>Funktioniert auf Handy und Computer</li>
+            <li>Kontaktformular & Google Maps</li>
+            <li>Grundlegende SEO-Einrichtung</li>
+            <li>Hosting durch uns, optionaler Website-Service 25 €/Monat</li>
+            <li>DSGVO-konforme Rechtstexte</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Website-Service (25 €/Monat) beinhaltet</span>
+          </div>
+          <ul class="product-features">
+            <li>Hosting & Domain-Verwaltung</li>
+            <li>Sicherheitsupdates</li>
+            <li>Kleine inhaltliche Änderungen (bis zu 15 Min./Monat)</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+        <div class="product-card featured">
+          <div class="product-tag">Web Business</div>
+          <h3>Unternehmenswebsite</h3>
+          <div class="product-price"><span class="amount">2.400 €</span><span class="period">einmalig</span></div>
+          <p>Eine vollwertige Unternehmenswebsite mit mehreren Seiten, individuellem Design und Raum für Leistungen, Referenzen und Team.</p>
+          <ul class="product-features">
+            <li>5–8 Unterseiten</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
+            <li>Referenzen-/Portfoliobereich</li>
+            <li>Funktioniert auf Handy und Computer</li>
+            <li>SEO-Grundoptimierung</li>
+            <li>Hosting durch uns, optionaler Website-Service 25 €/Monat</li>
+            <li>Ihr digitaler Assistent kann direkt eingebunden werden</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Website-Service (25 €/Monat) beinhaltet</span>
+          </div>
+          <ul class="product-features">
+            <li>Hosting & Domain-Verwaltung</li>
+            <li>Sicherheitsupdates</li>
+            <li>Kleine inhaltliche Änderungen (bis zu 15 Min./Monat)</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PILLAR 3: CONTENT -->
+    <div class="pillar" id="content">
+      <div class="pillar-header">
+        <span class="section-label">Baustein 03</span>
+        <h3>Beiträge & Fotos für Website, Google & Social Media</h3>
+        <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle, ohne Strategie-Konzept. Sie entscheiden, wo und wie es eingesetzt wird, wir liefern das Material.</p>
+      </div>
+
+      <div class="sub-divider"><span>Einmalig — Grundausstattung</span></div>
+      <div class="products-grid" style="grid-template-columns:1fr;max-width:800px;margin:0 auto 64px;">
+        <div class="product-card featured">
+          <div class="product-tag">Foto & Grundausstattung</div>
+          <h3>Digitale Präsenz aufbauen</h3>
+          <div class="product-price"><span class="amount">390 €</span><span class="period">einmalig</span></div>
+          <p>Professionelle Fotos von Ihrem Unternehmen, Team und Räumlichkeiten, nutzbar für Ihre Website, Ihr Google-Unternehmensprofil und alle Social-Media-Kanäle. Nicht nur für Instagram & Facebook gedacht, sondern die Bildgrundlage für Ihren gesamten Online-Auftritt.</p>
+          <ul class="product-features">
+            <li>Vor-Ort-Fototermin</li>
+            <li>Bildbearbeitung & Zuschnitt für Website, Google-Profil und Social Media</li>
+            <li>Bereitstellung in allen gängigen Formaten</li>
+            <li>Einmalige Investition, keine laufenden Kosten</li>
+          </ul>
+          <div class="product-num">01</div>
+        </div>
+      </div>
+
+      <div class="sub-divider"><span>Laufend — regelmäßige Beiträge</span></div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-tag">Content Basis</div>
+          <h3>8 Beiträge / Monat</h3>
+          <div class="product-price"><span class="amount">249 €</span><span class="period">/ Monat</span></div>
+          <p>Fertig gestaltete Grafiken und Texte für Facebook & Instagram zum direkten Posten, zugeschnitten auf Ihre Marke.</p>
+          <ul class="product-features">
+            <li>8 fertige Beiträge inkl. Text</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
+            <li>Lieferung als fertige Dateien</li>
+            <li>Kein Community-Management</li>
+            <li>Keine Strategie- oder Konzeptarbeit</li>
+          </ul>
+          <div class="product-num">02</div>
+        </div>
+        <div class="product-card featured">
+          <div class="product-tag">Content Plus</div>
+          <h3>16 Beiträge / Monat</h3>
+          <div class="product-price"><span class="amount">490 €</span><span class="period">/ Monat</span></div>
+          <p>Alles aus Content Basis, plus mehr Umfang und zusätzliche Formate für Story und Anzeigen.</p>
+          <ul class="product-features">
+            <li>16 fertige Beiträge inkl. Text</li>
+            <li>Gestaltet in Ihren Farben und Ihrem Design</li>
+            <li>Lieferung als fertige Dateien</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Zusätzlich in Content Plus</span>
+          </div>
+          <ul class="product-features">
+            <li>Story-Grafiken für Instagram/Facebook</li>
+            <li>Anzeigenformate für Paid Ads</li>
+            <li>Priorisierte Bearbeitung</li>
+          </ul>
+          <div class="product-num">03</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="how fade-up">
+    <div class="how-header">
+      <span class="section-label">Der Ablauf</span>
+      <h2>In 3 Schritten<br>digital aufgestellt.</h2>
+      <p class="section-desc" style="margin:0 auto">Egal ob Chatbot, Website oder Content: Der Ablauf bleibt einfach und ohne technisches Know-how Ihrerseits.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>Bedarf klären</h4>
+        <p>Sie teilen uns mit, was Sie brauchen: Chatbot, Website, Content oder das Bundle. Wir stimmen den Umfang gemeinsam ab.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>Umsetzung</h4>
+        <p>Wir konfigurieren Ihren Chatbot, bauen Ihre Website oder produzieren Ihr Content-Material, abgestimmt auf Ihre Unternehmensidentität.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>Live & laufend betreut</h4>
+        <p>Ihre Lösung geht live. Ihr Chatbot und Ihre Beiträge werden laufend aktualisiert, neue Anfragen erscheinen in Echtzeit in Ihrer Tabelle.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section id="benefits">
+  <div class="benefits fade-up">
+    <div class="benefits-header">
+      <span class="section-label">Ihre Vorteile</span>
+      <h2>Mehr Zeit. Mehr Sichtbarkeit.<br>Mehr Vertrauen.</h2>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">⏱</div>
+        <h4>Zeitersparnis täglich</h4>
+        <p>Wiederkehrende Fragen beantwortet der Chatbot automatisch, Content-Material liefern wir fertig. Ihr Team kann sich auf das Kerngeschäft konzentrieren.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🎯</div>
+        <h4>Qualifizierte Leads</h4>
+        <p>Der Chatbot qualifiziert Interessenten durch gezielte Fragen, bevor er deren Daten weitergibt. Sie sprechen nur mit echten Kaufinteressenten.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🌙</div>
+        <h4>24/7 Erreichbarkeit</h4>
+        <p>Kunden erhalten auch nachts, am Wochenende und an Feiertagen sofort alle Informationen, die sie brauchen.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🔄</div>
+        <h4>Immer aktuell</h4>
+        <p>Wöchentliche Chatbot-Updates und laufender Content sorgen dafür, dass Ihre digitale Präsenz nie veraltet wirkt.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🤝</div>
+        <h4>Professioneller Auftritt</h4>
+        <p>Website, Bildmaterial und Content greifen ineinander. Kunden erleben ein stimmiges Bild Ihres Unternehmens, statt loser Einzelteile.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">📊</div>
+        <h4>Alles aus einer Hand</h4>
+        <p>Ein Ansprechpartner für Chatbot, Website und Content, statt drei Anbieter zu koordinieren, deren Ergebnisse nicht zusammenpassen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DATENSCHUTZ -->
+<section>
+  <div class="privacy fade-up">
+    <span class="section-label">Datenschutz</span>
+    <h2>DSGVO-konform.<br>Von Anfang an.</h2>
+    <p class="section-desc" style="margin:0 auto">Datenschutz ist kein Nachgedanke, er ist Teil jeder Lösung. Alle Daten werden sicher verarbeitet, gespeichert und auf Wunsch gelöscht. Vollständig konform mit der europäischen Datenschutzgrundverordnung.</p>
+    <div class="privacy-badges">
+      <div class="privacy-badge"><span class="icon">🇪🇺</span> DSGVO-konform</div>
+      <div class="privacy-badge"><span class="icon">🔐</span> Verschlüsselte Übertragung</div>
+      <div class="privacy-badge"><span class="icon">🗑</span> Datenlöschung auf Anfrage</div>
+      <div class="privacy-badge"><span class="icon">📋</span> Auftragsverarbeitungsvertrag</div>
+      <div class="privacy-badge"><span class="icon">🇩🇪</span> Server in Deutschland</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq fade-up">
+    <div class="faq-header">
+      <span class="section-label">Häufige Fragen</span>
+      <h2>Alles, was Sie<br>wissen möchten.</h2>
+    </div>
+
+    <div class="faq-category"><span class="icon">📋</span> Allgemeines</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie läuft die Zusammenarbeit ab?</div>
+      <div class="faq-a">Wir klären zunächst kurz, was Sie brauchen: digitaler Assistent, Website, Content oder das Bundle. Danach übernehmen wir die Umsetzung und begleiten Sie bei jedem Schritt, bis alles läuft.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie lange dauert die Umsetzung?</div>
+      <div class="faq-a">Der digitale Assistent ist meist nach 3–5 Werktagen einsatzbereit, eine Landingpage nach 1–2 Wochen, eine Unternehmenswebsite nach 3–4 Wochen. Das Bundle läuft parallel, sodass am Ende alles zusammen live geht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Muss ich technisches Wissen mitbringen?</div>
+      <div class="faq-a">Nein. Wir begleiten Sie bei der Einrichtung und erklären Ihnen jeden Schritt in Klartext. Falls doch mal etwas Technisches nötig ist, übernehmen wir das gemeinsam mit Ihrem Webdienstleister.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kann ich später weitere Leistungen hinzufügen?</div>
+      <div class="faq-a">Ja, jederzeit. Sie können mit einem einzelnen Baustein starten und später Website, Assistent oder Content dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie funktioniert die Bezahlung?</div>
+      <div class="faq-a">Bei der Website-Erstellung zahlen Sie 50 % als Anzahlung, den Rest bei Fertigstellung. Laufende Leistungen (Assistent, Website-Service, Content) werden monatlich per Lastschrift abgerechnet.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Gibt es Mindestlaufzeiten oder Kündigungsfristen?</div>
+      <div class="faq-a">Keine Mindestlaufzeit. Alle laufenden Leistungen sind monatlich kündbar, mit einer Kündigungsfrist von 2 Wochen zum Monatsende. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie nur einmal.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🌐</span> Website</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie lange dauert die Erstellung?</div>
+      <div class="faq-a">Eine Landingpage ist in der Regel nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–4 Wochen, abhängig davon, wie schnell uns Inhalte wie Texte, Bilder oder Logo vorliegen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ist die Website für Smartphones optimiert?</div>
+      <div class="faq-a">Ja, jede Website funktioniert automatisch auf Handy, Tablet und Computer, ohne Aufpreis.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Übernehmt ihr Hosting und Wartung?</div>
+      <div class="faq-a">Ja, optional. Für 25 €/Monat kümmern wir uns um Hosting, Domain, Sicherheitsupdates und kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat). Sie können aber auch selbst hosten: Sie erhalten den vollständigen Quellcode Ihrer Website und können ihn bei jedem beliebigen Anbieter einrichten lassen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Gehört die Website nach Fertigstellung mir?</div>
+      <div class="faq-a">Ja. Sie erhalten den kompletten Quellcode Ihrer Website und sind an keine Agentur gebunden. Das gilt auch, wenn Sie den Website-Service später kündigen: Die Website gehört weiterhin Ihnen, das ist vertraglich festgehalten.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🤖</span> Digitaler Assistent</div>
+    <div class="faq-item">
+      <div class="faq-q">Wie funktioniert der digitale Assistent?</div>
+      <div class="faq-a">Ihr Assistent ist ein Chatfenster auf Ihrer Website, das Fragen zu Ihrem Unternehmen rund um die Uhr beantwortet, ohne dass jemand aus Ihrem Team dafür online sein muss.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Woher kennt der Chat meine Leistungen?</div>
+      <div class="faq-a">Sie teilen uns Ihre Unternehmensinformationen mit: Öffnungszeiten, Leistungen, Referenzen. Ändert sich etwas, sagen Sie uns kurz Bescheid, wir aktualisieren den Assistenten für Sie.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was passiert mit den Daten meiner Kunden?</div>
+      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet. Details dazu finden Sie weiter unten im Abschnitt Datenschutz.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Wie erhalte ich neue Kundenanfragen?</div>
+      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kann ich jederzeit von Modell 1 auf Modell 2 wechseln?</div>
+      <div class="faq-a">Ja, ein Upgrade ist jederzeit möglich und unkompliziert. Die bestehende Konfiguration bleibt dabei vollständig erhalten.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">📸</span> Content & Fotos</div>
+    <div class="faq-item">
+      <div class="faq-q">Was ist in einem Beitrag enthalten?</div>
+      <div class="faq-a">Eine fertig gestaltete Grafik inklusive passendem Text, abgestimmt auf Ihre Farben und Ihr Design, zum direkten Posten auf Facebook & Instagram.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Muss ich die Beiträge selbst posten?</div>
+      <div class="faq-a">Ja, das Posten übernehmen Sie selbst, wir liefern Ihnen die fertigen Dateien. Wenn Sie das lieber abgeben möchten, sprechen Sie uns gerne an.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Macht ihr auch Fotos vor Ort?</div>
+      <div class="faq-a">Ja, im Umkreis von rund 50 km. Umfang und Termin sprechen wir individuell mit Ihnen ab. Wir tasten uns gemeinsam an den passenden Stil heran. Dieses Abstimmen ist für Sie kostenlos, bezahlt wird erst das fertige Ergebnis, das Ihnen wirklich gefällt.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ist eine Marketingstrategie enthalten?</div>
+      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material. Themenplanung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung, das hält den Preis niedrig.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🔒</span> Datenschutz</div>
+    <div class="faq-item">
+      <div class="faq-q">Ist alles DSGVO-konform, und wo werden die Daten gespeichert?</div>
+      <div class="faq-a">Ja. Kunden erteilen im Chat ausdrücklich ihre Einwilligung zur Kontaktaufnahme. Wir arbeiten mit etablierten Dienstleistern, teils mit Sitz in der EU, teils in den USA, mit allen schließen wir DSGVO-konforme Verträge (Auftragsverarbeitung bzw. Standardvertragsklauseln) ab.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Benötige ich einen AV-Vertrag, und wie werden Daten gelöscht?</div>
+      <div class="faq-a">Ja, wir schließen mit Ihnen einen Auftragsverarbeitungsvertrag (AVV) ab, die Vorlage dafür haben wir bereits fertig. Daten werden automatisch nur so lange gespeichert, wie gesetzlich notwendig, und anschließend gelöscht.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Welche Verträge schließen wir konkret mit Ihnen ab?</div>
+      <div class="faq-a">Drei Dokumente: unsere Allgemeinen Geschäftsbedingungen (AGB), die den Rahmen der Zusammenarbeit regeln; einen Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO, passend zu Ihrem gewählten Modell; und einen fertigen Datenschutzbaustein, den Sie einfach in Ihre eigene Datenschutzerklärung einfügen, damit auch Ihre Website-Besucher korrekt informiert sind.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM LYNX -->
+<section id="why">
+  <div class="why fade-up">
+    <div class="why-header">
+      <span class="section-label">Warum Lynx</span>
+      <h2>Wir kümmern uns<br>um die Technik.</h2>
+      <p class="section-desc">Als Handwerksbetrieb müssen Sie nichts programmieren und kein Fachchinesisch verstehen. Sie bekommen eine fertige Lösung, in wenigen Tagen einsatzbereit.</p>
+    </div>
+    <div class="why-card">
+      <ul class="product-features why-grid">
+        <li>Persönlicher Ansprechpartner</li>
+        <li>Keine Agentur mit wechselnden Mitarbeitern</li>
+        <li>Schnelle Einrichtung</li>
+        <li>Transparente Preise</li>
+        <li>Monatlich kündbar</li>
+        <li>Chatbot, Website & Content aus einer Hand</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact fade-up">
+    <span class="section-label">Kontakt</span>
+    <h2>Bereit für Ihre<br>digitale Präsenz?</h2>
+    <p class="section-desc" style="margin:0 auto">Fordern Sie jetzt eine kostenlose Beratung an, ob Chatbot, Website, Content oder alles zusammen. Wir zeigen Ihnen unverbindlich, wie Ihre Lösung aussehen würde.</p>
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Vorname *</label>
+          <input type="text" id="f-vorname" placeholder="Max" required>
+        </div>
+        <div class="form-group">
+          <label>Nachname *</label>
+          <input type="text" id="f-nachname" placeholder="Mustermann" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>E-Mail-Adresse *</label>
+          <input type="email" id="f-email" placeholder="max@beispiel.de" required>
+        </div>
+        <div class="form-group">
+          <label>Telefon (optional)</label>
+          <input type="tel" id="f-telefon" placeholder="+49 ...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Unternehmen *</label>
+        <input type="text" id="f-unternehmen" placeholder="Ihr Unternehmen GmbH" required>
+      </div>
+      <div class="form-group">
+        <label>Ich interessiere mich für *</label>
+        <select id="f-thema">
+          <option>Modell 1 – Digitaler Assistent für Ihre Website</option>
+          <option>Modell 2 – Assistent mit automatischer Kundengewinnung</option>
+          <option>Website – Landingpage</option>
+          <option>Website – Unternehmenswebsite</option>
+          <option>Content – Foto & Grundausstattung (einmalig)</option>
+          <option>Content – laufende Beiträge</option>
+          <option>Bundle – Digitale Rundum-Lösung</option>
+          <option>Ich bin noch unentschieden</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Ihre Nachricht (optional)</label>
+        <textarea id="f-nachricht" placeholder="Erzählen Sie uns kurz von Ihrem Unternehmen und Ihren Zielen..."></textarea>
+      </div>
+      <!-- Datenschutz-Einwilligung -->
+      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;padding:16px;background:rgba(13,27,62,0.4);border:1px solid var(--border);border-radius:8px;">
+        <input type="checkbox" id="f-einwilligung" style="margin-top:3px;flex-shrink:0;accent-color:var(--purple-light);width:16px;height:16px;cursor:pointer;">
+        <label for="f-einwilligung" style="font-size:0.8rem;color:var(--grey);line-height:1.6;cursor:pointer;text-transform:none;letter-spacing:0;">
+          Ich stimme zu, dass Lynx Automation Solutions meine angegebenen Daten zur Bearbeitung meiner Anfrage und zur Kontaktaufnahme speichert und verarbeitet. Mir ist bekannt, dass ich diese Einwilligung jederzeit widerrufen kann. Weitere Informationen in der <a href="datenschutz.html" target="_blank" style="color:var(--accent);">Datenschutzerklärung</a>. *
+        </label>
+      </div>
+      <div id="f-error" style="display:none;color:#f08080;font-size:0.83rem;margin-bottom:16px;padding:10px 14px;background:rgba(240,128,128,0.08);border:1px solid rgba(240,128,128,0.2);border-radius:6px;"></div>
+      <button id="f-submit" class="form-submit" onclick="submitLead()">
+        Kostenlos beraten lassen →
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#" class="logo">Lynx <span>Automation</span></a>
+  <div class="footer-copy">Digitale Lösungen für Handwerksbetriebe in Paderborn, Höxter, Delbrück, Willebadessen und ganz Ostwestfalen-Lippe (OWL).</div>
+  <div class="footer-copy">© 2026 Lynx Automation Solutions. Alle Rechte vorbehalten.</div>
+  <div class="footer-links">
+    <a href="#">Impressum</a>
+    <a href="datenschutz.html">Datenschutz</a>
+    <a href="agb.html">AGB</a>
+  </div>
+</footer>
+
+<script>
+  // SCROLL ANIMATIONS
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // LEAD FORM SUBMIT
+  async function submitLead() {
+    const btn = document.getElementById('f-submit');
+    const errBox = document.getElementById('f-error');
+
+    const vorname = document.getElementById('f-vorname').value.trim();
+    const nachname = document.getElementById('f-nachname').value.trim();
+    const email = document.getElementById('f-email').value.trim();
+    const unternehmen = document.getElementById('f-unternehmen').value.trim();
+    const einwilligung = document.getElementById('f-einwilligung').checked;
+
+    errBox.style.display = 'none';
+
+    if (!vorname || !nachname || !email || !unternehmen) {
+      errBox.textContent = 'Bitte füllen Sie alle Pflichtfelder (*) aus.';
+      errBox.style.display = 'block';
+      return;
+    }
+    if (!einwilligung) {
+      errBox.textContent = 'Bitte stimmen Sie der Datenschutzerklärung zu.';
+      errBox.style.display = 'block';
+      return;
+    }
+
+    btn.textContent = 'Wird gesendet...';
+    btn.disabled = true;
+
+    try {
+      const now = new Date().toISOString();
+      const res = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name:        `${vorname} ${nachname}`.trim(),
+          phone:       document.getElementById('f-telefon').value.trim() || '',
+          email,
+          topic:       document.getElementById('f-thema').value || 'Website-Formular',
+          note:        `Unternehmen: ${unternehmen}. ${document.getElementById('f-nachricht').value.trim()}`.trim(),
+          date:        now,
+          consentDate: now
+        })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        btn.textContent = 'Anfrage gesendet ✓';
+        btn.style.background = 'linear-gradient(135deg,#2e7d52,#43a06b)';
+      } else {
+        throw new Error(data.error || 'Unbekannter Fehler');
+      }
+    } catch (err) {
+      btn.textContent = 'Kostenlos beraten lassen →';
+      btn.disabled = false;
+      errBox.textContent = 'Fehler beim Senden. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt.';
+      errBox.style.display = 'block';
+    }
+  }
+
+  // FAQ ACCORDION
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+
+
+<!-- ── LYNX CHATBOT ──────────────────────────────────────── -->
+<style>
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple:       #5b3fa0;
+    --purple-dark:  #42297a;
+    --purple-light: rgba(91,63,160,0.12);
+    --navy:         #0d1b3e;
+    --navy-mid:     #162454;
+    --border:       rgba(179,157,219,0.2);
+    --text:         #f5f3ff;
+    --text-muted:   #a0a0b8;
+    --bot-bg:       rgba(22,36,84,0.75);
+    --user-bg:      linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    --surface:      rgba(13,27,62,0.85);
+    --surface2:     rgba(22,36,84,0.7);
+    --shadow:       0 24px 80px rgba(0,0,0,0.6);
+    --radius:       18px;
+    --font-body:    'DM Sans', sans-serif;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --accent:       #7c5cc4;
+    --accent-dark:  #5b3fa0;
+  }
+
+  html, body { height: 100%; font-family: var(--font-body); }
+
+  /* ── LAUNCHER ─────────────────────────────────────────── */
+  #launcher {
+    position: fixed; bottom: 28px; right: 28px;
+    width: 60px; height: 60px; border-radius: 50%;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    border: none; cursor: pointer;
+    box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 0 rgba(124,92,196,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform .25s cubic-bezier(.34,1.56,.64,1), box-shadow .2s;
+    z-index: 1000;
+    animation: lynxPulse 3s ease-in-out infinite;
+  }
+  @keyframes lynxPulse {
+    0%,100% { box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 0 rgba(124,92,196,0.4); }
+    50%      { box-shadow: 0 4px 24px rgba(91,63,160,0.55), 0 0 0 10px rgba(124,92,196,0); }
+  }
+  #launcher:hover { transform: scale(1.08); }
+  #launcher svg { width: 28px; height: 28px; }
+  #launcher .close-icon { display: none; }
+  #launcher.open .chat-icon  { display: none; }
+  #launcher.open .close-icon { display: block; }
+
+  /* ── WIDGET ───────────────────────────────────────────── */
+  #widget {
+    position: fixed; bottom: 100px; right: 28px;
+    width: 420px; max-width: calc(100vw - 40px);
+    max-height: 660px;
+    background: var(--navy);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    opacity: 0; transform: translateY(18px) scale(.97);
+    pointer-events: none;
+    transition: opacity .3s ease, transform .3s cubic-bezier(.34,1.3,.64,1);
+    z-index: 999;
+  }
+  #widget.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; }
+
+  /* ── HEADER ───────────────────────────────────────────── */
+  .wg-header {
+    padding: 14px 16px;
+    background: linear-gradient(135deg, rgba(91,63,160,0.35), rgba(22,36,84,0.9));
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 11px; flex-shrink: 0;
+  }
+  .wg-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; box-shadow: 0 2px 12px rgba(91,63,160,0.5);
+  }
+  .wg-avatar svg { width: 20px; height: 20px; }
+  .wg-header-text { flex: 1; min-width: 0; }
+  .wg-name { font-size: 13.5px; font-weight: 500; color: #f5f3ff; line-height: 1.2; }
+  .wg-status {
+    font-size: 11px; color: rgba(179,157,219,0.9);
+    display: flex; align-items: center; gap: 5px; margin-top: 2px;
+  }
+  .wg-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #4cda64;
+    box-shadow: 0 0 5px #4cda64; flex-shrink: 0;
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { box-shadow: 0 0 0 2px rgba(76,218,100,.3); }
+    50%      { box-shadow: 0 0 0 5px rgba(76,218,100,.15); }
+  }
+
+  /* ── MESSAGES ─────────────────────────────────────────── */
+  #messages {
+    flex: 1; overflow-y: auto; padding: 14px 13px;
+    display: flex; flex-direction: column; gap: 8px;
+    scroll-behavior: smooth;
+  }
+  #messages::-webkit-scrollbar { width: 4px; }
+  #messages::-webkit-scrollbar-track { background: transparent; }
+  #messages::-webkit-scrollbar-thumb { background: rgba(124,92,196,0.3); border-radius: 4px; }
+
+  .msg {
+    max-width: 88%; padding: 10px 13px;
+    border-radius: 14px; font-size: 13.5px;
+    line-height: 1.55; word-break: break-word;
+    animation: fadeUp .25s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .msg.bot {
+    background: var(--bot-bg); color: #e8e4ff;
+    border: 1px solid rgba(179,157,219,0.12);
+    border-bottom-left-radius: 4px; align-self: flex-start;
+  }
+  .msg.user {
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4); color: #fff;
+    border-bottom-right-radius: 4px; align-self: flex-end;
+  }
+  .msg.privacy {
+    font-size: 11px; color: #888880;
+    background: transparent; padding: 2px 6px;
+    max-width: 95%; line-height: 1.5; border: none;
+  }
+  .msg.typing {
+    background: var(--bot-bg); border: 1px solid rgba(179,157,219,0.12);
+    align-self: flex-start; border-bottom-left-radius: 4px;
+    display: flex; gap: 5px; align-items: center; padding: 12px 15px;
+  }
+  .msg.typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #7c5cc4; animation: blink 1.2s infinite; display: inline-block;
+  }
+  .msg.typing span:nth-child(2) { animation-delay: .2s; }
+  .msg.typing span:nth-child(3) { animation-delay: .4s; }
+  @keyframes blink {
+    0%,80%,100% { opacity: .25; }
+    40%          { opacity: 1; }
+  }
+
+  /* ── LEAD FORM ────────────────────────────────────────── */
+  .lead-form-wrapper {
+    margin: 4px 0; align-self: flex-start;
+    max-width: 95%; width: 100%;
+    animation: fadeUp .3s ease both;
+  }
+  .lead-form {
+    background: rgba(22,36,84,0.85);
+    border: 1px solid rgba(124,92,196,0.25);
+    border-radius: 14px; padding: 14px;
+    display: flex; flex-direction: column; gap: 9px;
+  }
+  .lead-form h3 {
+    font-size: 13px; font-weight: 500; color: #b39ddb; margin-bottom: 2px;
+  }
+  .lead-form input, .lead-form textarea {
+    width: 100%; padding: 8px 10px;
+    border: 1px solid rgba(124,92,196,0.22);
+    border-radius: 8px; font-family: var(--font-body);
+    font-size: 12.5px; background: rgba(13,27,62,0.8);
+    color: #f5f3ff; outline: none;
+    transition: border-color .2s; resize: none;
+  }
+  .lead-form input::placeholder, .lead-form textarea::placeholder { color: rgba(160,160,184,0.45); }
+  .lead-form input:focus, .lead-form textarea:focus { border-color: rgba(124,92,196,0.6); }
+  .lead-form textarea { min-height: 62px; line-height: 1.4; }
+  .consent-row {
+    display: flex; align-items: flex-start; gap: 8px;
+    background: rgba(91,63,160,0.15);
+    border-radius: 8px; padding: 9px 10px;
+  }
+  .consent-row input[type="checkbox"] {
+    width: 14px; height: 14px; flex-shrink: 0; margin-top: 2px;
+    accent-color: #7c5cc4; cursor: pointer; padding: 0; border: none;
+  }
+  .consent-row label {
+    font-size: 10.5px; color: #888880; line-height: 1.5; cursor: pointer;
+  }
+  .consent-row a { color: #7c5cc4; text-decoration: underline; }
+  .lead-submit {
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    color: #fff; border: none; border-radius: 9px; padding: 9px;
+    font-family: var(--font-body); font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: opacity .2s; width: 100%;
+  }
+  .lead-submit:disabled { opacity: .45; cursor: not-allowed; }
+  .lead-submit:not(:disabled):hover { opacity: .88; }
+
+  /* ── CHIPS ────────────────────────────────────────────── */
+  #chips {
+    padding: 0 13px 10px;
+    display: flex; flex-wrap: wrap; gap: 6px; flex-shrink: 0;
+  }
+  .chip {
+    background: rgba(91,63,160,0.15);
+    color: #b39ddb;
+    border: 1px solid rgba(124,92,196,0.3);
+    border-radius: 20px; padding: 5px 12px;
+    font-size: 12px; font-weight: 400;
+    cursor: pointer; transition: background .18s, transform .15s;
+    font-family: var(--font-body);
+  }
+  .chip:hover {
+    background: rgba(91,63,160,0.4); color: #f5f3ff;
+    border-color: rgba(124,92,196,0.7); transform: translateY(-1px);
+  }
+
+  /* ── INPUT BAR ────────────────────────────────────────── */
+  .wg-input-bar {
+    padding: 10px 12px 12px; display: flex; gap: 8px;
+    align-items: flex-end; border-top: 1px solid var(--border);
+    background: rgba(13,27,62,0.7); flex-shrink: 0;
+  }
+  #userInput {
+    flex: 1; border: 1px solid rgba(124,92,196,0.25);
+    border-radius: 12px; padding: 9px 12px;
+    font-family: var(--font-body); font-size: 13px;
+    color: #f5f3ff; background: rgba(22,36,84,0.7);
+    resize: none; outline: none;
+    height: 38px !important; max-height: 38px !important; overflow-y: hidden !important; min-height: unset !important;
+    line-height: 1.4; transition: border-color .2s;
+  }
+  #userInput:focus { border-color: rgba(124,92,196,0.6); }
+  #userInput::placeholder { color: rgba(160,160,184,0.5); }
+  #sendBtn {
+    width: 38px; height: 38px; border-radius: 10px;
+    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
+    border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; transition: opacity .2s, transform .15s;
+  }
+  #sendBtn:hover { opacity: .88; transform: scale(1.05); }
+  #sendBtn svg { width: 17px; height: 17px; fill: #fff; }
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  .wg-footer {
+    text-align: center; padding: 5px 0 8px;
+    font-size: 10px; color: rgba(160,160,184,0.4); flex-shrink: 0;
+  }
+
+  @media (max-width: 440px) {
+    #widget { right: 0; bottom: 0; width: 100vw; max-height: 100dvh; border-radius: 0; }
+    #launcher { bottom: 16px; right: 16px; }
+  }
+
+</style>
+
+<!-- LAUNCHER -->
+<button id="launcher" aria-label="Chat öffnen">
+  <!-- Bot/AI Icon -->
+  <svg class="chat-icon" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="10" r="5" fill="white" opacity="0.9"/>
+    <rect x="9" y="16" width="10" height="7" rx="2" fill="white" opacity="0.9"/>
+    <circle cx="6" cy="19" r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="22" cy="19" r="2.5" fill="white" opacity="0.7"/>
+    <circle cx="11.5" cy="9" r="1" fill="#5b3fa0"/>
+    <circle cx="16.5" cy="9" r="1" fill="#5b3fa0"/>
+    <rect x="12.5" y="11.5" width="3" height="1" rx="0.5" fill="#5b3fa0"/>
+    <line x1="14" y1="5" x2="14" y2="3" stroke="white" stroke-width="1.2" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="14" cy="2.5" r="1" fill="white" opacity="0.5"/>
+  </svg>
+  <!-- Close Icon -->
+  <svg class="close-icon" viewBox="0 0 24 24" fill="white">
+    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+  </svg>
+</button>
+
+<!-- WIDGET -->
+<div id="widget" role="dialog" aria-label="Lynx Digitaler Assistent">
+  <div class="wg-header">
+    <div class="wg-avatar">
+      <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="7" r="3.5" fill="white" opacity="0.9"/>
+        <rect x="6.5" y="11" width="7" height="5" rx="1.5" fill="white" opacity="0.9"/>
+        <circle cx="4" cy="13.5" r="1.8" fill="white" opacity="0.7"/>
+        <circle cx="16" cy="13.5" r="1.8" fill="white" opacity="0.7"/>
+        <circle cx="8.5" cy="6.5" r="0.7" fill="#5b3fa0"/>
+        <circle cx="11.5" cy="6.5" r="0.7" fill="#5b3fa0"/>
+      </svg>
+    </div>
+    <div class="wg-header-text">
+      <div class="wg-name">Lynx AI-Assistent</div>
+      <div class="wg-status"><div class="wg-dot"></div>Online &amp; bereit</div>
+    </div>
+  </div>
+
+  <div id="messages" aria-live="polite">
+    <div class="msg bot">Hallo! 👋 Ich bin der digitale Assistent von <strong>Lynx Automation Solutions</strong>. Wie kann ich dir helfen?</div>
+    <div class="msg privacy">Ich bin ein KI-gestützter Chatbot und beantworte Fragen zu diesem Unternehmen. Deine Eingaben können technisch verarbeitet werden. Bitte gib keine sensiblen personenbezogenen Daten ein. Weitere Informationen findest du in der <a href="datenschutz.html" target="_blank" style="color:#7c5cc4">Datenschutzerklärung</a>.</div>
+  </div>
+
+  <div id="chips">
+    <button class="chip">Was ist Modell 1?</button>
+    <button class="chip">Was ist Modell 2?</button>
+    <button class="chip">Wie läuft die Einrichtung ab?</button>
+    <button class="chip">Demo anfragen</button>
+  </div>
+
+  <div class="wg-input-bar">
+    <textarea id="userInput" rows="1" placeholder="Schreib eine Nachricht …" aria-label="Nachricht eingeben" style="height:38px!important;max-height:38px!important;min-height:unset!important"></textarea>
+    <button id="sendBtn" aria-label="Senden">
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+
+  <div class="wg-footer">Lynx Automation Solutions · Powered by AI</div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────────
+const SYSTEM_PROMPT = `Du bist der digitale Assistent von Lynx Automation Solutions. Lynx hilft kleinen und mittleren Unternehmen zu einer vollständigen digitalen Präsenz – mit drei Bausteinen: einem digitalen Assistenten (Chatbot), Websites und laufendem Content/Fotos. Alle drei sind einzeln buchbar oder im Bundle kombinierbar.
+
+Deine Aufgabe: Besucher informieren, Vertrauen aufbauen und Beratungsanfragen generieren.
+
+=== BAUSTEIN 1 – DIGITALER ASSISTENT ===
+Modell 1, 79 €/Monat:
+- Beantwortet automatisch Fragen zu Öffnungszeiten, Leistungen, Standort, Referenzen
+- Läuft als Chatfenster direkt auf der Website des Kunden
+- Wöchentlich aktualisiertes Wissen über das Unternehmen, DSGVO-konform
+- Setup dauert in der Regel 3–5 Werktage
+- Der Kunde teilt Lynx seine Unternehmensinfos mit (Öffnungszeiten, Leistungen, Referenzen); ändert sich etwas, meldet er sich kurz, Lynx aktualisiert den Assistenten
+
+Modell 2, 149 €/Monat:
+- Alles aus Modell 1
+- Erfasst zusätzlich Kontaktdaten von Interessenten direkt im Chat
+- Neue Anfragen landen in Echtzeit in der Kundentabelle (z. B. Google Sheets)
+- E-Mail-Benachrichtigung bei neuer Anfrage
+
+Ein Wechsel von Modell 1 auf Modell 2 ist jederzeit unkompliziert möglich, die bestehende Konfiguration bleibt dabei erhalten.
+
+=== BAUSTEIN 2 – WEBSITE ===
+Web Start (Landingpage), 890 € einmalig: 1–3 Unterseiten, individuelles Design, Kontaktformular, Grundlegende SEO. Fertig in 1–2 Wochen.
+Web Business (Unternehmenswebsite), 2.400 € einmalig: 5–8 Unterseiten, Referenzen-/Portfoliobereich, digitaler Assistent direkt einbindbar. Fertig in 3–4 Wochen.
+Website-Service (optional), 25 €/Monat: Hosting, Domain, Sicherheitsupdates, kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat).
+Jede Website funktioniert automatisch auf Handy, Tablet und Computer, ohne Aufpreis.
+Wichtig: Der Kunde erhält immer den vollständigen Quellcode und ist nicht an Lynx gebunden – er kann auch selbst hosten oder wechseln.
+
+=== BAUSTEIN 3 – CONTENT & FOTOS ===
+Foto & Grundausstattung, einmalig 390 €: professionelle Fotos vor Ort (Umkreis ca. 50 km) für Website, Google-Unternehmensprofil und Social Media. Die Abstimmung zum Stil ist kostenlos – bezahlt wird erst das fertige Ergebnis, das dem Kunden gefällt.
+Content Basis, 249 €/Monat: 8 fertige Beiträge inkl. Text.
+Content Plus, 490 €/Monat: 16 Beiträge, zusätzlich Story-Grafiken & Anzeigenformate.
+Das Posten der Beiträge übernimmt der Kunde selbst – Lynx liefert die fertigen Dateien.
+Wichtig: Keine Strategie- oder Konzeptarbeit enthalten – nur fertiges, einsatzbereites Material.
+
+=== BUNDLE – DIGITALE RUNDUM-LÖSUNG ===
+Digitaler Assistent Modell 2 + Web Business + Website-Service + Foto & Grundausstattung + Content Basis, für 359 €/Monat (statt 423 € einzeln, spart 64 €/Monat) + 2.790 € einmalig für Website & Fotos. Die meistgewählte Option, weil alles aufeinander abgestimmt ist und der Kunde sich um nichts einzeln kümmern muss.
+Kunden können außerdem jederzeit mit einem einzelnen Baustein starten und später weitere dazu buchen oder ins Bundle wechseln – bereits gebuchte Leistungen werden dabei fair angerechnet.
+
+=== VORTEILE (ALLGEMEIN) ===
+- Beantwortet Anfragen rund um die Uhr – auch außerhalb der Öffnungszeiten
+- Website, Assistent und Content greifen ineinander statt lose nebeneinander zu stehen
+- Kein technisches Vorwissen nötig – Lynx übernimmt die Einrichtung
+- Ein Ansprechpartner für alles, statt mehrere Anbieter koordinieren zu müssen
+
+=== ZAHLUNG & VERTRAG ===
+- Website: 50 % Anzahlung, Rest bei Fertigstellung
+- Laufende Leistungen (Assistent, Website-Service, Content): monatlich per Lastschrift
+- Keine Mindestlaufzeit, Kündigungsfrist 2 Wochen zum Monatsende
+
+=== DATENSCHUTZ ===
+- DSGVO-konform, ausdrückliche Einwilligung im Chat
+- Verträge mit dem Kunden: AGB (regelt die Zusammenarbeit), ein AVV gemäß Art. 28 DSGVO (passend zum gewählten Modell), sowie ein fertiger Datenschutzbaustein zur Einbindung in die eigene Datenschutzerklärung des Kunden
+- Lynx arbeitet mit etablierten Dienstleistern, teils in der EU, teils in den USA, mit entsprechenden Verträgen (Auftragsverarbeitung bzw. Standardvertragsklauseln)
+
+=== EINRICHTUNGSPROZESS ===
+1. Kurzes Gespräch – der Kunde beschreibt, was er braucht (Assistent, Website, Content oder Bundle)
+2. Lynx setzt um – z. B. wird beim Assistenten eine individuelle Demo erstellt, bei der Website ein Entwurf
+3. Gemeinsame Abstimmung & Feedback
+4. Fertigstellung & Go-Live, danach laufende Aktualisierung/Betreuung
+
+Wenn jemand fragt "Wie läuft das ab?", antworte in eigenen Worten sinngemäß: Man bespricht kurz, was gebraucht wird, Lynx setzt es um und stimmt sich unterwegs mit dem Kunden ab – erst am Ende entscheidet der Kunde, ob er die Lösung übernimmt.
+
+=== FÜR WEN GEEIGNET ===
+Besonders sinnvoll für Unternehmen, die noch keine moderne Website haben, regelmäßig dieselben Fragen am Telefon beantworten, oder ihre Online-Präsenz aktuell halten möchten, ohne selbst Zeit in Grafiken und Texte zu stecken.
+
+=== HÄUFIGE FRAGEN ===
+Was kostet das genau? → Kommt auf den gewählten Baustein an – 79 €/Monat für den Assistenten, 890 € einmalig für eine Website. Genaue Einschätzung gibt es im kostenlosen Erstgespräch.
+Ist das kompliziert? → Nein, Lynx übernimmt die komplette Einrichtung.
+Gehört mir die Website danach? → Ja, der Kunde erhält den vollständigen Quellcode und ist nicht gebunden.
+Ist das DSGVO-konform? → Ja, vollständig datenschutzkonform aufgebaut, inklusive AVV.
+
+=== KONTAKT ===
+E-Mail: info@lynx-automation.de
+
+=== LEAD-ERFASSUNG ===
+Wenn ein Besucher eine Beratung anfragen, ein Angebot möchte oder Kontakt aufnehmen will, antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag:
+[SHOW_LEAD_FORM]
+
+Das System zeigt automatisch ein Kontaktformular an. Frage NICHT nach Name, Telefon oder E-Mail – das übernimmt das Formular.
+
+=== TONALITÄT ===
+- Professionell, modern, auf Augenhöhe
+- Maximal 3-4 Sätze, locker und gesprächig formuliert
+- Stichpunkte NUR wenn wirklich mehrere gleichwertige Dinge aufgezählt werden müssen
+- Bevorzuge natürlichen Fließtext statt Listen, schreib wie ein Mensch, nicht wie eine Aufzählung
+- Vermeide Gedankenstriche (–) als Satzverbindung; nutze stattdessen Punkte, Kommas oder Doppelpunkte
+- Beginne Antworten abwechslungsreich, nicht immer mit dem gleichen Satzaufbau
+- Deutsch, sieze Kunden immer (Sie/Ihr) – nur wenn der Kunde selbst das "du" verwendet, wechsle zur Du-Form
+- Begeistere für eine unkomplizierte digitale Präsenz, ohne zu übertreiben
+- Kein Markdown wie #, ## oder --- in Antworten
+- Fett (**text**) nur für wirklich wichtige Begriffe, sehr sparsam`;
+
+// ── STATE ───────────────────────────────────────────────────────────────────
+const history  = [];
+let formShown  = false;
+
+// ── DOM REFS ────────────────────────────────────────────────────────────────
+const launcher  = document.getElementById('launcher');
+const widget    = document.getElementById('widget');
+const messages  = document.getElementById('messages');
+const userInput = document.getElementById('userInput');
+const sendBtn   = document.getElementById('sendBtn');
+const chipsEl   = document.getElementById('chips');
+
+// ── OPEN / CLOSE ────────────────────────────────────────────────────────────
+launcher.addEventListener('click', () => {
+  const isOpen = widget.classList.toggle('open');
+  launcher.classList.toggle('open', isOpen);
+  if (isOpen) { userInput.focus(); scrollBottom(); }
+});
+
+// ── AUTO-RESIZE TEXTAREA ────────────────────────────────────────────────────
+userInput.addEventListener('input', () => {
+  // input stays fixed height
+});
+
+// ── SEND ON ENTER ───────────────────────────────────────────────────────────
+userInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+sendBtn.addEventListener('click', sendMessage);
+
+// ── CHIPS ───────────────────────────────────────────────────────────────────
+chipsEl.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    userInput.value = chip.textContent;
+    sendMessage();
+  });
+});
+
+// ── HELPERS ─────────────────────────────────────────────────────────────────
+function scrollBottom() {
+  setTimeout(() => { messages.scrollTop = messages.scrollHeight; }, 50);
+}
+
+function appendMsg(cls, html) {
+  const div = document.createElement('div');
+  div.className = 'msg ' + cls;
+  div.innerHTML = html;
+  messages.appendChild(div);
+  scrollBottom();
+  return div;
+}
+
+function showTyping() {
+  const div = document.createElement('div');
+  div.className = 'msg typing';
+  div.id = 'typing-indicator';
+  div.innerHTML = '<span></span><span></span><span></span>';
+  messages.appendChild(div);
+  scrollBottom();
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function formatReply(text) {
+  return escapeHtml(text)
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+// ── LEAD FORM ────────────────────────────────────────────────────────────────
+function showLeadForm() {
+  if (formShown) return;
+  formShown = true;
+  chipsEl.style.display = 'none';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'lead-form-wrapper';
+  wrap.innerHTML =
+    '<div class="lead-form">' +
+      '<h3>📬 Demo anfragen</h3>' +
+      '<input type="text" id="lf-name"  placeholder="Dein Name *" />' +
+      '<input type="tel"  id="lf-phone" placeholder="Telefonnummer *" />' +
+      '<input type="email" id="lf-email" placeholder="E-Mail-Adresse (optional)" />' +
+      '<textarea id="lf-note" placeholder="Dein Unternehmen / Anliegen (optional)"></textarea>' +
+      '<div class="consent-row">' +
+        '<input type="checkbox" id="lf-consent" />' +
+        '<label for="lf-consent">Ich stimme zu, dass meine Daten (Name, E-Mail, Anliegen) gespeichert und zur Kontaktaufnahme genutzt werden. Die Einwilligung kann jederzeit widerrufen werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>' +
+      '</div>' +
+      '<button class="lead-submit" id="lf-submit" disabled>Anfrage absenden</button>' +
+    '</div>';
+  messages.appendChild(wrap);
+  scrollBottom();
+
+  const consentBox = wrap.querySelector('#lf-consent');
+  const submitBtn  = wrap.querySelector('#lf-submit');
+
+  consentBox.addEventListener('change', () => {
+    submitBtn.disabled = !consentBox.checked;
+  });
+
+  submitBtn.addEventListener('click', async () => {
+    const name  = document.getElementById('lf-name').value.trim();
+    const phone = document.getElementById('lf-phone').value.trim();
+    const email = document.getElementById('lf-email').value.trim();
+    const note  = document.getElementById('lf-note').value.trim();
+
+    if (!name || !phone) {
+      if (!name)  document.getElementById('lf-name').style.borderColor  = 'rgba(255,100,100,0.6)';
+      if (!phone) document.getElementById('lf-phone').style.borderColor = 'rgba(255,100,100,0.6)';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet…';
+
+    const now = new Date().toISOString();
+    const payload = {
+      name,
+      phone,
+      email,
+      topic:       'Chatbot Demo-Anfrage',
+      note:        note || '',
+      date:        now,
+      consentDate: now
+    };
+
+    try {
+      const res  = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        wrap.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns bald bei dir.</div>';
+        appendMsg('bot', 'Deine Anfrage ist eingegangen, wir melden uns schnellstmöglich! Bei dringenden Fragen erreichst du uns auch direkt unter info@lynx-automation.de');
+        chipsEl.style.display = 'flex';
+      } else {
+        throw new Error(data.error || 'Fehler');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Anfrage absenden';
+      appendMsg('bot', 'Beim Senden ist ein Fehler aufgetreten. Bitte schreib uns direkt: info@lynx-automation.de');
+    }
+    scrollBottom();
+  });
+  scrollBottom();
+}
+
+// ── SEND MESSAGE ─────────────────────────────────────────────────────────────
+async function sendMessage() {
+  const text = userInput.value.trim();
+  if (!text) return;
+
+  chipsEl.style.display = 'none';
+  appendMsg('user', escapeHtml(text));
+  userInput.value = '';
+  userInput.style.height = 'auto';
+
+  history.push({ role: 'user', content: text });
+
+  showTyping();
+  sendBtn.disabled = true;
+
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: history, system: SYSTEM_PROMPT })
+    });
+    const data = await res.json();
+    removeTyping();
+
+    let reply = '';
+    if (data.content && data.content[0] && data.content[0].text) {
+      reply = data.content[0].text;
+    } else {
+      reply = 'Entschuldigung, es gab einen technischen Fehler. Bitte versuche es erneut.';
+    }
+
+    const showForm = reply.includes('[SHOW_LEAD_FORM]');
+
+    const cleanReply = reply
+      .replace(/\[SHOW_LEAD_FORM\]/g, '')
+      .trim();
+
+    history.push({ role: 'assistant', content: reply });
+
+    if (cleanReply) appendMsg('bot', formatReply(cleanReply));
+    if (showForm)   showLeadForm();
+
+  } catch (err) {
+    removeTyping();
+    appendMsg('bot', 'Verbindungsfehler. Bitte prüfe deine Internetverbindung und versuche es erneut.');
+  }
+
+  sendBtn.disabled = false;
+  scrollBottom();
+}
+</script>
+<!-- ── END LYNX CHATBOT ───────────────────────────────────── -->
+</body>
+</html>
