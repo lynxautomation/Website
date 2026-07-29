@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,10 +201,49 @@
 <main>
   <span class="page-label">Website</span>
   <h1>7 Fehler auf Handwerker-Websites</h1>
-  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 5 Min. Lesezeit</p>
   <p class="lead">Manche Fehler sind klein, kosten aber trotzdem jeden Monat Anfragen. Hier die häufigsten sieben.</p>
 
-    <section>
+    <div class="diagram">
+    <svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="15" y="10" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="35" cy="32" r="12" fill="#5b3fa0"/><text x="35" y="37" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">1</text>
+      <text x="35" y="60" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Handy-Nutzung</text>
+      <text x="35" y="76" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">nicht bedacht</text>
+
+      <rect x="180" y="10" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="200" cy="32" r="12" fill="#5b3fa0"/><text x="200" y="37" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">2</text>
+      <text x="200" y="60" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Vage Leistungen</text>
+      <text x="200" y="76" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">beschrieben</text>
+
+      <rect x="345" y="10" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="365" cy="32" r="12" fill="#5b3fa0"/><text x="365" y="37" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">3</text>
+      <text x="365" y="60" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Kontakt veraltet</text>
+      <text x="365" y="76" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">oder defekt</text>
+
+      <rect x="510" y="10" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="530" cy="32" r="12" fill="#5b3fa0"/><text x="530" y="37" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">4</text>
+      <text x="530" y="60" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Schwache oder</text>
+      <text x="530" y="76" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">fehlende Bilder</text>
+
+      <rect x="108" y="120" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="128" cy="142" r="12" fill="#5b3fa0"/><text x="128" y="147" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">5</text>
+      <text x="128" y="170" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Keine Bewertungen</text>
+      <text x="128" y="186" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">sichtbar</text>
+
+      <rect x="273" y="120" width="155" height="90" rx="10" fill="#162454" stroke="#5b3fa0" stroke-width="1.5"/>
+      <circle cx="293" cy="142" r="12" fill="#5b3fa0"/><text x="293" y="147" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">6</text>
+      <text x="293" y="170" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Sehr lange</text>
+      <text x="293" y="186" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Ladezeiten</text>
+
+      <rect x="438" y="120" width="155" height="90" rx="10" fill="#1b2f66" stroke="#7c5cc4" stroke-width="1.5"/>
+      <circle cx="458" cy="142" r="12" fill="#7c5cc4"/><text x="458" y="147" text-anchor="middle" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">7</text>
+      <text x="458" y="170" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">Kein klarer</text>
+      <text x="458" y="186" fill="#f5f3ff" font-family="DM Sans, sans-serif" font-size="11" font-weight="600">nächster Schritt</text>
+    </svg>
+  </div>
+
+  <section>
     <h2>1. Keine Handynutzung mitgedacht</h2>
     <p>Die meisten Besucher kommen über das Smartphone. Wenn Text zu klein oder Buttons kaum antippbar sind, verlässt ein großer Teil die Seite sofort wieder.</p>
   </section>
@@ -202,20 +253,32 @@
   </section>
   <section>
     <h2>3. Keine oder veraltete Kontaktmöglichkeit</h2>
-    <p>Eine Telefonnummer, die nicht mehr aktuell ist, oder ein Kontaktformular, das technisch nicht funktioniert, kostet stille, aber sichere Anfragen.</p>
+    <p>Eine Telefonnummer, die nicht mehr aktuell ist, oder ein Kontaktformular, das technisch nicht funktioniert, kostet stille, aber sichere Anfragen. Besucher melden einen solchen Fehler in der Regel nicht, sie verlassen die Seite einfach und versuchen es beim nächsten Betrieb.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>Praxis-Tipp:</strong> Schon drei aktuelle Projektfotos können den ersten Eindruck einer Website deutlich verbessern, mehr braucht es am Anfang nicht.</p>
+  </div>
+
   <section>
     <h2>4. Fehlende oder schwache Bilder</h2>
     <p>Unscharfe Handyfotos vom letzten Auftrag wirken wenig professionell. Schon wenige gute, gut beleuchtete Fotos verbessern den Gesamteindruck erheblich.</p>
   </section>
   <section>
     <h2>5. Keine Google-Bewertungen sichtbar</h2>
-    <p>Selbst wenn gute Bewertungen bei Google vorhanden sind, fehlt oft ein Verweis darauf auf der eigenen Website.</p>
+    <p>Selbst wenn gute Bewertungen bei Google vorhanden sind, fehlt oft ein Verweis darauf auf der eigenen Website. Dabei reicht meist schon ein einfacher Hinweis mit Verlinkung, um das vorhandene Vertrauen auch auf der Website sichtbar zu machen.</p>
   </section>
   <section>
     <h2>6. Sehr lange Ladezeiten</h2>
     <p>Große, unkomprimierte Bilder oder überladene Baukasten-Systeme führen zu Ladezeiten, bei denen ungeduldige Besucher abspringen, bevor die Seite überhaupt fertig geladen ist.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Die meisten dieser sieben Punkte lassen sich einzeln beheben, ohne die Website komplett neu zu bauen. Oft reichen kleine, gezielte Anpassungen.</p>
+  </div>
+
   <section>
     <h2>7. Kein klarer nächster Schritt</h2>
     <p>Am Ende sollte für den Besucher klar sein, was als Nächstes zu tun ist, etwa anrufen, schreiben oder ein Angebot anfragen. Fehlt dieser klare Hinweis, verlässt der Besucher die Seite oft einfach unentschlossen.</p>

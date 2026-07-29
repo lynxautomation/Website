@@ -104,6 +104,18 @@
     backdrop-filter: blur(12px);
   }
   .highlight-box p:last-child { margin-bottom: 0; }
+  .info-box {
+    display: flex; gap: 14px; align-items: flex-start;
+    background: rgba(91,63,160,0.12);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 16px 20px; margin: 28px 0;
+  }
+  .info-box .icon { font-size: 1.15rem; flex-shrink: 0; line-height: 1.4; }
+  .info-box p { font-size: 0.88rem; margin-bottom: 0; }
+  .info-box strong { color: var(--white); }
+  .diagram { margin: 32px 0; }
+  .diagram svg { width: 100%; height: auto; display: block; }
   .cta-strip {
     margin-top: 60px;
     background: rgba(91,63,160,0.15);
@@ -189,7 +201,7 @@
 <main>
   <span class="page-label">Digitaler Assistent</span>
   <h1>Warum antworten viele Handwerksbetriebe nicht auf Anfragen?</h1>
-  <p class="meta">Lynx Automation Solutions · 3 Min. Lesezeit</p>
+  <p class="meta">Lynx Automation Solutions · 4 Min. Lesezeit</p>
   <p class="lead">Es ist selten böser Wille. Meistens fehlt schlicht die Zeit, oder die Anfrage geht in der Hektik des Tagesgeschäfts unter.</p>
 
     <section>
@@ -201,14 +213,50 @@
     <li>Anfragen außerhalb der Geschäftszeiten werden schlicht vergessen, sobald der nächste Arbeitstag beginnt</li>
     <li>Ohne feste Zuständigkeit im Betrieb bleibt die Beantwortung von Anfragen oft liegen, weil sich niemand explizit dafür verantwortlich fühlt</li>
   </ul>
+
+  <div class="diagram">
+    <svg viewBox="0 0 700 170" xmlns="http://www.w3.org/2000/svg">
+      <text x="15" y="16" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11.5">Ohne digitalen Assistenten</text>
+      <rect x="15" y="24" width="82" height="30" rx="4" fill="#b8860b" fill-opacity="0.55"/>
+      <rect x="101" y="24" width="82" height="30" rx="4" fill="#b8860b" fill-opacity="0.55"/>
+      <rect x="187" y="24" width="82" height="30" rx="4" fill="#b8860b" fill-opacity="0.55"/>
+      <rect x="273" y="24" width="82" height="30" rx="4" fill="#b8860b" fill-opacity="0.55"/>
+      <rect x="359" y="24" width="82" height="30" rx="4" fill="#b8860b" fill-opacity="0.55"/>
+      <rect x="445" y="24" width="82" height="30" rx="4" fill="#c0392b" fill-opacity="0.6"/>
+      <rect x="531" y="24" width="82" height="30" rx="4" fill="#c0392b" fill-opacity="0.6"/>
+      <text x="15" y="70" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11">Werktags nur eingeschränkt erreichbar, am Wochenende gar nicht</text>
+
+      <text x="15" y="106" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11.5">Mit digitalem Assistenten</text>
+      <rect x="15" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="101" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="187" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="273" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="359" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="445" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <rect x="531" y="114" width="82" height="30" rx="4" fill="#43a06b" fill-opacity="0.6"/>
+      <text x="15" y="160" fill="#a0a0b8" font-family="DM Sans, sans-serif" font-size="11">Durchgehend erreichbar, auch abends und am Wochenende</text>
+    </svg>
+  </div>
+
   <section>
     <h2>Was das für den Interessenten bedeutet</h2>
     <p>Aus Sicht eines Interessenten sieht eine unbeantwortete Anfrage schnell wie Desinteresse aus, selbst wenn eigentlich nur die Zeit gefehlt hat. Er wendet sich dann meist an den nächsten Betrieb in der Suchergebnisliste.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">📌</span>
+    <p><strong>Kurz erklärt:</strong> Für den Interessenten ist nicht erkennbar, ob eine Anfrage aus Desinteresse oder aus Zeitmangel unbeantwortet bleibt. Er reagiert in beiden Fällen gleich, indem er woanders weitersucht.</p>
+  </div>
+
   <section>
     <h2>Wie ein digitaler Assistent genau hier ansetzt</h2>
     <p>Ein Assistent übernimmt automatisch die erste Antwort, unabhängig davon, ob gerade jemand im Büro ist. Wichtige Anfragen gehen dadurch nicht mehr unter, und der Interessent bekommt sofort das Gefühl, ernst genommen zu werden, auch wenn die persönliche Rückmeldung erst später erfolgt.</p>
   </section>
+
+  <div class="info-box">
+    <span class="icon">💡</span>
+    <p><strong>Praxis-Tipp:</strong> Der Assistent ersetzt keine persönliche Rückmeldung, er überbrückt nur die Zeit bis dahin. Die eigentliche Auftragsklärung bleibt weiterhin bei Ihnen im Betrieb.</p>
+  </div>
 
 
   <div class="cta-strip">
