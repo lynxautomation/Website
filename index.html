@@ -433,6 +433,60 @@
   }
   .pillar-nav a:hover { color: var(--white); border-color: rgba(179,157,219,0.4); }
 
+  /* PILLAR VISUALS — signature illustrations per Baustein */
+  .pillar-visual { display: flex; justify-content: center; margin: 0 0 52px; }
+  .pillar-visual svg { width: 100%; max-width: 380px; height: auto; overflow: visible; }
+
+  /* Baustein 00 — chaos to order */
+  .visual-ordnung .chaos-dot { animation: chaosFloat 4.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .visual-ordnung .d1 { animation-delay: 0s; }
+  .visual-ordnung .d2 { animation-delay: .6s; }
+  .visual-ordnung .d3 { animation-delay: 1.1s; }
+  .visual-ordnung .d4 { animation-delay: .3s; }
+  .visual-ordnung .d5 { animation-delay: .9s; }
+  .visual-ordnung .d6 { animation-delay: 1.4s; }
+  @keyframes chaosFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  .visual-ordnung .flow-line { stroke-dasharray: 6 6; animation: flowDash 1.2s linear infinite; }
+  @keyframes flowDash { to { stroke-dashoffset: -24; } }
+  .visual-ordnung .order-dot { animation: orderGlow 2.4s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .visual-ordnung .o1 { animation-delay: 0s; }
+  .visual-ordnung .o2 { animation-delay: .2s; }
+  .visual-ordnung .o3 { animation-delay: .4s; }
+  .visual-ordnung .o4 { animation-delay: .6s; }
+  @keyframes orderGlow { 0%,100% { filter: drop-shadow(0 0 0 rgba(157,127,224,0)); } 50% { filter: drop-shadow(0 0 6px rgba(157,127,224,0.85)); } }
+
+  /* Baustein 01 — live chat mock */
+  .chat-mock { display: flex; flex-direction: column; gap: 10px; max-width: 280px; width: 100%; }
+  .chat-bubble { padding: 11px 16px; border-radius: 16px; font-size: 0.85rem; line-height: 1.4; max-width: 82%; }
+  .chat-bubble.user { align-self: flex-start; background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--grey); border-bottom-left-radius: 4px; }
+  .chat-bubble.bot { align-self: flex-end; background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%); border-bottom-right-radius: 4px; display: flex; gap: 5px; align-items: center; padding: 14px 18px; box-shadow: 0 6px 20px rgba(91,63,160,0.35); }
+  .chat-bubble.bot span { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.9); animation: typingBounce 1.2s infinite ease-in-out; }
+  .chat-bubble.bot span:nth-child(2) { animation-delay: 0.15s; }
+  .chat-bubble.bot span:nth-child(3) { animation-delay: 0.3s; }
+  @keyframes typingBounce { 0%,60%,100% { transform: translateY(0); opacity: .6; } 30% { transform: translateY(-4px); opacity: 1; } }
+  .chat-mock-caption { font-size: 0.72rem; color: var(--grey); letter-spacing: 0.06em; text-transform: uppercase; margin-top: 2px; display: flex; align-items: center; gap: 6px; align-self: flex-end; }
+  .chat-mock-caption::before { content: '●'; color: #7defa0; font-size: 0.6rem; animation: pulse 2s infinite; }
+
+  /* Baustein 02 — browser/device mock */
+  .visual-web .skel { animation: skelPulse 2.2s ease-in-out infinite; }
+  .visual-web .s2 { animation-delay: .2s; }
+  .visual-web .s3 { animation-delay: .4s; }
+  .visual-web .s4 { animation-delay: .6s; }
+  .visual-web .s5 { animation-delay: .3s; }
+  .visual-web .s6 { animation-delay: .5s; }
+  @keyframes skelPulse { 0%,100% { opacity: .9; } 50% { opacity: .3; } }
+
+  /* Baustein 03 — photo stack */
+  .visual-content .photo { animation: photoSway 5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+  .visual-content .p1 { animation-delay: 0s; }
+  .visual-content .p2 { animation-delay: .35s; }
+  .visual-content .p3 { animation-delay: .7s; }
+  @keyframes photoSway { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pillar-visual * { animation: none !important; }
+  }
+
   /* BUNDLE */
   .bundle { padding: 100px 60px; max-width: 1000px; margin: 0 auto; }
   .bundle-card {
@@ -808,6 +862,7 @@
       <p class="section-desc" style="margin:0 auto">Drei Bausteine für die digitale Präsenz Ihres Handwerksbetriebs, einzeln buchbar oder kombiniert. Kein Marketing-Konzept, keine Strategie-Workshops: Sie bekommen fertige, einsatzbereite Lösungen.</p>
       <div class="pillar-nav">
         <a href="#bundle">Bundle — alles inklusive</a>
+        <a href="#ordnung">00 · Digitale Ordnung</a>
         <a href="#chatbot">01 · Digitaler Assistent</a>
         <a href="#website">02 · Website</a>
         <a href="#content">03 · Beiträge & Fotos</a>
@@ -840,11 +895,68 @@
       </div>
     </div>
 
+    <!-- BAUSTEIN 0: DIGITALE ORDNUNG -->
+    <div class="pillar" id="ordnung">
+      <div class="pillar-header">
+        <span class="section-label">Baustein 00</span>
+        <h3>Digitale Ordnung</h3>
+        <p class="section-desc" style="margin:16px auto 0">Viele Betriebe sind digital längst vorhanden, nur eben verstreut: Bewertungen auf drei Plattformen, ein verwaistes Facebook-Profil, uneinheitliche Kontaktdaten. Wir bringen das an einen Ort, bevor wir etwas Neues aufbauen. Die Bestandsaufnahme ist bei uns immer kostenlos, erst die eigentliche Umsetzung kostet.</p>
+      </div>
+      <div class="pillar-visual visual-ordnung">
+        <svg viewBox="0 0 380 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <circle class="chaos-dot d1" cx="30" cy="40" r="7" fill="#b39ddb" opacity="0.55"/>
+          <circle class="chaos-dot d2" cx="58" cy="92" r="5" fill="#7c5cc4" opacity="0.5"/>
+          <circle class="chaos-dot d3" cx="14" cy="72" r="4" fill="#9d7fe0" opacity="0.45"/>
+          <circle class="chaos-dot d4" cx="72" cy="28" r="6" fill="#b39ddb" opacity="0.4"/>
+          <circle class="chaos-dot d5" cx="44" cy="112" r="5" fill="#7c5cc4" opacity="0.5"/>
+          <circle class="chaos-dot d6" cx="82" cy="76" r="4" fill="#9d7fe0" opacity="0.4"/>
+          <path class="flow-line" d="M104 70 H266" stroke="#b39ddb" stroke-width="1.5" fill="none"/>
+          <path d="M258 63 L268 70 L258 77" stroke="#b39ddb" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <line x1="292" y1="70" x2="366" y2="70" stroke="rgba(179,157,219,0.3)" stroke-width="1"/>
+          <circle class="order-dot o1" cx="296" cy="70" r="5" fill="#7c5cc4"/>
+          <circle class="order-dot o2" cx="316" cy="70" r="5" fill="#7c5cc4"/>
+          <circle class="order-dot o3" cx="337" cy="70" r="5" fill="#7c5cc4"/>
+          <circle class="order-dot o4" cx="358" cy="70" r="5" fill="#7c5cc4"/>
+        </svg>
+      </div>
+      <div class="products-grid" style="grid-template-columns:1fr;max-width:800px;margin:0 auto 64px;">
+        <div class="product-card featured">
+          <div class="product-tag">Digitale Ordnung</div>
+          <h3>Ihr Auftritt an einem Ort</h3>
+          <div class="product-price"><span class="amount">ab 349 €</span><span class="period">einmalig</span></div>
+          <p>Wir sichten alle vorhandenen Profile und Einträge und bringen sie auf einen einheitlichen, aktuellen Stand, bis zu 5 Profile inklusive. So wird aus einem verstreuten Auftritt ein stimmiges Bild.</p>
+          <ul class="product-features">
+            <li>Google-Unternehmensprofil vervollständigen und optimieren</li>
+            <li>Bewertungsquellen sichten und wo möglich sichtbar bündeln</li>
+            <li>Handelsregister-/Handwerksrolle-Eintrag prüfen und Basisdaten abgleichen</li>
+            <li>Social-Media-Profile vereinheitlichen (Kontaktdaten, Verlinkung)</li>
+            <li>Kurzer Ergebnisbericht mit Status aller geprüften Kanäle</li>
+          </ul>
+          <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
+            <span style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.1em; color:var(--purple-glow);">Gut zu wissen</span>
+          </div>
+          <ul class="product-features">
+            <li>Jedes weitere Profil über die inkludierten 5 hinaus: +49 €</li>
+            <li>Dauer meist 1–2 Wochen, abhängig von Rückmeldezeiten der Plattformen</li>
+            <li>Kein neuer Inhalt: keine neuen Texte, Fotos oder Designs enthalten</li>
+          </ul>
+          <div class="product-num">00</div>
+        </div>
+      </div>
+    </div>
+
     <!-- BAUSTEIN 1: CHATBOT -->
     <div class="pillar" id="chatbot">
       <div class="pillar-header">
         <span class="section-label">Baustein 01</span>
         <h3>Digitaler Assistent</h3>
+      </div>
+      <div class="pillar-visual visual-chat">
+        <div class="chat-mock">
+          <div class="chat-bubble user">Wann habt ihr geöffnet?</div>
+          <div class="chat-bubble bot"><span></span><span></span><span></span></div>
+          <div class="chat-mock-caption">Antwortet in Sekunden, rund um die Uhr</div>
+        </div>
       </div>
       <div class="products-grid">
         <div class="product-card">
@@ -912,6 +1024,23 @@
         <span class="section-label">Baustein 02</span>
         <h3>Website</h3>
       </div>
+      <div class="pillar-visual visual-web">
+        <svg viewBox="0 0 300 170" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect x="10" y="10" width="230" height="140" rx="10" fill="rgba(255,255,255,0.03)" stroke="rgba(179,157,219,0.2)" stroke-width="1.2"/>
+          <rect x="10" y="10" width="230" height="26" rx="10" fill="rgba(255,255,255,0.04)"/>
+          <circle cx="24" cy="23" r="3" fill="#9d7fe0" opacity="0.6"/>
+          <circle cx="36" cy="23" r="3" fill="#b39ddb" opacity="0.5"/>
+          <circle cx="48" cy="23" r="3" fill="#7c5cc4" opacity="0.5"/>
+          <rect class="skel s1" x="26" y="55" width="150" height="8" rx="4" fill="#b39ddb" opacity="0.3"/>
+          <rect class="skel s2" x="26" y="75" width="190" height="8" rx="4" fill="#b39ddb" opacity="0.25"/>
+          <rect class="skel s3" x="26" y="95" width="110" height="8" rx="4" fill="#b39ddb" opacity="0.2"/>
+          <rect class="skel s4" x="26" y="120" width="90" height="20" rx="6" fill="#7c5cc4" opacity="0.35"/>
+          <rect x="205" y="70" width="60" height="100" rx="12" fill="#0d1b3e" stroke="#b39ddb" stroke-width="1.4"/>
+          <rect x="212" y="82" width="46" height="66" rx="4" fill="rgba(255,255,255,0.04)"/>
+          <rect class="skel s5" x="217" y="90" width="36" height="6" rx="3" fill="#b39ddb" opacity="0.3"/>
+          <rect class="skel s6" x="217" y="102" width="26" height="6" rx="3" fill="#b39ddb" opacity="0.25"/>
+        </svg>
+      </div>
       <div class="products-grid">
         <div class="product-card">
           <div class="product-tag">Web Start</div>
@@ -970,6 +1099,32 @@
         <span class="section-label">Baustein 03</span>
         <h3>Beiträge & Fotos für Website, Google & Social Media</h3>
         <p class="section-desc" style="margin:16px auto 0">Fertiges Material für Ihre Kanäle, ohne Strategie-Konzept. Sie entscheiden, wo und wie es eingesetzt wird, wir liefern das Material.</p>
+      </div>
+
+      <div class="pillar-visual visual-content">
+        <svg viewBox="0 0 260 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <g transform="translate(130,88) rotate(-9)">
+            <g class="photo p1">
+              <rect x="-55" y="-38" width="110" height="76" rx="8" fill="rgba(255,255,255,0.04)" stroke="rgba(179,157,219,0.2)" stroke-width="1.2"/>
+              <circle cx="-30" cy="-16" r="6" fill="#b39ddb" opacity="0.55"/>
+              <path d="M-45 14 L-15 -8 L5 8 L45 -18 L45 24 L-45 24 Z" fill="#7c5cc4" opacity="0.35"/>
+            </g>
+          </g>
+          <g transform="translate(130,82) rotate(4)">
+            <g class="photo p2">
+              <rect x="-55" y="-38" width="110" height="76" rx="8" fill="rgba(255,255,255,0.05)" stroke="rgba(179,157,219,0.2)" stroke-width="1.2"/>
+              <circle cx="-30" cy="-16" r="6" fill="#9d7fe0" opacity="0.6"/>
+              <path d="M-45 14 L-10 -12 L15 10 L45 -14 L45 24 L-45 24 Z" fill="#b39ddb" opacity="0.4"/>
+            </g>
+          </g>
+          <g transform="translate(130,76) rotate(-2)">
+            <g class="photo p3">
+              <rect x="-55" y="-38" width="110" height="76" rx="8" fill="rgba(255,255,255,0.06)" stroke="#b39ddb" stroke-width="1.4"/>
+              <circle cx="-30" cy="-16" r="6" fill="#b39ddb" opacity="0.75"/>
+              <path d="M-45 14 L-15 -10 L10 5 L45 -17 L45 24 L-45 24 Z" fill="#7c5cc4" opacity="0.5"/>
+            </g>
+          </g>
+        </svg>
       </div>
 
       <div class="sub-divider"><span>Einmalig — Grundausstattung</span></div>
@@ -1148,6 +1303,28 @@
     <div class="faq-item">
       <div class="faq-q">Gibt es Mindestlaufzeiten oder Kündigungsfristen?</div>
       <div class="faq-a">Keine Mindestlaufzeit. Alle laufenden Leistungen sind monatlich kündbar, mit einer Kündigungsfrist von 2 Wochen zum Monatsende. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie nur einmal.</div>
+    </div>
+
+    <div class="faq-category"><span class="icon">🧭</span> Digitale Ordnung</div>
+    <div class="faq-item">
+      <div class="faq-q">Was genau ist die Digitale Ordnung?</div>
+      <div class="faq-a">Wir sichten alle vorhandenen Profile und Einträge Ihres Betriebs, Google, Social Media, Bewertungsportale, Register, und bringen sie auf einen einheitlichen, aktuellen Stand. Kein neuer Inhalt, sondern Ordnung in dem, was bereits existiert.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ist die Analyse vorab auch kostenlos?</div>
+      <div class="faq-a">Ja. Die erste Bestandsaufnahme Ihres digitalen Auftritts ist bei uns immer kostenlos und unverbindlich. Erst wenn Sie sich für die Umsetzung entscheiden, also das tatsächliche Aufräumen und Vereinheitlichen Ihrer Profile, fällt der Preis für die Digitale Ordnung an.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Muss ich Ihnen meine Passwörter geben?</div>
+      <div class="faq-a">In den meisten Fällen nicht. Bei Google und Facebook fügen Sie uns einfach als Verwalter des jeweiligen Profils hinzu, ganz ohne Passwort-Weitergabe. Nur bei bestehenden Website-Zugängen brauchen wir tatsächlich einen Zugang, den wir ausschließlich über sichere, befristete Freigaben anfragen.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was passiert bei Registereinträgen wie Handelsregister oder Handwerksrolle?</div>
+      <div class="faq-a">Diese Register können wir nicht selbst ändern, das darf nur der Betrieb bzw. dessen Notar oder Steuerberater. Wir prüfen den aktuellen Stand und sagen Ihnen konkret, was zu korrigieren ist, damit Sie es an der richtigen Stelle klären lassen können.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Was ist, wenn ich mehr als 5 Profile habe?</div>
+      <div class="faq-a">Kein Problem. Die ersten 5 Profile sind im Preis enthalten, jedes weitere kostet pauschal 49 € zusätzlich. Den genauen Umfang klären wir vorab in der kostenlosen Bestandsaufnahme.</div>
     </div>
 
     <div class="faq-category"><span class="icon">🌐</span> Website</div>
@@ -1716,9 +1893,20 @@
 
 <script>
 // ── CONFIG ──────────────────────────────────────────────────────────────────
-const SYSTEM_PROMPT = `Du bist der digitale Assistent von Lynx Automation Solutions. Lynx hilft kleinen und mittleren Unternehmen zu einer vollständigen digitalen Präsenz – mit drei Bausteinen: einem digitalen Assistenten (Chatbot), Websites und laufendem Content/Fotos. Alle drei sind einzeln buchbar oder im Bundle kombinierbar.
+const SYSTEM_PROMPT = `Du bist der digitale Assistent von Lynx Automation Solutions. Lynx hilft kleinen und mittleren Unternehmen zu einer vollständigen digitalen Präsenz – mit vier Bausteinen: Digitale Ordnung (Bestandsaufnahme & Aufräumen bestehender Profile), einem digitalen Assistenten (Chatbot), Websites und laufendem Content/Fotos. Alle sind einzeln buchbar oder im Bundle kombinierbar.
 
 Deine Aufgabe: Besucher informieren, Vertrauen aufbauen und Beratungsanfragen generieren.
+
+WICHTIG zur Preislogik: Die erste Bestandsaufnahme/Analyse des digitalen Auftritts eines Unternehmens ist bei Lynx IMMER kostenlos und unverbindlich. Kostenpflichtig wird es erst, wenn der Kunde sich für eine tatsächliche Umsetzung entscheidet (z. B. die Digitale Ordnung selbst, den Chatbot, die Website oder Content). Mach diesen Unterschied klar, wenn danach gefragt wird: „Reinschauen und einschätzen" ist gratis, „Anfassen und umsetzen" kostet.
+
+=== BAUSTEIN 0 – DIGITALE ORDNUNG ===
+Digitale Ordnung, ab 349 € einmalig (bis zu 5 Profile/Plattformen inklusive, jedes weitere +49 €):
+- Für Betriebe, die digital schon präsent, aber unübersichtlich aufgestellt sind: Bewertungen verstreut, Profile veraltet, Kontaktdaten uneinheitlich
+- Leistungsumfang: Google-Unternehmensprofil vervollständigen/optimieren, Bewertungsquellen sichten und wo möglich sichtbar bündeln, Handelsregister-/Handwerksrolle-Eintrag prüfen und Basisdaten abgleichen, Social-Media-Profile vereinheitlichen, kurzer Ergebnisbericht
+- Dauer meist 1–2 Wochen, abhängig von Rückmeldezeiten der Plattformen
+- Kein neuer Inhalt enthalten: keine neuen Texte, Fotos oder Designs (das ist Baustein 3)
+- Registeränderungen (Handelsregister, Handwerksrolle) kann Lynx nicht selbst vornehmen, nur prüfen und dem Kunden konkret sagen, was zu korrigieren ist
+- Für Google/Facebook braucht Lynx keine Passwörter, der Kunde fügt Lynx als Verwalter/Editor des jeweiligen Profils hinzu; nur bei bestehenden Website-Zugängen wird ein befristeter, sicherer Zugang benötigt
 
 === BAUSTEIN 1 – DIGITALER ASSISTENT ===
 Modell 1, 79 €/Monat:
@@ -1753,6 +1941,7 @@ Wichtig: Keine Strategie- oder Konzeptarbeit enthalten – nur fertiges, einsatz
 === BUNDLE – DIGITALE RUNDUM-LÖSUNG ===
 Digitaler Assistent Modell 2 + Web Business + Website-Service + Foto & Grundausstattung + Content Basis, für 359 €/Monat (statt 423 € einzeln, spart 64 €/Monat) + 2.790 € einmalig für Website & Fotos. Die meistgewählte Option, weil alles aufeinander abgestimmt ist und der Kunde sich um nichts einzeln kümmern muss.
 Kunden können außerdem jederzeit mit einem einzelnen Baustein starten und später weitere dazu buchen oder ins Bundle wechseln – bereits gebuchte Leistungen werden dabei fair angerechnet.
+Hinweis: Digitale Ordnung ist nicht Teil des Bundles, da es eine einmalige Aufräum-Leistung ist, kein laufender Baustein. Sie wird bei Bedarf separat und vorab angeboten, oft bevor Website oder Chatbot überhaupt sinnvoll aufgesetzt werden können.
 
 === VORTEILE (ALLGEMEIN) ===
 - Beantwortet Anfragen rund um die Uhr – auch außerhalb der Öffnungszeiten
