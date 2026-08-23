@@ -368,7 +368,6 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 28px 24px;
-    backdrop-filter: blur(12px);
   }
   .stat-num {
     font-family: 'Cormorant Garamond', serif;
@@ -390,7 +389,6 @@
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 48px 40px;
-    backdrop-filter: blur(16px);
     position: relative;
     overflow: hidden;
     transition: transform 0.3s, border-color 0.3s;
@@ -497,7 +495,6 @@
     border: 1px solid var(--border);
     border-radius: 16px;
     padding: 48px 56px;
-    backdrop-filter: blur(16px);
     text-align: left;
   }
   ul.product-features.why-grid {
@@ -619,7 +616,7 @@
   @keyframes photoSway { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
 
   @media (prefers-reduced-motion: reduce) {
-    .pillar-visual * { animation: none !important; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
   }
 
   /* BUNDLE */
@@ -629,7 +626,6 @@
     border: 1px solid rgba(179,157,219,0.35);
     border-radius: 20px;
     padding: 56px;
-    backdrop-filter: blur(16px);
     display: grid;
     grid-template-columns: 1.3fr 1fr;
     gap: 48px;
@@ -733,7 +729,6 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.6rem;
     color: var(--accent);
-    backdrop-filter: blur(12px);
   }
   .step h4 {
     font-family: 'Cormorant Garamond', serif;
@@ -752,7 +747,6 @@
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 36px 32px;
-    backdrop-filter: blur(12px);
     transition: border-color 0.3s;
   }
   .benefit-card:hover { border-color: rgba(179,157,219,0.3); }
@@ -788,7 +782,6 @@
     padding: 16px 24px;
     font-size: 0.85rem;
     color: var(--grey);
-    backdrop-filter: blur(12px);
   }
   .privacy-badge .icon { font-size: 1.2rem; }
 
@@ -846,7 +839,6 @@
     border: 1px solid var(--border);
     border-radius: 20px;
     padding: 56px 52px;
-    backdrop-filter: blur(16px);
     margin-top: 52px;
     text-align: left;
   }
