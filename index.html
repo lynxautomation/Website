@@ -141,10 +141,17 @@
   .hero {
     min-height: 100vh;
     display: flex; align-items: center; justify-content: center;
-    text-align: center;
     padding: 120px 24px 80px;
   }
-  .hero-inner { max-width: 780px; }
+  .hero-inner { max-width: 1180px; width: 100%; }
+  .hero-flex {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+  }
+  .hero-copy { max-width: 560px; }
   .hero-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(91,63,160,0.2);
@@ -161,22 +168,23 @@
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 300;
     line-height: 1.08;
     letter-spacing: -0.01em;
     margin-bottom: 28px;
   }
-  h1 em { font-style: italic; color: var(--accent); }
+  h1 .line { display: block; font-size: clamp(2.6rem, 5.4vw, 4.4rem); }
+  h1 .line-1 { opacity: 0.8; font-size: clamp(1.8rem, 3.6vw, 2.9rem); }
+  h1 .line-2 { font-style: italic; color: var(--accent); font-size: clamp(3rem, 6.2vw, 5rem); }
+  h1 .line-3 { font-weight: 300; }
   .hero-sub {
     font-size: 1.08rem;
     color: var(--grey);
     line-height: 1.7;
-    max-width: 560px;
-    margin: 0 auto 48px;
+    margin: 0 0 48px;
     font-weight: 300;
   }
-  .hero-ctas { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; }
   .btn-primary {
     background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
     color: var(--white);
@@ -201,6 +209,84 @@
   }
   .btn-secondary:hover { border-color: var(--accent); color: var(--white); }
 
+  /* HERO VISUAL — live request card */
+  .hero-visual { display: flex; justify-content: center; align-items: center; position: relative; }
+  .hero-device { position: relative; width: 100%; max-width: 340px; animation: heroFloat 6s ease-in-out infinite; }
+  @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(1.5deg); } 50% { transform: translateY(-12px) rotate(0deg); } }
+  .hero-device::before {
+    content: '';
+    position: absolute;
+    inset: -60px;
+    background: radial-gradient(circle, rgba(157,127,224,0.35) 0%, transparent 70%);
+    animation: ringPulse 4s ease-in-out infinite;
+    z-index: 0;
+  }
+  @keyframes ringPulse { 0%,100% { opacity: 0.5; transform: scale(0.95); } 50% { opacity: 0.9; transform: scale(1.05); } }
+  .hero-device-card {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(22,36,84,0.5));
+    border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 20px;
+    padding: 22px 22px 24px;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 30px 60px rgba(5,10,30,0.5);
+  }
+  .hero-device-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+  .hero-device-time { font-size: 0.78rem; color: var(--grey); letter-spacing: 0.04em; }
+  .hero-device-live { display: flex; align-items: center; gap: 6px; font-size: 0.72rem; color: #7defa0; text-transform: uppercase; letter-spacing: 0.08em; }
+  .hero-device-live::before { content: '●'; font-size: 0.55rem; animation: pulse 2s infinite; }
+  .hero-device-tag {
+    margin-top: 14px;
+    font-size: 0.75rem;
+    color: var(--grey);
+    text-align: right;
+  }
+  .hero-notify {
+    position: absolute;
+    top: -14px;
+    right: 8px;
+    z-index: 2;
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: var(--white);
+    font-size: 0.72rem;
+    font-weight: 500;
+    padding: 7px 14px;
+    border-radius: 100px;
+    box-shadow: 0 8px 20px rgba(91,63,160,0.5);
+    animation: notifyPop 5s ease-in-out infinite;
+    white-space: nowrap;
+  }
+  @keyframes notifyPop { 0%,12% { opacity: 0; transform: translateY(6px) scale(0.9); } 20%,80% { opacity: 1; transform: translateY(0) scale(1); } 92%,100% { opacity: 0; transform: translateY(6px) scale(0.9); } }
+
+  /* HERO STACK — peeking website/content hints behind the chat card */
+  .hero-visual { flex-direction: column; gap: 20px; }
+  .hero-stack-card {
+    position: absolute;
+    width: 62%;
+    height: 58%;
+    border-radius: 16px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(22,36,84,0.4));
+    border: 1px solid rgba(179,157,219,0.15);
+    z-index: 0;
+    opacity: 0.55;
+    padding: 16px;
+  }
+  .card-web { top: -22px; left: -22px; transform: rotate(-9deg); }
+  .card-photo { bottom: -22px; right: -22px; transform: rotate(7deg); }
+  .stack-dots { display: flex; gap: 4px; margin-bottom: 10px; }
+  .stack-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); opacity: 0.5; }
+  .stack-line { height: 6px; border-radius: 3px; background: var(--accent); opacity: 0.25; margin-bottom: 7px; }
+  .stack-line.l1 { width: 75%; }
+  .stack-line.l2 { width: 50%; }
+  .stack-photo-icon { width: 34px; height: 34px; border-radius: 8px; background: linear-gradient(135deg, var(--purple-light), var(--accent)); opacity: 0.45; }
+  .hero-stack-caption {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--grey);
+    letter-spacing: 0.03em;
+  }
+
   .hero-scroll {
     margin-top: 80px;
     display: flex; flex-direction: column; align-items: center; gap: 8px;
@@ -213,6 +299,14 @@
     animation: scrollAnim 2s ease-in-out infinite;
   }
   @keyframes scrollAnim { 0%,100%{opacity:0.3;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+
+  @media (max-width: 900px) {
+    .hero-flex { grid-template-columns: 1fr; text-align: center; }
+    .hero-copy { max-width: 100%; margin: 0 auto; }
+    .hero-ctas { justify-content: center; }
+    .hero-visual { margin-top: 24px; }
+    .hero-device { max-width: 280px; }
+  }
 
   /* SECTION TITLES */
   .section-label {
@@ -809,12 +903,41 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-inner">
-    <div class="hero-badge">Digitale Lösungen für Handwerksbetriebe in Paderborn, Höxter & OWL</div>
-    <h1>Ihr Betrieb.<br><em>Immer verfügbar.</em><br>Immer sichtbar.</h1>
-    <p class="hero-sub">Wir bauen Websites und digitale Assistenten für Handwerksbetriebe im Mittelstand. Kunden werden rund um die Uhr informiert, neue Anfragen automatisch aufgenommen. Dazu fertige Beiträge für Ihre Social-Media-Kanäle. Alles aus einer Hand, DSGVO-konform.</p>
-    <div class="hero-ctas">
-      <a href="#contact" class="btn-primary">Kostenlos beraten lassen</a>
-      <a href="#products" class="btn-secondary">Unsere Leistungen</a>
+    <div class="hero-flex">
+      <div class="hero-copy">
+        <div class="hero-badge">Digitale Lösungen für Handwerksbetriebe in Paderborn, Höxter & OWL</div>
+        <h1><span class="line line-1">Ihr Betrieb.</span><span class="line line-2">Immer verfügbar.</span><span class="line line-3">Immer sichtbar.</span></h1>
+        <p class="hero-sub">Wir bringen Ihren gesamten digitalen Auftritt auf einen aktuellen Stand: eine moderne Website, ein digitaler Assistent, der auch nachts und am Wochenende antwortet, und laufender Content für Google & Social Media. Alles aus einer Hand, DSGVO-konform.</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">Kostenlos beraten lassen</a>
+          <a href="#products" class="btn-secondary">Unsere Leistungen</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-device">
+          <div class="hero-stack-card card-web" aria-hidden="true">
+            <div class="stack-dots"><span></span><span></span><span></span></div>
+            <div class="stack-line l1"></div>
+            <div class="stack-line l2"></div>
+          </div>
+          <div class="hero-stack-card card-photo" aria-hidden="true">
+            <div class="stack-photo-icon"></div>
+          </div>
+          <div class="hero-notify">Neue Anfrage eingegangen</div>
+          <div class="hero-device-card">
+            <div class="hero-device-top">
+              <span class="hero-device-time">23:47 Uhr</span>
+              <span class="hero-device-live">Online</span>
+            </div>
+            <div class="chat-mock">
+              <div class="chat-bubble user">Habt ihr morgen noch einen Termin frei?</div>
+              <div class="chat-bubble bot"><span></span><span></span><span></span></div>
+            </div>
+            <div class="hero-device-tag">Automatisch beantwortet</div>
+          </div>
+        </div>
+        <div class="hero-stack-caption">Ihr gesamter digitaler Auftritt, an einem Ort</div>
+      </div>
     </div>
     <div class="hero-scroll">
       <div class="scroll-line"></div>
