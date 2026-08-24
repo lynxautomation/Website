@@ -114,6 +114,26 @@
     background: rgba(13,27,62,0.92);
     border-bottom: 1px solid rgba(179,157,219,0.14);
   }
+
+  /* BACK TO TOP */
+  .back-to-top {
+    position: fixed;
+    left: 28px; bottom: 28px;
+    z-index: 90;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: rgba(22,36,84,0.75);
+    border: 1px solid rgba(179,157,219,0.3);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    opacity: 0; pointer-events: none;
+    transform: translateY(8px);
+    transition: opacity 0.3s ease, transform 0.3s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .back-to-top:hover { border-color: var(--accent); background: rgba(22,36,84,0.95); }
+  .back-to-top svg { width: 18px; height: 18px; }
+
   .logo {
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.4rem;
@@ -833,7 +853,9 @@
     max-width: 700px;
     margin: 0 auto;
     text-align: center;
+    transition: max-width 0.3s ease;
   }
+  .contact.contact--wide { max-width: 960px; }
   .contact-form {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -841,11 +863,73 @@
     padding: 56px 52px;
     margin-top: 52px;
     text-align: left;
+    backdrop-filter: blur(16px);
+  }
+  .contact-tabs {
+    display: flex;
+    gap: 4px;
+    background: rgba(13,27,62,0.5);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 4px;
+    margin: 0 auto 40px;
+    max-width: fit-content;
+  }
+  .contact-tab {
+    border: none;
+    background: transparent;
+    color: var(--grey);
+    font-size: 0.82rem;
+    padding: 10px 22px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: background 0.25s, color 0.25s;
+    font-family: inherit;
+  }
+  .contact-tab.active {
+    background: linear-gradient(135deg, var(--purple), var(--purple-light));
+    color: var(--white);
+  }
+  .contact-panel { display: none; }
+  .contact-panel.active { display: block; }
+  .analyse-note {
+    color: var(--grey);
+    font-size: 0.92rem;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .analyse-layout { display: flex; gap: 40px; align-items: flex-start; flex-wrap: wrap; }
+  .analyse-col-form { flex: 1.4; min-width: 300px; }
+  .analyse-preview {
+    flex: 1; min-width: 260px;
+    border: 1px dashed rgba(179,157,219,0.4);
+    border-radius: 12px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 20px;
+  }
+  .analyse-preview--visual {
+    border-style: solid;
+    border-color: rgba(179,157,219,0.22);
+    background: rgba(13,27,62,0.35);
+    padding: 18px 20px 16px;
+  }
+  .analyse-illustration { width: 100%; max-width: 300px; height: auto; margin-bottom: 12px; }
+  .analyse-caption {
+    font-size: 0.74rem; line-height: 1.55; color: var(--grey);
+    font-weight: 300; max-width: 300px;
+  }
+  .af-msg { font-size: 0.83rem; margin-top: 14px; }
+  .af-msg.error { color: #f08080; }
+  .form-group textarea#af-note {
+    width: 100%; box-sizing: border-box;
   }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .form-row .form-group { min-width: 0; }
   .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
   label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--grey); }
   input, select, textarea {
+    width: 100%;
+    box-sizing: border-box;
     background: rgba(13,27,62,0.6);
     border: 1px solid var(--border);
     border-radius: 8px;
@@ -1565,121 +1649,121 @@
     <div class="faq-category"><span class="icon">📋</span> Allgemeines</div>
     <div class="faq-item">
       <div class="faq-q">Wie läuft die Zusammenarbeit ab?</div>
-      <div class="faq-a">Wir klären zunächst kurz, was Sie brauchen: digitaler Assistent, Website, Content oder das Bundle. Danach übernehmen wir die Umsetzung und begleiten Sie bei jedem Schritt, bis alles läuft.</div>
+      <div class="faq-a">Sie sagen uns, was Sie brauchen, digitaler Assistent, Website, Content oder das Bundle, wir übernehmen den Rest. So kümmern Sie sich weiter um Ihre Kunden und Baustellen, nicht um Technik oder Koordination.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie lange dauert die Umsetzung?</div>
-      <div class="faq-a">Der digitale Assistent ist meist nach 3–5 Werktagen einsatzbereit, eine Landingpage nach 1–2 Wochen, eine Unternehmenswebsite nach 3–4 Wochen. Das Bundle läuft parallel, sodass am Ende alles zusammen live geht.</div>
+      <div class="faq-a">Der digitale Assistent beantwortet oft schon nach 3–5 Werktagen die ersten Kundenanfragen, eine Landingpage ist nach 1–2 Wochen online, eine Unternehmenswebsite nach 3–4 Wochen. Beim Bundle läuft alles parallel, damit Sie nicht wochenlang auf einzelne Teile warten.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Muss ich technisches Wissen mitbringen?</div>
-      <div class="faq-a">Nein. Wir begleiten Sie bei der Einrichtung und erklären Ihnen jeden Schritt in Klartext. Falls doch mal etwas Technisches nötig ist, übernehmen wir das gemeinsam mit Ihrem Webdienstleister.</div>
+      <div class="faq-a">Nein. Wir übernehmen die Einrichtung und erklären jeden Schritt in Klartext, damit Sie sich weiter auf Ihr Tagesgeschäft konzentrieren können statt auf Technik.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich später weitere Leistungen hinzufügen?</div>
-      <div class="faq-a">Ja, jederzeit. Sie können mit einem einzelnen Baustein starten und später Website, Assistent oder Content dazu buchen. Beim Wechsel ins Bundle rechnen wir bereits gebuchte Leistungen fair an.</div>
+      <div class="faq-a">Ja, jederzeit. Sie müssen sich nicht sofort für alles entscheiden, sondern können mit dem starten, was gerade am dringendsten ist, und später ausbauen. Bereits gebuchte Leistungen rechnen wir beim Wechsel ins Bundle fair an.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie funktioniert die Bezahlung?</div>
-      <div class="faq-a">Bei der Website-Erstellung zahlen Sie 50 % als Anzahlung, den Rest bei Fertigstellung. Laufende Leistungen (Assistent, Website-Service, Content) werden monatlich per Lastschrift abgerechnet.</div>
+      <div class="faq-a">Bei der Website zahlen Sie 50 % als Anzahlung, den Rest erst bei Fertigstellung, Sie zahlen also erst vollständig, wenn Sie das Ergebnis sehen. Laufende Leistungen laufen bequem per Lastschrift, ohne dass Sie jeden Monat selbst an eine Rechnung denken müssen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Gibt es Mindestlaufzeiten oder Kündigungsfristen?</div>
-      <div class="faq-a">Keine Mindestlaufzeit. Alle laufenden Leistungen sind monatlich kündbar, mit einer Kündigungsfrist von 2 Wochen zum Monatsende. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie nur einmal.</div>
+      <div class="faq-a">Keine Mindestlaufzeit. Alle laufenden Leistungen sind monatlich kündbar, mit 2 Wochen Frist zum Monatsende, Sie binden sich also an nichts, das für Sie nicht funktioniert. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie ohnehin nur einmal.</div>
     </div>
 
     <div class="faq-category"><span class="icon">🧭</span> Digitale Ordnung</div>
     <div class="faq-item">
       <div class="faq-q">Was genau ist die Digitale Ordnung?</div>
-      <div class="faq-a">Wir sichten alle vorhandenen Profile und Einträge Ihres Betriebs, Google, Social Media, Bewertungsportale, Register, und bringen sie auf einen einheitlichen, aktuellen Stand. Kein neuer Inhalt, sondern Ordnung in dem, was bereits existiert.</div>
+      <div class="faq-a">Wir bringen alle vorhandenen Profile und Einträge Ihres Betriebs, Google, Social Media, Bewertungsportale, Register, auf einen einheitlichen, aktuellen Stand. Das Ergebnis: Kunden finden überall dieselben, korrekten Informationen über Sie, statt sich durch veraltete oder widersprüchliche Angaben verunsichern zu lassen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Ist die Analyse vorab auch kostenlos?</div>
-      <div class="faq-a">Ja. Die erste Bestandsaufnahme Ihres digitalen Auftritts ist bei uns immer kostenlos und unverbindlich. Erst wenn Sie sich für die Umsetzung entscheiden, also das tatsächliche Aufräumen und Vereinheitlichen Ihrer Profile, fällt der Preis für die Digitale Ordnung an.</div>
+      <div class="faq-a">Ja. Die erste Bestandsaufnahme Ihres digitalen Auftritts ist immer kostenlos und unverbindlich, Sie wissen also, woran Sie sind, bevor Sie sich entscheiden. Kostenpflichtig wird es erst, wenn Sie sich für die tatsächliche Umsetzung entscheiden.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Muss ich Ihnen meine Passwörter geben?</div>
-      <div class="faq-a">In den meisten Fällen nicht. Bei Google und Facebook fügen Sie uns einfach als Verwalter des jeweiligen Profils hinzu, ganz ohne Passwort-Weitergabe. Nur bei bestehenden Website-Zugängen brauchen wir tatsächlich einen Zugang, den wir ausschließlich über sichere, befristete Freigaben anfragen.</div>
+      <div class="faq-a">In den meisten Fällen nicht. Bei Google und Facebook fügen Sie uns einfach als Verwalter des jeweiligen Profils hinzu, Ihre eigentlichen Zugangsdaten bleiben bei Ihnen. Nur bei bestehenden Website-Zugängen brauchen wir tatsächlich einen Zugang, ausschließlich über sichere, befristete Freigaben.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Was passiert bei Registereinträgen wie Handelsregister oder Handwerksrolle?</div>
-      <div class="faq-a">Diese Register können wir nicht selbst ändern, das darf nur der Betrieb bzw. dessen Notar oder Steuerberater. Wir prüfen den aktuellen Stand und sagen Ihnen konkret, was zu korrigieren ist, damit Sie es an der richtigen Stelle klären lassen können.</div>
+      <div class="faq-a">Diese Register dürfen nur Sie selbst bzw. Ihr Notar oder Steuerberater ändern, das übernehmen wir nicht. Wir sagen Ihnen aber konkret, was veraltet ist, damit Sie es gezielt an der richtigen Stelle klären lassen können, statt selbst danach suchen zu müssen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Was ist, wenn ich mehr als 5 Profile habe?</div>
-      <div class="faq-a">Kein Problem. Die ersten 5 Profile sind im Preis enthalten, jedes weitere kostet pauschal 49 € zusätzlich. Den genauen Umfang klären wir vorab in der kostenlosen Bestandsaufnahme.</div>
+      <div class="faq-a">Kein Problem, mehr Kanäle bedeuten am Ende einfach mehr Übersicht für Ihre Kunden. Die ersten 5 Profile sind im Preis enthalten, jedes weitere kostet pauschal 49 € zusätzlich. Den genauen Umfang klären wir vorab in der kostenlosen Bestandsaufnahme.</div>
     </div>
 
     <div class="faq-category"><span class="icon">🌐</span> Website</div>
     <div class="faq-item">
       <div class="faq-q">Wie lange dauert die Erstellung?</div>
-      <div class="faq-a">Eine Landingpage ist in der Regel nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–4 Wochen, abhängig davon, wie schnell uns Inhalte wie Texte, Bilder oder Logo vorliegen.</div>
+      <div class="faq-a">Eine Landingpage ist meist nach 1–2 Wochen fertig, eine Unternehmenswebsite nach 3–4 Wochen, damit Sie zügig online sichtbar sind statt monatelang zu warten. Wie schnell es geht, hängt vor allem davon ab, wie schnell uns Texte, Bilder oder Logo vorliegen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Ist die Website für Smartphones optimiert?</div>
-      <div class="faq-a">Ja, jede Website funktioniert automatisch auf Handy, Tablet und Computer, ohne Aufpreis.</div>
+      <div class="faq-a">Ja, automatisch und ohne Aufpreis. Die meisten Ihrer Kunden suchen vom Handy aus nach einem Handwerker, eine Website, die dort nicht gut aussieht, kostet Sie Anfragen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Übernehmt ihr Hosting und Wartung?</div>
-      <div class="faq-a">Ja, optional. Für 25 €/Monat kümmern wir uns um Hosting, Domain, Sicherheitsupdates und kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat). Sie können aber auch selbst hosten: Sie erhalten den vollständigen Quellcode Ihrer Website und können ihn bei jedem beliebigen Anbieter einrichten lassen.</div>
+      <div class="faq-a">Ja, optional für 25 €/Monat: Hosting, Domain, Sicherheitsupdates und kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat), damit Sie sich um nichts kümmern müssen und die Seite zuverlässig läuft. Sie können aber auch selbst hosten: Sie erhalten den vollständigen Quellcode und können ihn bei jedem beliebigen Anbieter einrichten lassen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Gehört die Website nach Fertigstellung mir?</div>
-      <div class="faq-a">Ja. Sie erhalten den kompletten Quellcode Ihrer Website und sind an keine Agentur gebunden. Das gilt auch, wenn Sie den Website-Service später kündigen: Die Website gehört weiterhin Ihnen, das ist vertraglich festgehalten.</div>
+      <div class="faq-a">Ja, uneingeschränkt. Sie erhalten den kompletten Quellcode Ihrer Website und sind an keine Agentur gebunden, auch nicht, wenn Sie den Website-Service später kündigen. Sie behalten also jederzeit die volle Kontrolle über Ihren eigenen Auftritt.</div>
     </div>
 
     <div class="faq-category"><span class="icon">🤖</span> Digitaler Assistent</div>
     <div class="faq-item">
       <div class="faq-q">Wie funktioniert der digitale Assistent?</div>
-      <div class="faq-a">Ihr Assistent ist ein Chatfenster auf Ihrer Website, das Fragen zu Ihrem Unternehmen rund um die Uhr beantwortet, ohne dass jemand aus Ihrem Team dafür online sein muss.</div>
+      <div class="faq-a">Ihr Assistent ist ein Chatfenster auf Ihrer Website, das Fragen zu Ihrem Unternehmen rund um die Uhr beantwortet, auch abends, am Wochenende oder während Sie auf der Baustelle sind. So verpassen Sie keine Anfrage mehr, nur weil gerade niemand ans Telefon gehen konnte.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Woher kennt der Chat meine Leistungen?</div>
-      <div class="faq-a">Sie teilen uns Ihre Unternehmensinformationen mit: Öffnungszeiten, Leistungen, Referenzen. Ändert sich etwas, sagen Sie uns kurz Bescheid, wir aktualisieren den Assistenten für Sie.</div>
+      <div class="faq-a">Sie teilen uns einmal Ihre Unternehmensinformationen mit: Öffnungszeiten, Leistungen, Referenzen. Ändert sich etwas, sagen Sie uns kurz Bescheid, wir aktualisieren den Assistenten für Sie, Sie müssen selbst nichts technisch anpassen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Was passiert mit den Daten meiner Kunden?</div>
-      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet. Details dazu finden Sie weiter unten im Abschnitt Datenschutz.</div>
+      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet, Details dazu finden Sie weiter unten im Abschnitt Datenschutz. Sie können den Assistenten also bedenkenlos einsetzen, ohne rechtliches Risiko für Ihren Betrieb.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie erhalte ich neue Kundenanfragen?</div>
-      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Sie sehen neue Kontakte sofort und können direkt reagieren.</div>
+      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Sie sehen neue Kontakte sofort und können reagieren, bevor der Kunde beim nächsten Handwerker anruft.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich jederzeit von Modell 1 auf Modell 2 wechseln?</div>
-      <div class="faq-a">Ja, ein Upgrade ist jederzeit möglich und unkompliziert. Die bestehende Konfiguration bleibt dabei vollständig erhalten.</div>
+      <div class="faq-a">Ja, jederzeit und unkompliziert, Sie können also klein anfangen und erst dann erweitern, wenn sich der Nutzen für Sie zeigt. Ihre bestehende Konfiguration bleibt dabei vollständig erhalten.</div>
     </div>
 
     <div class="faq-category"><span class="icon">📸</span> Content & Fotos</div>
     <div class="faq-item">
       <div class="faq-q">Was ist in einem Beitrag enthalten?</div>
-      <div class="faq-a">Eine fertig gestaltete Grafik inklusive passendem Text, abgestimmt auf Ihre Farben und Ihr Design, zum direkten Posten auf Facebook & Instagram.</div>
+      <div class="faq-a">Eine fertig gestaltete Grafik inklusive passendem Text, abgestimmt auf Ihre Farben und Ihr Design, zum direkten Posten auf Facebook & Instagram. Sie müssen sich um nichts selbst entwerfen oder formulieren, nur noch veröffentlichen.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Muss ich die Beiträge selbst posten?</div>
-      <div class="faq-a">Ja, das Posten übernehmen Sie selbst, wir liefern Ihnen die fertigen Dateien. Wenn Sie das lieber abgeben möchten, sprechen Sie uns gerne an.</div>
+      <div class="faq-a">Ja, das Posten übernehmen Sie selbst, so behalten Sie die Kontrolle über Timing und Kanal. Wenn Sie das lieber abgeben möchten, sprechen Sie uns gerne an.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Macht ihr auch Fotos vor Ort?</div>
-      <div class="faq-a">Ja, im Umkreis von rund 50 km. Umfang und Termin sprechen wir individuell mit Ihnen ab. Wir tasten uns gemeinsam an den passenden Stil heran. Dieses Abstimmen ist für Sie kostenlos, bezahlt wird erst das fertige Ergebnis, das Ihnen wirklich gefällt.</div>
+      <div class="faq-a">Ja, im Umkreis von rund 50 km. Umfang und Termin sprechen wir individuell mit Ihnen ab und tasten uns gemeinsam an den passenden Stil heran. Dieses Abstimmen ist für Sie kostenlos, bezahlt wird erst das fertige Ergebnis, das Ihnen wirklich gefällt, kein Risiko einer Fehlinvestition.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Ist eine Marketingstrategie enthalten?</div>
-      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material. Themenplanung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung, das hält den Preis niedrig.</div>
+      <div class="faq-a">Nein, bewusst nicht. Wir liefern fertiges, hochwertiges Material, Themenplanung und Kampagnenstrategie bleiben bei Ihnen bzw. Ihrer bestehenden Marketing-Betreuung, das hält den Preis für Sie niedrig, statt für Leistungen zu zahlen, die Sie vielleicht schon abgedeckt haben.</div>
     </div>
 
     <div class="faq-category"><span class="icon">🔒</span> Datenschutz</div>
     <div class="faq-item">
       <div class="faq-q">Ist alles DSGVO-konform, und wo werden die Daten gespeichert?</div>
-      <div class="faq-a">Ja. Kunden erteilen im Chat ausdrücklich ihre Einwilligung zur Kontaktaufnahme. Wir arbeiten mit etablierten Dienstleistern, teils mit Sitz in der EU, teils in den USA, mit allen schließen wir DSGVO-konforme Verträge (Auftragsverarbeitung bzw. Standardvertragsklauseln) ab.</div>
+      <div class="faq-a">Ja. Kunden erteilen im Chat ausdrücklich ihre Einwilligung zur Kontaktaufnahme, Sie sind damit rechtlich auf der sicheren Seite. Wir arbeiten mit etablierten Dienstleistern, teils mit Sitz in der EU, teils in den USA, mit allen schließen wir DSGVO-konforme Verträge (Auftragsverarbeitung bzw. Standardvertragsklauseln) ab.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Benötige ich einen AV-Vertrag, und wie werden Daten gelöscht?</div>
-      <div class="faq-a">Ja, wir schließen mit Ihnen einen Auftragsverarbeitungsvertrag (AVV) ab, die Vorlage dafür haben wir bereits fertig. Daten werden automatisch nur so lange gespeichert, wie gesetzlich notwendig, und anschließend gelöscht.</div>
+      <div class="faq-a">Ja, wir schließen mit Ihnen einen Auftragsverarbeitungsvertrag (AVV) ab, die Vorlage dafür haben wir bereits fertig, das spart Ihnen selbst Aufwand und Rechtsberatung. Daten werden automatisch nur so lange gespeichert, wie gesetzlich notwendig, und anschließend gelöscht.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Welche Verträge schließen wir konkret mit Ihnen ab?</div>
-      <div class="faq-a">Drei Dokumente: unsere Allgemeinen Geschäftsbedingungen (AGB), die den Rahmen der Zusammenarbeit regeln; einen Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO, passend zu Ihrem gewählten Modell; und einen fertigen Datenschutzbaustein, den Sie einfach in Ihre eigene Datenschutzerklärung einfügen, damit auch Ihre Website-Besucher korrekt informiert sind.</div>
+      <div class="faq-a">Drei Dokumente, die Ihnen den Papierkram abnehmen: unsere Allgemeinen Geschäftsbedingungen (AGB), die den Rahmen der Zusammenarbeit regeln; einen Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO passend zu Ihrem gewählten Modell; und einen fertigen Datenschutzbaustein zum Einfügen in Ihre eigene Datenschutzerklärung, damit auch Ihre Website-Besucher korrekt informiert sind, ohne dass Sie selbst etwas formulieren müssen.</div>
     </div>
   </div>
 </section>
@@ -1711,59 +1795,181 @@
     <span class="section-label">Kontakt</span>
     <h2>Bereit für Ihre<br>digitale Präsenz?</h2>
     <p class="section-desc" style="margin:0 auto">Fordern Sie jetzt eine kostenlose Beratung an, ob Chatbot, Website, Content oder alles zusammen. Wir zeigen Ihnen unverbindlich, wie Ihre Lösung aussehen würde.</p>
+
+    <div class="contact-tabs">
+      <button type="button" class="contact-tab active" data-panel="order">Produkt anfragen</button>
+      <button type="button" class="contact-tab" data-panel="analyse">Nur kostenlose Kurzanalyse</button>
+    </div>
+
     <div class="contact-form">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Vorname *</label>
-          <input type="text" id="f-vorname" placeholder="Max" required>
+      <div class="contact-panel active" id="panel-order">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Vorname *</label>
+            <input type="text" id="f-vorname" placeholder="Max" required>
+          </div>
+          <div class="form-group">
+            <label>Nachname *</label>
+            <input type="text" id="f-nachname" placeholder="Mustermann" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>E-Mail-Adresse *</label>
+            <input type="email" id="f-email" placeholder="max@beispiel.de" required>
+          </div>
+          <div class="form-group">
+            <label>Telefon (optional)</label>
+            <input type="tel" id="f-telefon" placeholder="+49 ...">
+          </div>
         </div>
         <div class="form-group">
-          <label>Nachname *</label>
-          <input type="text" id="f-nachname" placeholder="Mustermann" required>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>E-Mail-Adresse *</label>
-          <input type="email" id="f-email" placeholder="max@beispiel.de" required>
+          <label>Unternehmen *</label>
+          <input type="text" id="f-unternehmen" placeholder="Ihr Unternehmen GmbH" required>
         </div>
         <div class="form-group">
-          <label>Telefon (optional)</label>
-          <input type="tel" id="f-telefon" placeholder="+49 ...">
+          <label>Ich interessiere mich für *</label>
+          <select id="f-thema">
+            <option>Digitale Ordnung – Auftritt aufräumen</option>
+            <option>Modell 1 – Digitaler Assistent für Ihre Website</option>
+            <option>Modell 2 – Assistent mit automatischer Kundengewinnung</option>
+            <option>Website – Landingpage</option>
+            <option>Website – Unternehmenswebsite</option>
+            <option>Content – Foto & Grundausstattung (einmalig)</option>
+            <option>Content – laufende Beiträge</option>
+            <option>Bundle – Digitale Rundum-Lösung</option>
+            <option>Ich bin noch unentschieden</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Ihre Nachricht (optional)</label>
+          <textarea id="f-nachricht" placeholder="Erzählen Sie uns kurz von Ihrem Unternehmen und Ihren Zielen..."></textarea>
+        </div>
+        <!-- Datenschutz-Einwilligung -->
+        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;padding:16px;background:rgba(13,27,62,0.4);border:1px solid var(--border);border-radius:8px;">
+          <input type="checkbox" id="f-einwilligung" style="margin-top:3px;flex-shrink:0;accent-color:var(--purple-light);width:16px;height:16px;cursor:pointer;">
+          <label for="f-einwilligung" style="font-size:0.8rem;color:var(--grey);line-height:1.6;cursor:pointer;text-transform:none;letter-spacing:0;">
+            Ich stimme zu, dass Lynx Automation Solutions meine angegebenen Daten zur Bearbeitung meiner Anfrage und zur Kontaktaufnahme speichert und verarbeitet. Mir ist bekannt, dass ich diese Einwilligung jederzeit widerrufen kann. Weitere Informationen in der <a href="datenschutz.html" target="_blank" style="color:var(--accent);">Datenschutzerklärung</a>. *
+          </label>
+        </div>
+        <div id="f-error" style="display:none;color:#f08080;font-size:0.83rem;margin-bottom:16px;padding:10px 14px;background:rgba(240,128,128,0.08);border:1px solid rgba(240,128,128,0.2);border-radius:6px;"></div>
+        <button id="f-submit" class="form-submit" onclick="submitLead()">
+          Kostenlos beraten lassen →
+        </button>
+      </div>
+
+      <div class="contact-panel" id="panel-analyse">
+        <p class="analyse-note">Noch unsicher, ob und wo es bei Ihnen hakt? Schicken Sie uns kurz Ihre Website. Wir schauen sie uns persönlich an und schicken Ihnen eine ehrliche Kurzanalyse zurück, kostenlos und unverbindlich.</p>
+        <div class="analyse-layout">
+          <div class="analyse-preview analyse-preview--visual">
+            <svg class="analyse-illustration" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematische Darstellung: Ihre Website und Ihr digitaler Auftritt werden geprüft und in einer Kurz-Analyse mit Ampel-Bewertung für Website, Google-Profil, Bewertungen, Kontaktwege und Erreichbarkeit zusammengefasst.">
+              <defs>
+                <linearGradient id="apCardGrad2" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#182757"/>
+                  <stop offset="1" stop-color="#101c46"/>
+                </linearGradient>
+                <linearGradient id="apHeaderGrad2" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0" stop-color="#5b3fa0"/>
+                  <stop offset="1" stop-color="#7c5cc4"/>
+                </linearGradient>
+                <radialGradient id="apGlow2a" cx="0.8" cy="0.15" r="0.6">
+                  <stop offset="0" stop-color="#9d7fe0" stop-opacity="0.35"/>
+                  <stop offset="1" stop-color="#9d7fe0" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="apGlow2b" cx="0.5" cy="0.5" r="0.6">
+                  <stop offset="0" stop-color="#9d7fe0" stop-opacity="0.45"/>
+                  <stop offset="1" stop-color="#9d7fe0" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+
+              <rect x="1" y="1" width="418" height="198" rx="16" fill="url(#apGlow2a)" opacity="0.5"/>
+
+              <!-- WEBSITE / AUFTRITT MOCKUP -->
+              <rect x="14" y="26" width="140" height="132" rx="12" fill="url(#apCardGrad2)" stroke="rgba(179,157,219,0.28)" stroke-width="1"/>
+              <rect x="14" y="26" width="140" height="26" rx="12" fill="url(#apHeaderGrad2)"/>
+              <rect x="14" y="42" width="140" height="10" fill="url(#apHeaderGrad2)"/>
+              <circle cx="27" cy="39" r="3.2" fill="#f5f3ff" opacity="0.85"/>
+              <circle cx="37" cy="39" r="3.2" fill="#f5f3ff" opacity="0.55"/>
+              <circle cx="47" cy="39" r="3.2" fill="#f5f3ff" opacity="0.35"/>
+              <rect x="26" y="68" width="96" height="8" rx="4" fill="rgba(245,243,255,0.16)"/>
+              <rect x="26" y="86" width="112" height="8" rx="4" fill="rgba(245,243,255,0.13)"/>
+              <rect x="26" y="104" width="70" height="8" rx="4" fill="rgba(245,243,255,0.13)"/>
+              <rect x="26" y="126" width="60" height="16" rx="5" fill="rgba(179,157,219,0.28)"/>
+              <text x="84" y="177" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#9d92c0">Ihr Auftritt</text>
+
+              <!-- MAGNIFYING GLASS, hovering over the website mockup -->
+              <circle cx="150" cy="40" r="34" fill="url(#apGlow2b)"/>
+              <g transform="translate(150,40)">
+                <circle r="26" fill="#101c46" stroke="rgba(179,157,219,0.45)" stroke-width="1"/>
+                <circle r="9.5" cx="-3" cy="-3" fill="none" stroke="#b39ddb" stroke-width="2.6"/>
+                <line x1="4.5" y1="4.5" x2="12" y2="12" stroke="#b39ddb" stroke-width="2.8" stroke-linecap="round"/>
+              </g>
+
+              <!-- ARROW -->
+              <line x1="170" y1="100" x2="200" y2="100" stroke="#7c5cc4" stroke-width="2" stroke-linecap="round"/>
+              <path d="M192 92 L202 100 L192 108" stroke="#7c5cc4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+              <!-- KURZ-ANALYSE CARD MIT AMPEL-BEWERTUNG -->
+              <rect x="214" y="16" width="182" height="168" rx="12" fill="url(#apCardGrad2)" stroke="rgba(179,157,219,0.28)" stroke-width="1"/>
+              <rect x="214" y="16" width="182" height="30" rx="12" fill="url(#apHeaderGrad2)"/>
+              <rect x="214" y="34" width="182" height="12" fill="url(#apHeaderGrad2)"/>
+              <circle cx="230" cy="31" r="5" fill="#f5f3ff"/>
+              <text x="242" y="35" font-family="'DM Sans', sans-serif" font-size="9.5" font-weight="500" fill="#f5f3ff" letter-spacing="0.01em">Digitale Kurz-Analyse</text>
+
+              <g font-family="'DM Sans', sans-serif" font-size="9" fill="#c9c4e0">
+                <circle cx="230" cy="66" r="5" fill="#43a06b"/>
+                <rect x="242" y="62" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+                <text x="282" y="69">Website</text>
+
+                <circle cx="230" cy="90" r="5" fill="#43a06b"/>
+                <rect x="242" y="86" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+                <text x="282" y="93">Google-Profil</text>
+
+                <circle cx="230" cy="114" r="5" fill="#d4a531"/>
+                <rect x="242" y="110" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+                <text x="282" y="117">Bewertungen</text>
+
+                <circle cx="230" cy="138" r="5" fill="#d4685c"/>
+                <rect x="242" y="134" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+                <text x="282" y="141">Kontaktwege</text>
+
+                <circle cx="230" cy="162" r="5" fill="#d4685c"/>
+                <rect x="242" y="158" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+                <text x="282" y="165">Erreichbarkeit</text>
+              </g>
+            </svg>
+            <span class="analyse-caption">So laufen wir Ihren Auftritt einmal durch: Website, Google-Sichtbarkeit, Bewertungen, Kontaktwege und Erreichbarkeit, jeweils mit einer einfachen Ampel bewertet.</span>
+          </div>
+          <div class="analyse-col-form">
+        <form id="analyse-form">
+          <div class="form-group">
+            <label>Firma / Betrieb *</label>
+            <input type="text" id="af-firma" placeholder="Ihr Unternehmen GmbH" required>
+          </div>
+          <div class="form-group">
+            <label>Website-URL *</label>
+            <input type="url" id="af-website" placeholder="https://..." required>
+          </div>
+          <div class="form-group">
+            <label>E-Mail-Adresse *</label>
+            <input type="email" id="af-email" placeholder="max@beispiel.de" required>
+          </div>
+          <div class="form-group">
+            <label>Kurze Info zu Ihrem Betrieb (optional)</label>
+            <textarea id="af-note" placeholder="Gewerk, Region, was Sie sich erhoffen..."></textarea>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;padding:16px;background:rgba(13,27,62,0.4);border:1px solid var(--border);border-radius:8px;">
+            <input type="checkbox" id="af-consent" style="margin-top:3px;flex-shrink:0;accent-color:var(--purple-light);width:16px;height:16px;cursor:pointer;">
+            <label for="af-consent" style="font-size:0.8rem;color:var(--grey);line-height:1.6;cursor:pointer;text-transform:none;letter-spacing:0;">
+              Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung der Kurzanalyse gespeichert und genutzt werden. Weitere Infos in der <a href="datenschutz.html" target="_blank" style="color:var(--accent);">Datenschutzerklärung</a>.
+            </label>
+          </div>
+          <button type="submit" id="af-submit" class="form-submit" disabled>Kostenlose Kurzanalyse anfragen →</button>
+          <div class="af-msg" id="af-msg"></div>
+        </form>
+          </div>
         </div>
       </div>
-      <div class="form-group">
-        <label>Unternehmen *</label>
-        <input type="text" id="f-unternehmen" placeholder="Ihr Unternehmen GmbH" required>
-      </div>
-      <div class="form-group">
-        <label>Ich interessiere mich für *</label>
-        <select id="f-thema">
-          <option>Modell 1 – Digitaler Assistent für Ihre Website</option>
-          <option>Modell 2 – Assistent mit automatischer Kundengewinnung</option>
-          <option>Website – Landingpage</option>
-          <option>Website – Unternehmenswebsite</option>
-          <option>Content – Foto & Grundausstattung (einmalig)</option>
-          <option>Content – laufende Beiträge</option>
-          <option>Bundle – Digitale Rundum-Lösung</option>
-          <option>Ich bin noch unentschieden</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label>Ihre Nachricht (optional)</label>
-        <textarea id="f-nachricht" placeholder="Erzählen Sie uns kurz von Ihrem Unternehmen und Ihren Zielen..."></textarea>
-      </div>
-      <!-- Datenschutz-Einwilligung -->
-      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;padding:16px;background:rgba(13,27,62,0.4);border:1px solid var(--border);border-radius:8px;">
-        <input type="checkbox" id="f-einwilligung" style="margin-top:3px;flex-shrink:0;accent-color:var(--purple-light);width:16px;height:16px;cursor:pointer;">
-        <label for="f-einwilligung" style="font-size:0.8rem;color:var(--grey);line-height:1.6;cursor:pointer;text-transform:none;letter-spacing:0;">
-          Ich stimme zu, dass Lynx Automation Solutions meine angegebenen Daten zur Bearbeitung meiner Anfrage und zur Kontaktaufnahme speichert und verarbeitet. Mir ist bekannt, dass ich diese Einwilligung jederzeit widerrufen kann. Weitere Informationen in der <a href="datenschutz.html" target="_blank" style="color:var(--accent);">Datenschutzerklärung</a>. *
-        </label>
-      </div>
-      <div id="f-error" style="display:none;color:#f08080;font-size:0.83rem;margin-bottom:16px;padding:10px 14px;background:rgba(240,128,128,0.08);border:1px solid rgba(240,128,128,0.2);border-radius:6px;"></div>
-      <button id="f-submit" class="form-submit" onclick="submitLead()">
-        Kostenlos beraten lassen →
-      </button>
     </div>
   </div>
 </section>
@@ -1864,6 +2070,74 @@
       if (!wasOpen) item.classList.add('open');
     });
   });
+
+  // CONTACT TAB SWITCH
+  const contactWrap = document.querySelector('.contact');
+  document.querySelectorAll('.contact-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.contact-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.contact-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.panel).classList.add('active');
+      if (contactWrap) contactWrap.classList.toggle('contact--wide', tab.dataset.panel === 'analyse');
+    });
+  });
+
+  // KURZANALYSE FORMULAR
+  (function() {
+    const form = document.getElementById('analyse-form');
+    if (!form) return;
+    const consent = document.getElementById('af-consent');
+    const submit  = document.getElementById('af-submit');
+    const msg     = document.getElementById('af-msg');
+
+    consent.addEventListener('change', () => { submit.disabled = !consent.checked; });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const firma   = document.getElementById('af-firma').value.trim();
+      const website = document.getElementById('af-website').value.trim();
+      const email   = document.getElementById('af-email').value.trim();
+      const note    = document.getElementById('af-note').value.trim();
+
+      if (!firma || !website || !email) return;
+
+      submit.disabled = true;
+      submit.textContent = 'Wird gesendet…';
+      msg.textContent = '';
+      msg.className = 'af-msg';
+
+      const now = new Date().toISOString();
+      const payload = {
+        name:  firma,
+        phone: '-',
+        email: email,
+        topic: 'Digital-Check-Anfrage',
+        note:  'Website: ' + website + (note ? ' | Info: ' + note : ''),
+        date: now,
+        consentDate: now
+      };
+
+      try {
+        const res = await fetch('/.netlify/functions/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+          form.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns mit der Kurzanalyse bei Ihnen.</div>';
+        } else {
+          throw new Error(data.error || 'Fehler');
+        }
+      } catch (err) {
+        submit.disabled = false;
+        submit.textContent = 'Kostenlose Kurzanalyse anfragen →';
+        msg.textContent = 'Beim Senden ist ein Fehler aufgetreten. Bitte schreiben Sie uns direkt: jonah.kipshagen@lynx-automation.de';
+        msg.className = 'af-msg error';
+      }
+    });
+  })();
 </script>
 
 
@@ -2498,5 +2772,20 @@ async function sendMessage() {
 }
 </script>
 <!-- ── END LYNX CHATBOT ───────────────────────────────────── -->
+
+<button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen">
+  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 19V5M12 5L6 11M12 5L18 11" stroke="#b39ddb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+<script>
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+  backToTop.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
 </body>
 </html>

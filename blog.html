@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2032%2032%22%3E%20%3Crect%20width%3D%2232%22%20height%3D%2232%22%20rx%3D%228%22%20fill%3D%22%230d1b3e%22/%3E%20%3Ctext%20x%3D%2216%22%20y%3D%2223%22%20font-family%3D%22Georgia%2C%20%27Times%20New%20Roman%27%2C%20serif%22%20font-style%3D%22italic%22%20font-weight%3D%22600%22%20font-size%3D%2219%22%20fill%3D%22%23b39ddb%22%20text-anchor%3D%22middle%22%3EL%3C/text%3E%20%3Ccircle%20cx%3D%2224.5%22%20cy%3D%228.5%22%20r%3D%222.6%22%20fill%3D%22%237defa0%22/%3E%20%3C/svg%3E">
 <title>Blog – Digitale Themen für Handwerksbetriebe | Lynx Automation Solutions</title>
 <meta name="description" content="Praxisnahe Artikel zu Website, Chatbot, Google-Bewertungen und digitaler Sichtbarkeit für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL.">
 <meta name="robots" content="index, follow">
@@ -194,7 +195,7 @@
     color: var(--grey); font-size: 0.92rem; margin-bottom: 20px;
   }
   .analyse-preview {
-    flex: 1; min-width: 240px;
+    flex: 1.4; min-width: 280px;
     border: 1px dashed rgba(179,157,219,0.4);
     border-radius: 12px;
     min-height: 200px;
@@ -205,6 +206,17 @@
   }
   .analyse-preview img { max-width: 100%; border-radius: 8px; }
   .analyse-preview .icon { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.6; }
+  .analyse-preview--visual {
+    border-style: solid;
+    border-color: rgba(179,157,219,0.22);
+    background: rgba(13,27,62,0.35);
+    padding: 18px 20px 16px;
+  }
+  .analyse-illustration { width: 100%; max-width: 340px; height: auto; margin-bottom: 12px; }
+  .analyse-caption {
+    font-size: 0.74rem; line-height: 1.55; color: var(--grey);
+    font-weight: 300; max-width: 320px;
+  }
 
   .analyse-form { text-align: left; max-width: 420px; }
   .analyse-form input, .analyse-form textarea {
@@ -376,10 +388,84 @@
       <div class="lead-text">
         <h2>Wie sieht das bei Ihrem Betrieb aus?</h2>
         <p>Schicken Sie mir kurz Ihre Website und ein paar Infos zu Ihrem Betrieb. Wir schauen sie uns persönlich an und schicken Ihnen eine ehrliche Kurzanalyse zurück, kostenlos und unverbindlich, statt einer allgemeinen Checkliste.</p>
-        <div class="analyse-preview">
-          <!-- Beispielbild folgt: hier später <img src="analyse-beispiel.jpg" alt="Beispiel einer Kurzanalyse"> einfügen -->
-          <div class="icon">📄</div>
-          Beispiel einer Kurzanalyse folgt in Kürze
+        <div class="analyse-preview analyse-preview--visual">
+          <svg class="analyse-illustration" viewBox="0 0 420 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schematische Darstellung: Ihre Website und Ihr digitaler Auftritt werden geprüft und in einer Kurz-Analyse mit Ampel-Bewertung für Website, Google-Profil, Bewertungen, Kontaktwege und Erreichbarkeit zusammengefasst.">
+            <defs>
+              <linearGradient id="apCardGrad" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#182757"/>
+                <stop offset="1" stop-color="#101c46"/>
+              </linearGradient>
+              <linearGradient id="apHeaderGrad" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#5b3fa0"/>
+                <stop offset="1" stop-color="#7c5cc4"/>
+              </linearGradient>
+              <radialGradient id="apGlow" cx="0.8" cy="0.15" r="0.6">
+                <stop offset="0" stop-color="#9d7fe0" stop-opacity="0.35"/>
+                <stop offset="1" stop-color="#9d7fe0" stop-opacity="0"/>
+              </radialGradient>
+              <radialGradient id="apGlow2" cx="0.5" cy="0.5" r="0.6">
+                <stop offset="0" stop-color="#9d7fe0" stop-opacity="0.45"/>
+                <stop offset="1" stop-color="#9d7fe0" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+
+            <rect x="1" y="1" width="418" height="198" rx="16" fill="url(#apGlow)" opacity="0.5"/>
+
+            <!-- WEBSITE / AUFTRITT MOCKUP -->
+            <rect x="14" y="26" width="140" height="132" rx="12" fill="url(#apCardGrad)" stroke="rgba(179,157,219,0.28)" stroke-width="1"/>
+            <rect x="14" y="26" width="140" height="26" rx="12" fill="url(#apHeaderGrad)"/>
+            <rect x="14" y="42" width="140" height="10" fill="url(#apHeaderGrad)"/>
+            <circle cx="27" cy="39" r="3.2" fill="#f5f3ff" opacity="0.85"/>
+            <circle cx="37" cy="39" r="3.2" fill="#f5f3ff" opacity="0.55"/>
+            <circle cx="47" cy="39" r="3.2" fill="#f5f3ff" opacity="0.35"/>
+            <rect x="26" y="68" width="96" height="8" rx="4" fill="rgba(245,243,255,0.16)"/>
+            <rect x="26" y="86" width="112" height="8" rx="4" fill="rgba(245,243,255,0.13)"/>
+            <rect x="26" y="104" width="70" height="8" rx="4" fill="rgba(245,243,255,0.13)"/>
+            <rect x="26" y="126" width="60" height="16" rx="5" fill="rgba(179,157,219,0.28)"/>
+            <text x="84" y="177" text-anchor="middle" font-family="'DM Sans', sans-serif" font-size="7.5" fill="#9d92c0">Ihr Auftritt</text>
+
+            <!-- MAGNIFYING GLASS, hovering over the website mockup -->
+            <circle cx="150" cy="40" r="34" fill="url(#apGlow2)"/>
+            <g transform="translate(150,40)">
+              <circle r="26" fill="#101c46" stroke="rgba(179,157,219,0.45)" stroke-width="1"/>
+              <circle r="9.5" cx="-3" cy="-3" fill="none" stroke="#b39ddb" stroke-width="2.6"/>
+              <line x1="4.5" y1="4.5" x2="12" y2="12" stroke="#b39ddb" stroke-width="2.8" stroke-linecap="round"/>
+            </g>
+
+            <!-- ARROW: website wird geprüft -> Ampel-Auswertung -->
+            <line x1="170" y1="100" x2="200" y2="100" stroke="#7c5cc4" stroke-width="2" stroke-linecap="round"/>
+            <path d="M192 92 L202 100 L192 108" stroke="#7c5cc4" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <!-- KURZ-ANALYSE CARD MIT AMPEL-BEWERTUNG -->
+            <rect x="214" y="16" width="182" height="168" rx="12" fill="url(#apCardGrad)" stroke="rgba(179,157,219,0.28)" stroke-width="1"/>
+            <rect x="214" y="16" width="182" height="30" rx="12" fill="url(#apHeaderGrad)"/>
+            <rect x="214" y="34" width="182" height="12" fill="url(#apHeaderGrad)"/>
+            <circle cx="230" cy="31" r="5" fill="#f5f3ff"/>
+            <text x="242" y="35" font-family="'DM Sans', sans-serif" font-size="9.5" font-weight="500" fill="#f5f3ff" letter-spacing="0.01em">Digitale Kurz-Analyse</text>
+
+            <g font-family="'DM Sans', sans-serif" font-size="9" fill="#c9c4e0">
+              <circle cx="230" cy="66" r="5" fill="#43a06b"/>
+              <rect x="242" y="62" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+              <text x="282" y="69">Website</text>
+
+              <circle cx="230" cy="90" r="5" fill="#43a06b"/>
+              <rect x="242" y="86" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+              <text x="282" y="93">Google-Profil</text>
+
+              <circle cx="230" cy="114" r="5" fill="#d4a531"/>
+              <rect x="242" y="110" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+              <text x="282" y="117">Bewertungen</text>
+
+              <circle cx="230" cy="138" r="5" fill="#d4685c"/>
+              <rect x="242" y="134" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+              <text x="282" y="141">Kontaktwege</text>
+
+              <circle cx="230" cy="162" r="5" fill="#d4685c"/>
+              <rect x="242" y="158" width="34" height="7" rx="3.5" fill="rgba(245,243,255,0.16)"/>
+              <text x="282" y="165">Erreichbarkeit</text>
+            </g>
+          </svg>
+          <span class="analyse-caption">So laufen wir Ihren Auftritt einmal durch: Website, Google-Sichtbarkeit, Bewertungen, Kontaktwege und Erreichbarkeit, jeweils mit einer einfachen Ampel bewertet.</span>
         </div>
       </div>
       <form class="analyse-form" id="analyse-form">
