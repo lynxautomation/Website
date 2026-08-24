@@ -2546,10 +2546,17 @@ Ist das DSGVO-konform? → Ja, vollständig datenschutzkonform aufgebaut, inklus
 E-Mail: info@lynx-automation.de
 
 === LEAD-ERFASSUNG ===
-Wenn ein Besucher eine Beratung anfragen, ein Angebot möchte oder Kontakt aufnehmen will, antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag:
+Es gibt zwei unterschiedliche Anliegen, die du auseinanderhalten musst:
+
+1. Der Besucher will eine Beratung, ein Angebot, eine Demo oder generell Kontakt zu einem konkreten Baustein (Assistent, Website, Content, Bundle, Digitale Ordnung als gebuchte Leistung). Antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag:
 [SHOW_LEAD_FORM]
 
-Das System zeigt automatisch ein Kontaktformular an. Frage NICHT nach Name, Telefon oder E-Mail – das übernimmt das Formular.
+2. Der Besucher will erstmal NUR eine kostenlose, unverbindliche Kurzanalyse seines digitalen Auftritts, ohne sich schon für eine Leistung zu entscheiden (z. B. "schaut euch das mal an", "was würdet ihr bei mir verbessern", "kostenlose Analyse"). Antworte kurz und freundlich und schreibe am Ende deiner Antwort EXAKT diesen Tag:
+[SHOW_ANALYSE_FORM]
+
+Im Zweifel, wenn unklar ist, ob jemand nur schauen lassen oder direkt eine Leistung buchen will, frage NICHT extra nach, sondern nutze [SHOW_ANALYSE_FORM] als die niedrigschwelligere Option.
+
+Das System zeigt je nach Tag automatisch das passende Formular an. Frage NICHT selbst nach Name, Telefon, E-Mail, Firma oder Website, das übernimmt das jeweilige Formular.
 
 === TONALITÄT ===
 - Professionell, modern, auf Augenhöhe
@@ -2720,6 +2727,88 @@ function showLeadForm() {
   scrollBottom();
 }
 
+// ── KOSTENLOSE KURZANALYSE FORM ────────────────────────────────────────────
+function showAnalyseForm() {
+  if (formShown) return;
+  formShown = true;
+  chipsEl.style.display = 'none';
+
+  const wrap = document.createElement('div');
+  wrap.className = 'lead-form-wrapper';
+  wrap.innerHTML =
+    '<div class="lead-form">' +
+      '<h3>🔍 Kostenlose Kurzanalyse</h3>' +
+      '<input type="text" id="af2-firma"   placeholder="Firma / Betrieb *" />' +
+      '<input type="url"  id="af2-website" placeholder="Website-URL *" />' +
+      '<input type="email" id="af2-email"  placeholder="E-Mail-Adresse *" />' +
+      '<textarea id="af2-note" placeholder="Kurze Info zu deinem Betrieb (optional)"></textarea>' +
+      '<div class="consent-row">' +
+        '<input type="checkbox" id="af2-consent" />' +
+        '<label for="af2-consent">Ich stimme zu, dass meine Angaben zur Erstellung und Zusendung der Kurzanalyse gespeichert und genutzt werden. Weitere Infos in der <a href="datenschutz.html" target="_blank">Datenschutzerklärung</a>.</label>' +
+      '</div>' +
+      '<button class="lead-submit" id="af2-submit" disabled>Kostenlose Kurzanalyse anfragen</button>' +
+    '</div>';
+  messages.appendChild(wrap);
+  scrollBottom();
+
+  const consentBox = wrap.querySelector('#af2-consent');
+  const submitBtn  = wrap.querySelector('#af2-submit');
+
+  consentBox.addEventListener('change', () => {
+    submitBtn.disabled = !consentBox.checked;
+  });
+
+  submitBtn.addEventListener('click', async () => {
+    const firma   = document.getElementById('af2-firma').value.trim();
+    const website = document.getElementById('af2-website').value.trim();
+    const email   = document.getElementById('af2-email').value.trim();
+    const note    = document.getElementById('af2-note').value.trim();
+
+    if (!firma || !website || !email) {
+      if (!firma)   document.getElementById('af2-firma').style.borderColor   = 'rgba(255,100,100,0.6)';
+      if (!website) document.getElementById('af2-website').style.borderColor = 'rgba(255,100,100,0.6)';
+      if (!email)   document.getElementById('af2-email').style.borderColor   = 'rgba(255,100,100,0.6)';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet…';
+
+    const now = new Date().toISOString();
+    const payload = {
+      name:  firma,
+      phone: '-',
+      email: email,
+      topic: 'Digital-Check-Anfrage',
+      note:  'Website: ' + website + (note ? ' | Info: ' + note : ''),
+      date: now,
+      consentDate: now
+    };
+
+    try {
+      const res  = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (data.success) {
+        wrap.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns mit der Kurzanalyse bei dir.</div>';
+        appendMsg('bot', 'Deine Anfrage ist eingegangen, wir schauen uns deinen Auftritt an und melden uns mit der Kurzanalyse. Bei dringenden Fragen erreichst du uns auch direkt unter info@lynx-automation.de');
+        chipsEl.style.display = 'flex';
+      } else {
+        throw new Error(data.error || 'Fehler');
+      }
+    } catch (err) {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Kostenlose Kurzanalyse anfragen';
+      appendMsg('bot', 'Beim Senden ist ein Fehler aufgetreten. Bitte schreib uns direkt: info@lynx-automation.de');
+    }
+    scrollBottom();
+  });
+  scrollBottom();
+}
+
 // ── SEND MESSAGE ─────────────────────────────────────────────────────────────
 async function sendMessage() {
   const text = userInput.value.trim();
@@ -2751,16 +2840,19 @@ async function sendMessage() {
       reply = 'Entschuldigung, es gab einen technischen Fehler. Bitte versuche es erneut.';
     }
 
-    const showForm = reply.includes('[SHOW_LEAD_FORM]');
+    const showForm    = reply.includes('[SHOW_LEAD_FORM]');
+    const showAnalyse = reply.includes('[SHOW_ANALYSE_FORM]');
 
     const cleanReply = reply
       .replace(/\[SHOW_LEAD_FORM\]/g, '')
+      .replace(/\[SHOW_ANALYSE_FORM\]/g, '')
       .trim();
 
     history.push({ role: 'assistant', content: reply });
 
-    if (cleanReply) appendMsg('bot', formatReply(cleanReply));
-    if (showForm)   showLeadForm();
+    if (cleanReply)  appendMsg('bot', formatReply(cleanReply));
+    if (showAnalyse) showAnalyseForm();
+    else if (showForm) showLeadForm();
 
   } catch (err) {
     removeTyping();
