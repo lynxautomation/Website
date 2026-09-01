@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /.netlify/functions/
 
-Sitemap: https://www.lynx-automation.de/sitemap.xml
+Sitemap: https://lynx-automation.de/sitemap.xml
