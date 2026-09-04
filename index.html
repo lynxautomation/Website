@@ -805,7 +805,8 @@
     font-size: 0.85rem;
     color: var(--grey);
   }
-  .privacy-badge .icon { font-size: 1.2rem; }
+  .privacy-badge .icon { display: flex; align-items: center; color: var(--accent); flex-shrink: 0; }
+  .privacy-badge .icon svg { width: 18px; height: 18px; }
 
   /* FAQ */
   .faq { padding: 120px 60px; max-width: 800px; margin: 0 auto; }
@@ -1632,11 +1633,11 @@
     <h2>DSGVO-konform.<br>Von Anfang an.</h2>
     <p class="section-desc" style="margin:0 auto">Datenschutz ist kein Nachgedanke, er ist Teil jeder Lösung. Alle Daten werden sicher verarbeitet, gespeichert und auf Wunsch gelöscht. Vollständig konform mit der europäischen Datenschutzgrundverordnung.</p>
     <div class="privacy-badges">
-      <div class="privacy-badge"><span class="icon">🇪🇺</span> DSGVO-konform</div>
-      <div class="privacy-badge"><span class="icon">🔐</span> Verschlüsselte Übertragung</div>
-      <div class="privacy-badge"><span class="icon">🗑</span> Datenlöschung auf Anfrage</div>
-      <div class="privacy-badge"><span class="icon">📋</span> Auftragsverarbeitungsvertrag</div>
-      <div class="privacy-badge"><span class="icon">🇩🇪</span> Server in Deutschland</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v6c0 5-3.5 8-7 9-3.5-1-7-4-7-9V6l7-3Z"/><path d="M9 12l2 2 4-4"/></svg></span> DSGVO-konform</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span> Verschlüsselte Übertragung</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M4 7h16"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></span> Datenlöschung auf Anfrage</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h4"/></svg></span> Auftragsverarbeitungsvertrag</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><circle cx="8" cy="7" r="0.6" fill="currentColor"/><circle cx="8" cy="17" r="0.6" fill="currentColor"/></svg></span> Server in Deutschland</div>
     </div>
   </div>
 </section>
