@@ -63,12 +63,35 @@
 
   main {
     position: relative; z-index: 1;
-    max-width: 900px; margin: 0 auto;
-    padding: 64px 40px 100px;
+    max-width: 1180px; margin: 0 auto;
+    padding: 0;
   }
   .loading-state { text-align: center; padding: 100px 20px; color: var(--grey); }
   #dashboardContent { display: none; }
-  #dashboardContent.active { display: block; }
+  #dashboardContent.active { display: flex; align-items: flex-start; }
+
+  /* SIDEBAR */
+  .dash-sidebar {
+    width: 220px; flex-shrink: 0;
+    padding: 44px 20px 40px 40px;
+    display: flex; flex-direction: column; gap: 4px;
+    position: sticky; top: 0;
+  }
+  .dash-nav-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 12px 16px; border-radius: 10px;
+    color: var(--grey); text-decoration: none;
+    font-size: 0.88rem; font-family: 'DM Sans', sans-serif;
+    background: none; border: none; cursor: pointer; text-align: left;
+    transition: background 0.2s, color 0.2s;
+  }
+  .dash-nav-item svg { width: 17px; height: 17px; flex-shrink: 0; }
+  .dash-nav-item:hover { color: var(--white); background: rgba(179,157,219,0.08); }
+  .dash-nav-item.active { color: var(--accent); background: rgba(91,63,160,0.18); }
+
+  .dash-main { flex: 1; min-width: 0; padding: 44px 40px 100px 36px; border-left: 1px solid var(--border); }
+  .dash-view { display: none; }
+  .dash-view.active { display: block; }
 
   .welcome-label {
     font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
@@ -76,69 +99,131 @@
   }
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 2.8rem);
-    font-weight: 300; margin-bottom: 40px;
+    font-size: clamp(1.8rem, 3.4vw, 2.4rem);
+    font-weight: 300; margin-bottom: 32px;
   }
   h1 em { font-style: italic; color: var(--accent); }
 
   .info-grid {
     display: grid; grid-template-columns: 1fr 1fr;
-    gap: 20px; margin-bottom: 40px;
+    gap: 16px; margin-bottom: 40px;
   }
   .info-card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 14px; padding: 24px 26px;
+    border-radius: 14px; padding: 20px 24px;
   }
   .info-card .label {
-    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
-    color: var(--grey); margin-bottom: 8px; display: block;
+    font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--grey); margin-bottom: 6px; display: block;
   }
   .info-card .value {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 500; color: var(--white);
+    font-size: 1.3rem; font-weight: 500; color: var(--white);
   }
 
   .section-title {
     font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: var(--grey); margin-bottom: 18px;
+    color: var(--grey); margin-bottom: 16px; margin-top: 40px;
   }
+  .section-title:first-of-type { margin-top: 0; }
+
+  /* PRODUKTE — kompakt (Übersicht) */
   .products-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 16px; margin-bottom: 48px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
   }
   .product-card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 12px; padding: 20px;
+    border-radius: 12px; padding: 18px;
     display: flex; align-items: center; gap: 14px;
-    opacity: 0.35;
+    opacity: 0.4;
   }
   .product-card.booked { opacity: 1; border-color: rgba(179,157,219,0.4); }
   .product-icon {
-    width: 36px; height: 36px; border-radius: 9px;
+    width: 34px; height: 34px; border-radius: 9px;
     background: rgba(91,63,160,0.25);
     display: flex; align-items: center; justify-content: center;
     color: var(--accent); flex-shrink: 0;
   }
-  .product-icon svg { width: 18px; height: 18px; }
-  .product-name { font-size: 0.9rem; font-weight: 500; }
-  .product-status { font-size: 0.72rem; color: var(--grey); margin-top: 2px; }
+  .product-icon svg { width: 17px; height: 17px; }
+  .product-name { font-size: 0.88rem; font-weight: 500; }
+  .product-status { font-size: 0.7rem; color: var(--grey); margin-top: 2px; }
   .product-card.booked .product-status { color: var(--green); }
+
+  /* PRODUKTE — ausführlich (Dienstleistungen) */
+  .product-detail-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 26px; margin-bottom: 16px;
+    display: flex; gap: 18px; opacity: 0.45;
+  }
+  .product-detail-card.booked { opacity: 1; border-color: rgba(179,157,219,0.4); }
+  .product-detail-card .product-icon { width: 42px; height: 42px; }
+  .product-detail-card .product-icon svg { width: 20px; height: 20px; }
+  .product-detail-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+  .product-detail-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--white); }
+  .status-pill {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+    padding: 4px 12px; border-radius: 100px;
+    color: var(--grey); border: 1px solid var(--border);
+  }
+  .status-pill.active { color: var(--green); border-color: rgba(125,239,160,0.35); background: rgba(125,239,160,0.08); }
+  .product-detail-card p { font-size: 0.85rem; color: var(--grey); line-height: 1.65; font-weight: 300; }
+
+  /* ANALYTICS — leere Zustände bis Google verbunden ist */
+  .analytics-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .analytics-card {
+    background: var(--card-bg); border: 1px dashed rgba(179,157,219,0.3);
+    border-radius: 14px; padding: 26px; text-align: center;
+  }
+  .analytics-card .a-icon {
+    width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 16px;
+    background: rgba(91,63,160,0.18);
+    display: flex; align-items: center; justify-content: center; color: var(--accent);
+  }
+  .analytics-card .a-icon svg { width: 19px; height: 19px; }
+  .analytics-card h4 { font-size: 0.92rem; font-weight: 500; margin-bottom: 6px; }
+  .analytics-card p { font-size: 0.78rem; color: var(--grey); line-height: 1.6; margin-bottom: 18px; font-weight: 300; }
+  .connect-btn {
+    display: inline-block; font-size: 0.78rem; color: var(--grey);
+    border: 1px solid var(--border); padding: 9px 18px; border-radius: 100px;
+    cursor: default; opacity: 0.7;
+  }
 
   .empty-note {
     background: rgba(91,63,160,0.1); border: 1px solid rgba(179,157,219,0.2);
     border-radius: 12px; padding: 24px; color: var(--grey);
     font-size: 0.88rem; line-height: 1.7; text-align: center;
   }
-
   .files-placeholder {
     background: var(--card-bg); border: 1px dashed rgba(179,157,219,0.3);
     border-radius: 14px; padding: 40px; text-align: center;
     color: var(--grey); font-size: 0.88rem;
   }
 
-  @media (max-width: 700px) {
-    nav { padding: 16px 24px; }
-    main { padding: 44px 24px 80px; }
+  /* HILFE */
+  .help-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 32px; max-width: 460px;
+  }
+  .help-card p { color: var(--grey); font-size: 0.9rem; line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
+  .help-email {
+    display: inline-flex; align-items: center; gap: 10px;
+    color: var(--white); text-decoration: none; font-size: 0.92rem;
+    border: 1px solid rgba(179,157,219,0.3); padding: 12px 22px; border-radius: 8px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .help-email:hover { border-color: var(--accent); background: rgba(179,157,219,0.08); }
+
+  @media (max-width: 800px) {
+    #dashboardContent.active { flex-direction: column; }
+    .dash-sidebar {
+      position: static; width: 100%; flex-direction: row; overflow-x: auto;
+      padding: 20px 24px; border-bottom: 1px solid var(--border);
+    }
+    .dash-main { padding: 32px 24px 80px; border-left: none; }
     .info-grid { grid-template-columns: 1fr; }
   }
 </style>
@@ -155,25 +240,94 @@
   <div class="loading-state" id="loadingState">Wird geladen…</div>
 
   <div id="dashboardContent">
-    <span class="welcome-label">Kundenportal</span>
-    <h1>Willkommen, <em id="firmaName">–</em></h1>
+    <aside class="dash-sidebar">
+      <button class="dash-nav-item active" data-view="uebersicht">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+        Übersicht
+      </button>
+      <button class="dash-nav-item" data-view="dienstleistungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 13l9 5 9-5"/></svg>
+        Dienstleistungen
+      </button>
+      <button class="dash-nav-item" data-view="rechnungen">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
+        Rechnungen
+      </button>
+      <button class="dash-nav-item" data-view="hilfe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.8 1c0 1.5-2.3 1.8-2.3 3.2"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg>
+        Hilfe
+      </button>
+    </aside>
 
-    <div class="info-grid">
-      <div class="info-card">
-        <span class="label">Kundennummer</span>
-        <div class="value" id="kundennummer">–</div>
+    <div class="dash-main">
+
+      <!-- ÜBERSICHT -->
+      <div class="dash-view active" id="view-uebersicht">
+        <span class="welcome-label">Kundenportal</span>
+        <h1>Willkommen, <em id="firmaName">–</em></h1>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <span class="label">Kundennummer</span>
+            <div class="value" id="kundennummer">–</div>
+          </div>
+          <div class="info-card">
+            <span class="label">Domain</span>
+            <div class="value" id="domain">–</div>
+          </div>
+        </div>
+
+        <div class="section-title">Ihre gebuchten Leistungen</div>
+        <div class="products-grid" id="productsGridCompact"></div>
+
+        <div class="section-title">Analytics</div>
+        <div class="analytics-grid">
+          <div class="analytics-card">
+            <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M12 19V5M20 19v-6"/></svg></div>
+            <h4>Besucher</h4>
+            <p>Sobald Google Analytics verbunden ist, siehst du hier Besucherzahlen und Trends.</p>
+            <span class="connect-btn">Noch nicht verbunden</span>
+          </div>
+          <div class="analytics-card">
+            <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
+            <h4>Google-Suchbegriffe</h4>
+            <p>Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
+            <span class="connect-btn">Noch nicht verbunden</span>
+          </div>
+          <div class="analytics-card">
+            <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg></div>
+            <h4>Chatbot-Gespräche</h4>
+            <p>Anzahl geführter Gespräche und Anfragen über deinen digitalen Assistenten. Erfassung folgt im nächsten Ausbauschritt.</p>
+            <span class="connect-btn">Noch keine Daten</span>
+          </div>
+        </div>
       </div>
-      <div class="info-card">
-        <span class="label">Domain</span>
-        <div class="value" id="domain">–</div>
+
+      <!-- DIENSTLEISTUNGEN -->
+      <div class="dash-view" id="view-dienstleistungen">
+        <span class="welcome-label">Kundenportal</span>
+        <h1>Dienstleistungen</h1>
+        <div id="productsDetailList"></div>
       </div>
+
+      <!-- RECHNUNGEN -->
+      <div class="dash-view" id="view-rechnungen">
+        <span class="welcome-label">Kundenportal</span>
+        <h1>Rechnungen</h1>
+        <div class="files-placeholder">Noch keine Rechnungen hochgeladen. Sobald deine erste Rechnung bereitsteht, erscheint sie automatisch hier.</div>
+      </div>
+
+      <!-- HILFE -->
+      <div class="dash-view" id="view-hilfe">
+        <span class="welcome-label">Kundenportal</span>
+        <h1>Hilfe & Support</h1>
+        <div class="help-card">
+          <p>Fragen zu deiner Website, dem Chatbot oder einer Rechnung? Schreib uns direkt, wir antworten in der Regel innerhalb eines Werktags.</p>
+          <a href="mailto:jonah.kipshagen@lynx-automation.de" class="help-email">✉ jonah.kipshagen@lynx-automation.de</a>
+        </div>
+      </div>
+
     </div>
-
-    <div class="section-title">Ihre gebuchten Leistungen</div>
-    <div class="products-grid" id="productsGrid"><!-- wird per JS befüllt --></div>
-
-    <div class="section-title">Dateien</div>
-    <div class="files-placeholder">Die Dateiablage folgt im nächsten Ausbauschritt.</div>
   </div>
 </main>
 
@@ -184,12 +338,22 @@
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const PRODUCT_DEFS = [
-    { key: 'digitale_ordnung', name: 'Digitale Ordnung', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>' },
-    { key: 'chatbot', name: 'Digitaler Assistent', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 6V4M16 6V4"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>' },
-    { key: 'website',    name: 'Website',            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>' },
-    { key: 'hosting',    name: 'Website-Service',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/></svg>' },
-    { key: 'seo',        name: 'Content & Fotos',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><path d="M4 16l4-4 3 3 5-5 4 4"/></svg>' }
+    { key: 'digitale_ordnung', name: 'Digitale Ordnung', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>', desc: 'Bestehende Profile (Google, Social Media, Register) geprüft und vereinheitlicht.' },
+    { key: 'chatbot', name: 'Digitaler Assistent', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 6V4M16 6V4"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>', desc: 'Beantwortet Kundenanfragen auf deiner Website rund um die Uhr, auch nachts und am Wochenende.' },
+    { key: 'website',    name: 'Website',            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>', desc: 'Deine individuelle Website, für Handy und Computer optimiert.' },
+    { key: 'hosting',    name: 'Website-Service',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/></svg>', desc: 'Hosting, Domain, Sicherheitsupdates und kleine inhaltliche Änderungen.' },
+    { key: 'seo',        name: 'Content & Fotos',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><path d="M4 16l4-4 3 3 5-5 4 4"/></svg>', desc: 'Laufende Beiträge und Fotos für Google-Profil und Social-Media-Kanäle.' }
   ];
+
+  // SIDEBAR-NAVIGATION
+  document.querySelectorAll('.dash-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.dash-view').forEach(v => v.classList.remove('active'));
+      item.classList.add('active');
+      document.getElementById('view-' + item.dataset.view).classList.add('active');
+    });
+  });
 
   async function loadDashboard() {
     const { data: sessionData } = await supabaseClient.auth.getSession();
@@ -218,14 +382,31 @@
     document.getElementById('kundennummer').textContent = customer.kundennummer;
     document.getElementById('domain').textContent = customer.domain || '–';
 
-    const grid = document.getElementById('productsGrid');
-    grid.innerHTML = PRODUCT_DEFS.map(p => {
+    // Kompakte Ansicht (Übersicht)
+    const compactGrid = document.getElementById('productsGridCompact');
+    compactGrid.innerHTML = PRODUCT_DEFS.map(p => {
       const booked = !!customer[p.key];
       return `<div class="product-card ${booked ? 'booked' : ''}">
         <div class="product-icon">${p.icon}</div>
         <div>
           <div class="product-name">${p.name}</div>
           <div class="product-status">${booked ? 'Aktiv' : 'Nicht gebucht'}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // Ausführliche Ansicht (Dienstleistungen)
+    const detailList = document.getElementById('productsDetailList');
+    detailList.innerHTML = PRODUCT_DEFS.map(p => {
+      const booked = !!customer[p.key];
+      return `<div class="product-detail-card ${booked ? 'booked' : ''}">
+        <div class="product-icon">${p.icon}</div>
+        <div style="flex:1;">
+          <div class="product-detail-top">
+            <h3>${p.name}</h3>
+            <span class="status-pill ${booked ? 'active' : ''}">${booked ? 'Aktiv' : 'Nicht gebucht'}</span>
+          </div>
+          <p>${p.desc}</p>
         </div>
       </div>`;
     }).join('');
