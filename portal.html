@@ -193,15 +193,6 @@
       </div>
     </div>
 
-    <!-- EINGELOGGT-ANSICHT (Platzhalter, bis das Dashboard gebaut ist) -->
-    <div class="logged-in-view" id="loggedInView">
-      <span class="login-label">Kundenportal</span>
-      <h1>Angemeldet</h1>
-      <p class="login-sub">Eingeloggt als <span class="customer-email" id="userEmail"></span></p>
-      <p class="login-sub" style="margin-top:-16px;">Das eigentliche Dashboard folgt in Kürze – Login-Bereich funktioniert schon mal.</p>
-      <button class="logout-btn" id="logoutBtn">Abmelden</button>
-    </div>
-
   </div>
 </main>
 
@@ -215,12 +206,9 @@
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   const loginFormView = document.getElementById('loginFormView');
-  const loggedInView  = document.getElementById('loggedInView');
   const loginForm     = document.getElementById('loginForm');
   const loginBtn      = document.getElementById('loginBtn');
   const msgBox        = document.getElementById('msgBox');
-  const userEmailEl   = document.getElementById('userEmail');
-  const logoutBtn     = document.getElementById('logoutBtn');
   const forgotLink    = document.getElementById('forgotLink');
 
   function showMsg(text, type) {
@@ -228,22 +216,11 @@
     msgBox.className = 'msg ' + type;
   }
 
-  function showLoggedIn(email) {
-    loginFormView.classList.add('hidden');
-    loggedInView.classList.add('active');
-    userEmailEl.textContent = email;
-  }
-
-  function showLoginForm() {
-    loginFormView.classList.remove('hidden');
-    loggedInView.classList.remove('active');
-  }
-
   // Beim Laden prüfen, ob schon eine aktive Sitzung besteht
   async function checkSession() {
     const { data } = await supabaseClient.auth.getSession();
     if (data.session) {
-      showLoggedIn(data.session.user.email);
+      window.location.href = 'dashboard.html';
     }
   }
   checkSession();
@@ -267,12 +244,7 @@
       return;
     }
 
-    showLoggedIn(data.user.email);
-  });
-
-  logoutBtn.addEventListener('click', async () => {
-    await supabaseClient.auth.signOut();
-    showLoginForm();
+    window.location.href = 'dashboard.html';
   });
 
   forgotLink.addEventListener('click', async (e) => {

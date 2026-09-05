@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<title>Dashboard – Lynx Automation</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --purple: #5b3fa0;
+    --purple-light: #7c5cc4;
+    --purple-glow: #9d7fe0;
+    --accent: #b39ddb;
+    --white: #f5f3ff;
+    --grey: #a0a0b8;
+    --card-bg: rgba(22, 36, 84, 0.55);
+    --border: rgba(179, 157, 219, 0.15);
+    --green: #7defa0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+  .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bg-mesh::before {
+    content: ''; position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,63,160,0.25) 0%, transparent 70%);
+    top: -120px; left: -120px;
+  }
+  nav {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--white); text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .logout-link {
+    color: var(--grey); text-decoration: none; font-size: 0.85rem;
+    background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  }
+  .logout-link:hover { color: var(--white); }
+
+  main {
+    position: relative; z-index: 1;
+    max-width: 900px; margin: 0 auto;
+    padding: 64px 40px 100px;
+  }
+  .loading-state { text-align: center; padding: 100px 20px; color: var(--grey); }
+  #dashboardContent { display: none; }
+  #dashboardContent.active { display: block; }
+
+  .welcome-label {
+    font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--purple-glow); margin-bottom: 10px; display: block;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 300; margin-bottom: 40px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+
+  .info-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-bottom: 40px;
+  }
+  .info-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 14px; padding: 24px 26px;
+  }
+  .info-card .label {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--grey); margin-bottom: 8px; display: block;
+  }
+  .info-card .value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 500; color: var(--white);
+  }
+
+  .section-title {
+    font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--grey); margin-bottom: 18px;
+  }
+  .products-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px; margin-bottom: 48px;
+  }
+  .product-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px;
+    display: flex; align-items: center; gap: 14px;
+    opacity: 0.35;
+  }
+  .product-card.booked { opacity: 1; border-color: rgba(179,157,219,0.4); }
+  .product-icon {
+    width: 36px; height: 36px; border-radius: 9px;
+    background: rgba(91,63,160,0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); flex-shrink: 0;
+  }
+  .product-icon svg { width: 18px; height: 18px; }
+  .product-name { font-size: 0.9rem; font-weight: 500; }
+  .product-status { font-size: 0.72rem; color: var(--grey); margin-top: 2px; }
+  .product-card.booked .product-status { color: var(--green); }
+
+  .empty-note {
+    background: rgba(91,63,160,0.1); border: 1px solid rgba(179,157,219,0.2);
+    border-radius: 12px; padding: 24px; color: var(--grey);
+    font-size: 0.88rem; line-height: 1.7; text-align: center;
+  }
+
+  .files-placeholder {
+    background: var(--card-bg); border: 1px dashed rgba(179,157,219,0.3);
+    border-radius: 14px; padding: 40px; text-align: center;
+    color: var(--grey); font-size: 0.88rem;
+  }
+
+  @media (max-width: 700px) {
+    nav { padding: 16px 24px; }
+    main { padding: 44px 24px 80px; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav>
+  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
+  <button class="logout-link" id="logoutBtn">Abmelden</button>
+</nav>
+
+<main>
+  <div class="loading-state" id="loadingState">Wird geladen…</div>
+
+  <div id="dashboardContent">
+    <span class="welcome-label">Kundenportal</span>
+    <h1>Willkommen, <em id="firmaName">–</em></h1>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <span class="label">Kundennummer</span>
+        <div class="value" id="kundennummer">–</div>
+      </div>
+      <div class="info-card">
+        <span class="label">Domain</span>
+        <div class="value" id="domain">–</div>
+      </div>
+    </div>
+
+    <div class="section-title">Ihre gebuchten Leistungen</div>
+    <div class="products-grid" id="productsGrid"><!-- wird per JS befüllt --></div>
+
+    <div class="section-title">Dateien</div>
+    <div class="files-placeholder">Die Dateiablage folgt im nächsten Ausbauschritt.</div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const PRODUCT_DEFS = [
+    { key: 'digitale_ordnung', name: 'Digitale Ordnung', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>' },
+    { key: 'chatbot', name: 'Digitaler Assistent', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 6V4M16 6V4"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>' },
+    { key: 'website',    name: 'Website',            icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 9h18"/></svg>' },
+    { key: 'hosting',    name: 'Website-Service',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/></svg>' },
+    { key: 'seo',        name: 'Content & Fotos',     icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><circle cx="9" cy="10" r="1.5" fill="currentColor"/><path d="M4 16l4-4 3 3 5-5 4 4"/></svg>' }
+  ];
+
+  async function loadDashboard() {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (!sessionData.session) {
+      window.location.href = 'portal.html';
+      return;
+    }
+
+    const userId = sessionData.session.user.id;
+    const { data: customer, error } = await supabaseClient
+      .from('customers')
+      .select('*')
+      .eq('user_id', userId)
+      .single();
+
+    document.getElementById('loadingState').style.display = 'none';
+
+    if (error || !customer) {
+      document.getElementById('dashboardContent').innerHTML =
+        '<div class="empty-note">Für dieses Konto ist noch kein Kundendatensatz hinterlegt. Bitte wende dich an Lynx Automation, damit dein Zugang eingerichtet wird.</div>';
+      document.getElementById('dashboardContent').classList.add('active');
+      return;
+    }
+
+    document.getElementById('firmaName').textContent = customer.firma;
+    document.getElementById('kundennummer').textContent = customer.kundennummer;
+    document.getElementById('domain').textContent = customer.domain || '–';
+
+    const grid = document.getElementById('productsGrid');
+    grid.innerHTML = PRODUCT_DEFS.map(p => {
+      const booked = !!customer[p.key];
+      return `<div class="product-card ${booked ? 'booked' : ''}">
+        <div class="product-icon">${p.icon}</div>
+        <div>
+          <div class="product-name">${p.name}</div>
+          <div class="product-status">${booked ? 'Aktiv' : 'Nicht gebucht'}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+    document.getElementById('dashboardContent').classList.add('active');
+  }
+
+  loadDashboard();
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+    window.location.href = 'portal.html';
+  });
+</script>
+</body>
+</html>
