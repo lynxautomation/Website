@@ -63,7 +63,7 @@
 
   main {
     position: relative; z-index: 1;
-    max-width: 1180px; margin: 0 auto;
+    max-width: 1440px; margin: 0 auto;
     padding: 0;
   }
   .loading-state { text-align: center; padding: 100px 20px; color: var(--grey); }
@@ -72,8 +72,8 @@
 
   /* SIDEBAR */
   .dash-sidebar {
-    width: 220px; flex-shrink: 0;
-    padding: 44px 20px 40px 40px;
+    width: 200px; flex-shrink: 0;
+    padding: 44px 16px 40px 24px;
     display: flex; flex-direction: column; gap: 4px;
     position: sticky; top: 0;
   }
@@ -89,7 +89,7 @@
   .dash-nav-item:hover { color: var(--white); background: rgba(179,157,219,0.08); }
   .dash-nav-item.active { color: var(--accent); background: rgba(91,63,160,0.18); }
 
-  .dash-main { flex: 1; min-width: 0; padding: 44px 40px 100px 36px; border-left: 1px solid var(--border); }
+  .dash-main { flex: 1; min-width: 0; padding: 44px 56px 100px 40px; border-left: 1px solid var(--border); }
   .dash-view { display: none; }
   .dash-view.active { display: block; }
 
@@ -150,46 +150,66 @@
   .product-status { font-size: 0.7rem; color: var(--grey); margin-top: 2px; }
   .product-card.booked .product-status { color: var(--green); }
 
-  /* PRODUKTE — ausführlich (Dienstleistungen) */
-  .product-detail-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 14px; padding: 26px; margin-bottom: 16px;
-    display: flex; gap: 18px; opacity: 0.45;
+  /* PRODUKTE — ausführlich (Dienstleistungen), Zeilen-Liste mit Status-Punkt */
+  .service-list { display: flex; flex-direction: column; }
+  .service-row {
+    display: flex; align-items: center; gap: 24px;
+    padding: 26px 4px;
+    border-bottom: 1px solid var(--border);
   }
-  .product-detail-card.booked { opacity: 1; border-color: rgba(179,157,219,0.4); }
-  .product-detail-card .product-icon { width: 42px; height: 42px; }
-  .product-detail-card .product-icon svg { width: 20px; height: 20px; }
-  .product-detail-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
-  .product-detail-card h3 { font-size: 1.05rem; font-weight: 500; color: var(--white); }
-  .status-pill {
-    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
-    padding: 4px 12px; border-radius: 100px;
-    color: var(--grey); border: 1px solid var(--border);
+  .service-row:last-child { border-bottom: none; }
+  .service-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    background: rgba(91,63,160,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(179,157,219,0.5);
   }
-  .status-pill.active { color: var(--green); border-color: rgba(125,239,160,0.35); background: rgba(125,239,160,0.08); }
-  .product-detail-card p { font-size: 0.85rem; color: var(--grey); line-height: 1.65; font-weight: 300; }
+  .service-row.booked .service-icon { background: rgba(91,63,160,0.3); color: var(--accent); }
+  .service-icon svg { width: 19px; height: 19px; }
+  .service-body { flex: 1; min-width: 0; }
+  .service-body h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 500;
+    color: rgba(245,243,255,0.45); margin-bottom: 4px;
+  }
+  .service-row.booked .service-body h3 { color: var(--white); }
+  .service-body p { font-size: 0.85rem; color: var(--grey); line-height: 1.6; font-weight: 300; max-width: 480px; }
+  .service-status {
+    display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+    font-size: 0.78rem; color: var(--grey); letter-spacing: 0.02em;
+  }
+  .service-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: rgba(160,160,184,0.3);
+  }
+  .service-row.booked .service-status { color: var(--green); }
+  .service-row.booked .service-dot {
+    background: var(--green);
+    box-shadow: 0 0 10px rgba(125,239,160,0.7);
+  }
 
-  /* ANALYTICS — leere Zustände bis Google verbunden ist */
-  .analytics-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
+  /* ANALYTICS — leere Zustände bis Google verbunden ist, volle Breite gestapelt */
+  .analytics-list { display: flex; flex-direction: column; }
+  .analytics-row {
+    display: flex; align-items: center; gap: 22px;
+    padding: 24px 4px;
+    border-bottom: 1px solid var(--border);
   }
-  .analytics-card {
-    background: var(--card-bg); border: 1px dashed rgba(179,157,219,0.3);
-    border-radius: 14px; padding: 26px; text-align: center;
-  }
-  .analytics-card .a-icon {
-    width: 40px; height: 40px; border-radius: 10px; margin: 0 auto 16px;
+  .analytics-row:last-child { border-bottom: none; }
+  .analytics-row .a-icon {
+    width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
     background: rgba(91,63,160,0.18);
     display: flex; align-items: center; justify-content: center; color: var(--accent);
   }
-  .analytics-card .a-icon svg { width: 19px; height: 19px; }
-  .analytics-card h4 { font-size: 0.92rem; font-weight: 500; margin-bottom: 6px; }
-  .analytics-card p { font-size: 0.78rem; color: var(--grey); line-height: 1.6; margin-bottom: 18px; font-weight: 300; }
+  .analytics-row .a-icon svg { width: 20px; height: 20px; }
+  .analytics-row-body { flex: 1; min-width: 0; }
+  .analytics-row h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+  .analytics-row p { font-size: 0.82rem; color: var(--grey); line-height: 1.6; font-weight: 300; max-width: 520px; }
   .connect-btn {
-    display: inline-block; font-size: 0.78rem; color: var(--grey);
-    border: 1px solid var(--border); padding: 9px 18px; border-radius: 100px;
-    cursor: default; opacity: 0.7;
+    flex-shrink: 0;
+    font-size: 0.76rem; color: var(--grey);
+    border: 1px solid var(--border); padding: 8px 16px; border-radius: 100px;
+    white-space: nowrap;
   }
 
   .empty-note {
@@ -281,23 +301,29 @@
         <div class="products-grid" id="productsGridCompact"></div>
 
         <div class="section-title">Analytics</div>
-        <div class="analytics-grid">
-          <div class="analytics-card">
+        <div class="analytics-list">
+          <div class="analytics-row">
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V9M12 19V5M20 19v-6"/></svg></div>
-            <h4>Besucher</h4>
-            <p>Sobald Google Analytics verbunden ist, siehst du hier Besucherzahlen und Trends.</p>
+            <div class="analytics-row-body">
+              <h4>Besucher</h4>
+              <p>Sobald Google Analytics verbunden ist, siehst du hier Besucherzahlen und Trends.</p>
+            </div>
             <span class="connect-btn">Noch nicht verbunden</span>
           </div>
-          <div class="analytics-card">
+          <div class="analytics-row">
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-            <h4>Google-Suchbegriffe</h4>
-            <p>Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
+            <div class="analytics-row-body">
+              <h4>Google-Suchbegriffe</h4>
+              <p>Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
+            </div>
             <span class="connect-btn">Noch nicht verbunden</span>
           </div>
-          <div class="analytics-card">
+          <div class="analytics-row">
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg></div>
-            <h4>Chatbot-Gespräche</h4>
-            <p>Anzahl geführter Gespräche und Anfragen über deinen digitalen Assistenten. Erfassung folgt im nächsten Ausbauschritt.</p>
+            <div class="analytics-row-body">
+              <h4>Chatbot-Gespräche</h4>
+              <p>Anzahl geführter Gespräche und Anfragen über deinen digitalen Assistenten. Erfassung folgt im nächsten Ausbauschritt.</p>
+            </div>
             <span class="connect-btn">Noch keine Daten</span>
           </div>
         </div>
@@ -307,7 +333,7 @@
       <div class="dash-view" id="view-dienstleistungen">
         <span class="welcome-label">Kundenportal</span>
         <h1>Dienstleistungen</h1>
-        <div id="productsDetailList"></div>
+        <div class="service-list" id="productsDetailList"></div>
       </div>
 
       <!-- RECHNUNGEN -->
@@ -399,14 +425,15 @@
     const detailList = document.getElementById('productsDetailList');
     detailList.innerHTML = PRODUCT_DEFS.map(p => {
       const booked = !!customer[p.key];
-      return `<div class="product-detail-card ${booked ? 'booked' : ''}">
-        <div class="product-icon">${p.icon}</div>
-        <div style="flex:1;">
-          <div class="product-detail-top">
-            <h3>${p.name}</h3>
-            <span class="status-pill ${booked ? 'active' : ''}">${booked ? 'Aktiv' : 'Nicht gebucht'}</span>
-          </div>
+      return `<div class="service-row ${booked ? 'booked' : ''}">
+        <div class="service-icon">${p.icon}</div>
+        <div class="service-body">
+          <h3>${p.name}</h3>
           <p>${p.desc}</p>
+        </div>
+        <div class="service-status">
+          <span class="service-dot"></span>
+          ${booked ? 'Aktiv' : 'Nicht gebucht'}
         </div>
       </div>`;
     }).join('');
