@@ -169,6 +169,15 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .nav-cta:hover { border-color: var(--accent); background: rgba(179,157,219,0.08); }
+  .nav-portal {
+    color: var(--accent) !important;
+    font-size: 0.82rem !important;
+    border: 1px solid rgba(179,157,219,0.4);
+    padding: 8px 18px;
+    border-radius: 100px;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .nav-portal:hover { color: var(--white) !important; background: rgba(179,157,219,0.12); border-color: var(--accent); }
 
   /* SECTIONS */
   section { position: relative; z-index: 1; }
@@ -777,9 +786,10 @@
     background: rgba(91,63,160,0.2);
     border-radius: 10px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem;
+    color: var(--accent);
     margin-bottom: 20px;
   }
+  .benefit-icon svg { width: 20px; height: 20px; }
   .benefit-card h4 {
     font-size: 1rem;
     font-weight: 500;
@@ -1114,6 +1124,7 @@
     <li><a href="blog.html">Blog</a></li>
     <li><a href="referenzen.html">Referenzen</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><a href="portal.html" class="nav-portal">Kundenportal</a></li>
     <li><a href="#contact" class="nav-cta">Demo buchen</a></li>
   </ul>
 </nav>
@@ -1593,32 +1604,32 @@
     </div>
     <div class="benefits-grid">
       <div class="benefit-card">
-        <div class="benefit-icon">⏱</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
         <h4>Zeitersparnis täglich</h4>
         <p>Wiederkehrende Fragen beantwortet der Chatbot automatisch, Content-Material liefern wir fertig. Ihr Team kann sich auf das Kerngeschäft konzentrieren.</p>
       </div>
       <div class="benefit-card">
-        <div class="benefit-icon">🎯</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
         <h4>Qualifizierte Leads</h4>
         <p>Der Chatbot qualifiziert Interessenten durch gezielte Fragen, bevor er deren Daten weitergibt. Sie sprechen nur mit echten Kaufinteressenten.</p>
       </div>
       <div class="benefit-card">
-        <div class="benefit-icon">🌙</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></div>
         <h4>24/7 Erreichbarkeit</h4>
         <p>Kunden erhalten auch nachts, am Wochenende und an Feiertagen sofort alle Informationen, die sie brauchen.</p>
       </div>
       <div class="benefit-card">
-        <div class="benefit-icon">🔄</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.6-4.5M4 13a8 8 0 0 0 14.6 4.5"/><path d="M4 4v4h4"/><path d="M20 20v-4h-4"/></svg></div>
         <h4>Immer aktuell</h4>
         <p>Wöchentliche Chatbot-Updates und laufender Content sorgen dafür, dass Ihre digitale Präsenz nie veraltet wirkt.</p>
       </div>
       <div class="benefit-card">
-        <div class="benefit-icon">🤝</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 13l9 5 9-5"/></svg></div>
         <h4>Professioneller Auftritt</h4>
         <p>Website, Bildmaterial und Content greifen ineinander. Kunden erleben ein stimmiges Bild Ihres Unternehmens, statt loser Einzelteile.</p>
       </div>
       <div class="benefit-card">
-        <div class="benefit-icon">📊</div>
+        <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><path d="M9.8 10.2L6.5 7.3M14.2 10.2l3.3-2.9M9.8 13.8L6.5 16.7"/></svg></div>
         <h4>Alles aus einer Hand</h4>
         <p>Ein Ansprechpartner für Chatbot, Website und Content, statt drei Anbieter zu koordinieren, deren Ergebnisse nicht zusammenpassen.</p>
       </div>

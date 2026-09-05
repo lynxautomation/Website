@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<title>Kundenportal – Lynx Automation</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e;
+    --purple: #5b3fa0;
+    --purple-light: #7c5cc4;
+    --purple-glow: #9d7fe0;
+    --accent: #b39ddb;
+    --white: #f5f3ff;
+    --grey: #a0a0b8;
+    --card-bg: rgba(22, 36, 84, 0.55);
+    --border: rgba(179, 157, 219, 0.15);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--navy);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+  .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .bg-mesh::before {
+    content: ''; position: absolute; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(91,63,160,0.3) 0%, transparent 70%);
+    top: -120px; left: -120px;
+  }
+  .bg-mesh::after {
+    content: ''; position: absolute; width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(124,92,196,0.2) 0%, transparent 70%);
+    bottom: -100px; right: -80px;
+  }
+  nav {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 60px;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600; letter-spacing: 0.04em;
+    color: var(--white); text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-back { color: var(--grey); text-decoration: none; font-size: 0.85rem; }
+  .nav-back:hover { color: var(--white); }
+
+  main {
+    position: relative; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+    min-height: calc(100vh - 90px);
+    padding: 40px 24px;
+  }
+  .login-card {
+    width: 100%; max-width: 420px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 48px 40px;
+    backdrop-filter: blur(16px);
+  }
+  .login-label {
+    font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
+    color: var(--purple-glow); margin-bottom: 12px; display: block; text-align: center;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; text-align: center; margin-bottom: 8px;
+  }
+  .login-sub {
+    text-align: center; color: var(--grey); font-size: 0.88rem;
+    font-weight: 300; margin-bottom: 36px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey); }
+  input {
+    width: 100%; box-sizing: border-box;
+    background: rgba(13,27,62,0.6);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 13px 16px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus { border-color: var(--purple-light); }
+  .login-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+    box-shadow: 0 8px 28px rgba(91,63,160,0.4);
+  }
+  .login-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(91,63,160,0.55); }
+  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .login-links {
+    display: flex; justify-content: space-between;
+    margin-top: 20px; font-size: 0.8rem;
+  }
+  .login-links a { color: var(--grey); text-decoration: none; }
+  .login-links a:hover { color: var(--accent); }
+  .msg {
+    font-size: 0.85rem; padding: 12px 14px; border-radius: 8px;
+    margin-bottom: 20px; display: none; line-height: 1.5;
+  }
+  .msg.error { display: block; color: #f08080; background: rgba(240,128,128,0.08); border: 1px solid rgba(240,128,128,0.2); }
+  .msg.success { display: block; color: #7defa0; background: rgba(76,218,100,0.08); border: 1px solid rgba(76,218,100,0.25); }
+
+  .logged-in-view { display: none; text-align: center; }
+  .logged-in-view.active { display: block; }
+  .login-form-view.hidden { display: none; }
+  .logged-in-view .customer-email { color: var(--accent); font-weight: 500; }
+  .logout-btn {
+    margin-top: 28px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--grey);
+    padding: 12px 28px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .logout-btn:hover { border-color: var(--accent); color: var(--white); }
+
+  @media (max-width: 500px) {
+    nav { padding: 20px 24px; }
+    .login-card { padding: 36px 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="bg-mesh"></div>
+
+<nav>
+  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
+  <a href="index.html" class="nav-back">← Zurück zur Website</a>
+</nav>
+
+<main>
+  <div class="login-card">
+
+    <!-- LOGIN-FORMULAR -->
+    <div class="login-form-view" id="loginFormView">
+      <span class="login-label">Kundenportal</span>
+      <h1>Willkommen zurück</h1>
+      <p class="login-sub">Melde dich mit deinen Zugangsdaten an.</p>
+
+      <div class="msg" id="msgBox"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label>E-Mail-Adresse</label>
+          <input type="email" id="email" placeholder="max@beispiel.de" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label>Passwort</label>
+          <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="login-btn" id="loginBtn">Anmelden</button>
+      </form>
+
+      <div class="login-links">
+        <a href="#" id="forgotLink">Passwort vergessen?</a>
+        <a href="index.html#contact">Noch kein Zugang?</a>
+      </div>
+    </div>
+
+    <!-- EINGELOGGT-ANSICHT (Platzhalter, bis das Dashboard gebaut ist) -->
+    <div class="logged-in-view" id="loggedInView">
+      <span class="login-label">Kundenportal</span>
+      <h1>Angemeldet</h1>
+      <p class="login-sub">Eingeloggt als <span class="customer-email" id="userEmail"></span></p>
+      <p class="login-sub" style="margin-top:-16px;">Das eigentliche Dashboard folgt in Kürze – Login-Bereich funktioniert schon mal.</p>
+      <button class="logout-btn" id="logoutBtn">Abmelden</button>
+    </div>
+
+  </div>
+</main>
+
+<!-- Supabase JS SDK über CDN, kein Build-Prozess nötig -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  // ⚠️ PLATZHALTER — hier die echten Werte aus Supabase → Project Settings → API eintragen
+  const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const loginFormView = document.getElementById('loginFormView');
+  const loggedInView  = document.getElementById('loggedInView');
+  const loginForm     = document.getElementById('loginForm');
+  const loginBtn      = document.getElementById('loginBtn');
+  const msgBox        = document.getElementById('msgBox');
+  const userEmailEl   = document.getElementById('userEmail');
+  const logoutBtn     = document.getElementById('logoutBtn');
+  const forgotLink    = document.getElementById('forgotLink');
+
+  function showMsg(text, type) {
+    msgBox.textContent = text;
+    msgBox.className = 'msg ' + type;
+  }
+
+  function showLoggedIn(email) {
+    loginFormView.classList.add('hidden');
+    loggedInView.classList.add('active');
+    userEmailEl.textContent = email;
+  }
+
+  function showLoginForm() {
+    loginFormView.classList.remove('hidden');
+    loggedInView.classList.remove('active');
+  }
+
+  // Beim Laden prüfen, ob schon eine aktive Sitzung besteht
+  async function checkSession() {
+    const { data } = await supabaseClient.auth.getSession();
+    if (data.session) {
+      showLoggedIn(data.session.user.email);
+    }
+  }
+  checkSession();
+
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = 'Wird geprüft…';
+    msgBox.className = 'msg';
+
+    const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+    loginBtn.disabled = false;
+    loginBtn.textContent = 'Anmelden';
+
+    if (error) {
+      showMsg('E-Mail oder Passwort ist falsch. Bitte erneut versuchen.', 'error');
+      return;
+    }
+
+    showLoggedIn(data.user.email);
+  });
+
+  logoutBtn.addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+    showLoginForm();
+  });
+
+  forgotLink.addEventListener('click', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value.trim();
+    if (!email) {
+      showMsg('Bitte zuerst deine E-Mail-Adresse oben eintragen, dann auf "Passwort vergessen?" klicken.', 'error');
+      return;
+    }
+    const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
+    if (error) {
+      showMsg('Da ist etwas schiefgelaufen. Bitte versuch es erneut.', 'error');
+    } else {
+      showMsg('Falls diese E-Mail-Adresse bei uns registriert ist, wurde ein Link zum Zurücksetzen verschickt.', 'success');
+    }
+  });
+</script>
+</body>
+</html>
