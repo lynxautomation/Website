@@ -362,10 +362,6 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.8 1c0 1.5-2.3 1.8-2.3 3.2"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg>
         Hilfe
       </button>
-      <button class="dash-nav-item" data-view="assistent">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><path d="M8 6V4M16 6V4"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg>
-        Assistent
-      </button>
     </aside>
 
     <div class="dash-main">
@@ -465,20 +461,16 @@
       <div class="dash-view" id="view-hilfe">
         <span class="welcome-label">Kundenportal</span>
         <h1>Hilfe & Support</h1>
-        <div class="help-card">
+        <div class="help-card" style="margin-bottom:36px;">
           <p>Fragen zu deiner Website, dem Chatbot oder einer Rechnung? Schreib uns direkt, wir antworten in der Regel innerhalb eines Werktags.</p>
           <a href="mailto:jonah.kipshagen@lynx-automation.de" class="help-email">✉ jonah.kipshagen@lynx-automation.de</a>
         </div>
-      </div>
 
-      <!-- ASSISTENT -->
-      <div class="dash-view" id="view-assistent">
-        <span class="welcome-label">Kundenportal</span>
-        <h1>Ihr persönlicher Assistent</h1>
-        <p style="font-size:0.85rem;color:var(--grey);margin-bottom:24px;max-width:560px;line-height:1.65;">Kennt deine Kundennummer, deine aktiven Leistungen und deine Domain, weil du eingeloggt bist, nicht weil du es ihm sagen musst. Ein Chatbot kann Fehler machen, für verbindliche Auskünfte gilt immer dein Vertrag bzw. eine Rückfrage bei uns direkt.</p>
+        <div class="section-title" style="margin-top:0;">Oder frag direkt unseren Assistenten</div>
+        <p style="font-size:0.85rem;color:var(--grey);margin-bottom:20px;max-width:560px;line-height:1.65;">Kennt deine Kundennummer, deine aktiven Leistungen und deine Domain, weil du eingeloggt bist, nicht weil du es ihm sagen musst. Ein Chatbot kann Fehler machen, für verbindliche Auskünfte gilt immer dein Vertrag bzw. eine Rückfrage bei uns direkt.</p>
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg bot">Hallo! Ich kenne deine Kundendaten bereits, du kannst mich z. B. fragen, welche Leistungen du aktuell gebucht hast.</div>
+            <div class="chat-msg bot">Hallo! Ich kenne deine Kundendaten bereits, du kannst mich z. B. fragen, welche Leistungen du aktuell gebucht hast. Hinweis: Deine Nachrichten werden zur Beantwortung an unseren KI-Anbieter übermittelt, mehr dazu in der Datenschutzerklärung.</div>
           </div>
           <div class="chat-input-row">
             <input type="text" id="chatInput" placeholder="Frag mich etwas..." autocomplete="off">
