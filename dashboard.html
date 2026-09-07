@@ -274,7 +274,7 @@
   /* HILFE */
   .help-card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: 14px; padding: 32px; max-width: 460px;
+    border-radius: 14px; padding: 32px; max-width: 640px;
   }
   .help-card p { color: var(--grey); font-size: 0.9rem; line-height: 1.75; font-weight: 300; margin-bottom: 20px; }
   .help-email {
@@ -312,6 +312,11 @@
     font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
   }
   .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+  .chat-privacy-note {
+    font-size: 0.74rem; color: rgba(160,160,184,0.65); line-height: 1.6;
+    max-width: 640px; margin-top: 12px;
+  }
+  .chat-privacy-note a { color: rgba(179,157,219,0.75); }
 
   .dash-footer {
     max-width: 1440px; margin: 0 auto;
@@ -467,16 +472,17 @@
         </div>
 
         <div class="section-title" style="margin-top:0;">Oder frag direkt unseren Assistenten</div>
-        <p style="font-size:0.85rem;color:var(--grey);margin-bottom:20px;max-width:560px;line-height:1.65;">Kennt deine Kundennummer, deine aktiven Leistungen und deine Domain, weil du eingeloggt bist, nicht weil du es ihm sagen musst. Ein Chatbot kann Fehler machen, für verbindliche Auskünfte gilt immer dein Vertrag bzw. eine Rückfrage bei uns direkt.</p>
+        <p style="font-size:0.85rem;color:var(--grey);margin-bottom:20px;max-width:640px;line-height:1.65;">Weil du eingeloggt bist, kennt der Assistent bereits deine Kundennummer, deine gebuchten Leistungen und deine Domain, du musst ihm das nicht selbst sagen.</p>
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
-            <div class="chat-msg bot">Hallo! Ich kenne deine Kundendaten bereits, du kannst mich z. B. fragen, welche Leistungen du aktuell gebucht hast. Hinweis: Deine Nachrichten werden zur Beantwortung an unseren KI-Anbieter übermittelt, mehr dazu in der Datenschutzerklärung.</div>
+            <div class="chat-msg bot">Hallo! Ich kenne deine Kundendaten bereits, du kannst mich z. B. fragen, welche Leistungen du aktuell gebucht hast.</div>
           </div>
           <div class="chat-input-row">
             <input type="text" id="chatInput" placeholder="Frag mich etwas..." autocomplete="off">
             <button class="chat-send" id="chatSend">Senden</button>
           </div>
         </div>
+        <p class="chat-privacy-note">Ich bin ein KI-gestützter Chatbot und beantworte Fragen zu deinem Konto und unseren Leistungen. Deine Eingaben können technisch verarbeitet werden. Bitte gib keine sensiblen personenbezogenen Daten ein. Weitere Informationen findest du in der <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutzerklärung</a>.</p>
       </div>
 
     </div>
@@ -677,10 +683,23 @@
   const chatInput = document.getElementById('chatInput');
   const chatSend = document.getElementById('chatSend');
 
+  function escapeChatHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function formatChatReply(text) {
+    return escapeChatHtml(text)
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+  }
+
   function appendChatMsg(role, text) {
     const div = document.createElement('div');
     div.className = 'chat-msg ' + role;
-    div.textContent = text;
+    if (role === 'bot') {
+      div.innerHTML = formatChatReply(text);
+    } else {
+      div.textContent = text;
+    }
     chatMessages.appendChild(div);
     chatMessages.scrollTop = chatMessages.scrollHeight;
   }
