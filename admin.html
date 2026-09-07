@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<title>Admin – Lynx Automation</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0d1b3e; --purple: #5b3fa0; --purple-light: #7c5cc4; --purple-glow: #9d7fe0;
+    --accent: #b39ddb; --white: #f5f3ff; --grey: #a0a0b8;
+    --card-bg: rgba(22, 36, 84, 0.55); --border: rgba(179, 157, 219, 0.15); --green: #7defa0;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--navy); color: var(--white); min-height: 100vh; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.4;
+  }
+  nav {
+    position: relative; z-index: 1; display: flex; align-items: center; justify-content: space-between;
+    padding: 20px 60px; border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: var(--white); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-badge { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--purple-glow); border: 1px solid rgba(179,157,219,0.3); padding: 5px 12px; border-radius: 100px; }
+  .logout-link { color: var(--grey); background: none; border: none; cursor: pointer; font-size: 0.85rem; font-family: 'DM Sans', sans-serif; }
+  .logout-link:hover { color: var(--white); }
+
+  main { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
+  .loading-state, .denied-state { text-align: center; padding: 100px 20px; color: var(--grey); }
+  #adminContent { display: none; }
+  #adminContent.active { display: block; }
+
+  h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; margin-bottom: 8px; }
+  .sub { color: var(--grey); font-size: 0.9rem; margin-bottom: 40px; font-weight: 300; }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+  label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey); }
+  select, input[type="file"] {
+    width: 100%; box-sizing: border-box; background: rgba(13,27,62,0.6);
+    border: 1px solid var(--border); border-radius: 8px; padding: 13px 16px;
+    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none;
+  }
+  select:focus { border-color: var(--purple-light); }
+  .radio-row { display: flex; gap: 10px; }
+  .radio-option {
+    flex: 1; text-align: center; padding: 12px; border-radius: 8px;
+    border: 1px solid var(--border); cursor: pointer; font-size: 0.85rem; color: var(--grey);
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .radio-option.selected { border-color: var(--purple-light); color: var(--white); background: rgba(91,63,160,0.18); }
+  .upload-submit {
+    width: 100%; background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    color: var(--white); border: none; padding: 15px; border-radius: 8px;
+    font-size: 0.95rem; font-weight: 500; font-family: 'DM Sans', sans-serif; cursor: pointer; margin-top: 6px;
+  }
+  .upload-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+  .status-msg { font-size: 0.85rem; margin-top: 14px; min-height: 20px; }
+  .status-msg.success { color: var(--green); }
+  .status-msg.error { color: #f08080; }
+
+  .section-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--grey); margin: 48px 0 16px; }
+  .file-row {
+    display: flex; align-items: center; gap: 14px; background: var(--card-bg);
+    border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; margin-bottom: 8px;
+  }
+  .file-row .cat { font-size: 0.68rem; text-transform: uppercase; color: var(--accent); border: 1px solid rgba(179,157,219,0.3); padding: 3px 10px; border-radius: 100px; }
+  .file-row .name { flex: 1; font-size: 0.85rem; }
+  .file-row .del {
+    background: none; border: 1px solid rgba(240,128,128,0.3); color: #f08080;
+    font-size: 0.75rem; padding: 6px 12px; border-radius: 100px; cursor: pointer;
+  }
+  .file-row .del:hover { background: rgba(240,128,128,0.1); }
+  .empty-doc { font-size: 0.85rem; color: rgba(160,160,184,0.6); }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span class="nav-badge">Admin</span>
+    <button class="logout-link" id="logoutBtn">Abmelden</button>
+  </div>
+</nav>
+
+<main>
+  <div class="loading-state" id="loadingState">Wird geladen…</div>
+  <div class="denied-state" id="deniedState" style="display:none;">Kein Admin-Zugriff für dieses Konto.</div>
+
+  <div id="adminContent">
+    <h1>Dokumente verwalten</h1>
+    <p class="sub">Verträge und Rechnungen für einen Kunden hochladen.</p>
+
+    <div class="form-group">
+      <label>Kunde</label>
+      <select id="customerSelect"></select>
+    </div>
+
+    <div class="form-group">
+      <label>Kategorie</label>
+      <div class="radio-row">
+        <div class="radio-option selected" data-cat="vertrag">Vertrag</div>
+        <div class="radio-option" data-cat="rechnung">Rechnung</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Datei</label>
+      <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png">
+    </div>
+
+    <button class="upload-submit" id="uploadBtn">Hochladen</button>
+    <div class="status-msg" id="statusMsg"></div>
+
+    <div class="section-title">Bereits hochgeladene Dokumente für diesen Kunden</div>
+    <div id="fileList"><div class="empty-doc">Kunde auswählen, um Dokumente zu sehen.</div></div>
+  </div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+  const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  const STORAGE_BUCKET = 'customer-files';
+  let selectedCategory = 'vertrag';
+  let customers = [];
+
+  async function init() {
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    if (!sessionData.session) { window.location.href = 'portal.html'; return; }
+
+    const userId = sessionData.session.user.id;
+    const { data: adminRow } = await supabaseClient.from('admins').select('user_id').eq('user_id', userId).maybeSingle();
+
+    document.getElementById('loadingState').style.display = 'none';
+
+    if (!adminRow) {
+      document.getElementById('deniedState').style.display = 'block';
+      return;
+    }
+
+    const { data: custData } = await supabaseClient.from('customers').select('id, kundennummer, firma').order('firma');
+    customers = custData || [];
+
+    const select = document.getElementById('customerSelect');
+    select.innerHTML = customers.map(c => `<option value="${c.id}">${c.firma} (${c.kundennummer})</option>`).join('');
+
+    document.getElementById('adminContent').classList.add('active');
+
+    if (customers.length > 0) loadFileList(customers[0].id);
+    select.addEventListener('change', () => loadFileList(select.value));
+  }
+  init();
+
+  document.querySelectorAll('.radio-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.radio-option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      selectedCategory = opt.dataset.cat;
+    });
+  });
+
+  async function loadFileList(customerId) {
+    const listEl = document.getElementById('fileList');
+    const { data: files } = await supabaseClient.from('files').select('*').eq('customer_id', customerId).order('hochgeladen_am', { ascending: false });
+
+    if (!files || files.length === 0) {
+      listEl.innerHTML = '<div class="empty-doc">Noch keine Dokumente für diesen Kunden.</div>';
+      return;
+    }
+
+    listEl.innerHTML = files.map(f => `<div class="file-row">
+      <span class="cat">${f.kategorie}</span>
+      <span class="name">${f.dateiname}</span>
+      <button class="del" data-id="${f.id}" data-path="${f.storage_path}">Löschen</button>
+    </div>`).join('');
+
+    listEl.querySelectorAll('.del').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Diese Datei wirklich löschen?')) return;
+        await supabaseClient.storage.from(STORAGE_BUCKET).remove([btn.dataset.path]);
+        await supabaseClient.from('files').delete().eq('id', btn.dataset.id);
+        loadFileList(document.getElementById('customerSelect').value);
+      });
+    });
+  }
+
+  document.getElementById('uploadBtn').addEventListener('click', async () => {
+    const customerId = document.getElementById('customerSelect').value;
+    const file = document.getElementById('fileInput').files[0];
+    const statusEl = document.getElementById('statusMsg');
+
+    if (!customerId || !file) {
+      statusEl.textContent = 'Bitte Kunde und Datei auswählen.';
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    statusEl.textContent = 'Wird hochgeladen…';
+    statusEl.className = 'status-msg';
+
+    const path = `${customerId}/${selectedCategory}/${Date.now()}_${file.name}`;
+    const { error: uploadError } = await supabaseClient.storage.from(STORAGE_BUCKET).upload(path, file);
+
+    if (uploadError) {
+      statusEl.textContent = 'Fehler beim Hochladen: ' + uploadError.message;
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    const { error: insertError } = await supabaseClient.from('files').insert({
+      customer_id: customerId,
+      kategorie: selectedCategory,
+      dateiname: file.name,
+      storage_path: path,
+      hochgeladen_von: 'lynx'
+    });
+
+    if (insertError) {
+      statusEl.textContent = 'Datei gespeichert, aber Eintrag fehlgeschlagen: ' + insertError.message;
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    statusEl.textContent = '✓ Erfolgreich hochgeladen.';
+    statusEl.className = 'status-msg success';
+    document.getElementById('fileInput').value = '';
+    loadFileList(customerId);
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', async () => {
+    await supabaseClient.auth.signOut();
+    window.location.href = 'portal.html';
+  });
+</script>
+</body>
+</html>
