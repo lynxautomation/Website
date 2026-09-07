@@ -219,9 +219,57 @@
   }
   .files-placeholder {
     background: var(--card-bg); border: 1px dashed rgba(179,157,219,0.3);
-    border-radius: 14px; padding: 40px; text-align: center;
-    color: var(--grey); font-size: 0.88rem;
+    border-radius: 14px; padding: 32px; text-align: center;
+    color: var(--grey); font-size: 0.85rem;
   }
+
+  /* DOKUMENTE */
+  .doc-section { margin-bottom: 44px; }
+  .doc-section-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+  .doc-list { display: flex; flex-direction: column; gap: 8px; }
+  .doc-row {
+    display: flex; align-items: center; gap: 14px;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 14px 18px;
+  }
+  .doc-icon { color: var(--accent); flex-shrink: 0; display: flex; }
+  .doc-icon svg { width: 17px; height: 17px; }
+  .doc-name { flex: 1; font-size: 0.87rem; }
+  .doc-date { font-size: 0.75rem; color: var(--grey); flex-shrink: 0; }
+  .doc-download {
+    flex-shrink: 0; font-size: 0.78rem; color: var(--accent);
+    border: 1px solid rgba(179,157,219,0.3); padding: 6px 14px; border-radius: 100px;
+    background: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .doc-download:hover { background: rgba(179,157,219,0.1); border-color: var(--accent); }
+
+  .agb-row {
+    display: flex; align-items: center; justify-content: space-between;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 18px;
+  }
+  .agb-row span { font-size: 0.87rem; color: var(--grey); }
+  .agb-link {
+    font-size: 0.78rem; color: var(--accent); text-decoration: none;
+    border: 1px solid rgba(179,157,219,0.3); padding: 7px 16px; border-radius: 100px;
+  }
+  .agb-link:hover { background: rgba(179,157,219,0.1); }
+
+  .upload-zone {
+    border: 1px dashed rgba(179,157,219,0.35);
+    border-radius: 12px; padding: 24px; text-align: center;
+    margin-top: 10px;
+  }
+  .upload-zone p { font-size: 0.82rem; color: var(--grey); margin-bottom: 14px; }
+  .upload-btn {
+    display: inline-block; font-size: 0.82rem; color: var(--white);
+    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
+    padding: 10px 22px; border-radius: 8px; cursor: pointer;
+    border: none; font-family: 'DM Sans', sans-serif;
+  }
+  .upload-status { font-size: 0.78rem; color: var(--grey); margin-top: 10px; min-height: 18px; }
+  .empty-doc { font-size: 0.82rem; color: rgba(160,160,184,0.6); padding: 8px 4px; }
 
   /* HILFE */
   .help-card {
@@ -236,6 +284,15 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .help-email:hover { border-color: var(--accent); background: rgba(179,157,219,0.08); }
+
+  .dash-footer {
+    max-width: 1440px; margin: 0 auto;
+    padding: 24px 40px 40px 240px;
+    display: flex; gap: 24px; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .dash-footer a { font-size: 0.78rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
+  .dash-footer a:hover { color: var(--white); }
 
   @media (max-width: 800px) {
     #dashboardContent.active { flex-direction: column; }
@@ -271,7 +328,7 @@
       </button>
       <button class="dash-nav-item" data-view="rechnungen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>
-        Rechnungen
+        Dokumente
       </button>
       <button class="dash-nav-item" data-view="hilfe">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 4.8 1c0 1.5-2.3 1.8-2.3 3.2"/><circle cx="12" cy="17" r="0.6" fill="currentColor"/></svg>
@@ -336,11 +393,40 @@
         <div class="service-list" id="productsDetailList"></div>
       </div>
 
-      <!-- RECHNUNGEN -->
+      <!-- DOKUMENTE -->
       <div class="dash-view" id="view-rechnungen">
         <span class="welcome-label">Kundenportal</span>
-        <h1>Rechnungen</h1>
-        <div class="files-placeholder">Noch keine Rechnungen hochgeladen. Sobald deine erste Rechnung bereitsteht, erscheint sie automatisch hier.</div>
+        <h1>Dokumente</h1>
+
+        <div class="doc-section">
+          <div class="doc-section-head"><div class="section-title" style="margin:0;">Verträge</div></div>
+          <div class="doc-list" id="docListVertrag"><div class="empty-doc">Noch keine Verträge hinterlegt.</div></div>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-head"><div class="section-title" style="margin:0;">AGB</div></div>
+          <div class="agb-row">
+            <span>Allgemeine Geschäftsbedingungen von Lynx Automation</span>
+            <a href="agb.html" target="_blank" rel="noopener" class="agb-link">Ansehen / herunterladen</a>
+          </div>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-head"><div class="section-title" style="margin:0;">Rechnungen</div></div>
+          <div class="doc-list" id="docListRechnung"><div class="empty-doc">Noch keine Rechnungen hochgeladen.</div></div>
+        </div>
+
+        <div class="doc-section">
+          <div class="doc-section-head"><div class="section-title" style="margin:0;">Ihre Uploads</div></div>
+          <p style="font-size:0.83rem;color:var(--grey);margin-bottom:14px;max-width:520px;line-height:1.65;">Broschüren, Bilder oder anderes Material, das wir für die Aktualisierung deiner Website nutzen sollen, kannst du hier direkt hochladen.</p>
+          <div class="doc-list" id="docListUpload"><div class="empty-doc">Noch keine eigenen Dateien hochgeladen.</div></div>
+          <div class="upload-zone">
+            <p>Datei auswählen (PDF, JPG, PNG)</p>
+            <input type="file" id="uploadInput" style="display:none;" accept=".pdf,.jpg,.jpeg,.png">
+            <button class="upload-btn" id="uploadTrigger">Datei hochladen</button>
+            <div class="upload-status" id="uploadStatus"></div>
+          </div>
+        </div>
       </div>
 
       <!-- HILFE -->
@@ -357,11 +443,19 @@
   </div>
 </main>
 
+<footer class="dash-footer">
+  <a href="impressum.html" target="_blank" rel="noopener">Impressum</a>
+  <a href="datenschutz.html" target="_blank" rel="noopener">Datenschutz</a>
+  <a href="agb.html" target="_blank" rel="noopener">AGB</a>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script>
   const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  let currentCustomerId = null;
+  const STORAGE_BUCKET = 'customer-files';
 
   const PRODUCT_DEFS = [
     { key: 'digitale_ordnung', name: 'Digitale Ordnung', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4"/></svg>', desc: 'Bestehende Profile (Google, Social Media, Register) geprüft und vereinheitlicht.' },
@@ -439,6 +533,8 @@
     }).join('');
 
     document.getElementById('dashboardContent').classList.add('active');
+    currentCustomerId = customer.id;
+    loadDocuments(customer.id);
   }
 
   loadDashboard();
@@ -446,6 +542,93 @@
   document.getElementById('logoutBtn').addEventListener('click', async () => {
     await supabaseClient.auth.signOut();
     window.location.href = 'portal.html';
+  });
+
+  const DOC_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6Z"/><path d="M14 2v6h6"/></svg>';
+
+  // Verhindert, dass Dateinamen o.ä. als HTML/Skript interpretiert werden (XSS-Schutz)
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str == null ? '' : String(str);
+    return div.innerHTML;
+  }
+
+  function renderDocRows(containerEl, rows, emptyText) {
+    if (!rows || rows.length === 0) {
+      containerEl.innerHTML = `<div class="empty-doc">${emptyText}</div>`;
+      return;
+    }
+    containerEl.innerHTML = rows.map(r => {
+      const datum = new Date(r.hochgeladen_am).toLocaleDateString('de-DE');
+      return `<div class="doc-row">
+        <span class="doc-icon">${DOC_ICON}</span>
+        <span class="doc-name">${escapeHtml(r.dateiname)}</span>
+        <span class="doc-date">${datum}</span>
+        <button class="doc-download" data-path="${escapeHtml(r.storage_path)}">Herunterladen</button>
+      </div>`;
+    }).join('');
+
+    containerEl.querySelectorAll('.doc-download').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const path = btn.dataset.path;
+        btn.textContent = '…';
+        const { data, error } = await supabaseClient.storage.from(STORAGE_BUCKET).createSignedUrl(path, 60);
+        btn.textContent = 'Herunterladen';
+        if (error || !data) { alert('Datei konnte nicht geöffnet werden. Bitte später erneut versuchen.'); return; }
+        window.open(data.signedUrl, '_blank');
+      });
+    });
+  }
+
+  async function loadDocuments(customerId) {
+    const { data: files } = await supabaseClient
+      .from('files')
+      .select('*')
+      .eq('customer_id', customerId)
+      .order('hochgeladen_am', { ascending: false });
+
+    const alle = files || [];
+    renderDocRows(document.getElementById('docListVertrag'), alle.filter(f => f.kategorie === 'vertrag'), 'Noch keine Verträge hinterlegt.');
+    renderDocRows(document.getElementById('docListRechnung'), alle.filter(f => f.kategorie === 'rechnung'), 'Noch keine Rechnungen hochgeladen.');
+    renderDocRows(document.getElementById('docListUpload'), alle.filter(f => f.kategorie === 'kunden_upload'), 'Noch keine eigenen Dateien hochgeladen.');
+  }
+
+  // KUNDEN-UPLOAD (nur Kategorie kunden_upload erlaubt, siehe RLS-Regeln)
+  document.getElementById('uploadTrigger').addEventListener('click', () => {
+    document.getElementById('uploadInput').click();
+  });
+
+  document.getElementById('uploadInput').addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file || !currentCustomerId) return;
+
+    const statusEl = document.getElementById('uploadStatus');
+    statusEl.textContent = 'Wird hochgeladen…';
+
+    const path = `${currentCustomerId}/kunden_upload/${Date.now()}_${file.name}`;
+
+    const { error: uploadError } = await supabaseClient.storage.from(STORAGE_BUCKET).upload(path, file);
+    if (uploadError) {
+      statusEl.textContent = 'Fehler beim Hochladen. Bitte erneut versuchen.';
+      return;
+    }
+
+    const { error: insertError } = await supabaseClient.from('files').insert({
+      customer_id: currentCustomerId,
+      kategorie: 'kunden_upload',
+      dateiname: file.name,
+      storage_path: path,
+      hochgeladen_von: 'kunde'
+    });
+
+    if (insertError) {
+      statusEl.textContent = 'Datei gespeichert, aber Eintrag konnte nicht angelegt werden.';
+      return;
+    }
+
+    statusEl.textContent = '✓ Hochgeladen.';
+    loadDocuments(currentCustomerId);
+    e.target.value = '';
   });
 </script>
 </body>
