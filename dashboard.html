@@ -675,6 +675,24 @@
     statusEl.textContent = '✓ Hochgeladen.';
     loadDocuments(currentCustomerId);
     e.target.value = '';
+
+    // Benachrichtigung: nutzt denselben Google-Sheets-Kanal wie die Kontaktformulare,
+    // damit Uploads an derselben Stelle auftauchen, die ohnehin regelmäßig geprüft wird.
+    const firma = document.getElementById('firmaName').textContent || 'Unbekannter Kunde';
+    const now = new Date().toISOString();
+    fetch('/.netlify/functions/lead', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: firma,
+        phone: '-',
+        email: '-',
+        topic: 'Datei-Upload (Kundenportal)',
+        note: `Datei hochgeladen: ${file.name}`,
+        date: now,
+        consentDate: now
+      })
+    }).catch(() => { /* Benachrichtigung ist ein Nice-to-have, Upload selbst ist schon erfolgreich gespeichert */ });
   });
 
   // ── PORTAL-ASSISTENT ─────────────────────────────────────────────────────────
