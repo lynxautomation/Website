@@ -251,6 +251,10 @@
   .analytics-row-body { flex: 1; min-width: 0; }
   .analytics-row h4 { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
   .analytics-row p { font-size: 0.82rem; color: var(--grey); line-height: 1.6; font-weight: 300; max-width: 520px; }
+  .sc-query-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+  .sc-query-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.8rem; }
+  .sc-query-term { color: var(--white); }
+  .sc-query-clicks { color: var(--purple-glow); flex-shrink: 0; }
   .connect-btn {
     flex-shrink: 0;
     font-size: 0.76rem; color: var(--grey);
@@ -483,9 +487,10 @@
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
             <div class="analytics-row-body">
               <h4>Google-Suchbegriffe</h4>
-              <p>Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
+              <p id="searchConsoleSummary">Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
+              <div id="searchConsoleList"></div>
             </div>
-            <span class="connect-btn">Noch nicht verbunden</span>
+            <span class="connect-btn" id="searchConsoleStatus">Noch nicht verbunden</span>
           </div>
           <div class="analytics-row">
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="6" width="16" height="12" rx="3"/><circle cx="9" cy="12" r="1" fill="currentColor"/><circle cx="15" cy="12" r="1" fill="currentColor"/></svg></div>
@@ -698,6 +703,7 @@
     loadDocuments(customer.id);
     loadNews(customer);
     loadTimeline(customer);
+    loadSearchConsole(customer);
   }
 
   loadDashboard();
@@ -773,6 +779,42 @@
         ${tagText ? `<span class="news-portal-tag">${escapeHtml(tagText)}</span>` : ''}
       </div>`;
     }).join('');
+  }
+
+  async function loadSearchConsole(customer) {
+    if (!customer.domain) return;
+    const summaryEl = document.getElementById('searchConsoleSummary');
+    const listEl = document.getElementById('searchConsoleList');
+    const statusEl = document.getElementById('searchConsoleStatus');
+
+    const siteUrl = `https://${customer.domain.replace(/\/$/, '')}/`;
+
+    try {
+      const res = await fetch('/.netlify/functions/search-console?site=' + encodeURIComponent(siteUrl));
+      const data = await res.json();
+
+      if (!res.ok || !data.success) {
+        statusEl.textContent = 'Verbindung fehlgeschlagen';
+        return;
+      }
+
+      statusEl.textContent = 'Letzte 28 Tage';
+      summaryEl.textContent = `${data.totals.clicks} Klicks, ${data.totals.impressions} Impressionen, Ø Position ${data.totals.position || '–'}`;
+
+      if (data.queries.length === 0) {
+        listEl.innerHTML = '<div class="empty-doc">Noch keine Suchbegriffe im gewählten Zeitraum.</div>';
+        return;
+      }
+
+      listEl.innerHTML = data.queries.slice(0, 5).map(q => `
+        <div class="sc-query-row">
+          <span class="sc-query-term">${escapeHtml(q.query)}</span>
+          <span class="sc-query-clicks">${q.clicks} Klicks</span>
+        </div>
+      `).join('');
+    } catch (err) {
+      statusEl.textContent = 'Verbindung fehlgeschlagen';
+    }
   }
 
   async function loadTimeline(customer) {
