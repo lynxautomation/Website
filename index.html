@@ -169,6 +169,46 @@
     transition: border-color 0.2s, background 0.2s;
   }
   .nav-cta:hover { border-color: var(--accent); background: rgba(179,157,219,0.08); }
+  .nav-news-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: none; border: 1px solid rgba(179,157,219,0.25);
+    color: var(--grey); cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+  }
+  .nav-news-btn svg { width: 16px; height: 16px; }
+  .nav-news-btn:hover { color: var(--accent); border-color: var(--accent); background: rgba(179,157,219,0.08); }
+
+  /* NEUIGKEITEN-MODAL */
+  .news-modal-overlay {
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(5,10,30,0.7);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: flex-start; justify-content: center;
+    padding: 100px 24px 40px;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .news-modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .news-modal {
+    background: var(--navy); border: 1px solid var(--border);
+    border-radius: 20px; max-width: 760px; width: 100%;
+    max-height: 78vh; overflow-y: auto;
+    padding: 44px 48px;
+    transform: translateY(-16px);
+    transition: transform 0.25s ease;
+    position: relative;
+  }
+  .news-modal-overlay.active .news-modal { transform: translateY(0); }
+  .news-modal-close {
+    position: absolute; top: 24px; right: 24px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: none; border: 1px solid var(--border); color: var(--grey);
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .news-modal-close:hover { color: var(--white); border-color: var(--accent); }
+  .news-modal h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); white-space: nowrap; margin-bottom: 8px; }
+
   .nav-portal {
     color: var(--accent) !important;
     font-size: 0.82rem !important;
@@ -1095,14 +1135,14 @@
     .sys-line-track, .sys-line-fill { display: none; }
   }
 
-  /* NEUIGKEITEN / CHANGELOG */
-  .news { max-width: 780px; margin: 0 auto; padding: 100px 60px; }
-  .news-list { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+  /* NEUIGKEITEN / CHANGELOG (Inhalt lebt jetzt im Modal, siehe .news-modal) */
+  .news-list { display: flex; flex-direction: column; gap: 0; margin-top: 32px; }
   .news-item {
     display: flex; gap: 28px; padding: 26px 0;
     border-bottom: 1px solid var(--border);
   }
   .news-item:first-child { padding-top: 0; }
+  .news-item:last-child { border-bottom: none; }
   .news-date {
     flex-shrink: 0; width: 90px;
     font-size: 0.78rem; color: var(--purple-glow);
@@ -1112,7 +1152,7 @@
   .news-body p { font-size: 0.88rem; color: var(--grey); line-height: 1.7; font-weight: 300; }
 
   @media (max-width: 600px) {
-    .news { padding: 70px 24px; }
+    .news-modal { padding: 32px 24px; max-height: 82vh; }
     .news-item { flex-direction: column; gap: 6px; }
     .news-date { width: auto; }
   }
@@ -1143,10 +1183,10 @@
     <li><a href="#products">Leistungen</a></li>
     <li><a href="#bundle">Bundle</a></li>
     <li><a href="#how">Ablauf</a></li>
-    <li><a href="#news">Neuigkeiten</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="referenzen.html">Referenzen</a></li>
     <li><a href="#faq">FAQ</a></li>
+    <li><button class="nav-news-btn" id="newsToggle" aria-label="Neuigkeiten anzeigen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4V4Z"/><path d="M19 8h2v11a2 2 0 0 1-2 2H6"/><path d="M8 8h6M8 12h6M8 16h4"/></svg></button></li>
     <li><a href="portal.html" class="nav-portal">Kundenportal</a></li>
     <li><a href="#contact" class="nav-cta">Demo buchen</a></li>
   </ul>
@@ -1258,7 +1298,7 @@
   <a href="#products" class="signature-cta">Alle Bausteine im Detail ansehen</a>
 </section>
 
-<!-- NEUIGKEITEN / CHANGELOG
+<!-- NEUIGKEITEN / CHANGELOG — als Modal, aufrufbar über das Zeitungs-Icon in der Nav
      Neuen Eintrag hinzufügen: einfach einen weiteren .news-item Block ganz oben
      in die .news-list einfügen (neueste zuerst), nach diesem Muster kopieren:
 
@@ -1270,19 +1310,22 @@
        </div>
      </div>
 -->
-<section class="news fade-up" id="news">
-  <span class="section-label">Neuigkeiten</span>
-  <h2>Was sich bei uns<br>tut.</h2>
-  <div class="news-list">
-    <div class="news-item">
-      <div class="news-date">Februar 2027</div>
-      <div class="news-body">
-        <h4>Kundenportal gestartet</h4>
-        <p>Bestandskunden können sich ab sofort einloggen und sehen dort ihre gebuchten Leistungen, Verträge, Rechnungen und haben Zugriff auf einen persönlichen digitalen Assistenten.</p>
+<div class="news-modal-overlay" id="newsModalOverlay">
+  <div class="news-modal">
+    <button class="news-modal-close" id="newsModalClose" aria-label="Schließen">✕</button>
+    <span class="section-label">Neuigkeiten</span>
+    <h2>Was sich bei uns tut.</h2>
+    <div class="news-list">
+      <div class="news-item">
+        <div class="news-date">Februar 2027</div>
+        <div class="news-body">
+          <h4>Kundenportal gestartet</h4>
+          <p>Bestandskunden können sich ab sofort einloggen und sehen dort ihre gebuchten Leistungen, Verträge, Rechnungen und haben Zugriff auf einen persönlichen digitalen Assistenten.</p>
+        </div>
       </div>
     </div>
   </div>
-</section>
+</div>
 
 <!-- PRODUCTS / LEISTUNGEN -->
 <section id="products">
@@ -2952,6 +2995,23 @@ async function sendMessage() {
   }, { passive: true });
   backToTop.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // NEUIGKEITEN-MODAL
+  const newsToggle = document.getElementById('newsToggle');
+  const newsOverlay = document.getElementById('newsModalOverlay');
+  const newsClose = document.getElementById('newsModalClose');
+
+  function openNewsModal() { newsOverlay.classList.add('active'); }
+  function closeNewsModal() { newsOverlay.classList.remove('active'); }
+
+  newsToggle.addEventListener('click', openNewsModal);
+  newsClose.addEventListener('click', closeNewsModal);
+  newsOverlay.addEventListener('click', (e) => {
+    if (e.target === newsOverlay) closeNewsModal();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeNewsModal();
   });
 </script>
 </body>
