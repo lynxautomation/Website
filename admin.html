@@ -103,8 +103,16 @@
       <select id="customerSelect"></select>
     </div>
 
+    <div class="section-title" style="margin-top:0;">Website-Vorschau für diesen Kunden</div>
+    <div id="previewCurrent" style="margin-bottom:14px;"></div>
     <div class="form-group">
-      <label>Kategorie</label>
+      <input type="file" id="previewFileInput" accept=".jpg,.jpeg,.png,.webp">
+    </div>
+    <button class="upload-submit" id="previewUploadBtn">Vorschaubild hochladen</button>
+    <div class="status-msg" id="previewStatusMsg"></div>
+
+    <div class="section-title">Kategorie</div>
+    <div class="form-group">
       <div class="radio-row">
         <div class="radio-option selected" data-cat="vertrag">Vertrag</div>
         <div class="radio-option" data-cat="rechnung">Rechnung</div>
@@ -166,6 +174,58 @@
     return div.innerHTML;
   }
 
+  async function loadPreview(customerId) {
+    const previewEl = document.getElementById('previewCurrent');
+    const { data: cust } = await supabaseClient.from('customers').select('website_screenshot_path').eq('id', customerId).maybeSingle();
+
+    if (!cust || !cust.website_screenshot_path) {
+      previewEl.innerHTML = '<div class="empty-doc">Noch kein Vorschaubild hinterlegt.</div>';
+      return;
+    }
+
+    const { data: signed } = await supabaseClient.storage.from(STORAGE_BUCKET).createSignedUrl(cust.website_screenshot_path, 300);
+    if (signed) {
+      previewEl.innerHTML = `<img src="${escapeHtml(signed.signedUrl)}" style="max-width:280px;border-radius:10px;border:1px solid var(--border);display:block;">`;
+    }
+  }
+
+  document.getElementById('previewUploadBtn').addEventListener('click', async () => {
+    const customerId = document.getElementById('customerSelect').value;
+    const file = document.getElementById('previewFileInput').files[0];
+    const statusEl = document.getElementById('previewStatusMsg');
+
+    if (!customerId || !file) {
+      statusEl.textContent = 'Bitte Kunde und Bild auswählen.';
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    statusEl.textContent = 'Wird hochgeladen…';
+    statusEl.className = 'status-msg';
+
+    const path = `${customerId}/website-preview/${Date.now()}_${file.name}`;
+    const { error: uploadError } = await supabaseClient.storage.from(STORAGE_BUCKET).upload(path, file, { upsert: true });
+
+    if (uploadError) {
+      statusEl.textContent = 'Fehler beim Hochladen: ' + uploadError.message;
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    const { error: updateError } = await supabaseClient.from('customers').update({ website_screenshot_path: path }).eq('id', customerId);
+
+    if (updateError) {
+      statusEl.textContent = 'Bild gespeichert, aber Kundendatensatz nicht aktualisiert: ' + updateError.message;
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    statusEl.textContent = '✓ Vorschaubild aktualisiert.';
+    statusEl.className = 'status-msg success';
+    document.getElementById('previewFileInput').value = '';
+    loadPreview(customerId);
+  });
+
   async function init() {
     const { data: sessionData } = await supabaseClient.auth.getSession();
     if (!sessionData.session) { window.location.href = 'portal.html'; return; }
@@ -188,8 +248,8 @@
 
     document.getElementById('adminContent').classList.add('active');
 
-    if (customers.length > 0) loadFileList(customers[0].id);
-    select.addEventListener('change', () => loadFileList(select.value));
+    if (customers.length > 0) { loadFileList(customers[0].id); loadPreview(customers[0].id); }
+    select.addEventListener('change', () => { loadFileList(select.value); loadPreview(select.value); });
     loadNewsList();
   }
   init();

@@ -91,7 +91,8 @@
 
   .dash-main { flex: 1; min-width: 0; min-height: 70vh; padding: 44px 56px 100px 40px; border-left: 1px solid var(--border); }
   .dash-view { display: none; }
-  .dash-view.active { display: block; }
+  .dash-view.active { display: block; animation: viewFadeIn 0.35s ease; }
+  @keyframes viewFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
   .welcome-label {
     font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
@@ -105,7 +106,7 @@
   h1 em { font-style: italic; color: var(--accent); }
 
   .info-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
     gap: 16px; margin-bottom: 40px;
   }
   .info-card {
@@ -120,6 +121,51 @@
     font-family: 'Cormorant Garamond', serif;
     font-size: 1.3rem; font-weight: 500; color: var(--white);
   }
+
+  /* WEBSITE-VORSCHAU */
+  .preview-wrap { position: relative; max-width: 400px; margin-bottom: 8px; }
+  .preview-wrap::before {
+    content: '';
+    position: absolute; inset: -26px;
+    background: radial-gradient(circle, rgba(157,127,224,0.22) 0%, transparent 70%);
+    z-index: 0;
+    animation: previewGlow 4.5s ease-in-out infinite;
+  }
+  @keyframes previewGlow { 0%,100% { opacity: 0.5; transform: scale(0.96); } 50% { opacity: 0.9; transform: scale(1.02); } }
+  .preview-frame {
+    position: relative; z-index: 1;
+    background: linear-gradient(160deg, rgba(255,255,255,0.06), rgba(22,36,84,0.55));
+    border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 14px; padding: 10px 10px 12px;
+    box-shadow: 0 24px 50px rgba(5,10,30,0.4);
+  }
+  .preview-frame-bar { display: flex; gap: 5px; padding: 3px 6px 10px; }
+  .preview-frame-bar span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.22); }
+  .preview-frame img { width: 100%; border-radius: 8px; display: block; }
+
+  /* AKTIVITÄTS-ZEITLEISTE */
+  .timeline { position: relative; margin-left: 6px; padding-left: 26px; border-left: 1px solid rgba(179,157,219,0.2); }
+  .timeline-item { position: relative; padding-bottom: 24px; }
+  .timeline-item:last-child { padding-bottom: 0; }
+  .timeline-dot {
+    position: absolute; left: -31px; top: 3px;
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--purple-light);
+    box-shadow: 0 0 9px rgba(157,127,224,0.7);
+    border: 2px solid var(--navy);
+  }
+  .timeline-date { font-size: 0.72rem; color: var(--purple-glow); margin-bottom: 3px; letter-spacing: 0.02em; }
+  .timeline-text { font-size: 0.87rem; color: var(--white); }
+
+  /* ÄNDERUNGSANFRAGE */
+  .change-form { max-width: 480px; margin-top: 20px; }
+  .change-form textarea {
+    width: 100%; box-sizing: border-box; background: rgba(13,27,62,0.6);
+    border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px;
+    color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 0.88rem;
+    outline: none; resize: vertical; min-height: 90px;
+  }
+  .change-form textarea:focus, .change-form input:focus { border-color: var(--purple-light); }
 
   .section-title {
     font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em;
@@ -401,10 +447,27 @@
             <span class="label">Domain</span>
             <div class="value" id="domain">–</div>
           </div>
+          <div class="info-card">
+            <span class="label">Kunde seit</span>
+            <div class="value" id="kundeSeit">–</div>
+          </div>
+        </div>
+
+        <div id="previewSection" style="display:none;">
+          <div class="section-title" style="margin-top:0;">Ihre Website</div>
+          <div class="preview-wrap">
+            <div class="preview-frame">
+              <div class="preview-frame-bar"><span></span><span></span><span></span></div>
+              <img id="previewImg" src="" alt="Vorschau Ihrer Website">
+            </div>
+          </div>
         </div>
 
         <div class="section-title">Ihre gebuchten Leistungen</div>
         <div class="products-grid" id="productsGridCompact"></div>
+
+        <div class="section-title">Letzte Aktivität</div>
+        <div class="timeline" id="activityTimeline"></div>
 
         <div class="section-title">Analytics</div>
         <div class="analytics-list">
@@ -456,6 +519,7 @@
 
         <div class="doc-section">
           <div class="doc-section-head"><div class="section-title" style="margin:0;">Verträge</div></div>
+          <p style="font-size:0.8rem;color:var(--grey);margin-bottom:14px;">Keine Mindestlaufzeit, Kündigungsfrist 2 Wochen zum Monatsende.</p>
           <div class="doc-list" id="docListVertrag"><div class="empty-doc">Noch keine Verträge hinterlegt.</div></div>
         </div>
 
@@ -494,7 +558,22 @@
           <a href="mailto:jonah.kipshagen@lynx-automation.de" class="help-email">✉ jonah.kipshagen@lynx-automation.de</a>
         </div>
 
-        <div class="section-title" style="margin-top:0;">Oder frag direkt unseren Assistenten</div>
+        <div class="section-title" style="margin-top:0;">Kleine Änderung an der Website anfragen</div>
+        <p style="font-size:0.85rem;color:var(--grey);margin-bottom:16px;max-width:560px;line-height:1.65;">Im Website-Service sind kleine inhaltliche Änderungen (bis zu 15 Min./Monat) enthalten. Beschreib kurz, was geändert werden soll, statt eine freie E-Mail zu schreiben, das hilft uns, es schneller umzusetzen.</p>
+        <form class="change-form" id="changeForm">
+          <div class="form-group">
+            <label>Was soll geändert werden?</label>
+            <input type="text" id="changeTitel" placeholder="z. B. Öffnungszeiten aktualisieren" required>
+          </div>
+          <div class="form-group">
+            <label>Details (optional)</label>
+            <textarea id="changeDetails" placeholder="Alles, was wir dafür wissen sollten..."></textarea>
+          </div>
+          <button type="submit" class="upload-btn" id="changeSubmitBtn">Anfrage senden</button>
+          <div class="upload-status" id="changeStatus"></div>
+        </form>
+
+        <div class="section-title">Oder frag direkt unseren Assistenten</div>
         <p style="font-size:0.85rem;color:var(--grey);margin-bottom:20px;max-width:640px;line-height:1.65;">Weil du eingeloggt bist, kennt der Assistent bereits deine Kundennummer, deine gebuchten Leistungen und deine Domain, du musst ihm das nicht selbst sagen.</p>
         <div class="chat-box">
           <div class="chat-messages" id="chatMessages">
@@ -571,6 +650,19 @@
     document.getElementById('kundennummer').textContent = customer.kundennummer;
     document.getElementById('domain').textContent = customer.domain || '–';
 
+    if (customer.created_at) {
+      const seit = new Date(customer.created_at).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
+      document.getElementById('kundeSeit').textContent = seit;
+    }
+
+    if (customer.website_screenshot_path) {
+      const { data: signed } = await supabaseClient.storage.from(STORAGE_BUCKET).createSignedUrl(customer.website_screenshot_path, 300);
+      if (signed) {
+        document.getElementById('previewImg').src = signed.signedUrl;
+        document.getElementById('previewSection').style.display = 'block';
+      }
+    }
+
     // Kompakte Ansicht (Übersicht)
     const compactGrid = document.getElementById('productsGridCompact');
     compactGrid.innerHTML = PRODUCT_DEFS.map(p => {
@@ -605,6 +697,7 @@
     currentCustomerId = customer.id;
     loadDocuments(customer.id);
     loadNews(customer);
+    loadTimeline(customer);
   }
 
   loadDashboard();
@@ -680,6 +773,55 @@
         ${tagText ? `<span class="news-portal-tag">${escapeHtml(tagText)}</span>` : ''}
       </div>`;
     }).join('');
+  }
+
+  async function loadTimeline(customer) {
+    const timelineEl = document.getElementById('activityTimeline');
+
+    const { data: files } = await supabaseClient.from('files').select('*').eq('customer_id', customer.id);
+    const { data: updates } = await supabaseClient.from('updates').select('*');
+
+    const events = [];
+
+    (files || []).forEach(f => {
+      const label = f.kategorie === 'kunden_upload'
+        ? `Du hast "${f.dateiname}" hochgeladen`
+        : `${f.kategorie === 'vertrag' ? 'Vertrag' : 'Rechnung'} "${f.dateiname}" wurde hinterlegt`;
+      events.push({ date: f.hochgeladen_am, text: label });
+    });
+
+    (updates || []).forEach(u => {
+      if (!u.zielprodukt || !!customer[u.zielprodukt]) {
+        events.push({ date: u.erstellt_am, text: `Neuigkeit veröffentlicht: „${u.titel}"` });
+      }
+    });
+
+    events.sort((a, b) => new Date(b.date) - new Date(a.date));
+    const recent = events.slice(0, 6);
+
+    if (recent.length === 0) {
+      timelineEl.innerHTML = '<div class="empty-doc">Noch keine Aktivität.</div>';
+      return;
+    }
+
+    timelineEl.innerHTML = recent.map(e => {
+      const rel = formatRelativeDate(e.date);
+      return `<div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">${rel}</div>
+        <div class="timeline-text">${escapeHtml(e.text)}</div>
+      </div>`;
+    }).join('');
+  }
+
+  function formatRelativeDate(dateStr) {
+    const diffMs = Date.now() - new Date(dateStr).getTime();
+    const days = Math.floor(diffMs / 86400000);
+    if (days <= 0) return 'Heute';
+    if (days === 1) return 'Gestern';
+    if (days < 7) return `vor ${days} Tagen`;
+    if (days < 30) return `vor ${Math.floor(days / 7)} Woche${Math.floor(days/7) > 1 ? 'n' : ''}`;
+    return new Date(dateStr).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
   }
 
   async function loadDocuments(customerId) {
@@ -831,6 +973,50 @@
 
   chatSend.addEventListener('click', sendChatMessage);
   chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') sendChatMessage(); });
+
+  // ── ÄNDERUNGSANFRAGE ─────────────────────────────────────────────────────────
+  document.getElementById('changeForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const titel = document.getElementById('changeTitel').value.trim();
+    const details = document.getElementById('changeDetails').value.trim();
+    const statusEl = document.getElementById('changeStatus');
+    const btn = document.getElementById('changeSubmitBtn');
+
+    if (!titel) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Wird gesendet…';
+    const firma = document.getElementById('firmaName').textContent || 'Unbekannter Kunde';
+    const now = new Date().toISOString();
+
+    try {
+      const res = await fetch('/.netlify/functions/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: firma,
+          phone: '-',
+          email: '-',
+          topic: 'Änderungsanfrage (Kundenportal)',
+          note: `${titel}${details ? ' | ' + details : ''}`,
+          date: now,
+          consentDate: now
+        })
+      });
+      const data = await res.json();
+      if (data.success) {
+        statusEl.textContent = '✓ Anfrage gesendet, wir melden uns bei Bedarf.';
+        document.getElementById('changeTitel').value = '';
+        document.getElementById('changeDetails').value = '';
+      } else {
+        throw new Error();
+      }
+    } catch (err) {
+      statusEl.textContent = 'Fehler beim Senden. Bitte schreib uns direkt per E-Mail.';
+    }
+    btn.disabled = false;
+    btn.textContent = 'Anfrage senden';
+  });
 </script>
 </body>
 </html>
