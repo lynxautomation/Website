@@ -121,6 +121,32 @@
 
     <div class="section-title">Bereits hochgeladene Dokumente für diesen Kunden</div>
     <div id="fileList"><div class="empty-doc">Kunde auswählen, um Dokumente zu sehen.</div></div>
+
+    <div class="section-title" style="margin-top:64px;">Neuigkeit im Portal veröffentlichen</div>
+    <div class="form-group">
+      <label>Titel</label>
+      <input type="text" id="newsTitel" placeholder="z. B. Neues Feature im Chatbot">
+    </div>
+    <div class="form-group">
+      <label>Inhalt</label>
+      <textarea id="newsInhalt" rows="3" style="width:100%;box-sizing:border-box;background:rgba(13,27,62,0.6);border:1px solid var(--border);border-radius:8px;padding:13px 16px;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.9rem;outline:none;resize:vertical;" placeholder="Ein bis zwei Sätze, was neu ist."></textarea>
+    </div>
+    <div class="form-group">
+      <label>Sichtbar für</label>
+      <select id="newsZiel">
+        <option value="">Alle Kunden (allgemeine Neuigkeit)</option>
+        <option value="website">Nur Kunden mit Website</option>
+        <option value="hosting">Nur Kunden mit Website-Service</option>
+        <option value="chatbot">Nur Kunden mit Digitalem Assistenten</option>
+        <option value="seo">Nur Kunden mit Content & Fotos</option>
+        <option value="digitale_ordnung">Nur Kunden mit Digitaler Ordnung</option>
+      </select>
+    </div>
+    <button class="upload-submit" id="newsSubmitBtn">Veröffentlichen</button>
+    <div class="status-msg" id="newsStatusMsg"></div>
+
+    <div class="section-title">Bereits veröffentlichte Neuigkeiten</div>
+    <div id="newsList"><div class="empty-doc">Lädt…</div></div>
   </div>
 </main>
 
@@ -164,6 +190,7 @@
 
     if (customers.length > 0) loadFileList(customers[0].id);
     select.addEventListener('change', () => loadFileList(select.value));
+    loadNewsList();
   }
   init();
 
@@ -241,6 +268,64 @@
     statusEl.className = 'status-msg success';
     document.getElementById('fileInput').value = '';
     loadFileList(customerId);
+  });
+
+  // ── NEUIGKEITEN VERWALTEN ────────────────────────────────────────────────────
+  const PRODUCT_LABELS = {
+    website: 'Website', hosting: 'Website-Service', chatbot: 'Digitaler Assistent',
+    seo: 'Content & Fotos', digitale_ordnung: 'Digitale Ordnung'
+  };
+
+  async function loadNewsList() {
+    const listEl = document.getElementById('newsList');
+    const { data: updates } = await supabaseClient.from('updates').select('*').order('erstellt_am', { ascending: false });
+
+    if (!updates || updates.length === 0) {
+      listEl.innerHTML = '<div class="empty-doc">Noch keine Neuigkeiten veröffentlicht.</div>';
+      return;
+    }
+
+    listEl.innerHTML = updates.map(u => `<div class="file-row">
+      <span class="cat">${escapeHtml(u.zielprodukt ? PRODUCT_LABELS[u.zielprodukt] || u.zielprodukt : 'Alle')}</span>
+      <span class="name">${escapeHtml(u.titel)}</span>
+      <button class="del" data-id="${escapeHtml(u.id)}">Löschen</button>
+    </div>`).join('');
+
+    listEl.querySelectorAll('.del').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Diese Neuigkeit wirklich löschen?')) return;
+        await supabaseClient.from('updates').delete().eq('id', btn.dataset.id);
+        loadNewsList();
+      });
+    });
+  }
+
+  document.getElementById('newsSubmitBtn').addEventListener('click', async () => {
+    const titel = document.getElementById('newsTitel').value.trim();
+    const inhalt = document.getElementById('newsInhalt').value.trim();
+    const zielprodukt = document.getElementById('newsZiel').value || null;
+    const statusEl = document.getElementById('newsStatusMsg');
+
+    if (!titel || !inhalt) {
+      statusEl.textContent = 'Bitte Titel und Inhalt ausfüllen.';
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    const { error } = await supabaseClient.from('updates').insert({ titel, inhalt, zielprodukt });
+
+    if (error) {
+      statusEl.textContent = 'Fehler: ' + error.message;
+      statusEl.className = 'status-msg error';
+      return;
+    }
+
+    statusEl.textContent = '✓ Veröffentlicht.';
+    statusEl.className = 'status-msg success';
+    document.getElementById('newsTitel').value = '';
+    document.getElementById('newsInhalt').value = '';
+    document.getElementById('newsZiel').value = '';
+    loadNewsList();
   });
 
   document.getElementById('logoutBtn').addEventListener('click', async () => {

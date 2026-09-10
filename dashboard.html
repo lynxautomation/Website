@@ -271,6 +271,18 @@
   .upload-status { font-size: 0.78rem; color: var(--grey); margin-top: 10px; min-height: 18px; }
   .empty-doc { font-size: 0.82rem; color: rgba(160,160,184,0.6); padding: 8px 4px; }
 
+  /* NEUIGKEITEN */
+  .news-portal-item { padding: 24px 4px; border-bottom: 1px solid var(--border); }
+  .news-portal-item:last-child { border-bottom: none; }
+  .news-portal-date { font-size: 0.74rem; color: var(--purple-glow); letter-spacing: 0.04em; margin-bottom: 6px; }
+  .news-portal-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; margin-bottom: 6px; }
+  .news-portal-item p { font-size: 0.86rem; color: var(--grey); line-height: 1.65; font-weight: 300; max-width: 560px; }
+  .news-portal-tag {
+    display: inline-block; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.05em;
+    color: var(--accent); border: 1px solid rgba(179,157,219,0.3); padding: 3px 10px; border-radius: 100px;
+    margin-top: 10px;
+  }
+
   /* HILFE */
   .help-card {
     background: var(--card-bg); border: 1px solid var(--border);
@@ -355,6 +367,10 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
         Übersicht
       </button>
+      <button class="dash-nav-item" data-view="neuigkeiten">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+        Neuigkeiten
+      </button>
       <button class="dash-nav-item" data-view="dienstleistungen">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 5-9 5-9-5 9-5Z"/><path d="M3 13l9 5 9-5"/></svg>
         Dienstleistungen
@@ -417,6 +433,13 @@
             <span class="connect-btn">Noch keine Daten</span>
           </div>
         </div>
+      </div>
+
+      <!-- NEUIGKEITEN -->
+      <div class="dash-view" id="view-neuigkeiten">
+        <span class="welcome-label">Kundenportal</span>
+        <h1>Neuigkeiten</h1>
+        <div id="newsPortalList"><div class="empty-doc">Noch keine Neuigkeiten.</div></div>
       </div>
 
       <!-- DIENSTLEISTUNGEN -->
@@ -581,6 +604,7 @@
     document.getElementById('dashboardContent').classList.add('active');
     currentCustomerId = customer.id;
     loadDocuments(customer.id);
+    loadNews(customer);
   }
 
   loadDashboard();
@@ -624,6 +648,38 @@
         window.open(data.signedUrl, '_blank');
       });
     });
+  }
+
+  async function loadNews(customer) {
+    const { data: updates } = await supabaseClient
+      .from('updates')
+      .select('*')
+      .order('erstellt_am', { ascending: false });
+
+    const listEl = document.getElementById('newsPortalList');
+    if (!updates || updates.length === 0) {
+      listEl.innerHTML = '<div class="empty-doc">Noch keine Neuigkeiten.</div>';
+      return;
+    }
+
+    // Nur Updates ohne Zielprodukt (allgemein) oder passend zu einem aktiven Produkt des Kunden
+    const relevant = updates.filter(u => !u.zielprodukt || !!customer[u.zielprodukt]);
+
+    if (relevant.length === 0) {
+      listEl.innerHTML = '<div class="empty-doc">Noch keine Neuigkeiten für deine gebuchten Leistungen.</div>';
+      return;
+    }
+
+    listEl.innerHTML = relevant.map(u => {
+      const datum = new Date(u.erstellt_am).toLocaleDateString('de-DE', { month: 'long', year: 'numeric' });
+      const tagText = u.zielprodukt ? PRODUCT_DEFS.find(p => p.key === u.zielprodukt)?.name : null;
+      return `<div class="news-portal-item">
+        <div class="news-portal-date">${datum}</div>
+        <h3>${escapeHtml(u.titel)}</h3>
+        <p>${escapeHtml(u.inhalt)}</p>
+        ${tagText ? `<span class="news-portal-tag">${escapeHtml(tagText)}</span>` : ''}
+      </div>`;
+    }).join('');
   }
 
   async function loadDocuments(customerId) {

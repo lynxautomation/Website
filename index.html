@@ -1095,6 +1095,28 @@
     .sys-line-track, .sys-line-fill { display: none; }
   }
 
+  /* NEUIGKEITEN / CHANGELOG */
+  .news { max-width: 780px; margin: 0 auto; padding: 100px 60px; }
+  .news-list { display: flex; flex-direction: column; gap: 0; margin-top: 48px; }
+  .news-item {
+    display: flex; gap: 28px; padding: 26px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .news-item:first-child { padding-top: 0; }
+  .news-date {
+    flex-shrink: 0; width: 90px;
+    font-size: 0.78rem; color: var(--purple-glow);
+    letter-spacing: 0.04em; padding-top: 3px;
+  }
+  .news-body h4 { font-size: 0.98rem; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .news-body p { font-size: 0.88rem; color: var(--grey); line-height: 1.7; font-weight: 300; }
+
+  @media (max-width: 600px) {
+    .news { padding: 70px 24px; }
+    .news-item { flex-direction: column; gap: 6px; }
+    .news-date { width: auto; }
+  }
+
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
     .nav-links { display: none; }
@@ -1121,6 +1143,7 @@
     <li><a href="#products">Leistungen</a></li>
     <li><a href="#bundle">Bundle</a></li>
     <li><a href="#how">Ablauf</a></li>
+    <li><a href="#news">Neuigkeiten</a></li>
     <li><a href="blog.html">Blog</a></li>
     <li><a href="referenzen.html">Referenzen</a></li>
     <li><a href="#faq">FAQ</a></li>
@@ -1233,6 +1256,32 @@
     </a>
   </div>
   <a href="#products" class="signature-cta">Alle Bausteine im Detail ansehen</a>
+</section>
+
+<!-- NEUIGKEITEN / CHANGELOG
+     Neuen Eintrag hinzufügen: einfach einen weiteren .news-item Block ganz oben
+     in die .news-list einfügen (neueste zuerst), nach diesem Muster kopieren:
+
+     <div class="news-item">
+       <div class="news-date">März 2027</div>
+       <div class="news-body">
+         <h4>Kurzer Titel</h4>
+         <p>Ein bis zwei Sätze, was neu ist.</p>
+       </div>
+     </div>
+-->
+<section class="news fade-up" id="news">
+  <span class="section-label">Neuigkeiten</span>
+  <h2>Was sich bei uns<br>tut.</h2>
+  <div class="news-list">
+    <div class="news-item">
+      <div class="news-date">Februar 2027</div>
+      <div class="news-body">
+        <h4>Kundenportal gestartet</h4>
+        <p>Bestandskunden können sich ab sofort einloggen und sehen dort ihre gebuchten Leistungen, Verträge, Rechnungen und haben Zugriff auf einen persönlichen digitalen Assistenten.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- PRODUCTS / LEISTUNGEN -->
