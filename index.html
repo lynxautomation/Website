@@ -146,7 +146,7 @@
     transition: font-size 0.35s ease;
   }
   .logo span { color: var(--accent); }
-  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links { display: flex; align-items: center; gap: 44px; list-style: none; }
   .nav-links a {
     color: var(--grey);
     text-decoration: none;
@@ -1187,8 +1187,10 @@
     <li><a href="referenzen.html">Referenzen</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><button class="nav-news-btn" id="newsToggle" aria-label="Neuigkeiten anzeigen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h13a2 2 0 0 1 2 2v13a2 2 0 0 1-2 2H4V4Z"/><path d="M19 8h2v11a2 2 0 0 1-2 2H6"/><path d="M8 8h6M8 12h6M8 16h4"/></svg></button></li>
-    <li><a href="portal.html" class="nav-portal">Kundenportal</a></li>
-    <li><a href="#contact" class="nav-cta">Demo buchen</a></li>
+    <li style="display:flex; align-items:center; gap:14px;">
+      <a href="#contact" class="nav-cta">Demo buchen</a>
+      <a href="portal.html" class="nav-portal">Kundenportal</a>
+    </li>
   </ul>
 </nav>
 
