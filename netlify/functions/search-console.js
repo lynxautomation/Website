@@ -6,8 +6,38 @@ exports.handler = async function(event, context) {
   };
   if (event.httpMethod === 'OPTIONS') return { statusCode: 200, headers, body: '' };
 
+  const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
+
   try {
-    const siteUrl = (event.queryStringParameters && event.queryStringParameters.site) || 'https://lynx-automation.de/';
+    // ── 1. Sitzungs-Token SERVERSEITIG verifizieren, genau wie bei portal-chat.js ──
+    const accessToken = event.queryStringParameters && event.queryStringParameters.token;
+    if (!accessToken) {
+      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Nicht eingeloggt.' }) };
+    }
+
+    const userRes = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+      headers: { 'Authorization': `Bearer ${accessToken}`, 'apikey': SUPABASE_ANON_KEY }
+    });
+    if (!userRes.ok) {
+      return { statusCode: 401, headers, body: JSON.stringify({ error: 'Sitzung ungültig oder abgelaufen.' }) };
+    }
+    const verifiedUser = await userRes.json();
+
+    // ── 2. Domain AUSSCHLIESSLICH aus der verifizierten Kundenzeile holen,
+    //    niemals aus einem vom Client mitgeschickten Parameter ─────────────────
+    const custRes = await fetch(
+      `${SUPABASE_URL}/rest/v1/customers?user_id=eq.${verifiedUser.id}&select=domain`,
+      { headers: { 'Authorization': `Bearer ${accessToken}`, 'apikey': SUPABASE_ANON_KEY } }
+    );
+    const custRows = await custRes.json();
+    const customerDomain = Array.isArray(custRows) && custRows[0] && custRows[0].domain;
+
+    if (!customerDomain) {
+      return { statusCode: 404, headers, body: JSON.stringify({ error: 'Keine Domain für dieses Konto hinterlegt.' }) };
+    }
+
+    const siteUrl = `https://${customerDomain.replace(/\/$/, '')}/`;
 
     const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
     creds.private_key = creds.private_key.replace(/\\n/g, '\n');
