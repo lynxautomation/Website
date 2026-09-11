@@ -255,6 +255,61 @@
   .sc-query-row { display: flex; justify-content: space-between; gap: 12px; font-size: 0.8rem; }
   .sc-query-term { color: var(--white); }
   .sc-query-clicks { color: var(--purple-glow); flex-shrink: 0; }
+
+  /* SEARCH CONSOLE — reichere Visualisierung */
+  .sc-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 16px 0 22px; }
+  .sc-stat {
+    position: relative; overflow: hidden;
+    background: rgba(91,63,160,0.12); border: 1px solid rgba(179,157,219,0.25);
+    border-radius: 14px; padding: 18px 14px; text-align: center;
+  }
+  .sc-stat::before {
+    content: ''; position: absolute; top: -30px; right: -30px; width: 80px; height: 80px;
+    background: radial-gradient(circle, rgba(157,127,224,0.3) 0%, transparent 70%);
+    animation: scStatGlow 4s ease-in-out infinite;
+  }
+  @keyframes scStatGlow { 0%,100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .sc-stat-icon { width: 26px; height: 26px; margin: 0 auto 8px; color: var(--accent); position: relative; z-index: 1; }
+  .sc-stat-value {
+    font-family: 'Cormorant Garamond', serif; font-size: 2.1rem; font-weight: 500;
+    color: var(--white); line-height: 1; position: relative; z-index: 1;
+  }
+  .sc-stat-label {
+    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--grey); margin-top: 6px; position: relative; z-index: 1;
+  }
+
+  .sc-gauge-wrap { margin: 4px 0 26px; }
+  .sc-gauge-label-row { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--grey); margin-bottom: 7px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .sc-gauge-track { position: relative; height: 8px; border-radius: 100px; display: flex; overflow: visible; }
+  .sc-gauge-zone { height: 100%; flex: 1; }
+  .sc-gauge-zone.good { background: rgba(125,239,160,0.35); border-radius: 100px 0 0 100px; }
+  .sc-gauge-zone.mid { background: rgba(232,196,104,0.3); }
+  .sc-gauge-zone.low { background: rgba(240,128,128,0.22); border-radius: 0 100px 100px 0; }
+  .sc-gauge-marker {
+    position: absolute; top: -4px; width: 3px; height: 16px; border-radius: 2px;
+    background: var(--white); box-shadow: 0 0 10px rgba(255,255,255,0.9);
+    transition: left 0.8s cubic-bezier(0.4,0,0.2,1);
+  }
+  .sc-gauge-marker .sc-gauge-tag {
+    position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+    font-size: 0.72rem; color: var(--white); white-space: nowrap;
+    background: rgba(91,63,160,0.9); padding: 3px 10px; border-radius: 100px;
+    border: 1px solid rgba(179,157,219,0.4);
+  }
+  .sc-gauge-note { font-size: 0.78rem; color: var(--grey); margin-top: 14px; }
+
+  .sc-query-list { margin-top: 4px; display: flex; flex-direction: column; gap: 12px; }
+  .sc-query-row2 { position: relative; }
+  .sc-query-row2-top { display: flex; justify-content: space-between; font-size: 0.83rem; margin-bottom: 5px; }
+  .sc-query-row2-top .term { color: var(--white); }
+  .sc-query-row2-top .count { color: var(--purple-glow); flex-shrink: 0; margin-left: 10px; }
+  .sc-query-bar-bg { height: 4px; border-radius: 4px; background: rgba(179,157,219,0.12); overflow: hidden; }
+  .sc-query-bar-fill {
+    height: 100%; border-radius: 4px; width: 0;
+    background: linear-gradient(90deg, var(--purple-light), var(--accent));
+    transition: width 0.9s cubic-bezier(0.4,0,0.2,1);
+  }
   .connect-btn {
     flex-shrink: 0;
     font-size: 0.76rem; color: var(--grey);
@@ -483,12 +538,12 @@
             </div>
             <span class="connect-btn">Noch nicht verbunden</span>
           </div>
-          <div class="analytics-row">
+          <div class="analytics-row" style="align-items:flex-start;">
             <div class="a-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div>
-            <div class="analytics-row-body">
+            <div class="analytics-row-body" style="width:100%;">
               <h4>Google-Suchbegriffe</h4>
               <p id="searchConsoleSummary">Nach Verbindung mit der Search Console siehst du hier, wonach Kunden suchen, bevor sie auf deiner Seite landen.</p>
-              <div id="searchConsoleList"></div>
+              <div id="searchConsoleRich"></div>
             </div>
             <span class="connect-btn" id="searchConsoleStatus">Noch nicht verbunden</span>
           </div>
@@ -781,10 +836,29 @@
     }).join('');
   }
 
+  function animateCount(el, target, decimals) {
+    const duration = 900;
+    const startTime = performance.now();
+    function tick(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const value = target * eased;
+      el.textContent = decimals ? value.toFixed(decimals) : Math.round(value);
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function scPositionNote(pos) {
+    if (pos <= 10) return 'Im Schnitt auf Seite 1 der Google-Suche.';
+    if (pos <= 20) return 'Im Schnitt auf Seite 2 der Google-Suche, mit Potenzial nach oben.';
+    return 'Noch weiter hinten in den Suchergebnissen platziert, hier gibt es Luft nach oben.';
+  }
+
   async function loadSearchConsole(customer) {
     if (!customer.domain) return;
     const summaryEl = document.getElementById('searchConsoleSummary');
-    const listEl = document.getElementById('searchConsoleList');
+    const richEl = document.getElementById('searchConsoleRich');
     const statusEl = document.getElementById('searchConsoleStatus');
 
     const siteUrl = `https://${customer.domain.replace(/\/$/, '')}/`;
@@ -799,19 +873,77 @@
       }
 
       statusEl.textContent = 'Letzte 28 Tage';
-      summaryEl.textContent = `${data.totals.clicks} Klicks, ${data.totals.impressions} Impressionen, Ø Position ${data.totals.position || '–'}`;
+      summaryEl.style.display = 'none';
 
-      if (data.queries.length === 0) {
-        listEl.innerHTML = '<div class="empty-doc">Noch keine Suchbegriffe im gewählten Zeitraum.</div>';
-        return;
-      }
+      const pos = data.totals.position || 0;
+      const gaugePct = Math.min((pos / 30) * 100, 100);
 
-      listEl.innerHTML = data.queries.slice(0, 5).map(q => `
-        <div class="sc-query-row">
-          <span class="sc-query-term">${escapeHtml(q.query)}</span>
-          <span class="sc-query-clicks">${q.clicks} Klicks</span>
+      richEl.innerHTML = `
+        <div class="sc-stats">
+          <div class="sc-stat">
+            <svg class="sc-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9l6 6M9 15l6-6"/><circle cx="12" cy="12" r="9"/></svg>
+            <div class="sc-stat-value" id="scClicks">0</div>
+            <div class="sc-stat-label">Klicks</div>
+          </div>
+          <div class="sc-stat">
+            <svg class="sc-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div class="sc-stat-value" id="scImpressions">0</div>
+            <div class="sc-stat-label">Impressionen</div>
+          </div>
+          <div class="sc-stat">
+            <svg class="sc-stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>
+            <div class="sc-stat-value" id="scPosition">0</div>
+            <div class="sc-stat-label">Ø Position</div>
+          </div>
         </div>
-      `).join('');
+
+        <div class="sc-gauge-wrap">
+          <div class="sc-gauge-label-row"><span>Seite 1</span><span>Seite 2</span><span>Seite 3+</span></div>
+          <div class="sc-gauge-track">
+            <div class="sc-gauge-zone good"></div>
+            <div class="sc-gauge-zone mid"></div>
+            <div class="sc-gauge-zone low"></div>
+            <div class="sc-gauge-marker" id="scGaugeMarker" style="left:0%;"><span class="sc-gauge-tag">Ø ${pos}</span></div>
+          </div>
+          <div class="sc-gauge-note">${scPositionNote(pos)}</div>
+        </div>
+
+        <div class="sc-query-list" id="scQueryList"></div>
+      `;
+
+      animateCount(document.getElementById('scClicks'), data.totals.clicks, 0);
+      animateCount(document.getElementById('scImpressions'), data.totals.impressions, 0);
+      animateCount(document.getElementById('scPosition'), pos, 1);
+
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('scGaugeMarker').style.left = gaugePct + '%';
+        });
+      });
+
+      const queryListEl = document.getElementById('scQueryList');
+      if (data.queries.length === 0) {
+        queryListEl.innerHTML = '<div class="empty-doc">Noch keine Suchbegriffe im gewählten Zeitraum.</div>';
+      } else {
+        const maxImpr = Math.max(...data.queries.map(q => q.impressions), 1);
+        queryListEl.innerHTML = data.queries.slice(0, 5).map(q => {
+          const pct = Math.round((q.impressions / maxImpr) * 100);
+          return `<div class="sc-query-row2">
+            <div class="sc-query-row2-top">
+              <span class="term">${escapeHtml(q.query)}</span>
+              <span class="count">${q.clicks} Klicks · ${q.impressions} Impr.</span>
+            </div>
+            <div class="sc-query-bar-bg"><div class="sc-query-bar-fill" data-w="${pct}"></div></div>
+          </div>`;
+        }).join('');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            queryListEl.querySelectorAll('.sc-query-bar-fill').forEach(el => {
+              el.style.width = el.dataset.w + '%';
+            });
+          });
+        });
+      }
     } catch (err) {
       statusEl.textContent = 'Verbindung fehlgeschlagen';
     }
