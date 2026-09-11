@@ -90,9 +90,10 @@ Modell 2, 149 €/Monat: alles aus Modell 1, erfasst zusätzlich Kontaktdaten vo
 Ein Wechsel von Modell 1 auf Modell 2 ist jederzeit unkompliziert möglich.
 
 === BAUSTEIN 2 – WEBSITE ===
-Web Start (Landingpage), 890 € einmalig: 1–3 Unterseiten, individuelles Design, Kontaktformular, Grundlegende SEO. Fertig in 1–2 Wochen.
-Web Business (Unternehmenswebsite), 2.400 € einmalig: 5–8 Unterseiten, Referenzen-/Portfoliobereich, digitaler Assistent direkt einbindbar. Fertig in 3–4 Wochen.
-Website-Service (optional), 25 €/Monat: Hosting, Domain, Sicherheitsupdates, kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat).
+Web Start (Landingpage), 890 € einmalig: 1–3 Unterseiten, individuelles Design, Kontaktformular, Grundlegende SEO-Einrichtung, Google Business Profil & Search Console werden eingerichtet, DSGVO-konforme Rechtstexte. Fertig in 1–2 Wochen.
+Web Business (Unternehmenswebsite), 2.400 € einmalig: 5–8 Unterseiten, individuelles Design, Grundlegende SEO-Einrichtung, Google Business Profil & Search Console werden eingerichtet, DSGVO-konforme Rechtstexte. Fertig in 3–4 Wochen.
+Website-Service (optional), 50 €/Monat: Hosting, Domain, Sicherheitsupdates, kleine inhaltliche Änderungen (bis zu 15 Minuten/Monat), und das Kundenportal mit Dashboard, in dem der Kunde gerade eingeloggt ist. Bei der Unternehmenswebsite sieht der Kunde dort zusätzlich detaillierte Traffic-Daten aus Google.
+Der Zugang zu diesem Portal wird von Lynx Automation persönlich für jeden Kunden eingerichtet, sobald der Website-Service gebucht ist, der Kunde muss sich dafür nicht selbst registrieren.
 Der Kunde erhält immer den vollständigen Quellcode und ist nicht an Lynx gebunden.
 
 === BAUSTEIN 3 – CONTENT & FOTOS ===
@@ -102,7 +103,7 @@ Content Plus, 490 €/Monat: 16 Beiträge, zusätzlich Story-Grafiken & Anzeigen
 Das Posten übernimmt der Kunde selbst, Lynx liefert die fertigen Dateien.
 
 === BUNDLE – DIGITALE RUNDUM-LÖSUNG ===
-Digitaler Assistent Modell 2 + Web Business + Website-Service + Foto & Grundausstattung + Content Basis, für 359 €/Monat (statt 423 € einzeln) + 2.790 € einmalig für Website & Fotos. Digitale Ordnung ist nicht Teil des Bundles, da einmalige Aufräum-Leistung.
+Digitaler Assistent Modell 2 + Web Business + Website-Service + Foto & Grundausstattung + Content Basis, für 384 €/Monat (statt 448 € einzeln) + 2.790 € einmalig für Website & Fotos. Digitale Ordnung ist nicht Teil des Bundles, da einmalige Aufräum-Leistung.
 
 === ZAHLUNG & VERTRAG ===
 - Website: 50 % Anzahlung, Rest bei Fertigstellung
