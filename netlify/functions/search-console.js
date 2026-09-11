@@ -9,7 +9,7 @@ exports.handler = async function(event, context) {
   try {
     const siteUrl = (event.queryStringParameters && event.queryStringParameters.site) || 'https://lynx-automation.de/';
 
-    const creds = JSON.parse(process.env.Lynxautomation);
+    const creds = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_JSON);
     creds.private_key = creds.private_key.replace(/\\n/g, '\n');
 
     const token = await getGoogleToken(creds);
