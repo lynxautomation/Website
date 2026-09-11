@@ -861,10 +861,12 @@
     const richEl = document.getElementById('searchConsoleRich');
     const statusEl = document.getElementById('searchConsoleStatus');
 
-    const siteUrl = `https://${customer.domain.replace(/\/$/, '')}/`;
+    const { data: sessionData } = await supabaseClient.auth.getSession();
+    const accessToken = sessionData.session ? sessionData.session.access_token : null;
+    if (!accessToken) return;
 
     try {
-      const res = await fetch('/.netlify/functions/search-console?site=' + encodeURIComponent(siteUrl));
+      const res = await fetch('/.netlify/functions/search-console?token=' + encodeURIComponent(accessToken));
       const data = await res.json();
 
       if (!res.ok || !data.success) {
