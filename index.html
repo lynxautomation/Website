@@ -557,8 +557,33 @@
     background: var(--border);
   }
 
+  .section-top-divider {
+    height: 1px;
+    width: 100%;
+    background: var(--border);
+    margin: 0 0 56px;
+  }
+
+  /* EINFAHRBARE VERGLEICHSTABELLE */
+  .table-toggle {
+    display: flex; align-items: center; gap: 8px;
+    width: fit-content; margin: 48px auto 0;
+    padding: 12px 26px;
+    background: none; border: 1px solid rgba(179,157,219,0.3); border-radius: 100px;
+    color: var(--accent); font-size: 0.85rem; cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .table-toggle:hover { border-color: var(--accent); background: rgba(179,157,219,0.08); }
+  .table-toggle-icon { width: 15px; height: 15px; transition: transform 0.3s ease; }
+  .table-toggle.open .table-toggle-icon { transform: rotate(180deg); }
+  .table-collapse { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
+  .table-collapse.open { max-height: 700px; }
+  #faqCollapse.open { max-height: 4000px; }
+  .table-collapse table { margin-top: 32px !important; }
+
   /* WARUM LYNX */
-  .why { padding: 100px 60px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .why { padding: 100px 60px; max-width: 820px; margin: 0 auto; text-align: center; }
   .why-header { margin-bottom: 50px; }
   .why-header .section-desc { margin: 0 auto; }
   .why-card {
@@ -811,7 +836,7 @@
 
   /* VORTEILE */
   .benefits { padding: 120px 60px; max-width: 1200px; margin: 0 auto; }
-  .benefits-header { margin-bottom: 70px; }
+  .benefits-header { text-align: center; margin-bottom: 70px; }
   .benefits-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .benefit-card {
     background: var(--card-bg);
@@ -903,7 +928,7 @@
   /* CONTACT */
   .contact {
     padding: 120px 60px;
-    max-width: 700px;
+    max-width: 820px;
     margin: 0 auto;
     text-align: center;
     transition: max-width 0.3s ease;
@@ -1129,6 +1154,48 @@
   }
   .signature-cta:hover { color: var(--white); border-color: var(--accent); }
 
+  /* SEITEN-NAVIGATION — gleiche Punkt/Linie-Sprache wie "Vier Bausteine. Ein System." */
+  .section-nav {
+    position: fixed; left: 14px; top: 50%; transform: translateY(-50%);
+    z-index: 95;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 4px 0;
+  }
+  .section-nav-line {
+    position: absolute; top: 4px; bottom: 4px; left: 50%;
+    width: 1px; transform: translateX(-50%);
+    background: linear-gradient(to bottom, rgba(179,157,219,0.3), rgba(179,157,219,0.06));
+  }
+  .section-nav-item {
+    position: relative; z-index: 1;
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; cursor: pointer; padding: 0;
+  }
+  .section-nav-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: rgba(160,160,184,0.35);
+    border: 1px solid rgba(179,157,219,0.3);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  .section-nav-item:hover .section-nav-dot { border-color: var(--accent); }
+  .section-nav-item.active .section-nav-dot {
+    background: var(--purple-light);
+    border-color: var(--purple-light);
+    box-shadow: 0 0 11px rgba(157,127,224,0.85);
+    transform: scale(1.35);
+  }
+  .section-nav-tooltip {
+    position: absolute; left: 34px; top: 50%; transform: translateY(-50%);
+    background: rgba(13,27,62,0.95); border: 1px solid rgba(179,157,219,0.3);
+    padding: 5px 13px; border-radius: 100px;
+    font-size: 0.72rem; color: var(--white); white-space: nowrap;
+    opacity: 0; pointer-events: none; transition: opacity 0.2s ease;
+  }
+  .section-nav-item:hover .section-nav-tooltip { opacity: 1; }
+
+  @media (max-width: 1050px) { .section-nav { display: none; } }
+
   @media (max-width: 700px) {
     .signature { padding: 90px 24px 100px; }
     .signature-system { grid-template-columns: 1fr; gap: 40px; max-width: 240px; }
@@ -1195,7 +1262,7 @@
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div class="hero-inner">
     <div class="hero-flex">
       <div class="hero-copy">
@@ -1241,7 +1308,7 @@
 </section>
 
 <!-- PROBLEM -->
-<section>
+<section id="problem">
   <div class="problem fade-up">
     <div>
       <span class="section-label">Das Problem</span>
@@ -1271,7 +1338,7 @@
 </section>
 
 <!-- SIGNATURE MOMENT -->
-<section class="signature">
+<section class="signature" id="system">
   <h2 class="signature-title">Vier Bausteine.<br><em>Ein System.</em></h2>
   <div class="signature-system fade-up">
     <div class="sys-line-track"></div>
@@ -1476,6 +1543,11 @@
           <div class="product-num">02</div>
         </div>
       </div>
+      <button class="table-toggle" id="chatbotTableToggle">
+        <span>Alle Funktionen im Vergleich anzeigen</span>
+        <svg class="table-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="table-collapse" id="chatbotTableCollapse">
       <table style="margin-top:48px">
         <tr>
           <th>Funktion</th>
@@ -1492,6 +1564,7 @@
         <tr><td>Neue Anfragen automatisch in Ihrer Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
         <tr><td>E-Mail-Benachrichtigung bei neuer Anfrage</td><td class="dash">–</td><td class="check">✓</td></tr>
       </table>
+      </div>
     </div>
 
     <!-- BAUSTEIN 2: WEBSITE -->
@@ -1609,7 +1682,7 @@
       </div>
 
       <div class="sub-divider"><span>Einmalig — Grundausstattung</span></div>
-      <div class="products-grid" style="grid-template-columns:1fr;max-width:800px;margin:0 auto 64px;">
+      <div class="products-grid" style="grid-template-columns:1fr;max-width:900px;margin:0 auto 64px;">
         <div class="product-card featured">
           <div class="product-tag">Foto & Grundausstattung</div>
           <h3>Digitale Präsenz aufbauen</h3>
@@ -1626,7 +1699,7 @@
       </div>
 
       <div class="sub-divider"><span>Laufend — regelmäßige Beiträge</span></div>
-      <div class="products-grid">
+      <div class="products-grid" style="max-width:900px;margin:0 auto;">
         <div class="product-card">
           <div class="product-tag">Content Basis</div>
           <h3>8 Beiträge / Monat</h3>
@@ -1669,6 +1742,7 @@
 <!-- HOW IT WORKS -->
 <section id="how">
   <div class="how fade-up">
+    <div class="section-top-divider"></div>
     <div class="how-header">
       <span class="section-label">Der Ablauf</span>
       <h2>In 3 Schritten<br>digital aufgestellt.</h2>
@@ -1737,7 +1811,7 @@
 </section>
 
 <!-- DATENSCHUTZ -->
-<section>
+<section id="privacy">
   <div class="privacy fade-up">
     <span class="section-label">Datenschutz</span>
     <h2>DSGVO-konform.<br>Von Anfang an.</h2>
@@ -1748,6 +1822,27 @@
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M4 7h16"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></span> Datenlöschung auf Anfrage</div>
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h4"/></svg></span> Auftragsverarbeitungsvertrag</div>
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><circle cx="8" cy="7" r="0.6" fill="currentColor"/><circle cx="8" cy="17" r="0.6" fill="currentColor"/></svg></span> Server in Deutschland</div>
+    </div>
+  </div>
+</section>
+
+<!-- WARUM LYNX -->
+<section id="why">
+  <div class="why fade-up">
+    <div class="why-header">
+      <span class="section-label">Warum Lynx</span>
+      <h2>Wir kümmern uns<br>um die Technik.</h2>
+      <p class="section-desc">Als Handwerksbetrieb müssen Sie nichts programmieren und kein Fachchinesisch verstehen. Sie bekommen eine fertige Lösung, in wenigen Tagen einsatzbereit.</p>
+    </div>
+    <div class="why-card">
+      <ul class="product-features why-grid">
+        <li>Persönlicher Ansprechpartner</li>
+        <li>Keine Agentur mit wechselnden Mitarbeitern</li>
+        <li>Schnelle Einrichtung</li>
+        <li>Transparente Preise</li>
+        <li>Monatlich kündbar</li>
+        <li>Chatbot, Website & Content aus einer Hand</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -1785,6 +1880,12 @@
       <div class="faq-q">Gibt es Mindestlaufzeiten oder Kündigungsfristen?</div>
       <div class="faq-a">Keine Mindestlaufzeit. Alle laufenden Leistungen sind monatlich kündbar, mit 2 Wochen Frist zum Monatsende, Sie binden sich also an nichts, das für Sie nicht funktioniert. Einmalige Leistungen wie die Website-Erstellung bezahlen Sie ohnehin nur einmal.</div>
     </div>
+
+    <button class="table-toggle" id="faqToggle" style="margin:32px auto 40px;">
+      <span>Weitere Fragen anzeigen</span>
+      <svg class="table-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="table-collapse" id="faqCollapse">
 
     <div class="faq-category"><span class="icon">🧭</span> Digitale Ordnung</div>
     <div class="faq-item">
@@ -1879,26 +1980,7 @@
       <div class="faq-q">Welche Verträge schließen wir konkret mit Ihnen ab?</div>
       <div class="faq-a">Drei Dokumente, die Ihnen den Papierkram abnehmen: unsere Allgemeinen Geschäftsbedingungen (AGB), die den Rahmen der Zusammenarbeit regeln; einen Auftragsverarbeitungsvertrag (AVV) gemäß Art. 28 DSGVO passend zu Ihrem gewählten Modell; und einen fertigen Datenschutzbaustein zum Einfügen in Ihre eigene Datenschutzerklärung, damit auch Ihre Website-Besucher korrekt informiert sind, ohne dass Sie selbst etwas formulieren müssen.</div>
     </div>
-  </div>
-</section>
 
-<!-- WARUM LYNX -->
-<section id="why">
-  <div class="why fade-up">
-    <div class="why-header">
-      <span class="section-label">Warum Lynx</span>
-      <h2>Wir kümmern uns<br>um die Technik.</h2>
-      <p class="section-desc">Als Handwerksbetrieb müssen Sie nichts programmieren und kein Fachchinesisch verstehen. Sie bekommen eine fertige Lösung, in wenigen Tagen einsatzbereit.</p>
-    </div>
-    <div class="why-card">
-      <ul class="product-features why-grid">
-        <li>Persönlicher Ansprechpartner</li>
-        <li>Keine Agentur mit wechselnden Mitarbeitern</li>
-        <li>Schnelle Einrichtung</li>
-        <li>Transparente Preise</li>
-        <li>Monatlich kündbar</li>
-        <li>Chatbot, Website & Content aus einer Hand</li>
-      </ul>
     </div>
   </div>
 </section>
@@ -1906,6 +1988,7 @@
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact fade-up">
+    <div class="section-top-divider"></div>
     <span class="section-label">Kontakt</span>
     <h2>Bereit für Ihre<br>digitale Präsenz?</h2>
     <p class="section-desc" style="margin:0 auto">Fordern Sie jetzt eine kostenlose Beratung an, ob Chatbot, Website, Content oder alles zusammen. Wir zeigen Ihnen unverbindlich, wie Ihre Lösung aussehen würde.</p>
@@ -2988,6 +3071,20 @@ async function sendMessage() {
 </script>
 <!-- ── END LYNX CHATBOT ───────────────────────────────────── -->
 
+<nav class="section-nav" id="sectionNav">
+  <div class="section-nav-line"></div>
+  <button class="section-nav-item" data-target="hero"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Start</span></button>
+  <button class="section-nav-item" data-target="problem"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Das Problem</span></button>
+  <button class="section-nav-item" data-target="system"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Ein System</span></button>
+  <button class="section-nav-item" data-target="products"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Leistungen</span></button>
+  <button class="section-nav-item" data-target="how"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Ablauf</span></button>
+  <button class="section-nav-item" data-target="benefits"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Vorteile</span></button>
+  <button class="section-nav-item" data-target="privacy"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Datenschutz</span></button>
+  <button class="section-nav-item" data-target="faq"><span class="section-nav-dot"></span><span class="section-nav-tooltip">FAQ</span></button>
+  <button class="section-nav-item" data-target="why"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Warum Lynx</span></button>
+  <button class="section-nav-item" data-target="contact"><span class="section-nav-dot"></span><span class="section-nav-tooltip">Kontakt</span></button>
+</nav>
+
 <button class="back-to-top" id="back-to-top" aria-label="Nach oben scrollen">
   <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M12 19V5M12 5L6 11M12 5L18 11" stroke="#b39ddb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -3002,6 +3099,30 @@ async function sendMessage() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
+  // SEITEN-NAVIGATION (Punkte am rechten Rand)
+  const sectionNavItems = document.querySelectorAll('.section-nav-item');
+  sectionNavItems.forEach(item => {
+    item.addEventListener('click', () => {
+      const target = document.getElementById(item.dataset.target);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  const sectionNavObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        sectionNavItems.forEach(item => {
+          item.classList.toggle('active', item.dataset.target === entry.target.id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+
+  sectionNavItems.forEach(item => {
+    const el = document.getElementById(item.dataset.target);
+    if (el) sectionNavObserver.observe(el);
+  });
+
   // NEUIGKEITEN-MODAL
   const newsToggle = document.getElementById('newsToggle');
   const newsOverlay = document.getElementById('newsModalOverlay');
@@ -3011,6 +3132,28 @@ async function sendMessage() {
   function closeNewsModal() { newsOverlay.classList.remove('active'); }
 
   newsToggle.addEventListener('click', openNewsModal);
+
+  // EINFAHRBARE VERGLEICHSTABELLE (Chatbot)
+  const chatbotTableToggle = document.getElementById('chatbotTableToggle');
+  const chatbotTableCollapse = document.getElementById('chatbotTableCollapse');
+  chatbotTableToggle.addEventListener('click', () => {
+    const isOpen = chatbotTableCollapse.classList.toggle('open');
+    chatbotTableToggle.classList.toggle('open', isOpen);
+    chatbotTableToggle.querySelector('span').textContent = isOpen
+      ? 'Funktionen ausblenden'
+      : 'Alle Funktionen im Vergleich anzeigen';
+  });
+
+  // EINFAHRBARE FAQ-LISTE
+  const faqToggle = document.getElementById('faqToggle');
+  const faqCollapse = document.getElementById('faqCollapse');
+  faqToggle.addEventListener('click', () => {
+    const isOpen = faqCollapse.classList.toggle('open');
+    faqToggle.classList.toggle('open', isOpen);
+    faqToggle.querySelector('span').textContent = isOpen
+      ? 'Weniger Fragen anzeigen'
+      : 'Weitere Fragen anzeigen';
+  });
   newsClose.addEventListener('click', closeNewsModal);
   newsOverlay.addEventListener('click', (e) => {
     if (e.target === newsOverlay) closeNewsModal();
