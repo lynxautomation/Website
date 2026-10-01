@@ -156,6 +156,22 @@
     transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--white); }
+
+  /* MOBILE NAV TOGGLE (hamburger) */
+  .nav-burger {
+    display: none;
+    width: 40px; height: 40px;
+    align-items: center; justify-content: center;
+    background: none; border: 1px solid rgba(179,157,219,0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    flex-shrink: 0;
+    z-index: 101;
+  }
+  .nav-burger svg { width: 19px; height: 19px; }
+  .nav-burger .icon-close { display: none; }
+  .nav-burger.open .icon-menu { display: none; }
+  .nav-burger.open .icon-close { display: block; }
   .nav-cta {
     background: transparent;
     border: 1px solid rgba(179,157,219,0.3);
@@ -1226,7 +1242,40 @@
 
   @media (max-width: 900px) {
     nav { padding: 16px 24px; }
-    .nav-links { display: none; }
+    .nav-burger { display: flex; }
+    .nav-links {
+      position: fixed;
+      top: 0; right: 0;
+      height: 100vh;
+      width: min(78vw, 320px);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
+      padding: 90px 32px 32px;
+      background: rgba(13,20,46,0.98);
+      border-left: 1px solid rgba(179,157,219,0.15);
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      z-index: 99;
+      overflow-y: auto;
+    }
+    .nav-links.open { transform: translateX(0); }
+    .nav-links li {
+      width: 100%;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(179,157,219,0.1);
+    }
+    .nav-links li:last-child { border-bottom: none; }
+    .nav-links li[style] { display: flex !important; flex-direction: column; align-items: flex-start !important; gap: 16px !important; }
+    .nav-links a { font-size: 0.95rem; }
+    .nav-links .nav-cta, .nav-links .nav-portal { width: 100%; text-align: center; }
+    .nav-backdrop {
+      display: none;
+      position: fixed; inset: 0; z-index: 98;
+      background: rgba(5,9,24,0.6);
+    }
+    .nav-backdrop.open { display: block; }
     .problem, .products-grid, .benefits-grid, .steps { grid-template-columns: 1fr; }
     .steps::before { display: none; }
     .problem { padding: 80px 24px; gap: 40px; }
@@ -1236,6 +1285,15 @@
     .contact-form { padding: 36px 28px; }
     .form-row { grid-template-columns: 1fr; }
     footer { padding: 36px 24px; }
+
+    /* PERFORMANCE: mobile GPUs struggle with the feTurbulence noise filter,
+       heavy backdrop-filter blur and the always-on drift animations behind
+       a fixed background - this combination is the main cause of scroll
+       jank/"hanging" on phones, so we simplify all three on small screens. */
+    body::before { display: none; }
+    .bg-mesh::before, .bg-mesh::after { animation: none; }
+    nav { backdrop-filter: none; background: rgba(13,27,62,0.96); }
+    nav.nav-scrolled { backdrop-filter: none; background: rgba(13,27,62,0.98); }
   }
 </style>
 </head>
@@ -1246,7 +1304,7 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">Lynx <span>Automation</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="navLinks">
     <li><a href="#products">Leistungen</a></li>
     <li><a href="#bundle">Bundle</a></li>
     <li><a href="#how">Ablauf</a></li>
@@ -1259,7 +1317,12 @@
       <a href="portal.html" class="nav-portal">Kundenportal</a>
     </li>
   </ul>
+  <button class="nav-burger" id="navBurger" aria-label="Menü öffnen" aria-expanded="false">
+    <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+  </button>
 </nav>
+<div class="nav-backdrop" id="navBackdrop"></div>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -2198,6 +2261,33 @@
   };
   window.addEventListener('scroll', onNavScroll, { passive: true });
   onNavScroll();
+
+  // MOBILE NAV TOGGLE (hamburger menu)
+  const navBurger = document.getElementById('navBurger');
+  const navLinksEl = document.getElementById('navLinks');
+  const navBackdrop = document.getElementById('navBackdrop');
+  function closeMobileNav() {
+    navBurger.classList.remove('open');
+    navBurger.setAttribute('aria-expanded', 'false');
+    navLinksEl.classList.remove('open');
+    navBackdrop.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function openMobileNav() {
+    navBurger.classList.add('open');
+    navBurger.setAttribute('aria-expanded', 'true');
+    navLinksEl.classList.add('open');
+    navBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  if (navBurger) {
+    navBurger.addEventListener('click', () => {
+      if (navLinksEl.classList.contains('open')) { closeMobileNav(); } else { openMobileNav(); }
+    });
+    navBackdrop.addEventListener('click', closeMobileNav);
+    navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+    window.addEventListener('resize', () => { if (window.innerWidth > 900) closeMobileNav(); });
+  }
 
   // LEAD FORM SUBMIT
   async function submitLead() {
