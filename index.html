@@ -1294,6 +1294,28 @@
     .bg-mesh::before, .bg-mesh::after { animation: none; }
     nav { backdrop-filter: none; background: rgba(13,27,62,0.96); }
     nav.nav-scrolled { backdrop-filter: none; background: rgba(13,27,62,0.98); }
+
+    /* Stop every remaining decorative icon/dot animation on mobile:
+       pulsing status dots, the hero notify popup, the "mehr erfahren"
+       scroll indicator, and the little floating/glowing icons inside the
+       four Bausteine illustrations (chaos dots, order dots, chat typing
+       dots, skeleton lines, photo icon) - all of it stays static on phones. */
+    .hero-badge::before,
+    .hero-device-live::before,
+    .chat-mock-caption::before,
+    .hero-device::before,
+    .hero-notify,
+    .hero-scroll .scroll-line,
+    .visual-ordnung .chaos-dot,
+    .visual-ordnung .flow-line,
+    .visual-ordnung .order-dot,
+    .chat-bubble.bot span,
+    .visual-web .skel,
+    .visual-content .photo,
+    .wg-dot {
+      animation: none !important;
+    }
+    .hero-notify { opacity: 1; transform: none; }
   }
 </style>
 </head>
