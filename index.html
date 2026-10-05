@@ -447,7 +447,7 @@
   .problem h2 { font-size: clamp(2rem, 3.6vw, 3rem); }
   .problem-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
   }
   .stat-card {
@@ -1277,6 +1277,7 @@
     }
     .nav-backdrop.open { display: block; }
     .problem, .products-grid, .benefits-grid, .steps { grid-template-columns: 1fr; }
+    .problem-stats { grid-template-columns: 1fr; }
     .steps::before { display: none; }
     .problem { padding: 80px 24px; gap: 40px; }
     .products, .how, .benefits, .comparison, .faq, .contact, .bundle { padding: 80px 24px; }
@@ -1403,20 +1404,16 @@
     </div>
     <div class="problem-stats">
       <div class="stat-card">
-        <div class="stat-num">72%</div>
-        <div class="stat-label">recherchieren online, bevor sie Kontakt aufnehmen</div>
+        <div class="stat-num">~70%</div>
+        <div class="stat-label">recherchieren Studien zufolge online, bevor sie Kontakt aufnehmen</div>
       </div>
       <div class="stat-card">
-        <div class="stat-num">67%</div>
-        <div class="stat-label">der Kunden erwarten eine sofortige Antwort auf Anfragen</div>
+        <div class="stat-num">~65%</div>
+        <div class="stat-label">der Kunden erwarten laut Umfragen eine schnelle Antwort auf Anfragen</div>
       </div>
       <div class="stat-card">
         <div class="stat-num">24/7</div>
         <div class="stat-label">Erreichbarkeit ohne zusätzlichen Personalaufwand</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3×</div>
-        <div class="stat-label">mehr Leads durch konsistente digitale Präsenz</div>
       </div>
     </div>
   </div>
@@ -1471,7 +1468,7 @@
     <h2>Was sich bei uns tut.</h2>
     <div class="news-list">
       <div class="news-item">
-        <div class="news-date">Februar 2027</div>
+        <div class="news-date">Februar 2026</div>
         <div class="news-body">
           <h4>Kundenportal gestartet</h4>
           <p>Bestandskunden können sich ab sofort einloggen und sehen dort ihre gebuchten Leistungen, Verträge, Rechnungen und haben Zugriff auf einen persönlichen digitalen Assistenten.</p>
@@ -1505,7 +1502,7 @@
           <h3>Digitale Rundum-Lösung</h3>
           <p>Für 384 €/Monat kümmern wir uns komplett um Ihren digitalen Auftritt: Website, digitaler Assistent und laufende Beiträge, abgestimmt aufeinander, ohne dass Sie selbst koordinieren müssen.</p>
           <ul class="bundle-includes">
-            <li>Digitaler Assistent mit automatischer Kundengewinnung</li>
+            <li>Digitaler Assistent mit automatischer Lead-Erfassung</li>
             <li>Web Business — Unternehmenswebsite (5–8 Seiten)</li>
             <li>Website-Service inklusive (Hosting, Sicherheitsupdates, kleine Änderungen, Kundenportal mit Dashboard)</li>
             <li>Foto & Grundausstattung — einmalig</li>
@@ -1591,20 +1588,20 @@
           <div class="product-tag">Modell 1 — Starter</div>
           <h3>Digitaler Assistent für Ihre Website</h3>
           <div class="product-price"><span class="amount">79 €</span><span class="period">/ Monat</span></div>
-          <p>Ihr digitaler Assistent beantwortet Fragen rund um die Uhr. Besucher erhalten sofort Antworten, auch außerhalb Ihrer Öffnungszeiten. So verlieren Sie keine Interessenten mehr.</p>
+          <p>Ihr digitaler Assistent beantwortet Fragen rund um die Uhr. Besucher erhalten sofort Antworten, auch außerhalb Ihrer Öffnungszeiten.</p>
           <ul class="product-features">
             <li>Öffnungszeiten & Standort</li>
             <li>Projekte & Leistungen</li>
             <li>Bewertungen & Referenzen</li>
             <li>Individuelle Unternehmensinformationen</li>
-            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
+            <li>Ihr Chat kennt Ihre aktuellen Leistungen und Öffnungszeiten (Wissensbasis wird laufend aktualisiert)</li>
             <li>DSGVO-konform</li>
           </ul>
           <div class="product-num">01</div>
         </div>
         <div class="product-card featured">
           <div class="product-tag">Modell 2 — Pro</div>
-          <h3>Assistent mit automatischer Kundengewinnung</h3>
+          <h3>Assistent mit automatischer Lead-Erfassung</h3>
           <div class="product-price"><span class="amount">149 €</span><span class="period">/ Monat</span></div>
           <p>Alles aus Modell 1, und der Chat sammelt zusätzlich Kontaktdaten von Interessenten. Sie bekommen neue Anfragen, selbst wenn Sie gerade arbeiten.</p>
           <ul class="product-features">
@@ -1612,7 +1609,7 @@
             <li>Projekte & Leistungen</li>
             <li>Bewertungen & Referenzen</li>
             <li>Individuelle Unternehmensinformationen</li>
-            <li>Ihr Chat kennt immer Ihre aktuellen Leistungen und Öffnungszeiten</li>
+            <li>Ihr Chat kennt Ihre aktuellen Leistungen und Öffnungszeiten (Wissensbasis wird laufend aktualisiert)</li>
             <li>DSGVO-konform</li>
           </ul>
           <div style="margin: 20px 0; border-top: 1px solid rgba(179,157,219,0.2); padding-top: 20px;">
@@ -1622,7 +1619,6 @@
             <li>Der Chat fragt gezielt nach Kontaktdaten</li>
             <li>Der Chat stellt die richtigen Fragen, bevor er Kontakte weitergibt</li>
             <li>Neue Anfragen landen automatisch in Ihrer Tabelle</li>
-            <li>E-Mail-Benachrichtigung bei neuer Anfrage</li>
             <li>DSGVO-konforme Einwilligungserklärung im Chat</li>
           </ul>
           <div class="product-num">02</div>
@@ -1647,7 +1643,6 @@
         <tr><td>Sammelt Kontaktdaten im Chat</td><td class="dash">–</td><td class="check">✓</td></tr>
         <tr><td>Stellt gezielte Rückfragen</td><td class="dash">–</td><td class="check">✓</td></tr>
         <tr><td>Neue Anfragen automatisch in Ihrer Tabelle</td><td class="dash">–</td><td class="check">✓</td></tr>
-        <tr><td>E-Mail-Benachrichtigung bei neuer Anfrage</td><td class="dash">–</td><td class="check">✓</td></tr>
       </table>
       </div>
     </div>
@@ -1847,7 +1842,7 @@
       <div class="step">
         <div class="step-num">03</div>
         <h4>Live & laufend betreut</h4>
-        <p>Ihre Lösung geht live. Ihr Chatbot und Ihre Beiträge werden laufend aktualisiert, neue Anfragen erscheinen in Echtzeit in Ihrer Tabelle.</p>
+        <p>Ihre Lösung geht live. Ihr Chatbot und Ihre Beiträge werden laufend aktualisiert, neue Anfragen erscheinen automatisch in Ihrer Tabelle.</p>
       </div>
     </div>
   </div>
@@ -1869,7 +1864,7 @@
       <div class="benefit-card">
         <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg></div>
         <h4>Qualifizierte Leads</h4>
-        <p>Der Chatbot qualifiziert Interessenten durch gezielte Fragen, bevor er deren Daten weitergibt. Sie sprechen nur mit echten Kaufinteressenten.</p>
+        <p>Der Chatbot qualifiziert Interessenten durch gezielte Fragen, bevor er deren Daten weitergibt. So landen eher ernsthafte Anfragen in Ihrer Tabelle.</p>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg></div>
@@ -1906,7 +1901,7 @@
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span> Verschlüsselte Übertragung</div>
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7l1 12a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-12"/><path d="M4 7h16"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M10 11v6"/><path d="M14 11v6"/></svg></span> Datenlöschung auf Anfrage</div>
       <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="2"/><path d="M9 3v2h6V3"/><path d="M9 10h6"/><path d="M9 14h6"/><path d="M9 18h4"/></svg></span> Auftragsverarbeitungsvertrag</div>
-      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><circle cx="8" cy="7" r="0.6" fill="currentColor"/><circle cx="8" cy="17" r="0.6" fill="currentColor"/></svg></span> Server in Deutschland</div>
+      <div class="privacy-badge"><span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M4 12h16"/><path d="M12 4c2.5 2.3 2.5 13.7 0 16M12 4c-2.5 2.3-2.5 13.7 0 16"/></svg></span> Domain &amp; DNS in Deutschland</div>
     </div>
   </div>
 </section>
@@ -2023,11 +2018,11 @@
     </div>
     <div class="faq-item">
       <div class="faq-q">Was passiert mit den Daten meiner Kunden?</div>
-      <div class="faq-a">Alle Daten werden DSGVO-konform verarbeitet, Details dazu finden Sie weiter unten im Abschnitt Datenschutz. Sie können den Assistenten also bedenkenlos einsetzen, ohne rechtliches Risiko für Ihren Betrieb.</div>
+      <div class="faq-a">Wir setzen den Assistenten unter Berücksichtigung der geltenden datenschutzrechtlichen Anforderungen um, Details dazu finden Sie weiter unten im Abschnitt Datenschutz. Die datenschutzrechtliche Verantwortung für den Einsatz auf Ihrer eigenen Website bleibt wie bei jeder Website-Funktion bei Ihnen als Betreiber — dabei unterstützen wir Sie mit AVV und fertigem Datenschutzbaustein.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Wie erhalte ich neue Kundenanfragen?</div>
-      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage in Echtzeit in Ihrer Tabelle (z. B. Google Sheets oder Excel). Sie sehen neue Kontakte sofort und können reagieren, bevor der Kunde beim nächsten Handwerker anruft.</div>
+      <div class="faq-a">Sobald ein Interessent seine Daten im Chat hinterlässt, erscheint die Anfrage automatisch und in der Regel innerhalb kurzer Zeit in Ihrer Google-Sheets-Tabelle. Sie sehen neue Kontakte zeitnah und können reagieren, bevor der Kunde beim nächsten Handwerker anruft.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q">Kann ich jederzeit von Modell 1 auf Modell 2 wechseln?</div>
@@ -2114,7 +2109,7 @@
           <select id="f-thema">
             <option>Digitale Ordnung – Auftritt aufräumen</option>
             <option>Modell 1 – Digitaler Assistent für Ihre Website</option>
-            <option>Modell 2 – Assistent mit automatischer Kundengewinnung</option>
+            <option>Modell 2 – Assistent mit automatischer Lead-Erfassung</option>
             <option>Website – Landingpage</option>
             <option>Website – Unternehmenswebsite</option>
             <option>Content – Foto & Grundausstattung (einmalig)</option>
@@ -2789,8 +2784,7 @@ Modell 1, 79 €/Monat:
 Modell 2, 149 €/Monat:
 - Alles aus Modell 1
 - Erfasst zusätzlich Kontaktdaten von Interessenten direkt im Chat
-- Neue Anfragen landen in Echtzeit in der Kundentabelle (z. B. Google Sheets)
-- E-Mail-Benachrichtigung bei neuer Anfrage
+- Neue Anfragen landen automatisch und in der Regel innerhalb kurzer Zeit in der Kundentabelle (Google Sheets)
 
 Ein Wechsel von Modell 1 auf Modell 2 ist jederzeit unkompliziert möglich, die bestehende Konfiguration bleibt dabei erhalten.
 

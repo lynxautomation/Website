@@ -126,7 +126,29 @@
     nav { padding: 16px 24px; }
     main { padding: 120px 24px 80px; }
     footer { padding: 28px 24px; }
+    table.proc-table { font-size: 0.78rem; }
+    table.proc-table th, table.proc-table td { padding: 8px 6px; }
   }
+  table.proc-table {
+    width: 100%; border-collapse: collapse; margin: 20px 0 28px;
+    font-size: 0.82rem; color: var(--grey);
+  }
+  table.proc-table th {
+    background: rgba(91,63,160,0.25); color: var(--white);
+    text-align: left; padding: 10px 12px; font-weight: 500;
+    border-bottom: 1px solid var(--border);
+  }
+  table.proc-table td {
+    padding: 10px 12px; border-bottom: 1px solid var(--border);
+    vertical-align: top; line-height: 1.5;
+  }
+  table.proc-table tr:last-child td { border-bottom: none; }
+  .todo-box {
+    background: rgba(184,134,11,0.12); border: 1px solid rgba(184,134,11,0.4);
+    border-radius: 10px; padding: 16px 20px; margin: 16px 0;
+    font-size: 0.85rem; color: #e8d5a8; line-height: 1.7;
+  }
+  .todo-box strong { color: #f0c96e; }
 </style>
 </head>
 <body>
@@ -140,10 +162,10 @@
 <main>
   <span class="page-label">Rechtliches</span>
   <h1>Datenschutzerklärung</h1>
-  <p class="last-updated">Stand: Juli 2026 · Lynx Automation</p>
+  <p class="last-updated">Stand: Oktober 2026 · Lynx Automation</p>
 
   <div class="notice">
-    <strong>Hinweis:</strong> Diese Datenschutzerklärung wurde sorgfältig erstellt, ersetzt jedoch keine individuelle Rechtsberatung. Wir empfehlen eine Prüfung durch einen Rechtsanwalt oder einen spezialisierten Datenschutzdienst vor der Veröffentlichung.
+    <strong>Hinweis:</strong> Diese Datenschutzerklärung wurde sorgfältig und auf Basis der tatsächlich eingesetzten Technik erstellt, ersetzt jedoch keine individuelle Rechtsberatung. Vor Veröffentlichung empfehlen wir eine Prüfung durch einen Rechtsanwalt oder einen spezialisierten Datenschutzdienst — insbesondere die mit <span class="strong">„[Platzhalter]“</span> markierten Stellen sollten vor Freigabe noch bestätigt bzw. ergänzt werden.
   </div>
 
   <!-- 1 -->
@@ -166,104 +188,172 @@
   <!-- 2 -->
   <section>
     <h2>2. Grundsätze der Datenverarbeitung</h2>
-    <p>Wir verarbeiten personenbezogene Daten unserer Nutzer nur, soweit dies zur Bereitstellung einer funktionsfähigen Website sowie unserer Inhalte und Leistungen erforderlich ist.</p>
-    <p>Die Verarbeitung erfolgt auf Grundlage der DSGVO, insbesondere:</p>
-    <ul>
-      <li>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</li>
-      <li>Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen)</li>
-      <li>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)</li>
-    </ul>
+    <p>Wir verarbeiten personenbezogene Daten unserer Nutzer nur, soweit dies zur Bereitstellung einer funktionsfähigen Website, unseres Kundenportals sowie unserer Inhalte und Leistungen erforderlich ist. Je nach Verarbeitung stützen wir uns auf unterschiedliche Rechtsgrundlagen der DSGVO — welche das im Einzelfall ist, ist in Abschnitt 4 sowie in der Übersichtstabelle in Abschnitt 3 angegeben.</p>
   </section>
 
   <!-- 3 -->
   <section>
-    <h2>3. Erhebung und Speicherung personenbezogener Daten</h2>
-
-    <h3>3.1 Beim Besuch der Website</h3>
-    <p>Beim Aufrufen unserer Website werden automatisch Informationen durch Ihren Browser übermittelt und temporär in sogenannten Logfiles gespeichert:</p>
-    <ul>
-      <li>IP-Adresse (ggf. anonymisiert)</li>
-      <li>Datum und Uhrzeit des Zugriffs</li>
-      <li>Name und URL der abgerufenen Datei</li>
-      <li>Referrer-URL</li>
-      <li>verwendeter Browser und Betriebssystem</li>
-    </ul>
-    <p><span class="strong">Zweck der Verarbeitung:</span> Sicherstellung eines reibungslosen Verbindungsaufbaus sowie Systemsicherheit und Stabilität.</p>
-    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO</p>
-
-    <h3>3.2 Kontaktformular und Anfragen</h3>
-    <p>Wenn Sie uns über das Kontaktformular oder per E-Mail kontaktieren, verarbeiten wir folgende Daten:</p>
-    <ul>
-      <li>Vor- und Nachname</li>
-      <li>E-Mail-Adresse</li>
-      <li>Telefonnummer (optional)</li>
-      <li>Unternehmensname</li>
-      <li>Nachricht / Anliegen</li>
-      <li>Datum und Uhrzeit</li>
-    </ul>
-    <p>Die Verarbeitung erfolgt zum Zweck der Bearbeitung Ihrer Anfrage sowie zur Kontaktaufnahme.</p>
-    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung) sowie Art. 6 Abs. 1 lit. b DSGVO (vorvertragliche Maßnahmen)</p>
-    <p>Die im Formular eingegebenen Daten werden in einer passwortgeschützten Google Sheets-Tabelle gespeichert, die durch den Verantwortlichen betrieben wird. Im Rahmen der technischen Infrastruktur können administrative Zugriffsmöglichkeiten bestehen, die jedoch ausschließlich zur Wartung, Fehlerbehebung und Sicherstellung des Systembetriebs genutzt werden.</p>
-    <p>Eine Weitergabe der Daten erfolgt nicht, es sei denn, dies ist zur Erfüllung des Zwecks erforderlich oder gesetzlich vorgeschrieben.</p>
+    <h2>3. Übersicht der Verarbeitungen</h2>
+    <p>Die folgende Tabelle fasst zusammen, welche Daten bei welcher Gelegenheit zu welchem Zweck verarbeitet werden, wer sie empfängt, auf welcher Rechtsgrundlage dies geschieht und wie lange sie gespeichert werden. Die Details zu jedem Punkt stehen in den nachfolgenden Abschnitten.</p>
+    <div style="overflow-x:auto;">
+    <table class="proc-table">
+      <tr>
+        <th>Verarbeitung</th>
+        <th>Daten</th>
+        <th>Zweck</th>
+        <th>Empfänger</th>
+        <th>Rechtsgrundlage</th>
+        <th>Speicherdauer</th>
+      </tr>
+      <tr>
+        <td>Websitebesuch (Logfiles)</td>
+        <td>IP-Adresse, Datum/Uhrzeit, Browser/OS, Referrer-URL</td>
+        <td>Betrieb &amp; Sicherheit der Website</td>
+        <td>Netlify, Inc. (Hosting)</td>
+        <td>Art. 6 I f DSGVO</td>
+        <td>7 Tage</td>
+      </tr>
+      <tr>
+        <td>Einbindung von Google Fonts</td>
+        <td>IP-Adresse</td>
+        <td>Darstellung der Schriftarten</td>
+        <td>Google Ireland Ltd.</td>
+        <td>Art. 6 I f DSGVO</td>
+        <td>keine Speicherung durch uns; Verarbeitung durch Google gemäß deren Richtlinie</td>
+      </tr>
+      <tr>
+        <td>Kontaktformular</td>
+        <td>Name, E-Mail, Telefon (optional), Firma, Nachricht</td>
+        <td>Bearbeitung Ihrer Anfrage</td>
+        <td>Google LLC (Google Sheets) — erst nach Ihrer Einwilligung zur Übermittlung</td>
+        <td>Art. 6 I b / f DSGVO (Bearbeitung); Art. 6 I a DSGVO (Übermittlung an Google)</td>
+        <td>bis Bearbeitung abgeschlossen, max. 3 Monate</td>
+      </tr>
+      <tr>
+        <td>Öffentlicher Chatbot (Website)</td>
+        <td>Chat-Inhalt, IP-Adresse, Zeitstempel</td>
+        <td>Automatisierte Beantwortung von Anfragen</td>
+        <td>Anthropic, PBC</td>
+        <td>Art. 6 I f DSGVO</td>
+        <td>keine dauerhafte Speicherung des Chatverlaufs; techn. Verbindungsdaten max. 7 Tage</td>
+      </tr>
+      <tr>
+        <td>Freiwillige Kontaktangabe im Chat</td>
+        <td>Name, E-Mail, Telefon</td>
+        <td>Rückmeldung / Beratung ermöglichen</td>
+        <td>Google LLC (Google Sheets) — erst nach Ihrer Einwilligung</td>
+        <td>Art. 6 I a DSGVO (Einwilligung)</td>
+        <td>bis Bearbeitung abgeschlossen, max. 3 Monate</td>
+      </tr>
+      <tr>
+        <td>Kundenportal – Login &amp; Konto</td>
+        <td>E-Mail-Adresse, Passwort (gehasht), Sitzungs-Token</td>
+        <td>Authentifizierung, Zugriff auf gebuchte Leistungen</td>
+        <td>Supabase, Inc.</td>
+        <td>Art. 6 I b DSGVO</td>
+        <td>für die Vertragsdauer zzgl. gesetzlicher Aufbewahrungsfristen</td>
+      </tr>
+      <tr>
+        <td>Kundenportal – persönlicher Chat-Assistent</td>
+        <td>Chat-Inhalt, im Konto hinterlegte Kundendaten (Firma, Kundennummer, gebuchte Leistungen)</td>
+        <td>Kundenspezifische Auskunft zu gebuchten Leistungen</td>
+        <td>Anthropic, PBC; Supabase, Inc.</td>
+        <td>Art. 6 I b DSGVO</td>
+        <td>wie öffentlicher Chatbot; keine dauerhafte Speicherung des Chatverlaufs</td>
+      </tr>
+      <tr>
+        <td>Kundenportal – Vertrags- &amp; Rechnungsdokumente</td>
+        <td>Hochgeladene Dateien (z. B. Verträge, Rechnungen)</td>
+        <td>Vertragsabwicklung, Bereitstellung für den Kunden</td>
+        <td>Supabase, Inc. (Storage)</td>
+        <td>Art. 6 I b / c DSGVO</td>
+        <td>für die Vertragsdauer; Rechnungen gem. § 147 AO / § 257 HGB i. d. R. 10 Jahre</td>
+      </tr>
+      <tr>
+        <td>Kundenportal – Google-Search-Console-Auswertung</td>
+        <td>Such- &amp; Klickdaten der Domain des Kunden</td>
+        <td>Reporting im Dashboard des Kunden</td>
+        <td>Google LLC (Search Console API)</td>
+        <td>Art. 6 I b DSGVO</td>
+        <td>für die Vertragsdauer</td>
+      </tr>
+    </table>
+    </div>
   </section>
 
   <!-- 4 -->
   <section>
-    <h2>4. Einsatz eines KI-Chatbots auf dieser Website</h2>
-    <p>Auf unserer Website setzen wir einen KI-gestützten Chatbot ein, um Nutzeranfragen automatisiert zu beantworten und die Kommunikation zu erleichtern.</p>
+    <h2>4. Erhebung und Speicherung personenbezogener Daten im Einzelnen</h2>
 
-    <h3>4.1 Verarbeitung im Chat</h3>
-    <p>Bei Nutzung des Chatbots können folgende Daten verarbeitet werden:</p>
+    <h3>4.1 Beim Besuch der Website</h3>
+    <p>Beim Aufrufen unserer Website werden automatisch Informationen durch Ihren Browser übermittelt und temporär in sogenannten Logfiles gespeichert: IP-Adresse, Datum und Uhrzeit des Zugriffs, Name und URL der abgerufenen Datei, Referrer-URL, verwendeter Browser und Betriebssystem.</p>
+    <p><span class="strong">Zweck:</span> Sicherstellung eines reibungslosen Verbindungsaufbaus sowie Systemsicherheit und Stabilität. <span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO. Diese Logfiles werden nach spätestens 7 Tagen automatisch gelöscht, sofern keine gesetzliche Aufbewahrungspflicht besteht.</p>
+
+    <h3>4.2 Google Fonts</h3>
+    <p>Unsere Website bindet Schriftarten ein, die von Servern der <span class="strong">Google Ireland Limited</span>, Gordon House, Barrow Street, Dublin 4, Irland, geladen werden. Beim Aufruf einer Seite baut Ihr Browser dafür eine Verbindung zu Google-Servern auf, wobei Ihre IP-Adresse an Google übermittelt wird. Wir haben selbst keinen Einfluss darauf, ob und wie lange Google diese Daten speichert. <span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO (einheitliche und ansprechende Darstellung unseres Angebots). Weitere Informationen: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>.</p>
+    <div class="todo-box"><strong>Technischer Hinweis:</strong> Ein lokales Hosting der Schriftarten (ohne Verbindung zu Google-Servern) würde diese Datenübermittlung vollständig vermeiden und wird als nächster Schritt technisch umgesetzt.</div>
+
+    <h3>4.3 Kontaktformular und Anfragen</h3>
+    <p>Wenn Sie uns über das Kontaktformular kontaktieren, verarbeiten wir: Vor- und Nachname, E-Mail-Adresse, Telefonnummer (optional), Unternehmensname, Nachricht/Anliegen, Datum und Uhrzeit.</p>
+    <p><span class="strong">Rechtsgrundlage für die Bearbeitung Ihrer Anfrage:</span> Art. 6 Abs. 1 lit. b DSGVO, sofern Ihre Anfrage auf den Abschluss eines Vertrags mit uns abzielt, andernfalls Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der Bearbeitung eingehender Anfragen).</p>
+    <p><span class="strong">Google wird erst mit Ihrer ausdrücklichen Einwilligung Teil der Verarbeitung:</span> Das Formular lässt sich erst absenden, nachdem Sie über ein Kontrollkästchen ausdrücklich zugestimmt haben, dass Ihre Angaben gespeichert und zur Kontaktaufnahme verarbeitet werden dürfen (<span class="strong">Rechtsgrundlage für diesen Schritt: Art. 6 Abs. 1 lit. a DSGVO</span>). Erst mit dieser Einwilligung übermittelt eine serverseitige Funktion Ihre Daten an eine passwortgeschützte Google-Sheets-Tabelle, die durch den Verantwortlichen betrieben und ausschließlich über einen dedizierten Google-Service-Account angesprochen wird. Ohne Ihre Einwilligung wird das Formular technisch nicht abgeschickt — Google erhält Ihre Daten in diesem Fall nicht und ist an der Verarbeitung nicht beteiligt. Eine Weitergabe an weitere Dritte über Google hinaus erfolgt nicht, es sei denn, dies ist zur Erfüllung des Zwecks erforderlich oder gesetzlich vorgeschrieben.</p>
+
+    <h3>4.4 Einsatz eines KI-Chatbots auf dieser Website</h3>
+    <p>Auf unserer Website setzen wir einen KI-gestützten Chatbot ein, um Nutzeranfragen automatisiert zu beantworten.</p>
+    <p><span class="strong">4.4.1 Verarbeitung im Chat:</span> Bei Nutzung des Chatbots werden die eingegebenen Nachrichten sowie technische Verbindungsdaten (IP-Adresse, Zeitstempel) an unseren Server und von dort zur Erzeugung der Antwort an Anthropic, PBC weitergeleitet. Der Chatverlauf selbst wird von uns nicht dauerhaft gespeichert; technische Verbindungsdaten werden spätestens nach 7 Tagen gelöscht. <span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO.</p>
+    <p><span class="strong">4.4.2 Freiwillige Kontaktdaten über den Chatbot:</span> Möchten Sie im Chat eine Demo oder Beratung anfragen und dafür Name, E-Mail-Adresse oder Telefonnummer hinterlassen, wird Ihnen dafür ein eigenes Formular mit Kontrollkästchen angezeigt. Erst wenn Sie dort ausdrücklich zustimmen (<span class="strong">Rechtsgrundlage: Art. 6 Abs. 1 lit. a DSGVO</span>), wird die Anfrage überhaupt absendbar und Ihre Daten werden — wie unter 4.3 beschrieben — an die Google-Sheets-Tabelle übermittelt. Vor dieser Einwilligung ist Google an dieser Verarbeitung nicht beteiligt.</p>
+    <p><span class="strong">4.4.3 Kundenportal-Assistent:</span> Eingeloggte Kunden haben zusätzlich Zugriff auf einen personalisierten Assistenten im Kundenportal. Dessen Antworten stützen sich auf die im jeweiligen Kundenkonto hinterlegten Daten (Firma, Kundennummer, gebuchte Leistungen), die serverseitig anhand des Login-Tokens überprüft werden — nicht auf Angaben, die im Chat behauptet werden. Es gelten dieselben Grundsätze zur Nicht-Speicherung des Chatverlaufs wie unter 4.4.1. <span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. b DSGVO (Erfüllung des mit Ihnen bestehenden Vertrags).</p>
+    <p><span class="strong">4.4.4 Kein Profiling:</span> Es findet keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO statt.</p>
+
+    <h3>4.5 Kundenportal (Login, Dashboard, Dateiablage)</h3>
+    <p>Für Kunden, die ein Produkt bei uns gebucht haben, stellen wir ein passwortgeschütztes Kundenportal bereit. Technische Grundlage hierfür ist die Plattform <span class="strong">Supabase, Inc.</span> [Anschrift gemäß aktuellem AVV/Impressum von Supabase noch zu ergänzen], die für uns folgende Daten verarbeitet:</p>
     <ul>
-      <li>eingegebene Nachrichten (Chat-Inhalte)</li>
-      <li>technische Verbindungsdaten (z. B. IP-Adresse, Zeitstempel)</li>
+      <li>Login-Daten (E-Mail-Adresse, Passwort als Hash, Sitzungs-Token) zur Authentifizierung</li>
+      <li>Im Kundenkonto hinterlegte Stammdaten (Firma, Kundennummer, Domain, gebuchte Leistungen)</li>
+      <li>Von Ihnen oder uns hochgeladene Dokumente (z. B. Verträge, Rechnungen, AGB) als Dateien</li>
+      <li>Sofern von Ihnen freigegeben: Auswertungen Ihrer Google-Search-Console-Daten zur Darstellung im Dashboard</li>
     </ul>
-    <p>Die Verarbeitung erfolgt zur Bereitstellung des Chat-Dienstes.</p>
-    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an effizienter Kundenkommunikation)</p>
-
-    <h3>4.2 Erhebung von Kontaktdaten über den Chatbot</h3>
-    <p>Sofern Sie über den Chatbot freiwillig personenbezogene Daten (z. B. Name, E-Mail-Adresse, Telefonnummer) angeben, erfolgt dies ausschließlich auf Grundlage Ihrer ausdrücklichen Einwilligung.</p>
-    <p>Diese Daten werden verwendet, um:</p>
-    <ul>
-      <li>Ihre Anfrage zu bearbeiten</li>
-      <li>eine Demo oder Beratung bereitzustellen</li>
-      <li>Sie zu kontaktieren</li>
-    </ul>
-    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. a DSGVO (Einwilligung)</p>
-    <p>Die Speicherung erfolgt in einer geschützten Google Sheets-Tabelle. Zugriff hat ausschließlich der Verantwortliche. Im Rahmen des technischen Betriebs können administrative Zugriffsmöglichkeiten des technischen Dienstleisters bestehen, die jedoch ausschließlich zur Wartung, Fehlerbehebung und Sicherstellung des Systembetriebs sowie auf dokumentierte Weisung des Verantwortlichen genutzt werden.</p>
-
-    <h3>4.3 Kein Profiling</h3>
-    <p>Es findet keine automatisierte Entscheidungsfindung im Sinne von Art. 22 DSGVO statt.</p>
+    <p>Zur Aufrechterhaltung Ihrer Anmeldung setzt die eingesetzte Software-Bibliothek (Supabase-Client) einen Eintrag im lokalen Speicher Ihres Browsers (Local Storage), der Ihr Sitzungs-Token enthält. Dieser Eintrag ist technisch notwendig, um Sie im Portal, das Sie aktiv aufrufen, angemeldet zu halten, und bedarf gemäß § 25 Abs. 2 Nr. 2 TDDDG keiner gesonderten Einwilligung.</p>
+    <p><span class="strong">Rechtsgrundlage:</span> Art. 6 Abs. 1 lit. b DSGVO (Erfüllung des mit Ihnen geschlossenen Vertrags). Der Zugriff auf Ihre Daten ist technisch durch Zugriffsregeln (Row-Level-Security) auf Ihr eigenes Konto beschränkt; Administratorzugriff hat ausschließlich der Verantwortliche.</p>
+    <div class="todo-box"><strong>Vor Veröffentlichung zu klären:</strong> (1) In welcher Region die Supabase-Instanz gehostet ist (EU oder USA) und auf welcher Grundlage eine ggf. nötige Drittlandübermittlung erfolgt; (2) ob ein Auftragsverarbeitungsvertrag (AVV) mit Supabase abgeschlossen ist; (3) eine konkrete, auch technisch umgesetzte Löschroutine für Kundendaten nach Vertragsende.</div>
   </section>
 
   <!-- 5 -->
   <section>
     <h2>5. Weitergabe von Daten und eingesetzte Dienstleister</h2>
-    <p>Eine Weitergabe personenbezogener Daten erfolgt nur, wenn dies erforderlich ist oder eine gesetzliche Grundlage besteht.</p>
+    <p>Eine Weitergabe personenbezogener Daten an Dritte erfolgt ausschließlich im in Abschnitt 3 und 4 beschriebenen Umfang an die dort genannten Auftragsverarbeiter, oder soweit dies gesetzlich vorgeschrieben ist. Mit allen als Auftragsverarbeiter tätigen Dienstleistern bestehen bzw. werden Verträge nach Art. 28 DSGVO abgeschlossen, sofern gesetzlich erforderlich.</p>
     <p><span class="strong">Eingesetzte Dienstleister:</span></p>
     <ul>
       <li>
-        <span class="strong">Netlify, Inc.</span>, 44 Montgomery Street, Suite 300, San Francisco, CA 94104, USA – Hosting und Server-Infrastruktur<br>
+        <span class="strong">Netlify, Inc.</span>, 512 2nd Street, Suite 200, San Francisco, CA 94107, USA – Hosting und Server-Infrastruktur<br>
         <a href="https://www.netlify.com/privacy/" target="_blank">www.netlify.com/privacy</a>
       </li>
       <li>
-        <span class="strong">Google LLC</span>, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA – Speicherung von Kontaktanfragen (Google Sheets)<br>
+        <span class="strong">Google LLC</span>, 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA (für Nutzer in der EU: Google Ireland Limited) – Speicherung von Kontaktanfragen (Google Sheets), Schriftarten (Google Fonts), Search-Console-Auswertung<br>
         <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a>
       </li>
       <li>
         <span class="strong">Anthropic, PBC</span>, 548 Market St, San Francisco, CA 94104, USA – KI-Technologie für Chatbot-Funktionen<br>
         <a href="https://www.anthropic.com/privacy" target="_blank">www.anthropic.com/privacy</a>
       </li>
+      <li>
+        <span class="strong">Supabase, Inc.</span> [Anschrift zu ergänzen] – Authentifizierung, Datenbank und Datei-Speicher für das Kundenportal<br>
+        <a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a>
+      </li>
     </ul>
-    <p>Bei der Auswahl unserer Dienstleister achten wir auf datenschutzkonforme Verarbeitung. Wir behalten uns vor, eingesetzte Dienstleister zu ändern oder durch andere Anbieter zu ersetzen, sofern dies zur Erbringung unserer Leistungen erforderlich ist. In diesem Fall stellen wir sicher, dass auch neue Dienstleister den Anforderungen der DSGVO entsprechen. Über wesentliche Änderungen werden betroffene Parteien informiert.</p>
-    <p>Bei der Nutzung des Chatbots werden Inhalte zur Verarbeitung an Anthropic übermittelt. Bei Datenübermittlungen in die USA stützen wir uns auf Standardvertragsklauseln der EU-Kommission gemäß Art. 46 Abs. 2 lit. c DSGVO sowie ggf. ergänzende Schutzmaßnahmen.</p>
+    <p>Wir behalten uns vor, eingesetzte Dienstleister zu ändern oder durch andere Anbieter zu ersetzen, sofern dies zur Erbringung unserer Leistungen erforderlich ist. In diesem Fall stellen wir sicher, dass auch neue Dienstleister den Anforderungen der DSGVO entsprechen.</p>
+    <p><span class="strong">Übermittlung in die USA:</span> Netlify hat sich dem EU-US Data Privacy Framework (DPF) unterworfen; hilfsweise sowie für Anthropic, Google und Supabase stützen wir uns auf Standardvertragsklauseln der EU-Kommission gemäß Art. 46 Abs. 2 lit. c DSGVO sowie ggf. ergänzende technische und vertragliche Schutzmaßnahmen.</p>
   </section>
 
   <!-- 6 -->
   <section>
     <h2>6. Speicherdauer</h2>
-    <p>Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist.</p>
-    <p>Kontaktanfragen sowie über den Chatbot übermittelte Kontaktdaten werden gelöscht, sobald die Bearbeitung abgeschlossen ist und keine weitere Kommunikation erfolgt, <span class="strong">spätestens jedoch nach 3 Monaten</span>, sofern keine gesetzlichen Aufbewahrungspflichten bestehen.</p>
+    <p>Personenbezogene Daten werden nur so lange gespeichert, wie dies für den jeweiligen Zweck erforderlich ist. Die konkreten Fristen je Verarbeitung sind in der Tabelle in Abschnitt 3 aufgeführt. Zusammengefasst:</p>
+    <ul>
+      <li>Technische Logfiles (Websitebesuch, Chatbot-Verbindungsdaten): max. 7 Tage</li>
+      <li>Kontaktanfragen und über den Chatbot übermittelte Kontaktdaten: bis Bearbeitung abgeschlossen, spätestens nach 3 Monaten</li>
+      <li>Kundenportal-Daten (Konto, Dokumente): für die Dauer des Vertragsverhältnisses zzgl. gesetzlicher Aufbewahrungsfristen (z. B. handels- und steuerrechtlich bei Rechnungen i. d. R. 10 Jahre)</li>
+    </ul>
   </section>
 
   <!-- 7 -->
@@ -279,8 +369,16 @@
       <li>Widerspruch (Art. 21 DSGVO)</li>
       <li>Widerruf Ihrer Einwilligung jederzeit mit Wirkung für die Zukunft (Art. 7 Abs. 3 DSGVO)</li>
     </ul>
+    <p>Die Bereitstellung der unter Abschnitt 4.3 und 4.5 genannten Daten ist weder gesetzlich noch vertraglich vorgeschrieben; sie ist jedoch erforderlich, damit wir Ihre Anfrage bearbeiten bzw. Ihnen das Kundenportal bereitstellen können. Ohne diese Angaben können wir die jeweilige Leistung nicht erbringen.</p>
     <p>Zur Ausübung Ihrer Rechte wenden Sie sich bitte an: <a href="mailto:info@lynx-automation.de">info@lynx-automation.de</a></p>
-    <p>Sie haben außerdem das Recht, sich bei einer zuständigen Datenschutz-Aufsichtsbehörde zu beschweren.</p>
+    <p><span class="strong">Beschwerderecht:</span> Sie haben das Recht, sich bei einer Datenschutz-Aufsichtsbehörde zu beschweren. Zuständig für uns ist:</p>
+    <div class="highlight-box">
+      <p>
+        Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW)<br>
+        Kavalleriestraße 2–4, 40213 Düsseldorf<br>
+        <a href="https://www.ldi.nrw.de" target="_blank">www.ldi.nrw.de</a>
+      </p>
+    </div>
   </section>
 
   <!-- 8 -->
@@ -290,24 +388,25 @@
     <ul>
       <li>Verschlüsselte Datenübertragung (HTTPS)</li>
       <li>Zugriffsbeschränkung auf Systeme und API-Schlüssel durch Environment-Variablen</li>
-      <li>Keine dauerhafte Speicherung von Chat-Inhalten außer bei ausdrücklicher Einwilligung</li>
-      <li>Zugriff auf Google Sheets ausschließlich über einen dedizierten Service Account</li>
-      <li>Dokumentation der Nutzereinwilligung innerhalb des Systems</li>
+      <li>Serverseitige Verifizierung jeder Kundenportal-Sitzung gegen das Authentifizierungssystem, statt sich auf Angaben im Chat zu verlassen</li>
+      <li>Row-Level-Security in der Datenbank, sodass Kunden ausschließlich auf eigene Daten zugreifen können</li>
+      <li>Keine dauerhafte Speicherung von Chat-Inhalten</li>
+      <li>Zugriff auf Google Sheets ausschließlich über einen dedizierten Service-Account</li>
       <li>Verzicht auf Tracking- oder Analyse-Tools</li>
     </ul>
   </section>
 
   <!-- 9 -->
   <section>
-    <h2>9. Cookies</h2>
-    <p>Diese Website verwendet ausschließlich technisch notwendige Cookies, die für den Betrieb der Website erforderlich sind und keiner gesonderten Einwilligung bedürfen.</p>
-    <p>Es werden keine Tracking- oder Analyse-Tools eingesetzt.</p>
+    <h2>9. Cookies und vergleichbare Technologien</h2>
+    <p>Diese Website selbst setzt keine Cookies ein. Im Kundenportal verwendet die eingesetzte Login-Software (Supabase) einen technisch notwendigen Eintrag im Local Storage Ihres Browsers, um Sie während Ihrer Sitzung angemeldet zu halten (siehe Abschnitt 4.5) — dieser ist für die von Ihnen aktiv angeforderte Funktion (Login) erforderlich und bedarf nach § 25 Abs. 2 Nr. 2 TDDDG keiner gesonderten Einwilligung.</p>
+    <p>Es werden keine Tracking- oder Analyse-Tools eingesetzt. Beim Laden von Google Fonts (Abschnitt 4.2) sowie technischer Programmbibliotheken von externen Content-Delivery-Netzwerken wird Ihre IP-Adresse an die jeweiligen Anbieter übermittelt; es werden dabei jedoch keine Cookies gesetzt.</p>
   </section>
 
   <!-- 10 -->
   <section>
     <h2>10. Aktualität und Änderungen</h2>
-    <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Juli 2026. Sie wird bei Bedarf angepasst, insbesondere wenn sich rechtliche Vorgaben ändern oder neue Dienstleister eingesetzt werden. Die jeweils aktuelle Version ist jederzeit auf dieser Seite abrufbar.</p>
+    <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Oktober 2026. Sie wird bei Bedarf angepasst, insbesondere wenn sich rechtliche Vorgaben ändern oder neue Dienstleister eingesetzt werden. Die jeweils aktuelle Version ist jederzeit auf dieser Seite abrufbar.</p>
   </section>
 
 </main>
