@@ -8,161 +8,30 @@
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <title>Kundenportal – Lynx Automation</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0d1b3e;
-    --purple: #5b3fa0;
-    --purple-light: #7c5cc4;
-    --purple-glow: #9d7fe0;
-    --accent: #b39ddb;
-    --white: #f5f3ff;
-    --grey: #a0a0b8;
-    --card-bg: rgba(22, 36, 84, 0.55);
-    --border: rgba(179, 157, 219, 0.15);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--navy);
-    color: var(--white);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.4;
-  }
-  .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .bg-mesh::before {
-    content: ''; position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(91,63,160,0.3) 0%, transparent 70%);
-    top: -120px; left: -120px;
-  }
-  .bg-mesh::after {
-    content: ''; position: absolute; width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(124,92,196,0.2) 0%, transparent 70%);
-    bottom: -100px; right: -80px;
-  }
-  nav {
-    position: relative; z-index: 1;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 24px 60px;
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.4rem; font-weight: 600; letter-spacing: 0.04em;
-    color: var(--white); text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-  .nav-back { color: var(--grey); text-decoration: none; font-size: 0.85rem; }
-  .nav-back:hover { color: var(--white); }
-
-  main {
-    position: relative; z-index: 1;
-    display: flex; align-items: center; justify-content: center;
-    min-height: calc(100vh - 90px);
-    padding: 40px 24px;
-  }
-  .login-card {
-    width: 100%; max-width: 420px;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 48px 40px;
-    backdrop-filter: blur(16px);
-  }
-  .login-label {
-    font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
-    color: var(--purple-glow); margin-bottom: 12px; display: block; text-align: center;
-  }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem; font-weight: 300; text-align: center; margin-bottom: 8px;
-  }
-  .login-sub {
-    text-align: center; color: var(--grey); font-size: 0.88rem;
-    font-weight: 300; margin-bottom: 36px;
-  }
-  .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
-  label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--grey); }
-  input {
-    width: 100%; box-sizing: border-box;
-    background: rgba(13,27,62,0.6);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 13px 16px;
-    color: var(--white);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.92rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  input:focus { border-color: var(--purple-light); }
-  .login-btn {
-    width: 100%;
-    background: linear-gradient(135deg, var(--purple) 0%, var(--purple-light) 100%);
-    color: var(--white);
-    border: none;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
-    box-shadow: 0 8px 28px rgba(91,63,160,0.4);
-  }
-  .login-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 34px rgba(91,63,160,0.55); }
-  .login-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-  .login-links {
-    display: flex; justify-content: space-between;
-    margin-top: 20px; font-size: 0.8rem;
-  }
-  .login-links a { color: var(--grey); text-decoration: none; }
-  .login-links a:hover { color: var(--accent); }
-  .msg {
-    font-size: 0.85rem; padding: 12px 14px; border-radius: 8px;
-    margin-bottom: 20px; display: none; line-height: 1.5;
-  }
-  .msg.error { display: block; color: #f08080; background: rgba(240,128,128,0.08); border: 1px solid rgba(240,128,128,0.2); }
-  .msg.success { display: block; color: #7defa0; background: rgba(76,218,100,0.08); border: 1px solid rgba(76,218,100,0.25); }
-
-  .logged-in-view { display: none; text-align: center; }
-  .logged-in-view.active { display: block; }
-  .login-form-view.hidden { display: none; }
-  .logged-in-view .customer-email { color: var(--accent); font-weight: 500; }
-  .logout-btn {
-    margin-top: 28px;
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--grey);
-    padding: 12px 28px;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .logout-btn:hover { border-color: var(--accent); color: var(--white); }
-
-  @media (max-width: 500px) {
-    nav { padding: 20px 24px; }
-    .login-card { padding: 36px 28px; }
-  }
-</style>
+<link rel="preload" href="fonts/hanken-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
 </head>
-<body>
-<div class="bg-mesh"></div>
+<body class="page-portal">
 
-<nav>
-  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
-  <a href="index.html" class="nav-back">← Zurück zur Website</a>
-</nav>
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Lynx Automation, zur Startseite"><img src="logo.png" alt="Lynx Automation" width="112" height="52"></a>
+    <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu">
+      <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#ablauf">Ablauf</a></li>
+      <li><a href="referenzen.html">Referenzen</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="portal.html" class="menu-portal" aria-current="page">Kundenportal</a></li>
+      <li><a href="index.html#kontakt" class="btn btn--primary">Kostenlose Kurzanalyse</a></li>
+    </ul>
+  </div>
+</header>
 
 <main>
   <div class="login-card">
@@ -171,17 +40,17 @@
     <div class="login-form-view" id="loginFormView">
       <span class="login-label">Kundenportal</span>
       <h1>Willkommen zurück</h1>
-      <p class="login-sub">Melde dich mit deinen Zugangsdaten an.</p>
+      <p class="login-sub">Melden Sie sich mit Ihren Zugangsdaten an.</p>
 
       <div class="msg" id="msgBox"></div>
 
       <form id="loginForm">
         <div class="form-group">
-          <label>E-Mail-Adresse</label>
-          <input type="email" id="email" placeholder="max@beispiel.de" required autocomplete="email">
+          <label for="email">E-Mail-Adresse</label>
+          <input type="email" id="email" placeholder="name@betrieb.de" required autocomplete="email">
         </div>
         <div class="form-group">
-          <label>Passwort</label>
+          <label for="password">Passwort</label>
           <input type="password" id="password" placeholder="••••••••" required autocomplete="current-password">
         </div>
         <button type="submit" class="login-btn" id="loginBtn">Anmelden</button>
@@ -189,17 +58,17 @@
 
       <div class="login-links">
         <a href="#" id="forgotLink">Passwort vergessen?</a>
-        <a href="index.html#contact">Noch kein Zugang?</a>
+        <a href="index.html#kontakt">Noch kein Zugang?</a>
       </div>
     </div>
 
   </div>
 </main>
 
-<!-- Supabase JS SDK über CDN, kein Build-Prozess nötig -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<!-- Supabase JS SDK lokal eingebunden (keine Verbindung zu externen CDNs) -->
+<script src="vendor/supabase-2.117.3.min.js"></script>
 <script>
-  // ⚠️ PLATZHALTER — hier die echten Werte aus Supabase → Project Settings → API eintragen
+  // Supabase-Projekt: URL und öffentlicher anon-Key (aus Project Settings → API)
   const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
 
@@ -251,16 +120,17 @@
     e.preventDefault();
     const email = document.getElementById('email').value.trim();
     if (!email) {
-      showMsg('Bitte zuerst deine E-Mail-Adresse oben eintragen, dann auf "Passwort vergessen?" klicken.', 'error');
+      showMsg('Bitte tragen Sie zuerst oben Ihre E-Mail-Adresse ein und klicken Sie dann auf „Passwort vergessen?“.', 'error');
       return;
     }
     const { error } = await supabaseClient.auth.resetPasswordForEmail(email);
     if (error) {
-      showMsg('Da ist etwas schiefgelaufen. Bitte versuch es erneut.', 'error');
+      showMsg('Das hat nicht geklappt. Bitte versuchen Sie es erneut.', 'error');
     } else {
       showMsg('Falls diese E-Mail-Adresse bei uns registriert ist, wurde ein Link zum Zurücksetzen verschickt.', 'success');
     }
   });
 </script>
+<script src="site.js" defer></script>
 </body>
 </html>

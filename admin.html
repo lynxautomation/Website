@@ -8,8 +8,7 @@
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
 <title>Admin – Lynx Automation</title>
 <meta name="robots" content="noindex, nofollow">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="fonts.css">
 <style>
   :root {
     --navy: #0d1b3e; --purple: #5b3fa0; --purple-light: #7c5cc4; --purple-glow: #9d7fe0;
@@ -158,7 +157,7 @@
   </div>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="vendor/supabase-2.117.3.min.js"></script>
 <script>
   const SUPABASE_URL = 'https://mjibtbfrtpxjmybvdbwc.supabase.co';
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1qaWJ0YmZydHB4am15YnZkYndjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2MDQzMjYsImV4cCI6MjEwNDE4MDMyNn0.Fqd4W4GxX3nNz1nJ7umftTboEpoQFLTKu9NEld3n2RM';
@@ -185,7 +184,7 @@
 
     const { data: signed } = await supabaseClient.storage.from(STORAGE_BUCKET).createSignedUrl(cust.website_screenshot_path, 300);
     if (signed) {
-      previewEl.innerHTML = `<img src="${escapeHtml(signed.signedUrl)}" style="max-width:280px;border-radius:10px;border:1px solid var(--border);display:block;">`;
+      previewEl.innerHTML = `<img alt="Lynx Automation" src="${escapeHtml(signed.signedUrl)}" style="max-width:280px;border-radius:10px;border:1px solid var(--border);display:block;">`;
     }
   }
 

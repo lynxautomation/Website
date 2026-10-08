@@ -6,279 +6,135 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="icon" type="image/png" sizes="96x96" href="favicon-96.png">
 <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
-<title>Blog – Digitale Themen für Handwerksbetriebe | Lynx Automation</title>
+<title>Blog: Praxiswissen für Handwerksbetriebe | Lynx Automation</title>
 <meta name="description" content="Praxisnahe Artikel zu Website, Chatbot, Google-Bewertungen und digitaler Sichtbarkeit für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://lynx-automation.de/blog.html">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --navy: #0d1b3e;
-    --navy-mid: #162454;
-    --purple: #5b3fa0;
-    --purple-light: #7c5cc4;
-    --purple-glow: #9d7fe0;
-    --accent: #b39ddb;
-    --white: #f5f3ff;
-    --grey: #a0a0b8;
-    --card-bg: rgba(22, 36, 84, 0.55);
-    --border: rgba(179, 157, 219, 0.15);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--navy);
-    color: var(--white);
-    overflow-x: hidden;
-  }
-  body::before {
-    content: '';
-    position: fixed; inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 0; opacity: 0.4;
-  }
-  .bg-mesh { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .bg-mesh::before {
-    content: ''; position: absolute; width: 600px; height: 600px;
-    background: radial-gradient(circle, rgba(91,63,160,0.25) 0%, transparent 70%);
-    top: -100px; right: -100px;
-  }
-  .bg-mesh::after {
-    content: ''; position: absolute; width: 500px; height: 500px;
-    background: radial-gradient(circle, rgba(124,92,196,0.2) 0%, transparent 70%);
-    bottom: -80px; left: -60px;
-  }
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 20px 60px;
-    background: rgba(13,27,62,0.85);
-    backdrop-filter: blur(16px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.5rem; font-weight: 600; letter-spacing: 0.04em;
-    color: var(--white); text-decoration: none;
-  }
-  .logo span { color: var(--accent); }
-  .nav-back {
-    color: var(--grey); text-decoration: none; font-size: 0.88rem;
-    display: flex; align-items: center; gap: 8px; transition: color 0.2s;
-  }
-  .nav-back:hover { color: var(--white); }
-
-  main {
-    position: relative; z-index: 1;
-    max-width: 1080px; margin: 0 auto;
-    padding: 140px 40px 100px;
-  }
-  .page-label {
-    font-size: 0.73rem; text-transform: uppercase; letter-spacing: 0.18em;
-    color: var(--purple-glow); margin-bottom: 14px; display: block;
-  }
-  h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 5vw, 3.6rem);
-    font-weight: 300; line-height: 1.1; margin-bottom: 18px;
-  }
-  .intro {
-    max-width: 640px; color: var(--grey); font-size: 0.98rem;
-    line-height: 1.8; font-weight: 300; margin-bottom: 60px;
-  }
-
-  /* CATEGORY FILTER (visual only, no JS needed to launch) */
-  .filters {
-    display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px;
-  }
-  .filter-chip {
-    background: rgba(91,63,160,0.15);
-    color: var(--accent);
-    border: 1px solid rgba(124,92,196,0.3);
-    border-radius: 20px; padding: 7px 16px;
-    font-size: 0.8rem; font-weight: 400;
-    cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: background 0.2s, color 0.2s;
-  }
-  .filter-chip:hover { background: rgba(91,63,160,0.28); }
-  .filter-chip.active {
-    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
-    color: var(--white); border-color: transparent;
-  }
-  .post-card.hidden { display: none; }
-
-  /* BLOG GRID */
-  .blog-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 28px;
-  }
-  .post-card {
-    position: relative;
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 28px;
-    backdrop-filter: blur(12px);
-    display: flex; flex-direction: column;
-    transition: transform 0.25s ease, border-color 0.25s ease;
-    text-decoration: none;
-    color: inherit;
-  }
-  .card-badge {
-    position: absolute; top: -14px; left: 24px;
-    background: linear-gradient(135deg, #2e7d52, #43a06b);
-    color: #f5f3ff; font-size: 0.68rem; font-weight: 600;
-    letter-spacing: 0.02em;
-    padding: 5px 14px; border-radius: 14px;
-    box-shadow: 0 4px 14px rgba(46,125,82,0.4);
-    z-index: 2;
-  }
-  .card-badge::after {
-    content: '';
-    position: absolute; bottom: -4px; left: 16px;
-    width: 9px; height: 9px;
-    background: #237a48;
-    transform: rotate(45deg);
-    z-index: -1;
-  }
-  .post-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(179,157,219,0.4);
-  }
-  .post-tag {
-    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--purple-glow); margin-bottom: 14px;
-  }
-  .post-card h3 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem; font-weight: 500; line-height: 1.3;
-    margin-bottom: 12px; color: var(--white);
-  }
-  .post-excerpt {
-    font-size: 0.88rem; color: var(--grey); line-height: 1.7;
-    font-weight: 300; margin-bottom: 20px; flex-grow: 1;
-  }
-  .post-meta {
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 0.78rem; color: var(--grey);
-    padding-top: 16px; border-top: 1px solid var(--border);
-  }
-  .post-cta {
-    color: var(--accent); font-weight: 500;
-  }
-  .coming-soon {
-    display: inline-block; margin-top: 4px;
-    font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.1em;
-    color: rgba(160,160,184,0.6);
-  }
-
-  /* NEWSLETTER / LEAD STRIP */
-  .lead-strip {
-    margin-top: 80px;
-    background: rgba(91,63,160,0.15);
-    border: 1px solid rgba(179,157,219,0.25);
-    border-radius: 16px;
-    padding: 40px;
-  }
-  .lead-strip-inner {
-    display: flex; gap: 40px; align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  .lead-text { flex: 1; min-width: 260px; }
-  .lead-strip h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 400; font-size: 1.7rem; margin-bottom: 12px;
-    border: none; padding: 0;
-  }
-  .lead-strip .lead-text > p {
-    color: var(--grey); font-size: 0.92rem; margin-bottom: 20px;
-  }
-  .analyse-preview {
-    flex: 1.4; min-width: 280px;
-    border: 1px dashed rgba(179,157,219,0.4);
-    border-radius: 12px;
-    min-height: 200px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; padding: 20px;
-    color: rgba(160,160,184,0.7);
-    font-size: 0.8rem;
-  }
-  .analyse-preview img { max-width: 100%; border-radius: 8px; }
-  .analyse-preview .icon { font-size: 1.8rem; margin-bottom: 10px; opacity: 0.6; }
-  .analyse-preview--visual {
-    border-style: solid;
-    border-color: rgba(179,157,219,0.22);
-    background: rgba(13,27,62,0.35);
-    padding: 18px 20px 16px;
-  }
-  .analyse-illustration { width: 100%; max-width: 340px; height: auto; margin-bottom: 12px; }
-  .analyse-caption {
-    font-size: 0.74rem; line-height: 1.55; color: var(--grey);
-    font-weight: 300; max-width: 320px;
-  }
-
-  .analyse-form { text-align: left; max-width: 420px; }
-  .analyse-form input, .analyse-form textarea {
-    width: 100%; margin-bottom: 10px;
-    background: rgba(13,27,62,0.7);
-    border: 1px solid rgba(124,92,196,0.3);
-    border-radius: 8px; padding: 10px 12px;
-    font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
-    color: var(--white); outline: none;
-  }
-  .analyse-form input::placeholder, .analyse-form textarea::placeholder { color: rgba(160,160,184,0.6); }
-  .analyse-form textarea { resize: vertical; min-height: 60px; }
-  .analyse-form .consent-row {
-    display: flex; gap: 8px; align-items: flex-start;
-    margin: 10px 0 16px;
-  }
-  .analyse-form .consent-row input { width: auto; margin-top: 3px; }
-  .analyse-form .consent-row label { font-size: 0.72rem; color: var(--grey); line-height: 1.5; }
-  .analyse-form .consent-row a { color: var(--accent); }
-  .analyse-form button {
-    background: linear-gradient(135deg, #5b3fa0, #7c5cc4);
-    color: var(--white); border: none; cursor: pointer;
-    padding: 12px 26px; border-radius: 10px;
-    font-size: 0.88rem; font-weight: 500; width: 100%;
-    transition: opacity 0.2s;
-  }
-  .analyse-form button:disabled { opacity: 0.45; cursor: not-allowed; }
-  .analyse-form button:not(:disabled):hover { opacity: 0.88; }
-  .af-msg { font-size: 0.8rem; margin-top: 10px; }
-  .af-msg.error { color: #ff9d9d; }
-
-  footer {
-    border-top: 1px solid var(--border); padding: 36px 60px;
-    display: flex; align-items: center; justify-content: space-between;
-    position: relative; z-index: 1; flex-wrap: wrap; gap: 16px;
-  }
-  .footer-copy { font-size: 0.8rem; color: var(--grey); }
-  .footer-links { display: flex; gap: 28px; }
-  .footer-links a { font-size: 0.8rem; color: var(--grey); text-decoration: none; transition: color 0.2s; }
-  .footer-links a:hover { color: var(--white); }
-
-  @media (max-width: 700px) {
-    nav { padding: 16px 24px; }
-    main { padding: 120px 24px 80px; }
-    footer { padding: 28px 24px; }
-    .lead-strip { padding: 28px 20px; }
-  }
-</style>
+<link rel="preload" href="fonts/hanken-grotesk-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="site.css">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Blog: Praxiswissen für Handwerksbetriebe">
+<meta property="og:description" content="Praxisnahe Artikel zu Website, Chatbot, Google-Bewertungen und digitaler Sichtbarkeit für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL.">
+<meta property="og:url" content="https://lynx-automation.de/blog.html">
+<meta property="og:image" content="https://lynx-automation.de/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Lynx Automation – digitale Lösungen für Handwerksbetriebe in OWL">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Lynx Automation">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog: Praxiswissen für Handwerksbetriebe">
+<meta name="twitter:description" content="Praxisnahe Artikel zu Website, Chatbot, Google-Bewertungen und digitaler Sichtbarkeit für Handwerksbetriebe in Paderborn, Höxter, Delbrück und OWL.">
+<meta name="twitter:image" content="https://lynx-automation.de/og-image.jpg">
+<script type="application/ld+json" data-seo="blog">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Lynx Automation Blog",
+  "url": "https://lynx-automation.de/blog.html",
+  "inLanguage": "de-DE",
+  "publisher": {
+    "@type": "Organization",
+    "@id": "https://lynx-automation.de/#organisation",
+    "name": "Lynx Automation",
+    "url": "https://lynx-automation.de/",
+    "logo": "https://lynx-automation.de/logo.png"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Was kostet ein digitaler Assistent für Handwerksbetriebe wirklich?",
+      "url": "https://lynx-automation.de/blog-digitaler-assistent-kosten.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Warum Ihre Website heute mehr sein muss als eine Visitenkarte",
+      "url": "https://lynx-automation.de/blog-website-mehr-als-visitenkarte.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Google-Bewertungen: Der unterschätzte Umsatzhebel für Handwerksbetriebe in OWL",
+      "url": "https://lynx-automation.de/blog-google-bewertungen-owl.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "So läuft die Zusammenarbeit mit Lynx Automation ab",
+      "url": "https://lynx-automation.de/blog-ablauf-zusammenarbeit.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Warum antworten viele Handwerksbetriebe nicht auf Anfragen?",
+      "url": "https://lynx-automation.de/blog-warum-antworten-nicht.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "7 Fehler auf Handwerker-Websites",
+      "url": "https://lynx-automation.de/blog-7-fehler-handwerker-websites.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "So finden Kunden heute einen Handwerksbetrieb",
+      "url": "https://lynx-automation.de/blog-so-finden-kunden-handwerksbetrieb.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "Chatbot vs. Kontaktformular: Was bringt wirklich mehr Anfragen?",
+      "url": "https://lynx-automation.de/blog-chatbot-vs-kontaktformular.html"
+    },
+    {
+      "@type": "BlogPosting",
+      "headline": "WhatsApp für Handwerksbetriebe: Lohnt sich die automatische Antwort?",
+      "url": "https://lynx-automation.de/blog-whatsapp-handwerksbetriebe.html"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json" data-seo="crumbs">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Startseite",
+      "item": "https://lynx-automation.de/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://lynx-automation.de/blog.html"
+    }
+  ]
+}
+</script>
 </head>
-<body>
-<div class="bg-mesh"></div>
+<body class="page-blog">
 
-<nav>
-  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
-  <a href="index.html" class="nav-back">← Zurück zur Website</a>
-</nav>
+<header class="topbar" id="topbar">
+  <div class="wrap">
+    <a href="index.html" class="brand" aria-label="Lynx Automation, zur Startseite"><img src="logo.png" alt="Lynx Automation" width="112" height="52"></a>
+    <button class="burger" id="burger" aria-label="Menü" aria-expanded="false" aria-controls="menu">
+      <svg class="i-open" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      <svg class="i-close" viewBox="0 0 24 24" fill="none" stroke="#0d1b3e" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <ul class="menu" id="menu">
+      <li><a href="index.html#leistungen">Leistungen</a></li>
+      <li><a href="index.html#ablauf">Ablauf</a></li>
+      <li><a href="referenzen.html">Referenzen</a></li>
+      <li><a href="blog.html" aria-current="page">Blog</a></li>
+      <li><a href="index.html#faq">FAQ</a></li>
+      <li><a href="portal.html" class="menu-portal">Kundenportal</a></li>
+      <li><a href="index.html#kontakt" class="btn btn--primary">Kostenlose Kurzanalyse</a></li>
+    </ul>
+  </div>
+</header>
 
-<main>
-  <span class="page-label">Wissen &amp; Praxis</span>
-  <h1>Blog</h1>
+<main class="page page--wide">
+  <span class="page-label">Blog</span>
+  <h1>Praxiswissen für Handwerksbetriebe</h1>
   <p class="intro">Kurze, praxisnahe Artikel rund um Website, digitalen Assistenten und Sichtbarkeit im Netz, geschrieben für Handwerksbetriebe in Paderborn, Höxter, Delbrück und der Region OWL. Kein Fachchinesisch, sondern konkrete Antworten auf Fragen, die uns im Alltag begegnen.</p>
 
   <div class="filters" id="filters">
@@ -292,7 +148,7 @@
   <div class="blog-grid">
 
     <a href="blog-digitaler-assistent-kosten.html" class="post-card" data-category="Digitaler Assistent">
-      <span class="card-badge" style="background:linear-gradient(135deg,#5b3fa0,#7c5cc4); box-shadow:0 4px 14px rgba(91,63,160,0.4);">Besonders relevant</span>
+      <span class="card-badge">Besonders relevant</span>
       <span class="post-tag">Digitaler Assistent</span>
       <h3>Was kostet ein digitaler Assistent für Handwerksbetriebe wirklich?</h3>
       <p class="post-excerpt">Ein ehrlicher Blick auf Einrichtungskosten, monatliche Gebühren und was am Ende tatsächlich den Unterschied macht.</p>
@@ -305,7 +161,7 @@
     <a href="blog-website-mehr-als-visitenkarte.html" class="post-card" data-category="Website">
       <span class="post-tag">Website</span>
       <h3>Warum Ihre Website heute mehr sein muss als eine Visitenkarte</h3>
-      <p class="post-excerpt">Wie aus einer reinen Kontaktseite ein Werkzeug wird, das tatsächlich neue Anfragen bringt.</p>
+      <p class="post-excerpt">Wie aus einer reinen Kontaktseite ein Werkzeug wird, das neue Anfragen bringen kann.</p>
       <div class="post-meta">
         <span></span>
         <span class="post-cta">Weiterlesen →</span>
@@ -486,13 +342,37 @@
   </div>
 </main>
 
-<footer>
-  <a href="index.html" class="logo">Lynx <span>Automation</span></a>
-  <div class="footer-copy">© 2026 Lynx Automation</div>
-  <div class="footer-links">
-    <a href="impressum.html">Impressum</a>
-    <a href="agb.html">AGB</a>
-    <a href="datenschutz.html">Datenschutz</a>
+<a href="#" class="to-top" id="toTop" aria-label="Zurück zum Seitenanfang">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg>
+</a>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="index.html" class="brand"><img src="logo-hell.png" alt="Lynx Automation" width="129" height="60"></a>
+        <p>Digitale Lösungen für Handwerksbetriebe in Paderborn, Höxter, Delbrück, Willebadessen und ganz Ostwestfalen-Lippe.</p>
+        <p style="margin-top:20px">Jonah Kipshagen<br>Bogenstraße 14, 34439 Willebadessen<br><a href="mailto:jonah.kipshagen@lynx-automation.de">jonah.kipshagen@lynx-automation.de</a></p>
+      </div>
+      <div>
+        <h4>Seiten</h4>
+        <ul>
+          <li><a href="index.html#leistungen">Leistungen</a></li>
+          <li><a href="referenzen.html">Referenzen</a></li>
+          <li><a href="blog.html">Blog</a></li>
+          <li><a href="portal.html">Kundenportal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutz</a></li>
+          <li><a href="agb.html">AGB</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">© 2026 Lynx Automation</div>
   </div>
 </footer>
 
@@ -561,7 +441,7 @@
         });
         const data = await res.json();
         if (data.success) {
-          form.innerHTML = '<div style="padding:14px 12px;font-size:13px;color:#7defa0;background:rgba(76,218,100,0.1);border-radius:12px;border:1px solid rgba(76,218,100,0.25);">✓ Vielen Dank! Wir melden uns mit der Kurzanalyse bei Ihnen.</div>';
+          form.innerHTML = '<div class="form-ok">Vielen Dank! Wir melden uns mit der Kurzanalyse bei Ihnen.</div>';
         } else {
           throw new Error(data.error || 'Fehler');
         }
@@ -574,5 +454,6 @@
     });
   })();
 </script>
+<script src="site.js" defer></script>
 </body>
 </html>
