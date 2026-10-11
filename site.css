@@ -307,3 +307,15 @@ body.page-portal > main { background: var(--l-mist); display: flex; align-items:
 @supports (padding: max(0px)) {
   .to-top { bottom: max(28px, calc(env(safe-area-inset-bottom) + 16px)); }
 }
+
+/* Weitere Google-Bewertungen (Referenzen) */
+.page .voices { margin-top: clamp(64px, 8vw, 96px); }
+.page .voices h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); margin-bottom: 28px; }
+.voices-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.voice { margin: 0; padding: clamp(24px, 3.5vw, 36px); border: 1px solid var(--l-line); border-radius: 20px; display: flex; flex-direction: column; }
+.voice-stars { color: #b8860b; letter-spacing: 2px; margin-bottom: 16px; }
+.voice blockquote { margin: 0 0 20px; }
+.voice blockquote p { font-size: 1.1rem; line-height: 1.55; color: var(--l-ink); margin: 0; }
+.voice .voice-title { font-weight: 500; margin-bottom: 8px; }
+.voice figcaption { margin-top: auto; font-size: 0.92rem; color: var(--l-muted); }
+@media (max-width: 760px) { .voices-grid { grid-template-columns: minmax(0, 1fr); } }
